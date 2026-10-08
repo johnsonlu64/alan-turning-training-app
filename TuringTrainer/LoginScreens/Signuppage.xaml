@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TuringTrainer.SignupPage"
+	Title="Create Account"
+	Background="#0A0A0A">
+
+	<Grid>
+		<VerticalStackLayout
+			Padding="30"
+			Spacing="18"
+			VerticalOptions="Center">
+
+			<Label
+				Text="CREATE ACCOUNT"
+				FontSize="28"
+				FontAttributes="Bold"
+				TextColor="#FFD600"
+				HorizontalOptions="Center"
+				Margin="0,0,0,12" />
+
+			<Entry
+				x:Name="UsernameEntry"
+				Placeholder="Username"
+				TextColor="White"
+				PlaceholderColor="#A0A0A0"
+				Background="#151515" />
+
+			<Entry
+				x:Name="EmailEntry"
+				Placeholder="Email"
+				Keyboard="Email"
+				TextColor="White"
+				PlaceholderColor="#A0A0A0"
+				Background="#151515" />
+
+			<Entry
+				x:Name="PasswordEntry"
+				Placeholder="Password"
+				IsPassword="True"
+				TextColor="White"
+				PlaceholderColor="#A0A0A0"
+				Background="#151515" />
+
+			<Button
+				Text="SIGN UP"
+				FontAttributes="Bold"
+				Background="#FFD600"
+				TextColor="#0A0A0A"
+				HeightRequest="58"
+				Margin="0,10,0,0" />
+		</VerticalStackLayout>
+	</Grid>
+</ContentPage>

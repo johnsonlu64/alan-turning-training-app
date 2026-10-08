@@ -2,8 +2,6 @@ namespace TuringTrainer;
 
 public partial class WelcomePage : ContentPage
 {
-	int count = 0;
-
 	public WelcomePage()
 	{
 		InitializeComponent();
