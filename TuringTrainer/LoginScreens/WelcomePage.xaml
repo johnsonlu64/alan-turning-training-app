@@ -95,6 +95,20 @@
                 Clicked="SignupButton_Clicked"
                 HorizontalOptions="Fill" />
 
+            <Button
+                x:Name="GuestButton"
+                Text="GUEST MODE"
+                FontSize="16"
+                FontAttributes="Bold"
+                BackgroundColor="Transparent"
+                TextColor="#FFD600"
+                BorderColor="#FFD600"
+                BorderWidth="2"
+                CornerRadius="14"
+                HeightRequest="58"
+                Clicked="GuestButton_Clicked"
+                HorizontalOptions="Fill" />
+
         </VerticalStackLayout>
 
         
