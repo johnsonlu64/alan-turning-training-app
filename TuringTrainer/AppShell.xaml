@@ -7,7 +7,6 @@
     Title="TuringTrainer">
 
     <ShellContent
-        Title="Home"
         ContentTemplate="{DataTemplate local:WelcomePage}"
         Route="WelcomePage" />
 

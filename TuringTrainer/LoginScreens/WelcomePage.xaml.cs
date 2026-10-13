@@ -22,8 +22,5 @@ public partial class WelcomePage : ContentPage
 		await Shell.Current.GoToAsync("SignupPage");
 	}
 
-	private async void GuestButton_Clicked(object? sender, EventArgs e)
-	{
-		await Shell.Current.GoToAsync(nameof(LeaderBoardPage));
-	}
+	
 }

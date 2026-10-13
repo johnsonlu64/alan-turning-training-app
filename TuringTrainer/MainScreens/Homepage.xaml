@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TuringTrainer.Homepage"
+             Background="#0A0A0A">
+             
+              <Grid RowDefinitions="*,Auto">
+
+        
+        <VerticalStackLayout
+            Grid.Row="0"
+            Padding="30,60,30,20"
+            Spacing="0"
+            VerticalOptions="Center">
+
+            
+            <BoxView
+                Color="#FFD600"
+                HeightRequest="5"
+                WidthRequest="55"
+                HorizontalOptions="Center"
+                CornerRadius="3"
+                Margin="0,0,0,25" />
+
+            
+            <Label
+                Text="Welcome to TuringTrainer"
+                FontSize="42"
+                FontAttributes="Bold"
+                TextColor="White"
+                HorizontalOptions="Center"
+                CharacterSpacing="3" />
+
+            <Label
+                Text="TRAINER"
+                FontSize="42"
+                FontAttributes="Bold"
+                TextColor="#FFD600"
+                HorizontalOptions="Center"
+                CharacterSpacing="3" />
+
+           
+            <Label
+                Text="TRAIN HARD. TRACK EVERYTHING."
+                FontSize="12"
+                FontAttributes="Bold"
+                TextColor="#A0A0A0"
+                HorizontalOptions="Center"
+                CharacterSpacing="2"
+                Margin="0,12,0,35" />
+
+            
+            <Border
+                BackgroundColor="#151515"
+                Stroke="#292929"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 25"
+                Padding="20"
+                HeightRequest="230"
+                Margin="0,0,0,40">
+
+                <Image
+                    Source="barbell.png"
+                    Aspect="AspectFit"
+                    SemanticProperties.Description="Barbell" />
+            </Border>
+
+            
+            <Button
+                x:Name="LoginButton"
+                Text="LOG IN"
+                FontSize="16"
+                FontAttributes="Bold"
+                BackgroundColor="#FFD600"
+                TextColor="#0A0A0A"
+                CornerRadius="14"
+                HeightRequest="58"
+                Clicked="LoginButton_Clicked"
+                HorizontalOptions="Fill"
+                Margin="0,0,0,12" />
+
+            
+            <Button
+                x:Name="SignupButton"
+                Text="CREATE ACCOUNT"
+                FontSize="16"
+                FontAttributes="Bold"
+                BackgroundColor="Transparent"
+                TextColor="#FFD600"
+                BorderColor="#FFD600"
+                BorderWidth="2"
+                CornerRadius="14"
+                HeightRequest="58"
+                Clicked="SignupButton_Clicked"
+                HorizontalOptions="Fill" />
+
+
+        </VerticalStackLayout>
+
+        
+        <Label
+            Grid.Row="1"
+            Text="Number one app in the world"
+            FontSize="10"
+            FontAttributes="Bold"
+            TextColor="#555555"
+            HorizontalOptions="Center"
+            Margin="0,0,0,20"
+            CharacterSpacing="2" />
+
+    </Grid>
+
+</ContentPage>
