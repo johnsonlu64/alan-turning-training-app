@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TuringTrainer.MetricsPage"
+             Background="#0A0A0A">
+             
+
+    <Grid>
+		<ScrollView>
+		<VerticalStackLayout
+			Padding="30"
+			Spacing="18"
+			VerticalOptions="Start"
+			Margin="0,20,0,0">
+
+			
+			<Label
+				Text="Metrics"
+				FontSize="28"
+				FontAttributes="Bold"
+				TextColor="#FFD600"
+				HorizontalOptions="Center"/>
+
+
+			<Image
+                Source="placeholdermetrics.png"
+                Aspect="AspectFit"
+                SemanticProperties.Description="Placeholder" />
+			
+			<Button
+				x:Name="HistoryButton"
+				Text="History&#160;&#160;v"
+				FontSize="22"
+				FontAttributes="Bold"
+				HorizontalOptions="Start"
+				BackgroundColor="{StaticResource Gray950}"
+				TextColor="#FFD600"
+				BorderColor="{StaticResource Gray600}"
+				BorderWidth="1"
+				Clicked="HistoryButton_Clicked"/>
+
+
+			<VerticalStackLayout
+				x:Name="HistoryLayout"
+				IsVisible="False"
+				Spacing="10">
+
+				<Button
+					Text="10/14     >"
+					BackgroundColor="{StaticResource OffBlack}"
+					TextColor="#FFD600"
+					BorderColor="{StaticResource Gray600}"
+					BorderWidth="1"
+					CornerRadius="12"
+					HeightRequest="55"
+					HorizontalOptions="Fill"
+					Clicked="PastWorkout_Clicked"/>
+
+				<Button
+					Text="9/20     >"
+					BackgroundColor="{StaticResource OffBlack}"
+					TextColor="#FFD600"
+					BorderColor="{StaticResource Gray600}"
+					BorderWidth="1"
+					CornerRadius="12"
+					HeightRequest="55"
+					HorizontalOptions="Fill"
+					Clicked="PastWorkout_Clicked"/>
+
+				<Button
+					Text="9/16     >"
+					BackgroundColor="{StaticResource OffBlack}"
+					TextColor="#FFD600"
+					BorderColor="{StaticResource Gray600}"
+					BorderWidth="1"
+					CornerRadius="12"
+					HeightRequest="55"
+					HorizontalOptions="Fill"
+					Clicked="PastWorkout_Clicked"/>
+
+					
+				<VerticalStackLayout
+					x:Name="MoreHistoryLayout"
+					IsVisible="False"
+					Spacing="10">
+
+					<Button
+						Text="9/10  >"
+						BackgroundColor="{StaticResource OffBlack}"
+						TextColor="#FFD600"
+						BorderColor="{StaticResource Gray600}"
+						BorderWidth="1"
+						CornerRadius="12"
+						HeightRequest="55"
+						HorizontalOptions="Fill"
+						Clicked="PastWorkout_Clicked"/>
+						
+
+					<Button
+						Text="9/06  >"
+						BackgroundColor="{StaticResource OffBlack}"
+						TextColor="#FFD600"
+						BorderColor="{StaticResource Gray600}"
+						BorderWidth="1"
+						CornerRadius="12"
+						HeightRequest="55"
+						HorizontalOptions="Fill"
+						Clicked="PastWorkout_Clicked"/>
+
+					<Button
+						Text="9/02  >"
+						BackgroundColor="{StaticResource OffBlack}"
+						TextColor="#FFD600"
+						BorderColor="{StaticResource Gray600}"
+						BorderWidth="1"
+						CornerRadius="12"
+						HeightRequest="55"
+						HorizontalOptions="Fill"
+						Clicked="PastWorkout_Clicked"/>
+
+				</VerticalStackLayout>
+
+				<Button
+					x:Name="SeeAllButton"
+					Text="See All"
+					BackgroundColor="Transparent"
+					TextColor="White"
+					Clicked="SeeAllButton_Clicked"/>
+
+
+			</VerticalStackLayout>		
+
+		</VerticalStackLayout>
+		</ScrollView>
+	</Grid>
+
+</ContentPage>
