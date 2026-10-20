@@ -38,6 +38,7 @@
 			<Button
 				Text="LOGIN"
 				FontAttributes="Bold"
+				Clicked="LoginButton_Clicked"
 				Background="#FFD600"
 				TextColor="#0A0A0A"
 				HeightRequest="58"

@@ -5,6 +5,23 @@
 
     <!-- Brand -->
     <Color x:Key="Primary">#DEB200</Color>
+    <Color x:Key="PrimaryDark">#B58F00</Color>
+    <Color x:Key="PrimaryDarkText">#100A00</Color>
+    <Color x:Key="Secondary">#282727</Color>
+    <Color x:Key="SecondaryDarkText">#FCFCFB</Color>
+    <Color x:Key="Magenta">#DEB200</Color>
+    <Color x:Key="White">#FCFCFB</Color>
+    <Color x:Key="Black">#060605</Color>
+    <Color x:Key="OffBlack">#060605</Color>
+    <Color x:Key="MidnightBlue">#191817</Color>
+    <Color x:Key="Gray100">#F5F5F5</Color>
+    <Color x:Key="Gray200">#E6E6E6</Color>
+    <Color x:Key="Gray300">#D6D6D6</Color>
+    <Color x:Key="Gray400">#BDBDBD</Color>
+    <Color x:Key="Gray500">#A0A09E</Color>
+    <Color x:Key="Gray600">#666666</Color>
+    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#141414</Color>
     <!-- Text that sits on top of Primary (buttons, highlights) -->
     <Color x:Key="TextOnPrimary">#100A00</Color>
 
