@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TuringTrainer.Homepage"
+    BackgroundColor="#101010"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*,Auto"
+          Padding="20,12,20,0">
+
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*,Auto"
+              Padding="0,12,0,24">
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="TURINGTRAINER"
+                       FontSize="12"
+                       CharacterSpacing="3"
+                       TextColor="#F5C542"
+                       FontAttributes="Bold"/>
+
+                <Label Text="Coach Dashboard"
+                       FontSize="27"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+            </VerticalStackLayout>
+
+            <Border Grid.Column="1"
+                    WidthRequest="46"
+                    HeightRequest="46"
+                    Stroke="#393939"
+                    StrokeThickness="1"
+                    BackgroundColor="#202020"
+                    StrokeShape="RoundRectangle 23"
+                    VerticalOptions="Center">
+
+                <Label Text="♙"
+                       FontSize="26"
+                       TextColor="#F5C542"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Border>
+        </Grid>
+
+        <!-- Main content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="18">
+
+                <Grid ColumnDefinitions="*,Auto"
+                      Margin="0,0,0,0">
+                    <Label Text="YOUR CLASSES"
+                           FontSize="13"
+                           CharacterSpacing="2"
+                           FontAttributes="Bold"
+                           TextColor="#A5A5A5"
+                           VerticalOptions="Center"/>
+
+                    <Label Grid.Column="1"
+                           Text="3 classes"
+                           FontSize="12"
+                           TextColor="#777777"
+                           VerticalOptions="Center"/>
+                </Grid>
+
+                <!-- Class 1 -->
+                <Border BackgroundColor="#1C1C1C"
+                        Stroke="#343434"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="18">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="OnClass1Tapped"/>
+                    </Border.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto"
+                          ColumnSpacing="14">
+
+                        <Border WidthRequest="48"
+                                HeightRequest="48"
+                                BackgroundColor="#332B12"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 12"
+                                VerticalOptions="Center">
+                            <Label Text="01"
+                                   FontSize="17"
+                                   FontAttributes="Bold"
+                                   TextColor="#F5C542"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="5"
+                                             VerticalOptions="Center">
+                            <Label Text="Class 1"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                            <Label Text="View enrolled students"
+                                   FontSize="12"
+                                   TextColor="#999999"/>
+                        </VerticalStackLayout>
+
+                        <Button Grid.Column="2"
+                               Text="›"
+                               FontSize="32"
+                               BackgroundColor="#F5C542"
+                               TextColor="Black"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- Class 2 -->
+                <Border BackgroundColor="#1C1C1C"
+                        Stroke="#343434"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="18">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="OnClass2Tapped"/>
+                    </Border.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto"
+                          ColumnSpacing="14">
+
+                        <Border WidthRequest="48"
+                                HeightRequest="48"
+                                BackgroundColor="#332B12"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 12"
+                                VerticalOptions="Center">
+                            <Label Text="02"
+                                   FontSize="17"
+                                   FontAttributes="Bold"
+                                   TextColor="#F5C542"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="5"
+                                             VerticalOptions="Center">
+                            <Label Text="Class 2"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                            <Label Text="View enrolled students"
+                                   FontSize="12"
+                                   TextColor="#999999"/>
+                        </VerticalStackLayout>
+
+                        <Button Grid.Column="2"
+                               Text="›"
+                               FontSize="32"
+                               BackgroundColor="#F5C542"
+                               TextColor="Black"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- Class 3 -->
+                <Border BackgroundColor="#1C1C1C"
+                        Stroke="#343434"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="18">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="OnClass3Tapped"/>
+                    </Border.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto"
+                          ColumnSpacing="14">
+
+                        <Border WidthRequest="48"
+                                HeightRequest="48"
+                                BackgroundColor="#332B12"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 12"
+                                VerticalOptions="Center">
+                            <Label Text="03"
+                                   FontSize="17"
+                                   FontAttributes="Bold"
+                                   TextColor="#F5C542"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="5"
+                                             VerticalOptions="Center">
+                            <Label Text="Class 3"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                            <Label Text="View enrolled students"
+                                   FontSize="12"
+                                   TextColor="#999999"/>
+                        </VerticalStackLayout>
+
+                        <Button Grid.Column="2"
+                               Text="›"
+                               FontSize="32"
+                               BackgroundColor="#F5C542"
+                               TextColor="Black"
+                               VerticalOptions="Center"/>                    </Grid>
+                </Border>
+
+                <!-- Add actions -->
+                <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="12"
+                      Margin="0,4,0,0">
+
+                    <Button Text="+  Add Class"
+                            Clicked="OnAddClassClicked"
+                            BackgroundColor="#F5C542"
+                            TextColor="#151515"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            CornerRadius="12"
+                            HeightRequest="58"/>
+
+                    <Button Grid.Column="1"
+                            Text="+  Add Student"
+                            Clicked="OnAddStudentClicked"
+                            BackgroundColor="#F5C542"
+                            TextColor="Black"
+                            BorderColor="#414141"
+                            BorderWidth="1"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            CornerRadius="12"
+                            HeightRequest="58"/>
+                </Grid>
+
+                <!-- Reports -->
+                <Button Text="Reports     ›"
+                        Clicked="OnReportsClicked"
+                        BackgroundColor="#F5C542"
+                        TextColor="Black"
+                        BorderColor="#343434"
+                        BorderWidth="1"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        CornerRadius="12"
+                        HeightRequest="52"
+                        Margin="0,0,0,18"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom navigation -->
+        <Grid Grid.Row="2"
+              ColumnDefinitions="*,*,*,*"
+              Padding="0,12,0,16"
+              BackgroundColor="#151515">
+
+            <VerticalStackLayout Spacing="4">
+                <Button Text="⌂"
+                       FontSize="23"
+                       TextColor="Black"
+                       Clicked="OnHomeClicked"
+                       HorizontalOptions="Center"/>
+                <Label Text="Home"
+                       FontSize="10"
+                       TextColor="#F5C542"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1"
+                                 Spacing="4">
+                <Button Text="✓"
+                       FontSize="22"
+                       TextColor="Black"
+                       Clicked="OnLeaderboardClicked"
+                       HorizontalOptions="Center"/>
+                <Label Text="Leaderboard"
+                       FontSize="10"
+                       TextColor="#777777"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="2"
+                                 Spacing="4">
+                <Button Text="▤"
+                       FontSize="22"
+                       TextColor="Black"
+                       Clicked="OnMetricsClicked"
+                       HorizontalOptions="Center"/>
+                <Label Text="Metrics"
+                       FontSize="10"
+                       TextColor="#777777"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="3"
+                                 Spacing="4">
+                <Button Text="⚙"
+                       FontSize="22"
+                       TextColor="Black"
+                       Clicked="OnSettingsClicked"
+                       HorizontalOptions="Center"/>
+                <Label Text="Settings"
+                       FontSize="10"
+                       TextColor="#777777"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+
+    </Grid>
+</ContentPage>
