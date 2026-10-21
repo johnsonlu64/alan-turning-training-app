@@ -52,10 +52,9 @@ public partial class Homepage : ContentPage
         await Shell.Current.GoToAsync(nameof(LeaderBoardPage));
     }
 
-    private async void OnMetricsClicked(object sender, EventArgs e)
+    private void OnMetricsClicked(object sender, EventArgs e)
     {
         // Navigate to Metrics page
-        await Shell.Current.GoToAsync(nameof(MetricsPage));
     }
 
     private void OnSettingsClicked(object sender, EventArgs e)
