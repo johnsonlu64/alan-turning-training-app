@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TuringTrainer.ClassIPage"
+             Background="#101010"
+             Title="Class 1"
+             Shell.NavBarIsVisible="False">
+
+        <Grid RowDefinitions="Auto,*"
+          Padding="20,12,20,0"
+          RowSpacing="20">
+
+        <VerticalStackLayout Spacing="10">
+            <Label Text="TURINGTRAINER"
+                   FontSize="12"
+                   CharacterSpacing="3"
+                   TextColor="#F5C542"
+                   FontAttributes="Bold"/>
+
+            <Label Text="Class 1"
+                   TextColor="White"
+                   FontSize="27"
+                   FontAttributes="Bold"/>
+
+            <Label Text="COLLEGE SPORTS"
+                   TextColor="#A5A5A5"
+                   CharacterSpacing="2"
+                    FontAttributes="Bold"
+                   FontSize="13"/>
+
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1"
+                        x:Name="SportsList"
+                        SelectionMode="None">
+
+                        <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                            ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="#1C1C1C"
+                            Stroke="#343434"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 16"
+                            Padding="18"
+                            Margin="0">
+
+                        <Grid ColumnDefinitions="*,Auto"
+                            ColumnSpacing="14">
+
+                            <Label Text="{Binding .}"
+                                   TextColor="White"
+                                   FontSize="18"
+                                   VerticalOptions="Center"/>
+
+                            <Button Grid.Column="1"
+                                Text="›"
+                                FontSize="32"
+                                FontAttributes="Bold"
+                                TextColor="Black"
+                                BackgroundColor="#F5C542"
+                                CornerRadius="12"
+                                WidthRequest="55"
+                                HeightRequest="55"
+                                Padding="0"
+                                Clicked="OnSportClicked"
+                                CommandParameter="{Binding .}"/>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
+             
