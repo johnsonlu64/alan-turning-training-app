@@ -31,7 +31,7 @@
                        TextColor="#F5C542"
                        FontAttributes="Bold"/>
 
-                <Label Text="Class 1"
+                <Label Text="Class 2"
                        TextColor="White"
                        FontSize="27"
                        FontAttributes="Bold"/>
