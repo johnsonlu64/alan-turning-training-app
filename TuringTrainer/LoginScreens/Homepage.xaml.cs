@@ -26,9 +26,10 @@ public partial class Homepage : ContentPage
         await Shell.Current.GoToAsync(nameof(ClassIIIPage));
     }
 
-    private void OnAddClassClicked(object sender, EventArgs e)
+    private async void OnAddClassClicked(object sender, EventArgs e)
     {
         // Open Add Class flow
+        await Shell.Current.GoToAsync(nameof(AddClass));
     }
 
     private void OnAddStudentClicked(object sender, EventArgs e)
