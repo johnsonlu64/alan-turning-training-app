@@ -8,19 +8,22 @@ public partial class Homepage : ContentPage
         InitializeComponent();
     }
 
-    private void OnClass1Tapped(object sender, TappedEventArgs e)
+    private async void OnClass1Tapped(object sender, TappedEventArgs e)
     {
         // Open Class 1
+        await Shell.Current.GoToAsync(nameof(ClassIPage));
     }
 
-    private void OnClass2Tapped(object sender, TappedEventArgs e)
+    private async void OnClass2Tapped(object sender, TappedEventArgs e)
     {
         // Open Class 2
+        await Shell.Current.GoToAsync(nameof(ClassIIPage));
     }
 
-    private void OnClass3Tapped(object sender, TappedEventArgs e)
+    private async void OnClass3Tapped(object sender, TappedEventArgs e)
     {
         // Open Class 3
+        await Shell.Current.GoToAsync(nameof(ClassIIIPage));
     }
 
     private async void OnAddClassClicked(object sender, EventArgs e)
@@ -50,9 +53,10 @@ public partial class Homepage : ContentPage
         await Shell.Current.GoToAsync(nameof(LeaderBoardPage));
     }
 
-    private void OnMetricsClicked(object sender, EventArgs e)
+    private async void OnMetricsClicked(object sender, EventArgs e)
     {
         // Navigate to Metrics page
+        await Shell.Current.GoToAsync(nameof(MetricsPage));
     }
 
     private void OnSettingsClicked(object sender, EventArgs e)
