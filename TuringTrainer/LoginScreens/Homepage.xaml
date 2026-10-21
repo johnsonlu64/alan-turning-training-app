@@ -264,7 +264,7 @@
                     BackgroundColor="#151515">
 
                      <VerticalStackLayout Spacing="4">
-                            <Button Text="⌂"
+                            <Button Text="🏠"
                                     FontSize="23"
                                     TextColor="Black"
                                     Clicked="OnHomeClicked"
@@ -290,7 +290,7 @@
 
                      <VerticalStackLayout Grid.Column="2"
                                           Spacing="4">
-                            <Button Text="▤"
+                            <Button Text="📊"
                                     FontSize="22"
                                     TextColor="Black"
                                     Clicked="OnMetricsClicked"
@@ -303,7 +303,7 @@
 
                      <VerticalStackLayout Grid.Column="3"
                                           Spacing="4">
-                            <Button Text="⚙"
+                            <Button Text="⚙️"
                                     FontSize="22"
                                     TextColor="Black"
                                     Clicked="OnSettingsClicked"

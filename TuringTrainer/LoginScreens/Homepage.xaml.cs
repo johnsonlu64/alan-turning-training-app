@@ -1,4 +1,3 @@
-
 using TuringTrainer.LeaderBoard;
 
 namespace TuringTrainer;
@@ -126,9 +125,9 @@ public partial class Homepage : ContentPage
         // Navigate to Metrics page
     }
 
-    private void OnSettingsClicked(object sender, EventArgs e)
+    private async void OnSettingsClicked(object sender, EventArgs e)
     {
-        // Navigate to Settings page
+        await Shell.Current.GoToAsync("SettingsPage");
     }
 
 
