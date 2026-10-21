@@ -1,0 +1,29 @@
+namespace TuringTrainer;
+
+public partial class ClassIIPage : ContentPage
+{
+    public ClassIIPage()
+    {
+        InitializeComponent();
+
+        SportsList.ItemsSource = new List<string>
+        {
+            "Football",
+            "Soccer",
+            "Volleyball",
+            "Basketball"
+        };
+    }
+
+    private async void OnBackClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
+    }
+
+    private async void OnSportClicked(object sender, EventArgs e)
+    {
+
+    }
+
+
+}
