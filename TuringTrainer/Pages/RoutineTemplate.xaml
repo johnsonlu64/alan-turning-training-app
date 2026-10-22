@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:pages="clr-namespace:TuringTrainer.Pages">
+
+    <!-- The routine row, shared by the routines screen and the class screens. -->
+    <DataTemplate x:Key="RoutineTemplate"
+            x:DataType="pages:Routine">
+        <Border BackgroundColor="#1C1C1C"
+                Stroke="#343434"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 16"
+                Padding="18">
+            <Grid ColumnDefinitions="Auto,*,Auto"
+                    ColumnSpacing="14">
+
+                <Border WidthRequest="48"
+                        HeightRequest="48"
+                        BackgroundColor="#332B12"
+                        Stroke="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 12"
+                        VerticalOptions="Center">
+                    <Label Text="{Binding Index}"
+                           FontSize="17"
+                           FontAttributes="Bold"
+                           TextColor="#F5C542"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Border>
+
+                <VerticalStackLayout Grid.Column="1"
+                        Spacing="5"
+                        VerticalOptions="Center">
+                    <Label Text="{Binding Title}"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF"/>
+                    <Label Text="{Binding Subtitle}"
+                           FontSize="12"
+                           TextColor="#999999"/>
+
+                    <Grid ColumnDefinitions="*,Auto"
+                            ColumnSpacing="12">
+                        <Label Text="{Binding ExerciseCount}"
+                               FontSize="11"
+                               CharacterSpacing="1"
+                               TextColor="#999999"/>
+                        <Label Grid.Column="1"
+                               Text="{Binding Duration}"
+                               FontSize="11"
+                               CharacterSpacing="1"
+                               TextColor="#999999"/>
+                    </Grid>
+                </VerticalStackLayout>
+
+                <Label Grid.Column="2"
+                       Text="›"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="#F5C542"
+                       WidthRequest="48"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"/>
+            </Grid>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

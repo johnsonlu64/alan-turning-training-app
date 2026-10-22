@@ -69,9 +69,10 @@ public partial class Homepage : ContentPage
         await Shell.Current.GoToAsync(nameof(ClassIIIPage));
     }
 
-    private void OnAddClassClicked(object sender, EventArgs e)
+    private async void OnAddClassClicked(object sender, EventArgs e)
     {
         // Open Add Class flow
+        await Shell.Current.GoToAsync(nameof(AddClass));
     }
 
     /// <summary>
@@ -104,9 +105,10 @@ public partial class Homepage : ContentPage
         AddStudentPopup.IsVisible = false;
     }
 
-    private void OnReportsClicked(object sender, EventArgs e)
+    private async void OnReportsClicked(object sender, EventArgs e)
     {
         // Open Reports page
+        await Shell.Current.GoToAsync(nameof(Reports));
     }
 
     private void OnHomeClicked(object sender, EventArgs e)
@@ -119,10 +121,15 @@ public partial class Homepage : ContentPage
         // Navigate to Leaderboard page
         await Shell.Current.GoToAsync(nameof(LeaderBoardPage));
     }
+    private async void OnNotificationsClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(Pages.NotificationsPage));
+    }
 
     private void OnMetricsClicked(object sender, EventArgs e)
     {
         // Navigate to Metrics page
+        await Shell.Current.GoToAsync(nameof(MetricsPage));
     }
 
     private async void OnSettingsClicked(object sender, EventArgs e)
