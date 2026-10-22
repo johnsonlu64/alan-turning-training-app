@@ -6,7 +6,6 @@
              Title="Class 1"
              Shell.NavBarIsVisible="False">
 
-<<<<<<< HEAD
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,10 +14,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-        <Grid RowDefinitions="Auto,Auto,*"
-=======
     <Grid RowDefinitions="Auto,*"
->>>>>>> origin/main
           Padding="20,12,20,0"
           RowSpacing="16">
 
