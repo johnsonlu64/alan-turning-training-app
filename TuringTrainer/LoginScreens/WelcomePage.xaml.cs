@@ -1,5 +1,11 @@
 namespace TuringTrainer;
 
+/*
+ * Name : Bakary Ceesay
+ * This is the code-behind file for the WelcomePage.xaml page.
+ * It contains the logic for handling user interactions on the WelcomePage page.
+ */
+
 public partial class WelcomePage : ContentPage
 {
 	public WelcomePage()
