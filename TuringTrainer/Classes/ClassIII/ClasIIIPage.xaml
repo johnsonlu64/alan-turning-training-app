@@ -6,10 +6,18 @@
              Title="Class 3"
              Shell.NavBarIsVisible="False">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Pages/RoutineTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto,*"
-          Padding="20,12,20,0"
-          RowSpacing="20">
+    <Grid RowDefinitions="Auto,Auto,*"
+        Padding="20,12,20,0"
+        RowSpacing="16">
+
 
         <Grid ColumnDefinitions="Auto,*"
               ColumnSpacing="12"
@@ -47,7 +55,31 @@
             </VerticalStackLayout>
         </Grid>
 
-        <CollectionView Grid.Row="1"
+        <HorizontalStackLayout Grid.Row="1"
+                               Spacing="10">
+            <Button x:Name="SportsTab"
+                    Text="Sports"
+                    Clicked="OnSportsTabClicked"
+                    BackgroundColor="#332B12"
+                    TextColor="#F5C542"
+                    FontAttributes="Bold"
+                    FontSize="13"
+                    CornerRadius="12"
+                    HeightRequest="46"
+                    Padding="24,0"/>
+            <Button x:Name="RoutinesTab"
+                    Text="Routines"
+                    Clicked="OnRoutinesTabClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#999999"
+                    FontAttributes="Bold"
+                    FontSize="13"
+                    CornerRadius="12"
+                    HeightRequest="46"
+                    Padding="24,0"/>
+        </HorizontalStackLayout>
+
+        <CollectionView Grid.Row="2"
                         x:Name="SportsList"
                         SelectionMode="None">
 
@@ -90,6 +122,18 @@
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <CollectionView Grid.Row="2"
+                        x:Name="RoutinesList"
+                        IsVisible="False"
+                        SelectionMode="Single"
+                        SelectionChanged="OnRoutineSelected"
+                        ItemTemplate="{StaticResource RoutineTemplate}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="12"/>
+            </CollectionView.ItemsLayout>
         </CollectionView>
     </Grid>
 </ContentPage>
