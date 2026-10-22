@@ -1,6 +1,7 @@
 using TuringTrainer.LeaderBoard;
 
 namespace TuringTrainer;
+//Name: Bakary
 
 public partial class Homepage : ContentPage
 {

@@ -1,5 +1,5 @@
 namespace TuringTrainer;
-
+//Name: Bakary
 public partial class AddClass : ContentPage
 {
     public AddClass()

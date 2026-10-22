@@ -1,5 +1,5 @@
 namespace TuringTrainer;
-
+//Name: Bakary
 public partial class LoginPage : ContentPage
 {
     //int count = 0;
