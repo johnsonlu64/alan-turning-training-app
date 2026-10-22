@@ -4,7 +4,7 @@ using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 
 namespace TuringTrainer;
-
+// dasha
 public partial class MetricsPage : ContentPage
 {
     public MetricsPage()
