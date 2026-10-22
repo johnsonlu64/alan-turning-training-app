@@ -64,12 +64,18 @@ public partial class Settings : ContentPage
 
     private async void OnHelpTapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync("HelpPage");
+        await DisplayAlertAsync(
+        "Coming Soon!",
+        "The Help feature will be available soon.",
+        "OK");
     }
 
     private async void OnFeedbackTapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync("FeedbackPage");
+        await DisplayAlertAsync(
+        "Coming Soon!",
+        "The Feedback feature will be available soon.",
+        "OK");
     }
 
     private async void OnLogoutClicked(object sender, EventArgs e)
