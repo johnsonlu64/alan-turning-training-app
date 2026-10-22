@@ -37,9 +37,10 @@ public partial class Homepage : ContentPage
         // Open Add Student flow
     }
 
-    private void OnReportsClicked(object sender, EventArgs e)
+    private async void OnReportsClicked(object sender, EventArgs e)
     {
         // Open Reports page
+        await Shell.Current.GoToAsync(nameof(Reports));
     }
 
     private void OnHomeClicked(object sender, EventArgs e)
