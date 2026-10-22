@@ -4,10 +4,20 @@ using TuringTrainer.LeaderBoard;
 
 namespace TuringTrainer.Settings;
 
+/// <summary>
+/// Settings
+/// Author: Aaditya Bhanadari
+/// </summary>
 public partial class Settings : ContentPage
 {
+	/// <summary>
+	/// Themes
+	/// </summary>
     private readonly string[] themes = { "System", "Light", "Dark" };
 
+	/// <summary>
+	/// Constructor
+	/// </summary>	
     public Settings()
     {
         InitializeComponent();
