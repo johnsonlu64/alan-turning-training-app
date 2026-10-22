@@ -18,26 +18,42 @@
         Padding="20,12,20,0"
         RowSpacing="16">
 
-        <VerticalStackLayout Spacing="10">
 
-            <Label Text="TURINGTRAINER"
-                   FontSize="12"
-                   CharacterSpacing="3"
-                   TextColor="#F5C542"
-                   FontAttributes="Bold"/>
+        <Grid ColumnDefinitions="Auto,*"
+              ColumnSpacing="12"
+              Padding="0,12,0,0">
 
-            <Label Text="Class 3"
-                   TextColor="White"
-                   FontSize="27"
-                   FontAttributes="Bold"/>
+            <Button Text="‹"
+                    FontSize="32"
+                    WidthRequest="44"
+                    HeightRequest="44"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    TextColor="#F5C542"
+                    Clicked="OnBackClicked"
+                    VerticalOptions="Center"/>
 
-            <Label Text="COLLEGE SPORTS"
-                   TextColor="#A5A5A5"
-                   CharacterSpacing="2"
-                    FontAttributes="Bold"
-                   FontSize="13"/>
+            <VerticalStackLayout Grid.Column="1"
+                    Spacing="10">
+                <Label Text="TURINGTRAINER"
+                       FontSize="12"
+                       CharacterSpacing="3"
+                       TextColor="#F5C542"
+                       FontAttributes="Bold"/>
 
-        </VerticalStackLayout>
+                <Label Text="Class 3"
+                       TextColor="White"
+                       FontSize="27"
+                       FontAttributes="Bold"/>
+
+                <Label Text="COLLEGE SPORTS"
+                       TextColor="#A5A5A5"
+                       CharacterSpacing="2"
+                       FontAttributes="Bold"
+                       FontSize="13"/>
+
+            </VerticalStackLayout>
+        </Grid>
 
         <HorizontalStackLayout Grid.Row="1"
                                Spacing="10">
@@ -67,10 +83,10 @@
                         x:Name="SportsList"
                         SelectionMode="None">
 
-                        <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical"
-                                            ItemSpacing="10"/>
-                        </CollectionView.ItemsLayout>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border BackgroundColor="#1C1C1C"
@@ -82,7 +98,7 @@
 
 
                         <Grid ColumnDefinitions="*,Auto"
-                            ColumnSpacing="14">
+                              ColumnSpacing="14">
 
                             <Label Text="{Binding .}"
                                    TextColor="White"
@@ -90,17 +106,17 @@
                                    VerticalOptions="Center"/>
 
                             <Button Grid.Column="1"
-                                Text="›"
-                                FontSize="32"
-                                FontAttributes="Bold"
-                                TextColor="Black"
-                                BackgroundColor="#F5C542"
-                                CornerRadius="12"
-                                WidthRequest="55"
-                                HeightRequest="55"
-                                Padding="0"
-                                Clicked="OnSportClicked"
-                                CommandParameter="{Binding .}"/>
+                                    Text="›"
+                                    FontSize="32"
+                                    FontAttributes="Bold"
+                                    TextColor="Black"
+                                    BackgroundColor="#F5C542"
+                                    CornerRadius="12"
+                                    WidthRequest="55"
+                                    HeightRequest="55"
+                                    Padding="0"
+                                    Clicked="OnSportClicked"
+                                    CommandParameter="{Binding .}"/>
 
                         </Grid>
                     </Border>

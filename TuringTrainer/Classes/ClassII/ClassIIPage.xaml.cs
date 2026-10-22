@@ -1,5 +1,5 @@
 namespace TuringTrainer;
-
+// dasha
 public partial class ClassIIPage : ContentPage
 {
     public ClassIIPage()
@@ -17,9 +17,15 @@ public partial class ClassIIPage : ContentPage
         RoutinesList.ItemsSource = Pages.Routine.All;
     }
 
-    private async void OnSportClicked(object? sender, EventArgs e)
+
+    private async void OnBackClicked(object sender, EventArgs e)
     {
-        // Open the sport
+        await Shell.Current.GoToAsync("..");
+    }
+
+    private async void OnSportClicked(object sender, EventArgs e)
+    {
+
     }
 
     private void OnSportsTabClicked(object? sender, EventArgs e)

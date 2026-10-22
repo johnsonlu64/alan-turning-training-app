@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TuringTrainer.AddClass"
+    Title="Create Class"
+    BackgroundColor="#0A0A0A">
+
+    <Grid>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="18"
+            VerticalOptions="Center">
+
+            <!-- Page heading -->
+            <Label
+                Text="Create Class"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="#FFD600"
+                HorizontalOptions="Center"
+                Margin="0,0,0,12" />
+
+            <!-- Class name -->
+            <Entry
+                x:Name="ClassNameEntry"
+                Placeholder="Class Name"
+                TextColor="White"
+                PlaceholderColor="#A0A0A0"
+                BackgroundColor="#151515" />
+
+            <!-- Class code -->
+            <Entry
+                x:Name="ClassCodeEntry"
+                Placeholder="Class Code"
+                TextColor="White"
+                PlaceholderColor="#A0A0A0"
+                BackgroundColor="#151515" />
+
+            <!-- Create class button -->
+            <Button
+                Text="CREATE CLASS"
+                Clicked="OnAddClassClicked"
+                FontAttributes="Bold"
+                BackgroundColor="#FFD600"
+                TextColor="#0A0A0A"
+                HeightRequest="58"
+                CornerRadius="12"
+                Margin="0,10,0,0" />
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
