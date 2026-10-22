@@ -27,21 +27,28 @@
                        TextColor="White"/>
             </VerticalStackLayout>
 
-            <Border Grid.Column="1"
-                    WidthRequest="46"
-                    HeightRequest="46"
-                    Stroke="#393939"
-                    StrokeThickness="1"
-                    BackgroundColor="#202020"
-                    StrokeShape="RoundRectangle 23"
-                    VerticalOptions="Center">
+            <Grid Grid.Column="1">
 
-                <Label Text="♙"
-                       FontSize="26"
-                       TextColor="#F5C542"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"/>
-            </Border>
+                <Border WidthRequest="46"
+                        HeightRequest="46"
+                        Stroke="#393939"
+                        StrokeThickness="1"
+                        BackgroundColor="#202020"
+                        StrokeShape="RoundRectangle 23"
+                        VerticalOptions="Center">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="OnNotificationsClicked"/>
+                    </Border.GestureRecognizers>
+
+                    <Label Text="♙"
+                           FontSize="26"
+                           TextColor="#F5C542"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Border>
+            </Grid>
         </Grid>
 
         <!-- Main content -->
@@ -252,7 +259,7 @@
                         CornerRadius="12"
                         HeightRequest="52"
                         Margin="0,0,0,18"/>
-
+                        
             </VerticalStackLayout>
         </ScrollView>
 

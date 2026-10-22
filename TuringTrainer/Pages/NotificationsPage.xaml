@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:TuringTrainer.Pages"
+             x:Class="TuringTrainer.Pages.NotificationsPage"
+             Title="Notifications"
+             BackgroundColor="#101010"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="NotificationTemplate" x:DataType="pages:NotificationItem">
+            <Border BackgroundColor="#1C1C1C"
+                    Stroke="#343434"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="18">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnNotificationTapped" />
+                </Border.GestureRecognizers>
+
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+
+                    <Border WidthRequest="48"
+                            HeightRequest="48"
+                            BackgroundColor="{Binding BadgeFill}"
+                            Stroke="Transparent"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 12"
+                            VerticalOptions="Center">
+                        <Label Text="{Binding Badge}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{Binding BadgeColor}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
+                        <Label Text="{Binding Headline}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#FFFFFF"
+                               LineBreakMode="TailTruncation"
+                               MaxLines="2" />
+                        <Label Text="{Binding Detail}"
+                               FontSize="12"
+                               TextColor="#999999"
+                               LineBreakMode="TailTruncation"
+                               MaxLines="2" />
+
+                        <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                            <Label Text="{Binding Time}"
+                                   FontSize="11"
+                                   CharacterSpacing="1"
+                                   TextColor="#999999"
+                                   VerticalOptions="Center" />
+                            <Label Text="{Binding TypeWord}"
+                                   FontSize="11"
+                                   CharacterSpacing="1"
+                                   FontAttributes="Bold"
+                                   TextColor="#999999"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <Label Grid.Column="2"
+                           Text="›"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="#F5C542"
+                           WidthRequest="48"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center" />
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="20,12,20,20" RowSpacing="16">
+
+        <pages:PageHeader x:Name="Header"
+                          Title="Notifications"
+                          RightLabel="INBOX" />
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto">
+            <Label Text="RECENT"
+                   FontSize="13"
+                   CharacterSpacing="2"
+                   FontAttributes="Bold"
+                   TextColor="#A5A5A5" />
+
+            <Label x:Name="UnreadCountLabel"
+                   Grid.Column="1"
+                   Text="2 NEW"
+                   FontSize="12"
+                   CharacterSpacing="2"
+                   FontAttributes="Bold"
+                   TextColor="#F5C542"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <CollectionView x:Name="NotificationList"
+                        Grid.Row="2"
+                        ItemTemplate="{StaticResource NotificationTemplate}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+            </CollectionView.ItemsLayout>
+        </CollectionView>
+
+        <Button Grid.Row="3"
+                Text="Mark all read"
+                Clicked="OnMarkAllReadClicked"
+                BackgroundColor="Transparent"
+                TextColor="#F5C542"
+                BorderColor="#343434"
+                BorderWidth="1"
+                FontAttributes="Bold"
+                FontSize="14"
+                CornerRadius="12"
+                HeightRequest="52" />
+    </Grid>
+</ContentPage>
