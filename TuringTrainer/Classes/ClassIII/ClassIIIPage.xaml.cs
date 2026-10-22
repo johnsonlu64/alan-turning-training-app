@@ -1,5 +1,5 @@
 namespace TuringTrainer;
-
+// dasha
 public partial class ClassIIIPage : ContentPage
 {
     public ClassIIIPage()
