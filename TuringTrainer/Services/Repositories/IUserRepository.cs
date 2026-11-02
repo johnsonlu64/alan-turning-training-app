@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using TuringTrainer.Models;
 
 namespace TuringTrainer.Services.Repositories;
 

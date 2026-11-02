@@ -58,7 +58,7 @@ public class User : ObservableBaseModel
 
     public override String ToString()
     {
-        return String.Format("Id: {0}, FirstName: {1}, MiddleInitial: {2}, LastName: {3}, IsCoach: {4}, CreatedAt: {5}", Id, FirstName, MiddleInitial, LastName, IsCoach, CreatedAt);
+        return String.Format("Id: {0}, FirstName: {1}, MiddleInitial: {2}, LastName: {3}, IsCoach: {4}, CreatedAt: {5}", UserId, FirstName, MiddleInitial, LastName, IsCoach, CreatedAt);
     }
 
     public override bool Equals(object? obj)
@@ -69,11 +69,11 @@ public class User : ObservableBaseModel
         }
 
         User other = (User)obj;
-        return Id == other.Id;
+        return UserId == other.UserId;
     }
 
     public override int GetHashCode()
     {
-        return Id.GetHashCode();
+        return UserId.GetHashCode();
     }
 }
