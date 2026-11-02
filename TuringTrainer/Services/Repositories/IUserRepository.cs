@@ -5,11 +5,15 @@ namespace MovieExtravaganza2.Model;
 public interface IUserRepository
 {
 
-    public ObservableCollection<Movie> Movies { get; }
-    public Task SelectAllMovies();
+    public ObservableCollection<User> Users { get; }
+    public Task SelectAllUsers();
 
-    public Task<Movie?> SelectMovie(String imdbId);
-    public Task<MovieAdditionError> InsertMovie(Movie movie);
-    public Task<MovieEditError> UpdateMovie(Movie currentMovie, String title, int year, int numStars);
-    public Task<MovieDeletionError> DeleteMovie(Movie movieToDelete);
+    public Task SelectAllUsersByGroup(String groupId);
+    public Task SelectAllUsersByClass(String classId);
+    public Task SelectAllUsersBySport(String sportId);
+
+    public Task<User?> SelectUser(String userId);
+    public Task<MovieAdditionError> InsertUser(User user);
+    public Task<MovieEditError> UpdateUser(User currentUser, String title, int year, int numStars);
+    public Task<MovieDeletionError> DeleteUser(User user);
 }
