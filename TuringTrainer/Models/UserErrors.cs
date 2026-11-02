@@ -1,26 +1,26 @@
-namespace MovieExtravaganza2.Model;
+namespace TuringTrainer.Models;
 
-public enum MovieAdditionError
+public enum UserAdditionError
 {
-    InvalidIdLength,
-    InvalidTitleLength,
-    InvalidNumStars,
-    InvalidYear,
-    DuplicateMovieId,
+    InvalidId,
+    InvalidFirstName,
+    InvalidLastName,
+    InvalidMiddleInitial,
+    DuplicateUserId,
     DBAdditionError,
     NoError
 }
 
-public enum MovieDeletionError
+public enum UserDeletionError
 {
-    MovieNotFound,
+    UserNotFound,
     DBDeletionError,
     NoError
 }
 
-public enum MovieEditError
+public enum UserEditError
 {
-    MovieNotFound,
+    UserNotFound,
     InvalidFieldError,
     DBEditError,
     NoError

@@ -14,7 +14,7 @@ public interface IUserRepository
     public Task SelectAllUsersBySport(String sportId);
 
     public Task<User?> SelectUser(String userId);
-    public Task<MovieAdditionError> InsertUser(User user);
-    public Task<MovieEditError> UpdateUser(User currentUser, String title, int year, int numStars);
-    public Task<MovieDeletionError> DeleteUser(User user);
+    public Task<UserAdditionError> InsertUser(User user);
+    public Task<UserEditError> UpdateUser(User currentUser, String title, int year, int numStars);
+    public Task<UserDeletionError> DeleteUser(User user);
 }
