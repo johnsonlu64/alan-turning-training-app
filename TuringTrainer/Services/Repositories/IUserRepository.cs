@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace MovieExtravaganza2.Model;
+namespace TuringTrainer.Services.Repositories;
 
 public interface IUserRepository
 {

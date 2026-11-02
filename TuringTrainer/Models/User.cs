@@ -1,74 +1,65 @@
+namespace TuringTrainer.Models;
 
-namespace MovieExtravaganza2.Model;
-
-using System.ComponentModel;
-using System.Configuration;
-using System.Runtime.CompilerServices;
-using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using Supabase.Postgrest.Attributes;
-using Supabase.Postgrest.Models;
-
 
 [Table("user")]
-public class User : ObservableBaseModel
+public class User : ObservableObject
 {
-    String _user_id = "";
-    String _title = "";
-    int _numStars;
-    int _year;
+    Guid _id = Guid.Empty;
+    String _first_name = "";
+    String _middle_initial = "";
+    String _last_name = "";
+    bool _is_coach;
+    DateTimeOffset _created_at;
 
-    [PrimaryKey("user_id"), Column("user_id")]
-    public String UserId
+    [PrimaryKey("id"), Column("id")]
+    public Guid Id
     {
-      get { return _user_id; }
-    }
-
-    [Column("title")]
-    public String Title
-    {
-        get { return _title; }
-        set
-        {
-            SetProperty(ref _title, value);
-        }
-    }
-    [Column("year")]
-    public int Year
-    {
-        get { return _year; }
-        set
-        {
-            SetProperty(ref _year, value);
-        }
-    }
-    [Column("num_stars")]
-    public int NumStars
-    {
-        get
-        {
-            return _numStars;
-        }
-        set
-        {
-            if (value >= 1 && value <= 5) // Hmmm... hardcoding :-()
-            {
-                SetProperty(ref _numStars, value);
-            }
-        }
+        get { return _id; }
+        set { SetProperty(ref _id, value); }
     }
 
-    public Movie(String imdbId, String title, int year, int numStars)
+    [Column("first_name")]
+    public String FirstName
     {
-        ImdbId = imdbId;
-        Title = title;
-        Year = year;
-        NumStars = numStars;
+        get { return _first_name; }
+        set { SetProperty(ref _first_name, value); }
     }
 
-    public Movie() { }
+    [Column("middle_initial")]
+    public String MiddleInitial
+    {
+        get { return _middle_initial; }
+        set { SetProperty(ref _middle_initial, value); }
+    }
+
+    [Column("last_name")]
+    public String LastName
+    {
+        get { return _last_name; }
+        set { SetProperty(ref _last_name, value); }
+    }
+
+    [Column("is_coach")]
+    public bool IsCoach
+    {
+        get { return _is_coach; }
+        set { SetProperty(ref _is_coach, value); }
+    }
+
+    [Column("created_at")]
+    public DateTimeOffset CreatedAt
+    {
+        get { return _created_at; }
+        set { SetProperty(ref _created_at, value); }
+    }
+
+    public User() { }
+
     public override String ToString()
     {
-        return String.Format("Imdb_id: {0}, Title: {1}, Year: {2}, NumStars: {3}", ImdbId, Title, Year, NumStars);
+        return String.Format("Id: {0}, FirstName: {1}, MiddleInitial: {2}, LastName: {3}, IsCoach: {4}, CreatedAt: {5}", Id, FirstName, MiddleInitial, LastName, IsCoach, CreatedAt);
     }
 
     public override bool Equals(object? obj)
@@ -78,12 +69,12 @@ public class User : ObservableBaseModel
             return false;
         }
 
-        Movie other = (Movie)obj;
-        return ImdbId == other.ImdbId;
+        User other = (User)obj;
+        return Id == other.Id;
     }
 
     public override int GetHashCode()
     {
-        return ImdbId.GetHashCode();
+        return Id.GetHashCode();
     }
 }

@@ -1,5 +1,5 @@
 using System.Collections.ObjectModel;
-namespace MovieExtravaganza2.Infrastructure;
+namespace TuringTrainer.Services;
 
 public class Database : IDatabase
 {

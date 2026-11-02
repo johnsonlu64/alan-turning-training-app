@@ -1,4 +1,7 @@
-public class UserRepository
+using System.Collections.ObjectModel;
+
+namespace TuringTrainer.Services.Repositories;
+public class UserRepository : IUserRepository
 {
 
   public ObservableCollection<Movie> Movies { get; private set; } = new();
