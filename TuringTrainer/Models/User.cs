@@ -4,20 +4,19 @@ using System;
 using Supabase.Postgrest.Attributes;
 
 [Table("user")]
-public class User : ObservableObject
+public class User : ObservableBaseModel
 {
-    Guid _id = Guid.Empty;
+    readonly Guid _user_id = Guid.Empty;
     String _first_name = "";
     String _middle_initial = "";
     String _last_name = "";
     bool _is_coach;
     DateTimeOffset _created_at;
 
-    [PrimaryKey("id"), Column("id")]
-    public Guid Id
+    [PrimaryKey("user_id"), Column("user_id")]
+    public Guid UserId
     {
-        get { return _id; }
-        set { SetProperty(ref _id, value); }
+        get { return _user_id; }
     }
 
     [Column("first_name")]
