@@ -20,10 +20,6 @@ public partial class ClassIPage : ContentPage
     {
         // Open the sport
     }
-    private async void OnBackClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("..");
-    }
 
     private void OnSportsTabClicked(object? sender, EventArgs e)
     {

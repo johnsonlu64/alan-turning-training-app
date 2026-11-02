@@ -12,12 +12,6 @@ public partial class MetricsPage : ContentPage
         InitializeComponent();
     }
 
-    private async void OnBackClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("..");
-    }
-
-
     // When a item from the drop down is selected this method is triggered and
     // fills in the weights depending on which exercise was selected calls 
     // update chart method
