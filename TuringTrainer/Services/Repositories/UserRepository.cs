@@ -1,33 +1,50 @@
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
+using TuringTrainer.Models;
 
 namespace TuringTrainer.Services.Repositories;
 public class UserRepository : IUserRepository
 {
 
-  public ObservableCollection<Movie> Movies { get; private set; } = new();
+  public ObservableCollection<User> Users { get; private set; } = new();
 
-  public async Task SelectAllMovies()
+  public async Task SelectAllUsers()
     {
-        Console.WriteLine("Hello from SeletAllMovies()");
+        Console.WriteLine("Hello from SelectAllUsers()");
         try
         {
-            var response = await client.From<Movie>().Get();
-            Movies.Clear();
+            var response = await client.From<User>().Get();
+            Users.Clear();
 
-            foreach (var movie in response.Models)
+            foreach (var user in response.Models)
             {
-                Movies.Add(movie);
+                Users.Add(user);
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error fetching movies: {ex.Message}");
+            Console.WriteLine($"Error fetching users: {ex.Message}");
         }
     }
 
-    public async Task<Movie?> SelectMovie(string imdbId)
+    public async Task SelectAllUsersByGroup(string groupId)
     {
-        var response = await client.From<Movie>().Where(movie => movie.ImdbId == imdbId).Get();
+      return;
+    }
+
+    public async Task SelectAllUsersByClass(string classId)
+    {
+      return;
+    }
+
+    public async Task SelectAllUsersBySport(string sportId)
+    {
+      return;
+    }
+
+    public async Task<User?> SelectUser(Guid userId)
+    {
+        var response = await client.From<User>().Where(user => user.Id == userId).Get();
         if (response != null)
         {
             return response!.Models.FirstOrDefault();
@@ -35,79 +52,80 @@ public class UserRepository : IUserRepository
         return null;
     }
 
-    public async Task<MovieAdditionError> InsertMovie(Movie movie)
+    public async Task<UserAdditionError> InsertUser(User user)
     {
         try
         {
-            var response = await client.From<Movie>().Insert(movie); // insert into the database
+            var response = await client.From<User>().Insert(user);
             if (response.Models.Any())
             {
-                Movies.Add(response.Models.First()); // update the local cache [or maybe just movie
+                Users.Add(response.Models.First());
             }
             else
             {
-                return MovieAdditionError.DuplicateMovieId;
+                return UserAdditionError.DuplicateUserId;
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine("Insert failed, {0}", ex);
-            return ex.Message.Contains("already exists") ? MovieAdditionError.DuplicateMovieId : MovieAdditionError.DBAdditionError;
+            return ex.Message.Contains("already exists") ? UserAdditionError.DuplicateUserId : UserAdditionError.DBAdditionError;
         }
-        return MovieAdditionError.NoError;
+        return UserAdditionError.NoError;
     }
 
-    public async Task<MovieEditError> UpdateMovie(Movie movieToUpdate, string title, int year, int numStars)
+    public async Task<UserEditError> UpdateUser(User userToUpdate, String firstName, String middleInitial, String lastName, bool isCoach)
     {
         try
         {
-            movieToUpdate.Title = title;
-            movieToUpdate.Year = year;
-            movieToUpdate.NumStars = numStars;
-            var response = await client.From<Movie>().Update(movieToUpdate);
+            userToUpdate.FirstName = firstName;
+            userToUpdate.MiddleInitial = middleInitial;
+            userToUpdate.LastName = lastName;
+            userToUpdate.IsCoach = isCoach;
+            var response = await client.From<User>().Update(userToUpdate);
             if (response.Models.Any())
             {
-                var updatedMovie = response.Models.First();
-                var index = Movies.IndexOf(movieToUpdate);
+                var updatedUser = response.Models.First();
+                var index = Users.IndexOf(userToUpdate);
                 if (index >= 0)
                 {
-                    Movies[index] = updatedMovie; // adding, deleting, or in this case replacing an element in a collection triggers a property changed event so the bound collection view will be refreshed. Changing the properties of an existing object does not, unless those properties invoke OnPropertyChanged()
+                    Users[index] = updatedUser;
                 }
             }
             else
             {
-                return MovieEditError.MovieNotFound; // that's the only way this could fail normally - exceptions are caught below
+                return UserEditError.UserNotFound;
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine("Update failed, {0}", ex);
-            return MovieEditError.DBEditError;
+            return UserEditError.DBEditError;
         }
-        return MovieEditError.NoError;
+        return UserEditError.NoError;
     }
 
-    public async Task<MovieDeletionError> DeleteMovie(Movie movieToDelete)
+    public async Task<UserDeletionError> DeleteUser(User userToDelete)
     {
         try
         {
-            var response = await client.From<Movie>().Delete(movieToDelete);
+            var response = await client.From<User>().Delete(userToDelete);
             if (response.Models.Any())
             {
-                Console.WriteLine($"{Movies.Count}");
-                Movies.Remove(movieToDelete); // requires Equals() method be implemented
-                Console.WriteLine($"{Movies.Count}");
+                Console.WriteLine($"{Users.Count}");
+                Users.Remove(userToDelete);
+                Console.WriteLine($"{Users.Count}");
             }
             else
             {
-                return MovieDeletionError.MovieNotFound;
+                return UserDeletionError.UserNotFound;
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine("Delete failed, {0}", ex);
-            return MovieDeletionError.DBDeletionError;
+            return UserDeletionError.DBDeletionError;
         }
-        return MovieDeletionError.NoError;
+        return UserDeletionError.NoError;
     }
 }

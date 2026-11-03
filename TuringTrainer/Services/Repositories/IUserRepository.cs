@@ -13,8 +13,8 @@ public interface IUserRepository
     public Task SelectAllUsersByClass(String classId);
     public Task SelectAllUsersBySport(String sportId);
 
-    public Task<User?> SelectUser(String userId);
+    public Task<User?> SelectUser(Guid userId);
     public Task<UserAdditionError> InsertUser(User user);
-    public Task<UserEditError> UpdateUser(User currentUser, String title, int year, int numStars);
+    public Task<UserEditError> UpdateUser(User currentUser, String firstName, String middleInitial, String lastName, bool isCoach);
     public Task<UserDeletionError> DeleteUser(User user);
 }
