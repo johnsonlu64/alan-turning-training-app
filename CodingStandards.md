@@ -77,3 +77,76 @@ SELECT first_name, last_name
 FROM students
 WHERE student_id = 1;
 ```
+
+
+### DMC - Space indentation () 
+
+
+Spacing: // Use 4 spaces for indentation when writing code. 
+
+
+Bad: //   
+
+        public App() 
+          { 
+        InitializeComponent(); 
+          // The app is designed dark 
+
+         UserAppTheme = AppTheme.Dark; 
+
+        } 
+
+
+Good: // 
+    
+    public App() 
+    { 
+        InitializeComponent(); 
+
+        // The app is designed dark 
+        UserAppTheme = AppTheme.Dark; 
+    } 
+    
+
+ 
+### DMC - Use PascalCase for naming classes, methods, enumerations, public fields, and public properties.  
+
+Naming: // Capitalize every word. 
+
+
+Bad: // homePage, homepage, Homepage 
+
+
+Good :// HomePage 
+
+ 
+
+### DMC - Namespace ‘using’ declarations go at the top of the file before any namespaces. Organize the ‘using’ imports by alphabetical order and have System imports always organized first. 
+
+Organize: // declarations at the top in alphabetical order with System imports first. 
+
+
+Bad: //  
+    using MovieExtravaganza2.Model; 
+    using System; 
+    using FilmTracker.Model; 
+
+
+Good: // 
+    using System; 
+    using FilmTracker.Model; 
+    using MovieExtravaganza2.Model; 
+
+ 
+### DMC - Use camelCase for names of local variables and parameters. 
+
+Naming: // Use camelCase with the first word lowercase and the second uppercase 
+
+
+Bad: // FirstName, firstname, Firstname 
+
+
+Good: // firstName 
+
+
+(referencing c# at google style guide link in step 1 of instructions)  
