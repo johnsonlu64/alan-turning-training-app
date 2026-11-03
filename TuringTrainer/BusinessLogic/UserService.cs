@@ -13,9 +13,9 @@ public class UserService
     _userRepository = userRepository;
   }
 
-  public async  GetUserSession()
+  public Supabase.Gotrue.Session? GetUserSession()
   {
-    return null;
+    return _userRepository.GetUserSession();
   }
 
   public async Task<UserSignUpError> SignUpUser(string email, string password)
