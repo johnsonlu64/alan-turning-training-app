@@ -1,5 +1,10 @@
 namespace TuringTrainer;
-//Name: Bakary
+/*
+ * Name : Bakary Ceesay
+ * This is the code-behind file for the LoginPage.xaml page.
+ * It contains the logic for handling user interactions on the LoginPage page.
+ */
+
 public partial class LoginPage : ContentPage
 {
     //int count = 0;
