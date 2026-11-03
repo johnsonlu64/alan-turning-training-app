@@ -25,6 +25,10 @@
                        FontSize="27"
                        FontAttributes="Bold"
                        TextColor="White"/>
+                <Label x:Name="ActiveUserIdLabel"
+                       FontSize="14"
+                       TextColor="#A5A5A5"
+                       Margin="0,4,0,0"/>
             </VerticalStackLayout>
 
             <Grid Grid.Column="1">

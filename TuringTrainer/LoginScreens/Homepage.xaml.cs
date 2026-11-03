@@ -1,4 +1,6 @@
+using Supabase.Gotrue;
 using TuringTrainer.LeaderBoard;
+using TuringTrainer.Services.Repositories;
 
 namespace TuringTrainer;
 //Name: Bakary
@@ -47,16 +49,47 @@ public partial class Homepage : ContentPage
             }
         }
     };
+    private readonly UserService _userService;
+
 
     public Homepage()
     {
+        _userService = new UserService(new UserRepository());
+        
         InitializeComponent();
+        LoadActiveUser();
+        
+
 
         //fill the class with atheletes
         ClassPicker.Items.Add("Class 1");
         ClassPicker.Items.Add("Class 2");
         ClassPicker.Items.Add("Class 3");
     }
+
+    private async Task LoadActiveUser()
+    {
+        try
+        {
+            var userSession = _userService.GetUserSession();
+
+            string? userId = userSession?.User?.Id;
+
+            if (userId != null)
+            {
+                ActiveUserIdLabel.Text = userId;
+            }
+            else
+            {
+                ActiveUserIdLabel.Text = "No session";
+            }
+        }
+        catch
+        {
+            ActiveUserIdLabel.Text = "Not signed in";
+        }
+    }
+
 
     private async void OnClass1Tapped(object sender, TappedEventArgs e)
     {
