@@ -3,14 +3,17 @@ using System.Text.RegularExpressions;
 using TuringTrainer.Models;
 
 namespace TuringTrainer.Services.Repositories;
+
 public class UserRepository : IUserRepository
 {
 
-  public ObservableCollection<User> Users { get; private set; } = new();
+    private readonly Supabase.Client client = Database.getClient();
 
-  public async Task SelectAllUsers()
+
+    public ObservableCollection<User> Users { get; private set; } = new();
+
+    public async Task SelectAllUsers()
     {
-        Console.WriteLine("Hello from SelectAllUsers()");
         try
         {
             var response = await client.From<User>().Get();
@@ -29,22 +32,22 @@ public class UserRepository : IUserRepository
 
     public async Task SelectAllUsersByGroup(string groupId)
     {
-      return;
+        return;
     }
 
     public async Task SelectAllUsersByClass(string classId)
     {
-      return;
+        return;
     }
 
     public async Task SelectAllUsersBySport(string sportId)
     {
-      return;
+        return;
     }
 
     public async Task<User?> SelectUser(Guid userId)
     {
-        var response = await client.From<User>().Where(user => user.Id == userId).Get();
+        var response = await client.From<User>().Where(user => user.UserId == userId).Get();
         if (response != null)
         {
             return response!.Models.FirstOrDefault();
