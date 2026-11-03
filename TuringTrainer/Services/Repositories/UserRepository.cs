@@ -7,7 +7,7 @@ namespace TuringTrainer.Services.Repositories;
 public class UserRepository : IUserRepository
 {
 
-    private readonly Supabase.Client client = Database.getClient();
+    private readonly Supabase.Client _client = Database.getClient();
 
 
     public ObservableCollection<User> Users { get; private set; } = new();
@@ -16,7 +16,7 @@ public class UserRepository : IUserRepository
     {
         try
         {
-            var response = await client.From<User>().Get();
+            var response = await _client.From<User>().Get();
             Users.Clear();
 
             foreach (var user in response.Models)
@@ -32,29 +32,44 @@ public class UserRepository : IUserRepository
 
     public Supabase.Gotrue.Session? GetUserSession()
     {
-        return client.Auth.CurrentSession;
+        return _client.Auth.CurrentSession;
     }
 
     public Supabase.Gotrue.User? GetUser()
     {
-        return client.Auth.CurrentUser;
+        return _client.Auth.CurrentUser;
     }
 
-    public async Task<bool> SignUpUser(string email, string password)
+    public async Task<UserAdditionError> SignUpUser(string email, string password)
     {
-        var session = await client.Auth.SignUp(email, password);
-        return session != null;
+        try {
+            var session = await _client.Auth.SignUp(email, password);
+            var user = session?.User;
+            if (user == null || user.Id == null)
+            {
+                return UserAdditionError.DBAdditionError;
+            }
+
+            Guid userId = Guid.Parse(user.Id);
+            User createdUser = new User(userId);
+            return await InsertUser(createdUser);
+        }
+        catch
+        {
+            return UserAdditionError.DBAdditionError;
+        }
+
     }
 
     public async Task<bool> SignInUser(string email, string password)
     {
-        var session = await client.Auth.SignInWithPassword(email, password);
+        var session = await _client.Auth.SignInWithPassword(email, password);
         return session != null;
     }
 
     public async Task SignOutUser()
     {
-        await client.Auth.SignOut();
+        await _client.Auth.SignOut();
     }
 
 
@@ -77,7 +92,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> SelectUser(Guid userId)
     {
-        var response = await client.From<User>().Where(user => user.UserId == userId).Get();
+        var response = await _client.From<User>().Where(user => user.UserId == userId).Get();
         if (response != null)
         {
             return response!.Models.FirstOrDefault();
@@ -89,7 +104,7 @@ public class UserRepository : IUserRepository
     {
         try
         {
-            var response = await client.From<User>().Insert(user);
+            var response = await _client.From<User>().Insert(user);
             if (response.Models.Any())
             {
                 Users.Add(response.Models.First());
@@ -115,7 +130,7 @@ public class UserRepository : IUserRepository
             userToUpdate.MiddleInitial = middleInitial;
             userToUpdate.LastName = lastName;
             userToUpdate.IsCoach = isCoach;
-            var response = await client.From<User>().Update(userToUpdate);
+            var response = await _client.From<User>().Update(userToUpdate);
             if (response.Models.Any())
             {
                 var updatedUser = response.Models.First();
@@ -142,7 +157,7 @@ public class UserRepository : IUserRepository
     {
         try
         {
-            var response = await client.From<User>().Delete(userToDelete);
+            var response = await _client.From<User>().Delete(userToDelete);
             if (response.Models.Any())
             {
                 Console.WriteLine($"{Users.Count}");
