@@ -1,5 +1,9 @@
 namespace TuringTrainer;
-
+/*
+ * Name : Bakary Ceesay
+ * This is the code-behind file for the AddClass.xaml page.
+ * It contains the logic for handling user interactions on the AddClass page.
+ */
 public partial class AddClass : ContentPage
 {
     public AddClass()
