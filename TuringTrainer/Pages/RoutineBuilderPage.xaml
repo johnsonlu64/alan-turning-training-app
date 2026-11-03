@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:TuringTrainer.Pages"
+             x:Class="TuringTrainer.Pages.RoutineBuilderPage"
+             Title="Routine"
+             BackgroundColor="#101010"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="ExerciseTemplate"
+                x:DataType="pages:BuilderExercise">
+            <Border BackgroundColor="#1C1C1C"
+                    Stroke="#343434"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 14"
+                    Padding="14">
+                <Grid ColumnDefinitions="Auto,*"
+                        ColumnSpacing="12">
+
+                    <Border WidthRequest="40"
+                            HeightRequest="40"
+                            BackgroundColor="#332B12"
+                            Stroke="Transparent"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 10"
+                            VerticalOptions="Center">
+                        <Label Text="{Binding Index}"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="#F5C542"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1"
+                            Spacing="4"
+                            VerticalOptions="Center">
+                        <Label Text="{Binding Name}"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="#FFFFFF"/>
+                        <Label Text="{Binding Focus}"
+                               FontSize="11"
+                               CharacterSpacing="1"
+                               TextColor="#A5A5A5"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SetTemplate"
+                x:DataType="pages:BuilderSet">
+            <Border BackgroundColor="#1C1C1C"
+                    Stroke="#343434"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="12">
+                <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                        ColumnSpacing="10">
+
+                    <Label Text="{Binding Label}"
+                           FontSize="11"
+                           CharacterSpacing="1"
+                           FontAttributes="Bold"
+                           TextColor="#999999"
+                           VerticalOptions="Center"/>
+
+                    <Button Grid.Column="1"
+                            Text="-"
+                            Style="{StaticResource StepButton}"
+                            Clicked="OnPercentDown"
+                            CommandParameter="{Binding .}"/>
+
+                    <Label Grid.Column="2"
+                           Text="{Binding PercentText}"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="#F5C542"
+                           WidthRequest="56"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="Center"/>
+
+                    <Button Grid.Column="3"
+                            Text="+"
+                            Style="{StaticResource StepButton}"
+                            Clicked="OnPercentUp"
+                            CommandParameter="{Binding .}"
+                            HorizontalOptions="Start"/>
+
+                    <Button Grid.Column="4"
+                            Text="-"
+                            Style="{StaticResource StepButton}"
+                            Clicked="OnRepsDown"
+                            CommandParameter="{Binding .}"/>
+
+                    <Label Grid.Column="5"
+                           Text="{Binding RepsText}"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="#F5C542"
+                           WidthRequest="40"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="Center"/>
+
+                    <Button Grid.Column="6"
+                            Text="+"
+                            Style="{StaticResource StepButton}"
+                            Clicked="OnRepsUp"
+                            CommandParameter="{Binding .}"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*"
+            RowSpacing="16"
+            Padding="20,12,20,20">
+
+        <pages:PageHeader x:Name="Header"
+                          Title="Routine"
+                          RightLabel="BUILDER"/>
+
+        <Grid Grid.Row="1"
+                ColumnDefinitions="340,*"
+                ColumnSpacing="20">
+
+            <!-- Left: the exercises in this routine -->
+            <Grid RowDefinitions="Auto,*,Auto">
+
+                <Label Text="EXERCISES"
+                       FontSize="13"
+                       CharacterSpacing="2"
+                       FontAttributes="Bold"
+                       TextColor="#A5A5A5"/>
+
+                <CollectionView x:Name="ExerciseList"
+                                Grid.Row="1"
+                                Margin="0,12,0,12"
+                                SelectionMode="Single"
+                                SelectionChanged="OnExerciseSelected"
+                                ItemTemplate="{StaticResource ExerciseTemplate}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+
+                <Button Grid.Row="2"
+                        Text="+  ADD EXERCISE"
+                        Clicked="OnAddExerciseClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="#F5C542"
+                        BorderColor="#343434"
+                        BorderWidth="1"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        CornerRadius="12"
+                        HeightRequest="52"/>
+            </Grid>
+
+            <!-- Right: the prescription of the selected exercise -->
+            <Grid Grid.Column="1"
+                    RowDefinitions="Auto,Auto,Auto,*,Auto">
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label x:Name="ExerciseNameLabel"
+                           Text="Back Squat"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF"
+                           VerticalOptions="Center"/>
+
+                    <Button Grid.Column="1"
+                            Text="REMOVE"
+                            Clicked="OnRemoveExerciseClicked"
+                            BackgroundColor="Transparent"
+                            TextColor="#999999"
+                            BorderColor="#343434"
+                            BorderWidth="1"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            CornerRadius="8"
+                            HeightRequest="32"
+                            Padding="12,0"/>
+                </Grid>
+
+                <Border Grid.Row="1"
+                        Margin="0,12,0,0"
+                        BackgroundColor="#332B12"
+                        Stroke="#343434"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 14"
+                        Padding="14">
+                    <Grid ColumnDefinitions="*,Auto"
+                            ColumnSpacing="10">
+
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="ANCHOR"
+                                   FontSize="11"
+                                   CharacterSpacing="1"
+                                   TextColor="#A5A5A5"/>
+                            <Label x:Name="AnchorNameLabel"
+                                   Text="BACK SQUAT"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="#F5C542"/>
+                            <Label x:Name="AnchorDetailLabel"
+                                   Text="90% OF 315 LB"
+                                   FontSize="11"
+                                   CharacterSpacing="1"
+                                   TextColor="#999999"/>
+                        </VerticalStackLayout>
+
+                        <Button Grid.Column="1"
+                                Text="CHANGE"
+                                Clicked="OnChangeAnchorClicked"
+                                BackgroundColor="Transparent"
+                                TextColor="#F5C542"
+                                BorderColor="#343434"
+                                BorderWidth="1"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                CornerRadius="8"
+                                HeightRequest="36"
+                                Padding="10,0"
+                                VerticalOptions="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- Intensity of the selected set -->
+                <Grid Grid.Row="2"
+                      ColumnDefinitions="Auto,Auto,Auto"
+                      ColumnSpacing="8"
+                      Margin="0,16,0,0">
+
+                    <Label Text="INTENSITY"
+                           FontSize="13"
+                           CharacterSpacing="2"
+                           FontAttributes="Bold"
+                           TextColor="#A5A5A5"
+                           VerticalOptions="Center"/>
+
+                    <Button Grid.Column="1"
+                            Text="-"
+                            Style="{StaticResource StepButton}"
+                            Clicked="OnPercentDown"/>
+
+                    <Label Grid.Column="2"
+                           x:Name="PercentLabel"
+                           Text="70%"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#F5C542"
+                           WidthRequest="60"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="Center"/>
+                </Grid>
+
+                <CollectionView x:Name="SetList"
+                                Grid.Row="3"
+                                Margin="0,12,0,0"
+                                SelectionMode="Single"
+                                SelectionChanged="OnSetSelected"
+                                ItemTemplate="{StaticResource SetTemplate}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                ItemSpacing="8"/>
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+
+                <Grid Grid.Row="4"
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="12"
+                        Margin="0,16,0,0">
+                    <Button Text="+  ADD SET"
+                            Clicked="OnAddSetClicked"
+                            BackgroundColor="Transparent"
+                            TextColor="#F5C542"
+                            BorderColor="#343434"
+                            BorderWidth="1"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            CornerRadius="12"
+                            HeightRequest="52"/>
+
+                    <Button Grid.Column="1"
+                            Text="SAVE ROUTINE"
+                            Clicked="OnSaveClicked"
+                            BackgroundColor="#F5C542"
+                            TextColor="#101010"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            CornerRadius="12"
+                            HeightRequest="52"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

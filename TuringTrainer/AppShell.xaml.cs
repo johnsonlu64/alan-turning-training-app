@@ -1,4 +1,5 @@
-﻿namespace TuringTrainer;
+﻿using SettingsPage = TuringTrainer.Settings.Settings;
+namespace TuringTrainer;
 
 public partial class AppShell : Shell
 {
@@ -15,5 +16,9 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(ClassIPage), typeof(ClassIPage));
 		Routing.RegisterRoute(nameof(ClassIIPage), typeof(ClassIIPage));
 		Routing.RegisterRoute(nameof(ClassIIIPage), typeof(ClassIIIPage));
+		Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
+		Routing.RegisterRoute(nameof(Pages.RoutinesPage), typeof(Pages.RoutinesPage));
+		Routing.RegisterRoute(nameof(Pages.RoutineBuilderPage), typeof(Pages.RoutineBuilderPage));
+		Routing.RegisterRoute(nameof(Pages.NotificationsPage), typeof(Pages.NotificationsPage));
 	}
 }

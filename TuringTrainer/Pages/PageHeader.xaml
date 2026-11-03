@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TuringTrainer.Pages.PageHeader">
+
+    <Grid ColumnDefinitions="Auto,*"
+          ColumnSpacing="12"
+          Padding="0,12,0,0">
+
+        <Button Text="‹"
+                FontSize="32"
+                WidthRequest="44"
+                HeightRequest="44"
+                Padding="0"
+                BackgroundColor="Transparent"
+                TextColor="#F5C542"
+                Clicked="OnBackClicked"
+                VerticalOptions="Center"
+                AutomationId="backButton"
+                SemanticProperties.Description="Go back" />
+
+        <VerticalStackLayout Grid.Column="1" Spacing="10">
+
+            <Label Text="TURINGTRAINER"
+                   FontSize="12"
+                   CharacterSpacing="3"
+                   TextColor="#F5C542"
+                   FontAttributes="Bold" />
+
+            <Label x:Name="TitleLabel"
+                   FontSize="27"
+                   FontAttributes="Bold"
+                   TextColor="White" />
+
+            <Label x:Name="RightLabelText"
+                   FontSize="13"
+                   CharacterSpacing="2"
+                   FontAttributes="Bold"
+                   TextColor="#A5A5A5"
+                   IsVisible="False" />
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentView>

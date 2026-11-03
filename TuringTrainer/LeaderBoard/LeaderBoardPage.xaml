@@ -2,172 +2,66 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TuringTrainer.LeaderBoardPage"
-             Background="White">
+             Background="#101010"
+             Shell.NavBarIsVisible="False">
 
-        <VerticalStackLayout
-            Padding="20"
-            Spacing="20">
+    <Grid Padding="20"
+          RowDefinitions="Auto,Auto,*"
+          RowSpacing="20">
 
-            <Label
-                Text="LEADERBOARD👑"
-                FontSize="28"
-                FontAttributes="Bold"
-                TextColor="#FFD600"
-                HorizontalOptions="Center"
-                Margin="1,0,0,0"/>
+        <!-- Leaderboard title -->
+        <Label Grid.Row="0"
+               Text="LEADERBOARD👑"
+               FontSize="28"
+               FontAttributes="Bold"
+               TextColor="#FFD600"
+               HorizontalOptions="Center"
+               Margin="1,0,0,0"/>
 
-            <Border
-                Stroke="#FFD600"
-                StrokeThickness="2"
-                Padding="10">
+        <!-- Class selector -->
+        <Picker Grid.Row="1"
+                x:Name="ClassPicker"
+                TextColor="White"
+                FontSize="22"
+                BackgroundColor="#1C1C1C"
+                SelectedIndexChanged="OnClassChanged"/>
 
-                <VerticalStackLayout
-                    Spacing="10">
+        <!-- Scrollable athlete list -->
+        <CollectionView Grid.Row="2"
+                        x:Name="Board"
+                        VerticalOptions="Fill"
+                        ItemsLayout="VerticalList">
 
-                    <Grid
-                        ColumnDefinitions="50,*,Auto"
-                        ColumnSpacing="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Stroke="#FFD600"
+                            StrokeThickness="1"
+                            Padding="15"
+                            Margin="0,0,0,2"
+                            BackgroundColor="#1C1C1C"
+                            StrokeShape="RoundRectangle 12">
 
-                        <Label
-                            Grid.Column="0"
-                            Text="Rank"
-                            FontSize="18"
-                            FontAttributes="Bold"
-                            TextColor="Black"/>
+                        <Grid ColumnDefinitions="*,Auto"
+                              Padding="12">
 
-                        <Label
-                            Grid.Column="1"
-                            Text="Athelete Name"
-                            FontSize="18"
-                            FontAttributes="Bold"
-                            TextColor="Black"
-                            HorizontalOptions="Center"/>
+                            <Label Text="{Binding Name}"
+                                   TextColor="White"
+                                   FontSize="18"
+                                   VerticalOptions="Center"/>
 
-                        <Label
-                            Grid.Column="2"
-                            Text="Points"
-                            FontSize="18"
-                            FontAttributes="Bold"
-                            TextColor="Black"/>
+                            <Label Grid.Column="1"
+                                   Text="{Binding Points}"
+                                   TextColor="#FFD600"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"/>
 
-                    </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
 
-                    <BoxView HeightRequest="1"
-                             Color="#DDDDDD"/>
+        </CollectionView>
 
-                    <Grid
-                        ColumnDefinitions="50,*,Auto"
-                        ColumnSpacing="12">
-
-                        <Label Grid.Column="0"
-                               Text="🥇1"
-                               TextColor="Black"
-                               FontSize="18"/>
-
-                        <Label Grid.Column="1"
-                               Text="Alex Morgan"
-                               TextColor="Black"
-                               FontSize="18"/>
-
-                        <Label Grid.Column="2"
-                               Text="1250"
-                               TextColor="Black"
-                               FontSize="18"/>
-                    </Grid>
-
-                    <BoxView HeightRequest="1"
-                             Color="#DDDDDD"/>
-
-                    <Grid
-                        ColumnDefinitions="50,*,Auto"
-                        ColumnSpacing="12">
-
-                        <Label Grid.Column="0"
-                               Text="🥈2"
-                               TextColor="Black"
-                               FontSize="18"/>
-
-                        <Label Grid.Column="1"
-                               Text="Megan Rapinoe"
-                               TextColor="Black"
-                               FontSize="18"/>
-
-                        <Label Grid.Column="2"
-                               Text="1100"
-                               TextColor="Black"
-                               FontSize="18"/>
-
-                    </Grid>
-
-                    <BoxView HeightRequest="1"
-                             Color="#DDDDDD"/>
-
-                    <Grid
-                        ColumnDefinitions="50,*,Auto"
-                        ColumnSpacing="12">
-
-                        <Label Grid.Column="0"
-                               Text="🥉3"
-                               TextColor="Black"
-                               FontSize="18"/>
-
-                        <Label Grid.Column="1"
-                               Text="Sam Kerr"
-                               TextColor="Black"
-                               FontSize="18"/>
-
-                        <Label Grid.Column="2"
-                               Text="950"
-                               TextColor="Black"
-                               FontSize="18"/>
-                    </Grid>
-
-                </VerticalStackLayout>
-
-            </Border>
-
-            <VerticalStackLayout
-                Spacing="10">
-
-                <Label
-                Text="Team Members"
-                FontSize="28"
-                FontAttributes="Bold"
-                TextColor="#FFD600"
-                HorizontalOptions="Center"/>
-            </VerticalStackLayout>
-
-
-            <VerticalStackLayout
-                Spacing="10">
-                <Label
-                    Text="Student1"
-                    FontSize="18"
-                    TextColor="Black"/>
-
-                <Label
-                    Text="Student2"
-                    FontSize="18"
-                    TextColor="Black"/>
-
-                <Label
-                    Text="Student3"
-                    FontSize="18"
-                    TextColor="Black"/>
-
-                <Label
-                    Text="Student4"
-                    FontSize="18"
-                    TextColor="Black"/>
-
-                <Label
-                    Text="Student5"
-                    FontSize="18"
-                    TextColor="Black"/>
-            </VerticalStackLayout>
-
-
-        </VerticalStackLayout>
-
-    
+    </Grid>
 </ContentPage>
