@@ -3,6 +3,12 @@ using TuringTrainer.LeaderBoard;
 namespace TuringTrainer;
 //Name: Bakary
 
+/*
+    * Name : Bakary Ceesay
+    * This is the code-behind file for the Homepage.xaml page.
+    * It contains the logic for handling user interactions on the Homepage page.
+    */
+
 public partial class Homepage : ContentPage
 {
     /// <summary>
