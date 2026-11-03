@@ -77,3 +77,12 @@ SELECT first_name, last_name
 FROM students
 WHERE student_id = 1;
 ```
+
+
+### 5. Filenames and directory names are PascalCase, e.g. My files.cs
+
+### 6. Where possible the file name should be the same as the name of the main class in the file, e.g. MyClass.cs.
+
+### 7. Names of private, protected, internal and protected internal fields and properties: _camelCase.
+
+### 8. In general, prefer one core class per file. 
