@@ -77,87 +77,90 @@ SELECT first_name, last_name
 FROM students
 WHERE student_id = 1;
 ```
+
+### 13. SQL Comments - Use Comments to Explain Complex Logic (Your Initials)
+
+**Comments:** // Use comments to explain the purpose of complex queries, non-obvious logic, or business rules. Keep comments concise and up to date.
+
+**Bad:**
+```sql
+SELECT s.first_name, s.last_name, c.course_name
+FROM students s
+JOIN enrollments e ON e.student_id = s.student_id
+JOIN courses c ON c.course_id = e.course_id
+WHERE e.grade > 70;
 ```
 
+**Good:**
+```sql
+-- Retrieve students who passed their courses with a grade above 70
+SELECT s.first_name, s.last_name, c.course_name
+FROM students s
+JOIN enrollments e ON e.student_id = s.student_id
+JOIN courses c ON c.course_id = e.course_id
+WHERE e.grade > 70; -- passing threshold
+```
 
-### DMC - Space indentation () 
+### 14. SQL Data Types - Choose Appropriate Data Types (Your Initials)
 
+**Data Types:** // Use the most appropriate data type for each column based on the data it will store. Avoid using overly large or incorrect types.
 
-Spacing: // Use 4 spaces for indentation when writing code. 
+**Bad:**
+```sql
+CREATE TABLE students (
+    student_id VARCHAR(100),
+    age VARCHAR(10),
+    gpa VARCHAR(10)
+);
+```
 
+**Good:**
+```sql
+CREATE TABLE students (
+    student_id INTEGER,
+    age INTEGER,
+    gpa DECIMAL(3,2)
+);
+```
 
-Bad: //   
+### 15. SQL Primary Keys - Define a Primary Key for Every Table (Your Initials)
 
-        public App() 
-          { 
-        InitializeComponent(); 
-          // The app is designed dark 
+**Primary Keys:** // Every table should have a primary key to uniquely identify each row. Prefer an integer primary key.
 
-         UserAppTheme = AppTheme.Dark; 
+**Bad:**
+```sql
+CREATE TABLE students (
+    student_id INTEGER,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50)
+);
+```
 
-        } 
+**Good:**
+```sql
+CREATE TABLE students (
+    student_id INTEGER PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50)
+);
+```
 
+### 16. SQL Table Aliases - Use Short, Meaningful Aliases (Your Initials)
 
-Good: // 
-    
-    public App() 
-    { 
-        InitializeComponent(); 
+**Aliases:** // Use short, meaningful table aliases in queries with joins to improve readability. Avoid single-letter aliases unless obvious.
 
-        // The app is designed dark 
-        UserAppTheme = AppTheme.Dark; 
-    } 
-    
+**Bad:**
+```sql
+SELECT a.first_name, b.course_name
+FROM students a
+JOIN enrollments c ON c.student_id = a.student_id
+JOIN courses b ON b.course_id = c.course_id;
+```
 
- 
-### DMC - Use PascalCase for naming classes, methods, enumerations, public fields, and public properties.  
-
-Naming: // Capitalize every word. 
-
-
-Bad: // homePage, homepage, Homepage 
-
-
-Good :// HomePage 
-
- 
-
-### DMC - Namespace ‘using’ declarations go at the top of the file before any namespaces. Organize the ‘using’ imports by alphabetical order and have System imports always organized first. 
-
-Organize: // declarations at the top in alphabetical order with System imports first. 
-
-
-Bad: //  
-    using MovieExtravaganza2.Model; 
-    using System; 
-    using FilmTracker.Model; 
-
-
-Good: // 
-    using System; 
-    using FilmTracker.Model; 
-    using MovieExtravaganza2.Model; 
-
- 
-### DMC - Use camelCase for names of local variables and parameters. 
-
-Naming: // Use camelCase with the first word lowercase and the second uppercase 
-
-
-Bad: // FirstName, firstname, Firstname 
-
-
-Good: // firstName 
-
-
-(referencing c# at google style guide link in step 1 of instructions)  
-
-
-
-### 5. Filenames and directory names are PascalCase, e.g. My files.cs
-
-### 6. Where possible the file name should be the same as the name of the main class in the file, e.g. MyClass.cs.
-
-### 7. Names of private, protected, internal and protected internal fields and properties: _camelCase.
-
-### 8. In general, prefer one core class per file. 
+**Good:**
+```sql
+SELECT s.first_name, c.course_name
+FROM students s
+JOIN enrollments e ON e.student_id = s.student_id
+JOIN courses c ON c.course_id = e.course_id;
+```
