@@ -30,6 +30,23 @@ public class UserRepository : IUserRepository
         }
     }
 
+    public async Task SignUpUser(string email, string password)
+    {
+        var session = await client.Auth.SignUp(email, password);
+    }
+
+    public async Task SignInUser(string email, string password)
+    {
+        var session = await client.Auth.SignInWithPassword(email, password);
+    }
+
+    public async Task SignOutUser()
+    {
+        await client.Auth.SignOut();
+    }
+
+    
+
     public async Task SelectAllUsersByGroup(string groupId)
     {
         return;
