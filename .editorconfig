@@ -1,0 +1,19 @@
+root = true
+
+
+# C# files
+[*.cs]
+
+# File names should use PascalCase.
+# Directory names should use PascalCase.
+# Keep each source file named after its main class where possible.
+# Prefer one core class per file.
+dotnet_naming_rule.nonpublic_members_use_underscore_camel_case.severity = suggestion
+dotnet_naming_rule.nonpublic_members_use_underscore_camel_case.symbols = nonpublic_fields_and_properties
+dotnet_naming_rule.nonpublic_members_use_underscore_camel_case.style = underscore_camel_case
+
+dotnet_naming_symbols.nonpublic_fields_and_properties.applicable_kinds = field, property
+dotnet_naming_symbols.nonpublic_fields_and_properties.applicable_accessibilities = private, protected, internal, protected_internal
+
+dotnet_naming_style.underscore_camel_case.required_prefix = _
+dotnet_naming_style.underscore_camel_case.capitalization = camel_case
