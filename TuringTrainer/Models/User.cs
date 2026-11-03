@@ -7,9 +7,9 @@ using Supabase.Postgrest.Attributes;
 public class User : ObservableBaseModel
 {
     readonly Guid _user_id = Guid.Empty;
-    String _first_name = "";
-    String _middle_initial = "";
-    String _last_name = "";
+    string _first_name = "";
+    string _middle_initial = "";
+    string _last_name = "";
     bool _is_coach;
     DateTimeOffset _created_at;
 
@@ -20,21 +20,21 @@ public class User : ObservableBaseModel
     }
 
     [Column("first_name")]
-    public String FirstName
+    public string FirstName
     {
         get { return _first_name; }
         set { SetProperty(ref _first_name, value); }
     }
 
     [Column("middle_initial")]
-    public String MiddleInitial
+    public string MiddleInitial
     {
         get { return _middle_initial; }
         set { SetProperty(ref _middle_initial, value); }
     }
 
     [Column("last_name")]
-    public String LastName
+    public string LastName
     {
         get { return _last_name; }
         set { SetProperty(ref _last_name, value); }
@@ -56,9 +56,23 @@ public class User : ObservableBaseModel
 
     public User() { }
 
-    public override String ToString()
+    public User(Guid userId,
+                string firstName = "",
+                string middleInitial = "",
+                string lastName = "",
+                bool isCoach = false)
     {
-        return String.Format("Id: {0}, FirstName: {1}, MiddleInitial: {2}, LastName: {3}, IsCoach: {4}, CreatedAt: {5}", UserId, FirstName, MiddleInitial, LastName, IsCoach, CreatedAt);
+        _user_id = userId;
+        _first_name = firstName;
+        _middle_initial = middleInitial;
+        _last_name = lastName;
+        _is_coach = isCoach;
+        _created_at = DateTimeOffset.UtcNow;
+    }
+
+    public override string ToString()
+    {
+        return string.Format("Id: {0}, FirstName: {1}, MiddleInitial: {2}, LastName: {3}, IsCoach: {4}, CreatedAt: {5}", UserId, FirstName, MiddleInitial, LastName, IsCoach, CreatedAt);
     }
 
     public override bool Equals(object? obj)
