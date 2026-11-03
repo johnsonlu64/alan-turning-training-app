@@ -1,5 +1,17 @@
 namespace TuringTrainer.Models;
 
+public enum UserSignUpError
+{
+    MissingEmailOrPassword,
+    NoError
+}
+
+public enum UserSignInError
+{
+    InvalidEmailOrPassword,
+    NoError
+}
+
 public enum UserAdditionError
 {
     InvalidId,
