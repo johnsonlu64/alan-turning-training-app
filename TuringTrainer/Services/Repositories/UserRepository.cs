@@ -30,20 +30,33 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task SignUpUser(string email, string password)
+    public Supabase.Gotrue.Session? GetUserSession()
     {
-        var session = await client.Auth.SignUp(email, password);
+        return client.Auth.CurrentSession;
     }
 
-    public async Task SignInUser(string email, string password)
+    public Supabase.Gotrue.User? GetUser()
+    {
+        return client.Auth.CurrentUser;
+    }
+
+    public async Task<bool> SignUpUser(string email, string password)
+    {
+        var session = await client.Auth.SignUp(email, password);
+        return session != null;
+    }
+
+    public async Task<bool> SignInUser(string email, string password)
     {
         var session = await client.Auth.SignInWithPassword(email, password);
+        return session != null;
     }
 
     public async Task SignOutUser()
     {
         await client.Auth.SignOut();
     }
+
 
     
 
