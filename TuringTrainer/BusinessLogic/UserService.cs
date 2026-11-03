@@ -1,5 +1,6 @@
 using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
+using Xamarin.Google.ErrorProne.Annotations;
 public class UserService
 {
 
@@ -12,23 +13,47 @@ public class UserService
     _userRepository = userRepository;
   }
 
+  public async  GetUserSession()
+  {
+    return null;
+  }
 
-
-  public async Task<UserAdditionError> SignUpUser(string email, string password)
+  public async Task<UserSignUpError> SignUpUser(string email, string password)
   {
     if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
     {
-      return UserAdditionError.InvalidId;
+      return UserSignUpError.MissingEmailOrPassword;
     }
     
-    _userRepository.SignUpUser(email, password);
+    bool isSuccessful = await _userRepository.SignUpUser(email, password);
 
-
-    try
+    if (isSuccessful)
     {
-      _user_session = await 
+      return UserSignUpError.NoError;
+    } else
+    {
+      return UserSignUpError.MissingEmailOrPassword;
     }
   }
+
+  public async Task<UserSignInError> SignUpUser(string email, string password)
+  {
+    if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+    {
+      return UserSignInError.InvalidEmailOrPassword;
+    }
+    
+    bool isSuccessful = await _userRepository.SignInUser(email, password);
+
+    if (isSuccessful)
+    {
+      return UserSignInError.NoError;
+    } else
+    {
+      return UserSignInError.InvalidEmailOrPassword;
+    }
+  }
+
 
 
 }
