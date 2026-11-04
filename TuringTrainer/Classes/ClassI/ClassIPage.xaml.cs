@@ -1,10 +1,17 @@
+using TuringTrainer.BusinessLogic;
+using TuringTrainer.Services.Repositories;
 namespace TuringTrainer;
 // dasha
 public partial class ClassIPage : ContentPage
 {
+     private readonly IUserService _userService;
+     private readonly UserRepository _userRepository;
     public ClassIPage()
-    {
+    {        
         InitializeComponent();
+
+        _userRepository = new UserRepository();
+        _userService = new UserService(new UserRepository());
 
         SportsList.ItemsSource = new List<string>
         {
@@ -14,12 +21,8 @@ public partial class ClassIPage : ContentPage
 
         RoutinesList.ItemsSource = Pages.Routine.All;
 
-        MembersList.ItemsSource = new List<string>
-        {
-            "Dasha"
-        };
+        MembersList.ItemsSource = _userRepository.Users;
     }
-
 
     private async void OnSportClicked(object? sender, EventArgs e)
     {
@@ -41,8 +44,9 @@ public partial class ClassIPage : ContentPage
         ShowRoutines();
     }
 
-    private void OnMembersTabClicked(object? sender, EventArgs e)
+    private async void OnMembersTabClicked(object? sender, EventArgs e)
     {
+        await _userRepository.SelectAllUsers();
         ShowMembers();
     }
 

@@ -21,8 +21,9 @@
         <Grid ColumnDefinitions="Auto,*"
               ColumnSpacing="12"
               Padding="0,12,0,0">
-                    
-            <VerticalStackLayout Grid.Column="1" Spacing="10">
+
+            <VerticalStackLayout Grid.Column="1"
+                    Spacing="10">
                 <Label Text="TURINGTRAINER"
                        FontSize="12"
                        CharacterSpacing="3"
@@ -76,7 +77,7 @@
                     HeightRequest="46"
                     Padding="24,0"/>
         </HorizontalStackLayout>
-        
+
         <CollectionView Grid.Row="2"
                         x:Name="SportsList"
                         SelectionMode="None">
@@ -124,9 +125,9 @@
 
         </CollectionView>
         <CollectionView Grid.Row="2"
-                x:Name="MembersList"
-                IsVisible="False"
-                SelectionMode="None">
+                        x:Name="MembersList"
+                        IsVisible="False"
+                        SelectionMode="None">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"
@@ -145,10 +146,20 @@
                         <Grid ColumnDefinitions="*,Auto"
                               ColumnSpacing="14">
 
-                            <Label Text="{Binding .}"
-                                   TextColor="White"
-                                   FontSize="18"
-                                   VerticalOptions="Center"/>
+                            <HorizontalStackLayout Spacing="5"
+                                                   VerticalOptions="Center">
+
+                                <Label Text="{Binding FirstName}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       VerticalOptions="Center"/>
+
+                                <Label Text="{Binding LastName}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       VerticalOptions="Center"/>
+
+                            </HorizontalStackLayout>
 
                             <Button Grid.Column="1"
                                     Text="›"
