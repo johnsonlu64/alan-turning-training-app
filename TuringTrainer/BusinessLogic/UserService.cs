@@ -20,7 +20,7 @@ public class UserService
     return GetUserSession()?.User?.Id;
   }
 
-  public async Task<UserAdditionError> SignUpUser(string email, string password)
+  public async Task<UserAdditionError> SignUpUser(string email, string password, string username)
   {
     if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
     {
@@ -32,7 +32,7 @@ public class UserService
       return UserAdditionError.PasswordTooShort;
     }
     
-    return await _userRepository.SignUpUser(email, password);
+    return await _userRepository.SignUpUser(email, password, username);
   }
   public async Task<UserSignInError> SignInUser(string email, string password)
   {

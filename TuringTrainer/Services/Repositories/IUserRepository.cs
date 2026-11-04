@@ -16,7 +16,7 @@ public interface IUserRepository
     public Supabase.Gotrue.Session? GetUserSession();
     public Supabase.Gotrue.User? GetUser();
 
-    public Task<UserAdditionError> SignUpUser(string email, string password);
+    public Task<UserAdditionError> SignUpUser(string email, string password, string username);
     public Task<UserSignInError> SignInUser(string email, string password);
     public Task<UserSignoutError> SignOutUser();
 

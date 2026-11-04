@@ -41,7 +41,7 @@ public class UserRepository : IUserRepository
         return _client.Auth.CurrentUser;
     }
 
-    public async Task<UserAdditionError> SignUpUser(string email, string password)
+    public async Task<UserAdditionError> SignUpUser(string email, string password, string username)
     {
         try {
             var session = await _client.Auth.SignUp(email, password);
@@ -54,7 +54,7 @@ public class UserRepository : IUserRepository
             }
 
             Guid userId = Guid.Parse(user.Id);
-            User createdUser = new User(userId);
+            User createdUser = new User(userId, username);
             return await InsertUser(createdUser);
         }
         catch (Supabase.Gotrue.Exceptions.GotrueException ex)

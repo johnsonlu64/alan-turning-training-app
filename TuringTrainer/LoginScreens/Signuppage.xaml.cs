@@ -28,8 +28,9 @@ public partial class SignupPage : ContentPage
 		{
 			string email = EmailEntry.Text?.Trim() ?? "";
 			string password = PasswordEntry.Text ?? "";
+			string username = UsernameEntry.Text ?? "";
 
-			UserAdditionError result = await _userService.SignUpUser(email, password);
+			UserAdditionError result = await _userService.SignUpUser(email, password, username);
 
 			if (result == UserAdditionError.NoError)
 			{
