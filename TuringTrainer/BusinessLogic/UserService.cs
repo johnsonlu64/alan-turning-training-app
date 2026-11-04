@@ -1,6 +1,7 @@
+using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
-public class UserService
+public class UserService : IUserService
 {
 
   private readonly IUserRepository _userRepository;

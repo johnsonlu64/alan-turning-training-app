@@ -1,3 +1,4 @@
+using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
 
@@ -10,8 +11,7 @@ namespace TuringTrainer;
 
 public partial class SignupPage : ContentPage
 {
-	private readonly UserService _userService;
-	
+	private readonly IUserService _userService;
 	public SignupPage()
 	{
 		_userService = new UserService(new UserRepository());

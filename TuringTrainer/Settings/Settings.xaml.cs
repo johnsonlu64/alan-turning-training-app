@@ -1,6 +1,7 @@
+using TuringTrainer.BusinessLogic;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
-using TuringTrainer.LeaderBoard;
+using TuringTrainer.Services.Repositories;
 using TuringTrainer.Models;
 
 namespace TuringTrainer.Settings;
@@ -16,8 +17,7 @@ public partial class Settings : ContentPage
     /// </summary>
     private readonly string[] themes = { "System", "Light", "Dark" };
 
-    private readonly UserService _userService;
-
+    private readonly IUserService _userService;
 
     /// <summary>
     /// Constructor

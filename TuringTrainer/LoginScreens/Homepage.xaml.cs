@@ -1,3 +1,4 @@
+using TuringTrainer.BusinessLogic;
 using Supabase.Gotrue;
 using TuringTrainer.LeaderBoard;
 using TuringTrainer.Services.Repositories;
@@ -49,8 +50,7 @@ public partial class Homepage : ContentPage
             }
         }
     };
-    private readonly UserService _userService;
-
+    private readonly IUserService _userService;
 
     public Homepage()
     {
