@@ -1,12 +1,11 @@
-using Supabase.Gotrue;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Services.Repositories;
 namespace TuringTrainer;
 // dasha
 public partial class ClassIPage : ContentPage
 {
-     private readonly IUserService _userService;
-     private readonly UserRepository _userRepository;
+    private readonly IUserService _userService;
+    private readonly UserRepository _userRepository;
     public ClassIPage()
     {        
         InitializeComponent();
