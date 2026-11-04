@@ -1,3 +1,4 @@
+using Supabase.Gotrue;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Services.Repositories;
 namespace TuringTrainer;
@@ -31,7 +32,15 @@ public partial class ClassIPage : ContentPage
 
     private async void OnMemberClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(MetricsPage));
+        var clickedElement = sender as VisualElement;
+        if (clickedElement == null) return;
+
+        var member = clickedElement.BindingContext as Models.User;
+        if (member == null) return;
+
+        string memberName = $"{member.FirstName} {member.LastName}";
+
+        await Shell.Current.GoToAsync($"{nameof(MetricsPage)}?name={Uri.EscapeDataString(memberName)}");
     }
 
     private void OnSportsTabClicked(object? sender, EventArgs e)

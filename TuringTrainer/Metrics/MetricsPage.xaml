@@ -62,7 +62,7 @@
                                                                VerticalOptions="Center">
 
                                                  <Label x:Name="AthleteNameLabel"
-                                                        Text="John Doe"
+                                                        Text="{Binding MemberName}"
                                                         FontSize="20"
                                                         FontAttributes="Bold"
                                                         TextColor="White"/>

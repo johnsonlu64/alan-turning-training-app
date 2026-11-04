@@ -5,11 +5,24 @@ using SkiaSharp;
 
 namespace TuringTrainer;
 // dasha
+[QueryProperty(nameof(MemberName), "name")]
 public partial class MetricsPage : ContentPage
 {
+    private string _memberName = "";
+
+     public string MemberName
+    {
+        get { return _memberName; }
+        set
+        {
+            _memberName = value;
+            OnPropertyChanged();
+        }
+    }
     public MetricsPage()
     {
         InitializeComponent();
+        BindingContext = this;
     }
 
     // When a item from the drop down is selected this method is triggered and
