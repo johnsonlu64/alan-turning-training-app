@@ -15,6 +15,11 @@ public class UserService
     return _userRepository.GetUserSession();
   }
 
+  public string? CurrentUserId()
+  {
+    return GetUserSession()?.User?.Id;
+  }
+
   public async Task<UserAdditionError> SignUpUser(string email, string password)
   {
     if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
@@ -39,6 +44,8 @@ public class UserService
     return await _userRepository.SignInUser(email, password);
   }
 
+
+  public async Task<
 
 
 }
