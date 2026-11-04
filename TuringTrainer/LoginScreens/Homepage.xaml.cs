@@ -77,7 +77,7 @@ public partial class Homepage : ContentPage
 
             if (currentUser != null)
             {
-                ActiveUserIdLabel.Text = currentUser.FirstName;
+                ActiveUserIdLabel.Text = "Hello, " + currentUser.FirstName;
             }
             else
             {
