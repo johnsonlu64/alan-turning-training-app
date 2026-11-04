@@ -29,16 +29,15 @@
                 PlaceholderColor="#A0A0A0"
                 BackgroundColor="#151515" />
 
-            <!-- Class code -->
-            <Entry
-                x:Name="ClassCodeEntry"
-                Placeholder="Class Code"
-                TextColor="White"
-                PlaceholderColor="#A0A0A0"
-                BackgroundColor="#151515" />
+            <Label
+                Text="A new group ID will be generated automatically."
+                FontSize="13"
+                TextColor="#A0A0A0"
+                HorizontalOptions="Center" />
 
             <!-- Create class button -->
             <Button
+                x:Name="CreateClassButton"
                 Text="CREATE CLASS"
                 Clicked="OnAddClassClicked"
                 FontAttributes="Bold"

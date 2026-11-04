@@ -1,181 +1,180 @@
+using System.Collections.ObjectModel;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.LeaderBoard;
 using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
 
 namespace TuringTrainer;
-//Name: Bakary
-
-/*
-    * Name : Bakary Ceesay
-    * This is the code-behind file for the Homepage.xaml page.
-    * It contains the logic for handling user interactions on the Homepage page.
-    */
 
 public partial class Homepage : ContentPage
 {
-    /// <summary>
-    /// Class 1 - Class 3 with athletes
-    /// </summary>
-    private readonly List<CLasses> classes = new()
-    {
-        new CLasses
-        {
-            Name = "Class 1",
-            Athletes = new List<Athlete>
-            {
-                new Athlete { Name = "Alex Morgan", Points = 1250 },
-                new Athlete { Name = "Sam Kerr", Points = 1100 },
-                new Athlete { Name = "Jordan Lee", Points = 950 }
-            }
-        },
-        new CLasses
-        {
-            Name = "Class 2",
-            Athletes = new List<Athlete>
-            {
-                new Athlete { Name = "Taylor Smith", Points = 1400 },
-                new Athlete { Name = "Chris Brown", Points = 1200 },
-                new Athlete { Name = "Jamie Wilson", Points = 900 }
-            }
-        },
-        new CLasses
-        {
-            Name = "Class 3",
-            Athletes = new List<Athlete>
-            {
-                new Athlete { Name = "Morgan Davis", Points = 1350 },
-                new Athlete { Name = "Riley Chen", Points = 1150 },
-                new Athlete { Name = "Casey Jones", Points = 1000 }
-            }
-        }
-    };
-    private readonly IUserService _userService;
+    private readonly IUserService _userService = new UserService(new UserRepository());
+    private readonly ClassRepository _classRepository = new();
+    private readonly Dictionary<Guid, List<Athlete>> _athletesByClass = new();
+
+    private ObservableCollection<ClassListItem> Classes { get; } = new();
 
     public Homepage()
     {
-        _userService = new UserService(new UserRepository());
-        
         InitializeComponent();
-        LoadActiveUser();
-        
-
-
-        //fill the class with atheletes
-        ClassPicker.Items.Add("Class 1");
-        ClassPicker.Items.Add("Class 2");
-        ClassPicker.Items.Add("Class 3");
+        BindableLayout.SetItemsSource(ClassesLayout, Classes);
     }
 
-    private async Task LoadActiveUser()
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await LoadActiveUserAsync();
+        await LoadClassesAsync();
+    }
+
+    private async Task LoadActiveUserAsync()
     {
         try
         {
             User? currentUser = await _userService.CurrentUser();
-
-            
-
-            if (currentUser != null)
-            {
-                ActiveUserIdLabel.Text = "Hello, " + currentUser.FirstName;
-            }
-            else
-            {
-                ActiveUserIdLabel.Text = "No session";
-            }
+            ActiveUserIdLabel.Text = currentUser == null
+                ? "No session"
+                : $"Hello, {currentUser.FirstName}";
         }
-        catch
+        catch (Exception ex)
         {
-            ActiveUserIdLabel.Text = "Not signed in";
+            System.Diagnostics.Debug.WriteLine($"Unable to load current user: {ex}");
+            ActiveUserIdLabel.Text = "Unable to load user";
         }
     }
 
-
-    private async void OnClass1Tapped(object sender, TappedEventArgs e)
+    private async Task LoadClassesAsync()
     {
-        // Open Class 1
-        await Shell.Current.GoToAsync(nameof(ClassIPage));
+        if (!Guid.TryParse(_userService.CurrentUserId(), out Guid coachId))
+        {
+            Classes.Clear();
+            UpdateClassListUi();
+            await DisplayAlertAsync("Sign in required", "Sign in to view your classes.", "OK");
+            return;
+        }
+
+        try
+        {
+            IReadOnlyList<TrainingClass> classes =
+                await _classRepository.GetClassesForCoachAsync(coachId);
+
+            Classes.Clear();
+            for (int index = 0; index < classes.Count; index++)
+            {
+                Classes.Add(new ClassListItem(classes[index], index + 1));
+            }
+
+            UpdateClassListUi();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Unable to load classes", ex.Message, "OK");
+        }
     }
 
-    private async void OnClass2Tapped(object sender, TappedEventArgs e)
+    private void UpdateClassListUi()
     {
-        // Open Class 2
-        await Shell.Current.GoToAsync(nameof(ClassIIPage));
+        ClassCountLabel.Text = Classes.Count == 1
+            ? "1 class"
+            : $"{Classes.Count} classes";
+        NoClassesLabel.IsVisible = Classes.Count == 0;
+        ClassPicker.ItemsSource = Classes.Select(classItem => classItem.Name).ToList();
     }
 
-    private async void OnClass3Tapped(object sender, TappedEventArgs e)
+    private async void OnClassTapped(object? sender, TappedEventArgs e)
     {
-        // Open Class 3
-        await Shell.Current.GoToAsync(nameof(ClassIIIPage));
+        if (sender is BindableObject bindable &&
+            bindable.BindingContext is ClassListItem classItem)
+        {
+            await OpenClassAsync(classItem.TrainingClass);
+        }
     }
 
-    private async void OnAddClassClicked(object sender, EventArgs e)
+    private async void OnClassOpenClicked(object? sender, EventArgs e)
     {
-        // Open Add Class flow
+        if (sender is Button { CommandParameter: ClassListItem classItem })
+        {
+            await OpenClassAsync(classItem.TrainingClass);
+        }
+    }
+
+    private static Task OpenClassAsync(TrainingClass trainingClass)
+    {
+        return Shell.Current.GoToAsync(
+            nameof(ClassDetailsPage),
+            new Dictionary<string, object> { ["Class"] = trainingClass });
+    }
+
+    private async void OnAddClassClicked(object? sender, EventArgs e)
+    {
         await Shell.Current.GoToAsync(nameof(AddClass));
     }
 
-    /// <summary>
-    /// Opens the Add Student popup
-    /// Author: Aaditya Bhanadari
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void OnAddStudentClicked(object sender, EventArgs e)
+    private async void OnAddStudentClicked(object? sender, EventArgs e)
     {
+        if (Classes.Count == 0)
+        {
+            await DisplayAlertAsync("No classes", "Create a class before adding students.", "OK");
+            return;
+        }
+
         ClassPicker.SelectedIndex = 0;
         StudentIdEntry.Text = string.Empty;
         AddStudentPopup.IsVisible = true;
     }
 
-    private void OnStudentIdEntryCompleted(object sender, EventArgs e)
+    private void OnStudentIdEntryCompleted(object? sender, EventArgs e)
     {
-        string id = StudentIdEntry.Text;
-        if (string.IsNullOrEmpty(id))
+        int selectedIndex = ClassPicker.SelectedIndex;
+        string studentId = StudentIdEntry.Text?.Trim() ?? string.Empty;
+        if (selectedIndex < 0 || selectedIndex >= Classes.Count ||
+            string.IsNullOrWhiteSpace(studentId))
         {
             return;
         }
-        classes[ClassPicker.SelectedIndex].Athletes.Add(new Athlete { Name = id, Points = 0 });
 
+        TrainingClass selectedClass = Classes[selectedIndex].TrainingClass;
+        if (!_athletesByClass.TryGetValue(selectedClass.ClassId, out List<Athlete>? athletes))
+        {
+            athletes = new List<Athlete>();
+            _athletesByClass.Add(selectedClass.ClassId, athletes);
+        }
+
+        athletes.Add(new Athlete { Name = studentId, Points = 0 });
         AddStudentPopup.IsVisible = false;
     }
 
-    private void CloseAddStudentPopup(object sender, EventArgs e)
+    private void CloseAddStudentPopup(object? sender, EventArgs e)
     {
         AddStudentPopup.IsVisible = false;
     }
 
-    private async void OnReportsClicked(object sender, EventArgs e)
+    private async void OnReportsClicked(object? sender, EventArgs e)
     {
-        // Open Reports page
         await Shell.Current.GoToAsync(nameof(Reports));
     }
 
-    private void OnHomeClicked(object sender, EventArgs e)
+    private void OnHomeClicked(object? sender, EventArgs e)
     {
-        // Navigate to Home page
     }
 
-    private async void OnLeaderboardClicked(object sender, EventArgs e)
+    private async void OnLeaderboardClicked(object? sender, EventArgs e)
     {
-        // Navigate to Leaderboard page
         await Shell.Current.GoToAsync(nameof(LeaderBoardPage));
     }
-    private async void OnNotificationsClicked(object sender, EventArgs e)
+
+    private async void OnNotificationsClicked(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(Pages.NotificationsPage));
     }
 
-    private async void OnMetricsClicked(object sender, EventArgs e)
+    private async void OnMetricsClicked(object? sender, EventArgs e)
     {
-        // Navigate to Metrics page
         await Shell.Current.GoToAsync(nameof(MetricsPage));
     }
 
-    private async void OnSettingsClicked(object sender, EventArgs e)
+    private async void OnSettingsClicked(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("SettingsPage");
     }
-
-
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TuringTrainer.ClassDetailsPage"
+             BackgroundColor="#101010"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*"
+          Padding="20,12">
+        <Grid ColumnDefinitions="Auto,*"
+              ColumnSpacing="14"
+              Padding="0,12,0,24">
+            <Button Text="‹"
+                    FontSize="32"
+                    BackgroundColor="#202020"
+                    TextColor="#F5C542"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    CornerRadius="12"
+                    Clicked="OnBackClicked"/>
+
+            <VerticalStackLayout Grid.Column="1"
+                                 Spacing="4"
+                                 VerticalOptions="Center">
+                <Label Text="TURINGTRAINER"
+                       FontSize="12"
+                       CharacterSpacing="3"
+                       TextColor="#F5C542"
+                       FontAttributes="Bold"/>
+                <Label x:Name="ClassNameLabel"
+                       Text="Class"
+                       FontSize="27"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <VerticalStackLayout Grid.Row="1"
+                             Spacing="14">
+            <Label Text="CLASS DETAILS"
+                   FontSize="13"
+                   CharacterSpacing="2"
+                   FontAttributes="Bold"
+                   TextColor="#A5A5A5"/>
+
+            <Border BackgroundColor="#1C1C1C"
+                    Stroke="#343434"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="18">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Class ID"
+                           FontSize="12"
+                           TextColor="#999999"/>
+                    <Label x:Name="ClassIdLabel"
+                           FontSize="14"
+                           TextColor="White"/>
+                    <Label Text="Group ID"
+                           FontSize="12"
+                           TextColor="#999999"/>
+                    <Label x:Name="GroupIdLabel"
+                           FontSize="14"
+                           TextColor="White"/>
+                    <Label Text="Coach ID"
+                           FontSize="12"
+                           TextColor="#999999"/>
+                    <Label x:Name="CoachIdLabel"
+                           FontSize="14"
+                           TextColor="White"/>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

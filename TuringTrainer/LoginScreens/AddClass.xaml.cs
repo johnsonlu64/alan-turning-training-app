@@ -1,3 +1,6 @@
+using TuringTrainer.BusinessLogic;
+using TuringTrainer.Services.Repositories;
+
 namespace TuringTrainer;
 /*
  * Name : Bakary Ceesay
@@ -6,18 +9,47 @@ namespace TuringTrainer;
  */
 public partial class AddClass : ContentPage
 {
+    private readonly IUserService _userService = new UserService(new UserRepository());
+    private readonly ClassRepository _classRepository = new();
+
     public AddClass()
     {
         InitializeComponent();
     }
 
-    private void OnAddClassClicked(object sender, EventArgs e)
+    private async void OnAddClassClicked(object? sender, EventArgs e)
     {
-        // Logic to add a new class
+        string className = ClassNameEntry.Text?.Trim() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(className))
+        {
+            await DisplayAlertAsync("Class name required", "Enter a name for this class.", "OK");
+            return;
+        }
+
+        if (!Guid.TryParse(_userService.CurrentUserId(), out Guid coachId))
+        {
+            await DisplayAlertAsync("Sign in required", "Sign in before creating a class.", "OK");
+            return;
+        }
+
+        CreateClassButton.IsEnabled = false;
+        try
+        {
+            await _classRepository.CreateClassAsync(className, coachId);
+            await Shell.Current.GoToAsync("..");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Unable to create class", ex.Message, "OK");
+        }
+        finally
+        {
+            CreateClassButton.IsEnabled = true;
+        }
     }
 
-    private void OnCancelClicked(object sender, EventArgs e)
+    private async void OnCancelClicked(object? sender, EventArgs e)
     {
-        
+        await Shell.Current.GoToAsync("..");
     }
 }
