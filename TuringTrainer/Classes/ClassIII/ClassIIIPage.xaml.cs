@@ -1,9 +1,16 @@
+using TuringTrainer.BusinessLogic;
+using TuringTrainer.Services.Repositories;
 namespace TuringTrainer;
 // dasha
 public partial class ClassIIIPage : ContentPage
 {
+
+    private readonly IUserService _userService;
+    private readonly UserRepository _userRepository;
     public ClassIIIPage()
     {
+        _userRepository = new UserRepository();
+        _userService = new UserService(new UserRepository());
         InitializeComponent();
 
         SportsList.ItemsSource = new List<string>
@@ -14,10 +21,7 @@ public partial class ClassIIIPage : ContentPage
 
         RoutinesList.ItemsSource = Pages.Routine.All;
 
-        MembersList.ItemsSource = new List<string>
-        {
-            "Dasha"
-        };
+        MembersList.ItemsSource = _userRepository.Users;
     }
     
 
@@ -29,7 +33,15 @@ public partial class ClassIIIPage : ContentPage
 
     private async void OnMemberClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(MetricsPage));
+        var clickedElement = sender as VisualElement;
+        if (clickedElement == null) return;
+
+        var member = clickedElement.BindingContext as Models.User;
+        if (member == null) return;
+
+        string memberName = $"{member.FirstName} {member.LastName}";
+
+        await Shell.Current.GoToAsync($"{nameof(MetricsPage)}?name={Uri.EscapeDataString(memberName)}");
     }
 
     private void OnSportsTabClicked(object? sender, EventArgs e)
@@ -42,8 +54,9 @@ public partial class ClassIIIPage : ContentPage
         ShowRoutines();
     }
 
-    private void OnMembersTabClicked(object? sender, EventArgs e)
+    private async void OnMembersTabClicked(object? sender, EventArgs e)
     {
+        await _userRepository.SelectAllUsers();
         ShowMembers();
     }
 
