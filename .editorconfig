@@ -17,3 +17,5 @@ dotnet_naming_symbols.nonpublic_fields_and_properties.applicable_accessibilities
 
 dotnet_naming_style.underscore_camel_case.required_prefix = _
 dotnet_naming_style.underscore_camel_case.capitalization = camel_case
+
+#The coding standard to prefer one core class per file cannot be directly enforced to my knowledge so i am just leaving a comment here.
