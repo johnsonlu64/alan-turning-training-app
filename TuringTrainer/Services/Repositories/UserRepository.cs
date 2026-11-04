@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using TuringTrainer.Models;
 
@@ -7,7 +8,7 @@ namespace TuringTrainer.Services.Repositories;
 public class UserRepository : IUserRepository
 {
 
-    private readonly Supabase.Client client = Database.getClient();
+    private readonly Supabase.Client _client = Database.getClient();
 
 
     public ObservableCollection<User> Users { get; private set; } = new();
@@ -16,7 +17,7 @@ public class UserRepository : IUserRepository
     {
         try
         {
-            var response = await client.From<User>().Get();
+            var response = await _client.From<User>().Get();
             Users.Clear();
 
             foreach (var user in response.Models)
@@ -29,6 +30,76 @@ public class UserRepository : IUserRepository
             Console.WriteLine($"Error fetching users: {ex.Message}");
         }
     }
+
+    public Supabase.Gotrue.Session? GetUserSession()
+    {
+        return _client.Auth.CurrentSession;
+    }
+
+    public Supabase.Gotrue.User? GetUser()
+    {
+        return _client.Auth.CurrentUser;
+    }
+
+    public async Task<UserAdditionError> SignUpUser(string email, string password, string username)
+    {
+        try {
+            var session = await _client.Auth.SignUp(email, password);
+            Console.WriteLine("Failed after client");
+
+            var user = session?.User;
+            if (user == null || user.Id == null)
+            {
+                return UserAdditionError.InvalidFirstName;
+            }
+
+            Guid userId = Guid.Parse(user.Id);
+            User createdUser = new User(userId, username);
+            return await InsertUser(createdUser);
+        }
+        catch (Supabase.Gotrue.Exceptions.GotrueException ex)
+        {
+            if (ex.ErrorCode == "user_already_exists")
+            {
+                return UserAdditionError.UserAlreadyExists;
+            }
+
+            Debug.WriteLine("$Signup error", ex);
+            return UserAdditionError.DBAdditionError;
+        }
+
+    }
+
+    public async Task<UserSignInError> SignInUser(string email, string password)
+    {
+        
+        var session = await _client.Auth.SignIn(email, password);
+        
+        if (session != null)
+        {
+            return UserSignInError.NoError;
+        }
+        else
+        {
+            return UserSignInError.DBSigninError;
+        }
+    }
+
+    public async Task<UserSignoutError> SignOutUser()
+    {
+        try
+        {
+            await _client.Auth.SignOut();
+            return UserSignoutError.NoError;
+        }
+        catch
+        {
+            return UserSignoutError.DBSignoutError;
+        }
+    }
+
+
+    
 
     public async Task SelectAllUsersByGroup(string groupId)
     {
@@ -47,7 +118,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> SelectUser(Guid userId)
     {
-        var response = await client.From<User>().Where(user => user.UserId == userId).Get();
+        var response = await _client.From<User>().Where(user => user.UserId == userId).Get();
         if (response != null)
         {
             return response!.Models.FirstOrDefault();
@@ -59,7 +130,7 @@ public class UserRepository : IUserRepository
     {
         try
         {
-            var response = await client.From<User>().Insert(user);
+            var response = await _client.From<User>().Insert(user);
             if (response.Models.Any())
             {
                 Users.Add(response.Models.First());
@@ -85,7 +156,7 @@ public class UserRepository : IUserRepository
             userToUpdate.MiddleInitial = middleInitial;
             userToUpdate.LastName = lastName;
             userToUpdate.IsCoach = isCoach;
-            var response = await client.From<User>().Update(userToUpdate);
+            var response = await _client.From<User>().Update(userToUpdate);
             if (response.Models.Any())
             {
                 var updatedUser = response.Models.First();
@@ -112,7 +183,7 @@ public class UserRepository : IUserRepository
     {
         try
         {
-            var response = await client.From<User>().Delete(userToDelete);
+            var response = await _client.From<User>().Delete(userToDelete);
             if (response.Models.Any())
             {
                 Console.WriteLine($"{Users.Count}");

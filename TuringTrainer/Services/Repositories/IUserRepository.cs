@@ -13,6 +13,13 @@ public interface IUserRepository
     public Task SelectAllUsersByClass(String classId);
     public Task SelectAllUsersBySport(String sportId);
 
+    public Supabase.Gotrue.Session? GetUserSession();
+    public Supabase.Gotrue.User? GetUser();
+
+    public Task<UserAdditionError> SignUpUser(string email, string password, string username);
+    public Task<UserSignInError> SignInUser(string email, string password);
+    public Task<UserSignoutError> SignOutUser();
+
     public Task<User?> SelectUser(Guid userId);
     public Task<UserAdditionError> InsertUser(User user);
     public Task<UserEditError> UpdateUser(User currentUser, String firstName, String middleInitial, String lastName, bool isCoach);

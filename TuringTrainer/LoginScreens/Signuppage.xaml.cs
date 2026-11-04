@@ -1,3 +1,7 @@
+using TuringTrainer.BusinessLogic;
+using TuringTrainer.Models;
+using TuringTrainer.Services.Repositories;
+
 namespace TuringTrainer;
 /*
  * Name : Bakary Ceesay
@@ -7,8 +11,41 @@ namespace TuringTrainer;
 
 public partial class SignupPage : ContentPage
 {
+	private readonly IUserService _userService;
 	public SignupPage()
 	{
+		_userService = new UserService(new UserRepository());
+
 		InitializeComponent();
+
+		
+	}
+
+
+	public async void SignupButton_Clicked(object sender, EventArgs e)
+	{
+		try
+		{
+			string email = EmailEntry.Text?.Trim() ?? "";
+			string password = PasswordEntry.Text ?? "";
+			string username = UsernameEntry.Text ?? "";
+
+			UserAdditionError result = await _userService.SignUpUser(email, password, username);
+
+			if (result == UserAdditionError.NoError)
+			{
+				EmailEntry.Text = "";
+				PasswordEntry.Text = "";
+				await Shell.Current.GoToAsync(nameof(Homepage));
+			}
+			else
+			{
+				await DisplayAlert("Signup failed", result.ToString(), "Ok");
+			}
+		}
+		catch (Exception ex)
+		{
+			await DisplayAlert("Signup error", ex.Message, "Ok");
+		}
 	}
 }

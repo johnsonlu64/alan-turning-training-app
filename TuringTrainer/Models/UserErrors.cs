@@ -1,12 +1,33 @@
 namespace TuringTrainer.Models;
 
+public enum UserSignUpError
+{
+    MissingEmailOrPassword,
+    NoError
+}
+
+public enum UserSignInError
+{
+    InvalidEmailOrPassword,
+    DBSigninError,
+    NoError
+}
+
+public enum UserSignoutError
+{
+    DBSignoutError,
+    NoError
+}
+
 public enum UserAdditionError
 {
+    UserAlreadyExists,
     InvalidId,
     InvalidFirstName,
     InvalidLastName,
     InvalidMiddleInitial,
     DuplicateUserId,
+    PasswordTooShort,
     DBAdditionError,
     NoError
 }
