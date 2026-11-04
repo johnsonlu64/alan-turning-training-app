@@ -38,12 +38,12 @@ public partial class LoginPage : ContentPage
 			}
 			else
 			{
-				await DisplayAlert("Signup failed", result.ToString(), "Ok");
+				await DisplayAlertAsync("Signup failed", result.ToString(), "Ok");
 			}
 		}
 		catch (Exception ex)
 		{
-			await DisplayAlert("Signup error", ex.Message, "Ok");
+			await DisplayAlertAsync("Signup error", ex.Message, "Ok");
 		}
 	}
 

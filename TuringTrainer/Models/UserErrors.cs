@@ -13,6 +13,12 @@ public enum UserSignInError
     NoError
 }
 
+public enum UserSignoutError
+{
+    DBSignoutError,
+    NoError
+}
+
 public enum UserAdditionError
 {
     UserAlreadyExists,

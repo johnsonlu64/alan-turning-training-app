@@ -18,7 +18,7 @@ public interface IUserRepository
 
     public Task<UserAdditionError> SignUpUser(string email, string password);
     public Task<UserSignInError> SignInUser(string email, string password);
-    public Task SignOutUser();
+    public Task<UserSignoutError> SignOutUser();
 
     public Task<User?> SelectUser(Guid userId);
     public Task<UserAdditionError> InsertUser(User user);

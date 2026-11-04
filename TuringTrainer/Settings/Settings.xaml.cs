@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 using TuringTrainer.LeaderBoard;
+using TuringTrainer.Models;
 
 namespace TuringTrainer.Settings;
 
@@ -10,16 +11,21 @@ namespace TuringTrainer.Settings;
 /// </summary>
 public partial class Settings : ContentPage
 {
-	/// <summary>
-	/// Themes
-	/// </summary>
+    /// <summary>
+    /// Themes
+    /// </summary>
     private readonly string[] themes = { "System", "Light", "Dark" };
 
-	/// <summary>
-	/// Constructor
-	/// </summary>	
+    private readonly UserService _userService;
+
+
+    /// <summary>
+    /// Constructor
+    /// </summary>	
     public Settings()
     {
+        _userService = new UserService(new UserRepository());
+
         InitializeComponent();
 
         ThemePicker.ItemsSource = themes;
@@ -89,10 +95,17 @@ public partial class Settings : ContentPage
         if (!confirmed)
             return;
 
-        Preferences.Remove("auth_token");
+        UserSignoutError result = await _userService.SignOutUser();
 
         // LoginPage is registered in AppShell.
-        await Shell.Current.GoToAsync(nameof(LoginPage));
+        if (result == UserSignoutError.NoError)
+        {
+            await Shell.Current.GoToAsync(nameof(LoginPage));
+        }
+        else
+        {
+            await DisplayAlertAsync("ErrorSigningOut", UserSignoutError.DBSignoutError.ToString(), "Ok");
+        }
     }
 
     private async void OnBackClicked(object sender, EventArgs e)

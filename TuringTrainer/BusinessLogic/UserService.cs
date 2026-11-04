@@ -45,7 +45,10 @@ public class UserService
   }
 
 
-  public async Task<
+  public async Task<UserSignoutError> SignOutUser()
+  {
+    return await _userRepository.SignOutUser();
+  }
 
 
 }

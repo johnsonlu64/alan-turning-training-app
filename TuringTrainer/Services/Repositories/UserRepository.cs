@@ -85,9 +85,17 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task SignOutUser()
+    public async Task<UserSignoutError> SignOutUser()
     {
-        await _client.Auth.SignOut();
+        try
+        {
+            await _client.Auth.SignOut();
+            return UserSignoutError.NoError;
+        }
+        catch
+        {
+            return UserSignoutError.DBSignoutError;
+        }
     }
 
 
