@@ -9,6 +9,7 @@ public enum UserSignUpError
 public enum UserSignInError
 {
     InvalidEmailOrPassword,
+    DBSigninError,
     NoError
 }
 

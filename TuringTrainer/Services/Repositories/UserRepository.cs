@@ -70,10 +70,19 @@ public class UserRepository : IUserRepository
 
     }
 
-    public async Task<bool> SignInUser(string email, string password)
+    public async Task<UserSignInError> SignInUser(string email, string password)
     {
-        var session = await _client.Auth.SignInWithPassword(email, password);
-        return session != null;
+        
+        var session = await _client.Auth.SignIn(email, password);
+        
+        if (session != null)
+        {
+            return UserSignInError.NoError;
+        }
+        else
+        {
+            return UserSignInError.DBSigninError;
+        }
     }
 
     public async Task SignOutUser()

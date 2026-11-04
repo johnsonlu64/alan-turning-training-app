@@ -36,15 +36,7 @@ public class UserService
       return UserSignInError.InvalidEmailOrPassword;
     }
     
-    bool isSuccessful = await _userRepository.SignInUser(email, password);
-
-    if (isSuccessful)
-    {
-      return UserSignInError.NoError;
-    } else
-    {
-      return UserSignInError.InvalidEmailOrPassword;
-    }
+    return await _userRepository.SignInUser(email, password);
   }
 
 
