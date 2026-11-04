@@ -37,4 +37,20 @@ public class Group : ObservableBaseModel
 		_coach_id = coachId;
 		_sport_id = sportId;
 	}
+	public override string ToString()
+    {
+        return string.Format("Id: {0}, CoachId: {1}, SportId: {2}", GroupId, CoachId, SportId);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType()) return false;
+        Group other = (Group)obj;
+        return GroupId == other.GroupId;
+    }
+
+	public override int GetHashCode()
+    {
+        return GroupId.GetHashCode();
+    }
 }
