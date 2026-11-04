@@ -64,5 +64,25 @@ public partial class LeaderBoardPage : ContentPage
 
         Board.ItemsSource = athletes.OrderByDescending(a => a.Points).ToList();
     }
+
+    private async void OnBackClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
+    }
+
+    private async void OnHomeClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(Homepage));
+    }
+
+    private async void OnSettingsClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(Settings));
+    }
+
+    private async void OnMetricsClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("MetricsPage");
+    }
  
 }

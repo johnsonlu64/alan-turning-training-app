@@ -5,9 +5,8 @@
              Background="#101010"
              Shell.NavBarIsVisible="False">
 
-    <Grid Padding="20"
-          RowDefinitions="Auto,Auto,*"
-          RowSpacing="20">
+    <Grid RowDefinitions="Auto,Auto,*,Auto"
+          RowSpacing="15">
 
         <!-- Leaderboard title -->
         <Label Grid.Row="0"
@@ -16,11 +15,12 @@
                FontAttributes="Bold"
                TextColor="#FFD600"
                HorizontalOptions="Center"
-               Margin="1,0,0,0"/>
+               Margin="0,20,0,0"/>
 
         <!-- Class selector -->
         <Picker Grid.Row="1"
                 x:Name="ClassPicker"
+                Margin="20,0"
                 TextColor="White"
                 FontSize="22"
                 BackgroundColor="#1C1C1C"
@@ -29,6 +29,7 @@
         <!-- Scrollable athlete list -->
         <CollectionView Grid.Row="2"
                         x:Name="Board"
+                        Margin="20,0"
                         VerticalOptions="Fill"
                         ItemsLayout="VerticalList">
 
@@ -62,6 +63,67 @@
             </CollectionView.ItemTemplate>
 
         </CollectionView>
+
+        <Grid Grid.Row="3"
+              ColumnDefinitions="*,*,*,*"
+              Padding="0,12,0,16"
+              BackgroundColor="#151515">
+
+            <VerticalStackLayout Spacing="4">
+                <Button Text="🏠"
+                        FontSize="23"
+                        TextColor="#777777"
+                        Clicked="OnHomeClicked"
+                        HorizontalOptions="Center"/>
+
+                <Label Text="Home"
+                       FontSize="10"
+                       TextColor="#777777"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1"
+                                 Spacing="4">
+                <Button Text="👑"
+                        FontSize="22"
+                        TextColor="#F5C542"
+                        HorizontalOptions="Center"/>
+
+                <Label Text="Leaderboard"
+                       FontSize="10"
+                       TextColor="#F5C542"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="2"
+                                 Spacing="4">
+                <Button Text="📊"
+                        FontSize="22"
+                        TextColor="#777777"
+                        Clicked="OnMetricsClicked"
+                        HorizontalOptions="Center"/>
+
+                <Label Text="Metrics"
+                       FontSize="10"
+                       TextColor="#777777"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="3"
+                                 Spacing="4">
+                <Button Text="⚙️"
+                        FontSize="22"
+                        TextColor="#777777"
+                        Clicked="OnSettingsClicked"
+                        HorizontalOptions="Center"/>
+
+                <Label Text="Settings"
+                       FontSize="10"
+                       TextColor="#777777"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+        </Grid>
 
     </Grid>
 </ContentPage>
