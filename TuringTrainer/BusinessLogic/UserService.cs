@@ -21,6 +21,19 @@ public class UserService : IUserService
     return GetUserSession()?.User?.Id;
   }
 
+  public async Task<User?> CurrentUser()
+  {
+    string? currentUserId = CurrentUserId();
+    if (currentUserId != null)
+    {
+      return await _userRepository.SelectUser(Guid.Parse(currentUserId));
+    }
+    else
+    {
+      return null;
+    }
+  }
+
   public async Task<UserAdditionError> SignUpUser(string email, string password, string username)
   {
     if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))

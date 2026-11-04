@@ -1,6 +1,6 @@
 using TuringTrainer.BusinessLogic;
-using Supabase.Gotrue;
 using TuringTrainer.LeaderBoard;
+using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
 
 namespace TuringTrainer;
@@ -71,13 +71,13 @@ public partial class Homepage : ContentPage
     {
         try
         {
-            var userSession = _userService.GetUserSession();
+            User? currentUser = await _userService.CurrentUser();
 
-            string? userId = userSession?.User?.Id;
+            
 
-            if (userId != null)
+            if (currentUser != null)
             {
-                ActiveUserIdLabel.Text = userId;
+                ActiveUserIdLabel.Text = currentUser.FirstName;
             }
             else
             {
