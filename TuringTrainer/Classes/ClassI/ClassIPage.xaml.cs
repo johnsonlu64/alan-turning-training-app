@@ -28,7 +28,7 @@ public partial class ClassIPage : ContentPage
 
     private async void OnMemberClicked(object sender, EventArgs e)
     {
-
+        await Shell.Current.GoToAsync(nameof(MetricsPage));
     }
 
     private void OnSportsTabClicked(object? sender, EventArgs e)

@@ -136,7 +136,7 @@ public partial class Homepage : ContentPage
     private async void OnMetricsClicked(object sender, EventArgs e)
     {
         // Navigate to Metrics page
-        await Shell.Current.GoToAsync(nameof(MetricsPage));
+        await Shell.Current.GoToAsync(nameof(ClassesPage));
     }
 
     private async void OnSettingsClicked(object sender, EventArgs e)
