@@ -3,6 +3,7 @@ namespace TuringTrainer.Models;
 public enum SportAdditionError
 {
     SportAlreadyExists,
+    DuplicateSportId,
     InvalidId,
     InvalidName,
     DBAdditionError,
