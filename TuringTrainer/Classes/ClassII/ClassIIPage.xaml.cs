@@ -5,6 +5,7 @@ public partial class ClassIIPage : ContentPage
     public ClassIIPage()
     {
         InitializeComponent();
+        ShowSports();
 
         SportsList.ItemsSource = new List<string>
         {
@@ -15,11 +16,20 @@ public partial class ClassIIPage : ContentPage
         };
 
         RoutinesList.ItemsSource = Pages.Routine.All;
+
+        MembersList.ItemsSource = new List<string>
+        {
+            "Dasha"
+        };
     }
 
 
 
     private async void OnSportClicked(object sender, EventArgs e)
+    {
+
+    }
+    private async void OnMemberClicked(object sender, EventArgs e)
     {
 
     }
@@ -34,15 +44,23 @@ public partial class ClassIIPage : ContentPage
         ShowRoutines();
     }
 
+    private void OnMembersTabClicked(object? sender, EventArgs e)
+    {
+        ShowMembers();
+    }
+
     private void ShowSports()
     {
         SportsTab.BackgroundColor = Color.FromArgb("#332B12");
         SportsTab.TextColor = Color.FromArgb("#F5C542");
         RoutinesTab.BackgroundColor = Colors.Transparent;
         RoutinesTab.TextColor = Color.FromArgb("#999999");
+        MembersTab.BackgroundColor = Colors.Transparent;
+        MembersTab.TextColor = Color.FromArgb("#999999");
 
         SportsList.IsVisible = true;
         RoutinesList.IsVisible = false;
+        MembersList.IsVisible = false;
     }
 
     private void ShowRoutines()
@@ -51,10 +69,29 @@ public partial class ClassIIPage : ContentPage
         SportsTab.TextColor = Color.FromArgb("#999999");
         RoutinesTab.BackgroundColor = Color.FromArgb("#332B12");
         RoutinesTab.TextColor = Color.FromArgb("#F5C542");
+        MembersTab.BackgroundColor = Colors.Transparent;
+        MembersTab.TextColor = Color.FromArgb("#999999");
 
         SportsList.IsVisible = false;
         RoutinesList.IsVisible = true;
+        MembersList.IsVisible = false;
     }
+
+    private void ShowMembers()
+    { 
+        SportsTab.BackgroundColor = Colors.Transparent;
+        SportsTab.TextColor = Color.FromArgb("#999999");
+        RoutinesTab.BackgroundColor = Colors.Transparent;
+        RoutinesTab.TextColor = Color.FromArgb("#999999");
+
+        MembersTab.BackgroundColor = Color.FromArgb("#332B12");
+        MembersTab.TextColor = Color.FromArgb("#F5C542");
+
+        MembersList.IsVisible = true;
+        SportsList.IsVisible = false;
+        RoutinesList.IsVisible = false;
+    }
+
 
     private async void OnRoutineSelected(object? sender, SelectionChangedEventArgs e)
     {

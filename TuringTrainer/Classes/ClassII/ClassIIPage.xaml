@@ -66,8 +66,18 @@
                     CornerRadius="12"
                     HeightRequest="46"
                     Padding="24,0"/>
+            <Button x:Name="MembersTab"
+                    Text="Members"
+                    Clicked="OnMembersTabClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#999999"
+                    FontAttributes="Bold"
+                    FontSize="13"
+                    CornerRadius="12"
+                    HeightRequest="46"
+                    Padding="24,0"/>
         </HorizontalStackLayout>
-
+        
         <CollectionView Grid.Row="2"
                         x:Name="SportsList"
                         SelectionMode="None">
@@ -112,6 +122,51 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
+        </CollectionView>
+        <CollectionView Grid.Row="2"
+                x:Name="MembersList"
+                IsVisible="False"
+                SelectionMode="None">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="#1C1C1C"
+                            Stroke="#343434"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 16"
+                            Padding="18"
+                            Margin="0">
+
+
+                        <Grid ColumnDefinitions="*,Auto"
+                              ColumnSpacing="14">
+
+                            <Label Text="{Binding .}"
+                                   TextColor="White"
+                                   FontSize="18"
+                                   VerticalOptions="Center"/>
+
+                            <Button Grid.Column="1"
+                                    Text="›"
+                                    FontSize="32"
+                                    FontAttributes="Bold"
+                                    TextColor="Black"
+                                    BackgroundColor="#F5C542"
+                                    CornerRadius="12"
+                                    WidthRequest="55"
+                                    HeightRequest="55"
+                                    Padding="0"
+                                    Clicked="OnMemberClicked"
+                                    CommandParameter="{Binding .}"/>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
         </CollectionView>
 
         <CollectionView Grid.Row="2"
