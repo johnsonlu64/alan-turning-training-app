@@ -145,10 +145,20 @@
                         <Grid ColumnDefinitions="*,Auto"
                               ColumnSpacing="14">
 
-                            <Label Text="{Binding .}"
-                                   TextColor="White"
-                                   FontSize="18"
-                                   VerticalOptions="Center"/>
+                            <HorizontalStackLayout Spacing="5"
+                                                   VerticalOptions="Center">
+
+                                <Label Text="{Binding FirstName}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       VerticalOptions="Center"/>
+
+                                <Label Text="{Binding LastName}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       VerticalOptions="Center"/>
+
+                            </HorizontalStackLayout>
 
                             <Button Grid.Column="1"
                                     Text="›"
