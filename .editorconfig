@@ -1,21 +1,51 @@
 root = true
 
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
 
-# C# files
 [*.cs]
+indent_style = space
+indent_size = 4
+tab_width = 4
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
 
-# File names should use PascalCase.
-# Directory names should use PascalCase.
+# File and directory names should use PascalCase.
 # Keep each source file named after its main class where possible.
-# Prefer one core class per file.
-dotnet_naming_rule.nonpublic_members_use_underscore_camel_case.severity = suggestion
-dotnet_naming_rule.nonpublic_members_use_underscore_camel_case.symbols = nonpublic_fields_and_properties
-dotnet_naming_rule.nonpublic_members_use_underscore_camel_case.style = underscore_camel_case
+# Prefer one core class per file; this guideline cannot be enforced by EditorConfig.
+
+dotnet_naming_rule.types_should_be_pascal_case.severity = suggestion
+dotnet_naming_rule.types_should_be_pascal_case.symbols = types
+dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_rule.public_members_should_be_pascal_case.severity = suggestion
+dotnet_naming_rule.public_members_should_be_pascal_case.symbols = public_members
+dotnet_naming_rule.public_members_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_rule.nonpublic_fields_and_properties_use_underscore_camel_case.severity = suggestion
+dotnet_naming_rule.nonpublic_fields_and_properties_use_underscore_camel_case.symbols = nonpublic_fields_and_properties
+dotnet_naming_rule.nonpublic_fields_and_properties_use_underscore_camel_case.style = underscore_camel_case
+
+dotnet_naming_rule.locals_and_parameters_use_camel_case.severity = suggestion
+dotnet_naming_rule.locals_and_parameters_use_camel_case.symbols = locals_and_parameters
+dotnet_naming_rule.locals_and_parameters_use_camel_case.style = camel_case
+
+dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum, delegate
+
+dotnet_naming_symbols.public_members.applicable_kinds = field, method, property, event
+dotnet_naming_symbols.public_members.applicable_accessibilities = public
 
 dotnet_naming_symbols.nonpublic_fields_and_properties.applicable_kinds = field, property
 dotnet_naming_symbols.nonpublic_fields_and_properties.applicable_accessibilities = private, protected, internal, protected_internal
 
+dotnet_naming_symbols.locals_and_parameters.applicable_kinds = local, parameter
+
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
 dotnet_naming_style.underscore_camel_case.required_prefix = _
 dotnet_naming_style.underscore_camel_case.capitalization = camel_case
 
-#The coding standard to prefer one core class per file cannot be directly enforced to my knowledge so i am just leaving a comment here.
+dotnet_naming_style.camel_case.capitalization = camel_case
