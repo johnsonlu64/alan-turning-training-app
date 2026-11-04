@@ -128,16 +128,45 @@ public partial class Homepage : ContentPage
         AddStudentPopup.IsVisible = true;
     }
 
-    private void OnStudentIdEntryCompleted(object sender, EventArgs e)
+    private async void OnStudentIdEntryCompleted(object sender, EventArgs e)
     {
-        string id = StudentIdEntry.Text;
-        if (string.IsNullOrEmpty(id))
+        if(ClassPicker.SelectedIndex == -1)
         {
+            await DisplayAlertAsync("Error", "Please select a class.", "OK");
             return;
         }
-        classes[ClassPicker.SelectedIndex].Athletes.Add(new Athlete { Name = id, Points = 0 });
 
+        string studentIdsText = StudentIdEntry.Text;
+        if (string.IsNullOrWhiteSpace(studentIdsText))
+        {
+            await DisplayAlertAsync("Error", "Please enter at least one student ID.", "OK");
+            return;
+        }
+
+        string[] studentIds = studentIdsText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        CLasses selectedClass = classes[ClassPicker.SelectedIndex];
+
+        int numberOfStudentsAdded = 0;
+        foreach (string studentId in studentIds)
+        {
+            string cleanedStudentId = studentId.Trim();
+            if(cleanedStudentId != "")
+            {
+                Athlete newStudent = new Athlete();
+
+                newStudent.Name = cleanedStudentId;
+                newStudent.Points = 0;
+
+                selectedClass.Athletes.Add(newStudent);
+
+                numberOfStudentsAdded++;
+            }
+        }
+
+        StudentIdEntry.Text = "";
         AddStudentPopup.IsVisible = false;
+
+        await DisplayAlertAsync("Success", $"{numberOfStudentsAdded} student(s) added to {selectedClass.Name}.", "OK");
     }
 
     private void CloseAddStudentPopup(object sender, EventArgs e)
