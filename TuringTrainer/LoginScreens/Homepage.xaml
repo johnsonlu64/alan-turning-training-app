@@ -342,13 +342,13 @@
                      <Border BackgroundColor="#1C1C1C"
                              Stroke="#343434"
                              StrokeThickness="1"
-                             StrokeShape="RoundRectangle 16"
-                             Padding="22"
-                             WidthRequest="320"
+                             StrokeShape="RoundRectangle 20"
+                             Padding="24"
+                             WidthRequest="350"
                              HorizontalOptions="Center"
                              VerticalOptions="Center">
 
-                            <VerticalStackLayout Spacing="14">
+                            <VerticalStackLayout Spacing="16">
 
                                    <Label Text="ADD STUDENT"
                                           FontSize="20"
@@ -362,14 +362,16 @@
                                            TitleColor="#999999"
                                            BackgroundColor="#262626"/>
 
-                                   <Entry x:Name="StudentIdEntry"
-                                          Placeholder="Student ID"
+                                   <Editor x:Name="StudentIdEntry"
+                                          Placeholder="Enter student IDs (one per line)"
                                           PlaceholderColor="#777777"
                                           TextColor="White"
-                                          BackgroundColor="#262626"/>
+                                          BackgroundColor="#262626"
+                                          HeightRequest="120"
+                                          AutoSize="TextChanges"/>
 
                                    <Button Text="Add Student"
-                                           Clicked="OnAddStudentClicked"
+                                           Clicked="OnStudentIdEntryCompleted"
                                            BackgroundColor="#F5C542"
                                            TextColor="Black"
                                            FontAttributes="Bold"
