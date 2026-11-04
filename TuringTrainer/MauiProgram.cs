@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using LiveChartsCore.SkiaSharpView.Maui;
 using SkiaSharp.Views.Maui.Controls.Hosting;
-using TuringTrainer.Services.Repositories;
 #if MAUI_DEVFLOW
 using Microsoft.Maui.DevFlow.Agent;
 
@@ -24,8 +23,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		builder.Services.AddSingleton<IUserRepository, UserRepository>();
-		builder.Services.AddSingleton<UserService>();
+		
 
 
 		#if MAUI_DEVFLOW

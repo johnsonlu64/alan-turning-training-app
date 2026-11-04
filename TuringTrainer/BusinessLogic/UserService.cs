@@ -22,9 +22,13 @@ public class UserService
       return UserAdditionError.InvalidId;
     }
     
+    if (password.Length < 6)
+    {
+      return UserAdditionError.PasswordTooShort;
+    }
+    
     return await _userRepository.SignUpUser(email, password);
   }
-
   public async Task<UserSignInError> SignInUser(string email, string password)
   {
     if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))

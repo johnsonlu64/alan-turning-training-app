@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using TuringTrainer.Models;
 
@@ -44,18 +45,26 @@ public class UserRepository : IUserRepository
     {
         try {
             var session = await _client.Auth.SignUp(email, password);
+            Console.WriteLine("Failed after client");
+
             var user = session?.User;
             if (user == null || user.Id == null)
             {
-                return UserAdditionError.DBAdditionError;
+                return UserAdditionError.InvalidFirstName;
             }
 
             Guid userId = Guid.Parse(user.Id);
             User createdUser = new User(userId);
             return await InsertUser(createdUser);
         }
-        catch
+        catch (Supabase.Gotrue.Exceptions.GotrueException ex)
         {
+            if (ex.ErrorCode == "user_already_exists")
+            {
+                return UserAdditionError.UserAlreadyExists;
+            }
+
+            Debug.WriteLine("$Signup error", ex);
             return UserAdditionError.DBAdditionError;
         }
 

@@ -14,11 +14,13 @@ public enum UserSignInError
 
 public enum UserAdditionError
 {
+    UserAlreadyExists,
     InvalidId,
     InvalidFirstName,
     InvalidLastName,
     InvalidMiddleInitial,
     DuplicateUserId,
+    PasswordTooShort,
     DBAdditionError,
     NoError
 }

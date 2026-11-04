@@ -6,57 +6,58 @@
        BackgroundColor="#101010"
        Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto,*,Auto"
-          Padding="20,12,20,0">
+       <Grid RowDefinitions="Auto,*,Auto"
+             Padding="20,12,20,0">
 
-        <!-- Header -->
-        <Grid Grid.Row="0"
-              ColumnDefinitions="*,Auto"
-              Padding="0,12,0,24">
+              <!-- Header -->
+              <Grid Grid.Row="0"
+                    ColumnDefinitions="*,Auto"
+                    Padding="0,12,0,24">
 
-            <VerticalStackLayout Spacing="4">
-                <Label Text="TURINGTRAINER"
-                       FontSize="12"
-                       CharacterSpacing="3"
-                       TextColor="#F5C542"
-                       FontAttributes="Bold"/>
+                     <VerticalStackLayout Spacing="4">
+                            <Label Text="TURINGTRAINER"
+                                   FontSize="12"
+                                   CharacterSpacing="3"
+                                   TextColor="#F5C542"
+                                   FontAttributes="Bold"/>
 
-                <Label Text="Coach Dashboard"
-                       FontSize="27"
-                       FontAttributes="Bold"
-                       TextColor="White"/>
-                <Label x:Name="ActiveUserIdLabel"
-                       FontSize="14"
-                       TextColor="#A5A5A5"
-                       Margin="0,4,0,0"/>
-            </VerticalStackLayout>
+                            <Label Text="Coach Dashboard"
+                                   FontSize="27"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
 
-            <Grid Grid.Column="1">
+                            <Label x:Name="ActiveUserIdLabel"
+                                   FontSize="27"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                     </VerticalStackLayout>
 
-                <Border WidthRequest="46"
-                        HeightRequest="46"
-                        Stroke="#393939"
-                        StrokeThickness="1"
-                        BackgroundColor="#202020"
-                        StrokeShape="RoundRectangle 23"
-                        VerticalOptions="Center">
+                     <Grid Grid.Column="1">
 
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Tapped="OnNotificationsClicked"/>
-                    </Border.GestureRecognizers>
+                            <Border WidthRequest="46"
+                                    HeightRequest="46"
+                                    Stroke="#393939"
+                                    StrokeThickness="1"
+                                    BackgroundColor="#202020"
+                                    StrokeShape="RoundRectangle 23"
+                                    VerticalOptions="Center">
 
-                    <Label Text="♙"
-                           FontSize="26"
-                           TextColor="#F5C542"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-                </Border>
-            </Grid>
-        </Grid>
+                                   <Border.GestureRecognizers>
+                                          <TapGestureRecognizer
+                                                 Tapped="OnNotificationsClicked"/>
+                                   </Border.GestureRecognizers>
 
-        <!-- Main content -->
-        <ScrollView Grid.Row="1">
+                                   <Label Text="♙"
+                                          FontSize="26"
+                                          TextColor="#F5C542"
+                                          HorizontalOptions="Center"
+                                          VerticalOptions="Center"/>
+                            </Border>
+                     </Grid>
+              </Grid>
+
+              <!-- Main content -->
+              <ScrollView Grid.Row="1">
                      <VerticalStackLayout Spacing="18">
 
                             <Grid ColumnDefinitions="*,Auto"
