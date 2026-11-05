@@ -14,6 +14,9 @@ namespace TuringTrainer;
 
 public partial class Homepage : ContentPage
 {
+    private static readonly Guid CoachId = Guid.Parse("4daa0811-e8c6-431a-b4f8-21b05ce2d78f");
+    private readonly IClassRepository _classRepository = new ClassRepository();
+
     /// <summary>
     /// Class 1 - Class 3 with athletes
     /// </summary>
@@ -57,14 +60,29 @@ public partial class Homepage : ContentPage
         _userService = new UserService(new UserRepository());
         
         InitializeComponent();
+        BindableLayout.SetItemsSource(ClassListLayout, _classRepository.Classes);
         LoadActiveUser();
-        
-
 
         //fill the class with atheletes
         ClassPicker.Items.Add("Class 1");
         ClassPicker.Items.Add("Class 2");
         ClassPicker.Items.Add("Class 3");
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        try
+        {
+            await _classRepository.SelectClassesByCoachAsync(CoachId);
+            int totalClassCount = classes.Count + _classRepository.Classes.Count;
+            ClassCountLabel.Text = $"{totalClassCount} {(totalClassCount == 1 ? "class" : "classes")}";
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"Could not load classes: {ex.Message}", "OK");
+        }
     }
 
     private async Task LoadActiveUser()
@@ -90,22 +108,18 @@ public partial class Homepage : ContentPage
         }
     }
 
-
     private async void OnClass1Tapped(object sender, TappedEventArgs e)
     {
-        // Open Class 1
         await Shell.Current.GoToAsync(nameof(ClassIPage));
     }
 
     private async void OnClass2Tapped(object sender, TappedEventArgs e)
     {
-        // Open Class 2
         await Shell.Current.GoToAsync(nameof(ClassIIPage));
     }
 
     private async void OnClass3Tapped(object sender, TappedEventArgs e)
     {
-        // Open Class 3
         await Shell.Current.GoToAsync(nameof(ClassIIIPage));
     }
 

@@ -29,14 +29,6 @@
                 PlaceholderColor="#A0A0A0"
                 BackgroundColor="#151515" />
 
-            <!-- Class code -->
-            <Entry
-                x:Name="ClassCodeEntry"
-                Placeholder="Class Code"
-                TextColor="White"
-                PlaceholderColor="#A0A0A0"
-                BackgroundColor="#151515" />
-
             <!-- Create class button -->
             <Button
                 Text="CREATE CLASS"
