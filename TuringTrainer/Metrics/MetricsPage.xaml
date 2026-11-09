@@ -25,7 +25,7 @@
                                    TextColor="#F5C542"
                                    FontAttributes="Bold"/>
 
-                            <Label Text="Athlete Metrics"
+                            <Label Text="My Metrics"
                                    FontSize="27"
                                    FontAttributes="Bold"
                                    TextColor="White"/>
@@ -35,230 +35,6 @@
               <ScrollView Grid.Row="1">
                      <VerticalStackLayout Spacing="18"
                                           Padding="0,0,0,24">
-
-                            <Border BackgroundColor="#1C1C1C"
-                                    Stroke="#343434"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="18">
-
-                                   <Grid ColumnDefinitions="Auto,*"
-                                         ColumnSpacing="14">
-
-                                          <Border WidthRequest="54"
-                                                  HeightRequest="54"
-                                                  StrokeThickness="0"
-                                                  StrokeShape="RoundRectangle 27"
-                                                  VerticalOptions="Center">
-
-                                                 <Image Source="blank_profile_picture.png"
-                                                        WidthRequest="54"
-                                                        HeightRequest="54"
-                                                        Aspect="AspectFill"/>
-                                          </Border>
-
-                                          <VerticalStackLayout Grid.Column="1"
-                                                               Spacing="5"
-                                                               VerticalOptions="Center">
-
-                                                 <Label x:Name="AthleteNameLabel"
-                                                        Text="{Binding MemberName}"
-                                                        FontSize="20"
-                                                        FontAttributes="Bold"
-                                                        TextColor="White"/>
-
-                                                 <Label x:Name="AthleteClassLabel"
-                                                        Text="Class 1 • Varsity Football"
-                                                        FontSize="12"
-                                                        TextColor="#A5A5A5"/>
-                                          </VerticalStackLayout>
-                                   </Grid>
-                            </Border>
-
-                            <Label Text="PERFORMANCE OVERVIEW"
-                                   FontSize="13"
-                                   CharacterSpacing="2"
-                                   FontAttributes="Bold"
-                                   TextColor="#A5A5A5"/>
-
-                            <Grid ColumnDefinitions="*,*"
-                                  RowDefinitions="Auto,Auto"
-                                  ColumnSpacing="12"
-                                  RowSpacing="12">
-
-                                   <Border Grid.Row="0"
-                                           Grid.Column="0"
-                                           BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
-                                           StrokeThickness="1"
-                                           StrokeShape="RoundRectangle 16"
-                                           Padding="15">
-
-                                          <VerticalStackLayout Spacing="7">
-
-                                                 <Label Text="TOTAL PRs"
-                                                        FontSize="11"
-                                                        CharacterSpacing="1"
-                                                        TextColor="#A5A5A5"
-                                                        FontAttributes="Bold"/>
-
-                                                 <Label x:Name="TotalPRsLabel"
-                                                        Text="8"
-                                                        FontSize="27"
-                                                        TextColor="#F5C542"
-                                                        FontAttributes="Bold"/>
-
-                                                 <Label Text="Personal records"
-                                                        FontSize="11"
-                                                        TextColor="#999999"/>
-                                          </VerticalStackLayout>
-                                   </Border>
-
-                                   <Border Grid.Row="0"
-                                           Grid.Column="1"
-                                           BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
-                                           StrokeThickness="1"
-                                           StrokeShape="RoundRectangle 16"
-                                           Padding="15">
-
-                                          <VerticalStackLayout Spacing="7">
-
-                                                 <Label Text="WORKOUTS"
-                                                        FontSize="11"
-                                                        CharacterSpacing="1"
-                                                        TextColor="#A5A5A5"
-                                                        FontAttributes="Bold"/>
-
-                                                 <Label x:Name="WorkoutsLabel"
-                                                        Text="24"
-                                                        FontSize="27"
-                                                        TextColor="#F5C542"
-                                                        FontAttributes="Bold"/>
-
-                                                 <Label Text="Completed"
-                                                        FontSize="11"
-                                                        TextColor="#999999"/>
-                                          </VerticalStackLayout>
-                                   </Border>
-
-                                   <Border Grid.Row="1"
-                                           Grid.Column="0"
-                                           BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
-                                           StrokeThickness="1"
-                                           StrokeShape="RoundRectangle 16"
-                                           Padding="15">
-
-                                          <VerticalStackLayout Spacing="7">
-
-                                                 <Label Text="LATEST PR"
-                                                        FontSize="11"
-                                                        CharacterSpacing="1"
-                                                        TextColor="#A5A5A5"
-                                                        FontAttributes="Bold"/>
-
-                                                 <Label x:Name="LatestPRLabel"
-                                                        Text="315 lbs"
-                                                        FontSize="25"
-                                                        TextColor="#F5C542"
-                                                        FontAttributes="Bold"/>
-
-                                                 <Label x:Name="LatestPRExerciseLabel"
-                                                        Text="Deadlift"
-                                                        FontSize="11"
-                                                        TextColor="#999999"/>
-                                          </VerticalStackLayout>
-                                   </Border>
-
-                                   <Border Grid.Row="1"
-                                           Grid.Column="1"
-                                           BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
-                                           StrokeThickness="1"
-                                           StrokeShape="RoundRectangle 16"
-                                           Padding="15">
-
-                                          <VerticalStackLayout Spacing="7">
-
-                                                 <Label Text="IMPROVEMENT"
-                                                        FontSize="11"
-                                                        CharacterSpacing="1"
-                                                        TextColor="#A5A5A5"
-                                                        FontAttributes="Bold"/>
-
-                                                 <Label x:Name="ImprovementLabel"
-                                                        Text="+12%"
-                                                        FontSize="27"
-                                                        TextColor="#F5C542"
-                                                        FontAttributes="Bold"/>
-
-                                                 <Label x:Name="ImprovementExerciseLabel"
-                                                        Text="Bench Press"
-                                                        FontSize="11"
-                                                        TextColor="#999999"/>
-                                          </VerticalStackLayout>
-                                   </Border>
-                            </Grid>
-
-                            <Label Text="CURRENT PERSONAL RECORDS"
-                                   FontSize="13"
-                                   CharacterSpacing="2"
-                                   FontAttributes="Bold"
-                                   TextColor="#A5A5A5"/>
-
-                            <Border BackgroundColor="#1C1C1C"
-                                    Stroke="#343434"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="18">
-
-                                   <VerticalStackLayout Spacing="13">
-
-                                          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                                 <Label Text="Bench Press"
-                                                        FontSize="16"
-                                                        TextColor="White"/>
-
-                                                 <Label x:Name="BenchPressLabel"
-                                                        Grid.Column="1"
-                                                        Text="185 lbs"
-                                                        FontSize="17"
-                                                        FontAttributes="Bold"
-                                                        TextColor="#F5C542"/>
-                                          </Grid>
-
-                                          <BoxView HeightRequest="1" Color="#343434" HorizontalOptions="Fill"/>
-
-                                          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                                 <Label Text="Squat"
-                                                        FontSize="16"
-                                                        TextColor="White"/>
-
-                                                 <Label x:Name="SquatLabel"
-                                                        Grid.Column="1"
-                                                        Text="275 lbs"
-                                                        FontSize="17"
-                                                        FontAttributes="Bold"
-                                                        TextColor="#F5C542"/>
-                                          </Grid>
-
-                                          <BoxView HeightRequest="1" Color="#343434"/>
-
-                                          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                                 <Label Text="Deadlift"
-                                                        FontSize="16"
-                                                        TextColor="White"/>
-
-                                                 <Label x:Name="DeadliftLabel"
-                                                        Grid.Column="1"
-                                                        Text="315 lbs"
-                                                        FontSize="17"
-                                                        FontAttributes="Bold"
-                                                        TextColor="#F5C542"/>
-                                          </Grid>
-                                   </VerticalStackLayout>
-                            </Border>
 
                             <Label Text="STRENGTH PROGRESS"
                                    FontSize="13"
@@ -304,6 +80,154 @@
                      
                                    </VerticalStackLayout>
                             </Border>
+
+
+                            <Label
+                            Text="WORKOUT HISTORY"
+                            FontSize="13"
+                            CharacterSpacing="2"
+                            FontAttributes="Bold"
+                            TextColor="#A5A5A5"/>
+                            
+                            <Button
+				x:Name="HistoryButton"
+				Text="History&#160;&#160;v"
+				FontSize="18"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start"
+                            BackgroundColor="#1C1C1C"
+                            TextColor="#F5C542"
+                            BorderColor="#343434"
+                            BorderWidth="1"
+                            CornerRadius="12"
+                            Padding="16,10"
+				Clicked="HistoryButton_Clicked"/>
+
+
+			<VerticalStackLayout
+				x:Name="HistoryLayout"
+				IsVisible="False"
+				Spacing="10">
+
+				<Button
+					Text="10/14"
+					BackgroundColor="#1C1C1C"
+                                   TextColor="White"
+                                   FontSize="15"
+                                   BorderColor="#343434"
+					BorderWidth="1"
+					CornerRadius="12"
+					HeightRequest="55"
+					HorizontalOptions="Fill"
+					Clicked="PastWorkout_Clicked"/>
+
+                            <VerticalStackLayout
+                            x:Name="WorkoutOverview"
+                            IsVisible="False"
+                            BackgroundColor="#1C1C1C"
+                            Padding="15"
+                            Spacing="8">
+
+                            <Label
+                            Text="Workout Overview"
+                            TextColor="White"
+                            FontAttributes="Bold"/>
+
+                            <Label
+                            Text="Bench Press: 3 sets x 10 reps"
+                            TextColor="#A5A5A5"/>
+
+                            <Label
+                            Text="Squat: 3 sets x 8 reps"
+                            TextColor="#A5A5A5"/>
+
+                            <Label
+                            Text="Deadlift: 3 sets x 5 reps"
+                            TextColor="#A5A5A5"/>
+
+                     </VerticalStackLayout>
+
+				<Button
+					Text="9/20     "
+					BackgroundColor="#1C1C1C"
+                                   TextColor="White"
+                                   FontSize="15"
+                                   BorderColor="#343434"
+					BorderWidth="1"
+					CornerRadius="12"
+					HeightRequest="55"
+					HorizontalOptions="Fill"
+					Clicked="PastWorkout_Clicked"/>
+
+				<Button
+					Text="9/16     "
+					BackgroundColor="#1C1C1C"
+                                   TextColor="White"
+                                   FontSize="15"
+                                   BorderColor="#343434"
+					BorderWidth="1"
+					CornerRadius="12"
+					HeightRequest="55"
+					HorizontalOptions="Fill"
+					Clicked="PastWorkout_Clicked"/>
+
+					
+				<VerticalStackLayout
+					x:Name="MoreHistoryLayout"
+					IsVisible="False"
+					Spacing="10">
+
+					<Button
+						Text="9/10  "
+						BackgroundColor="#1C1C1C"
+                                   TextColor="White"
+                                   FontSize="15"
+                                   BorderColor="#343434"
+						BorderWidth="1"
+						CornerRadius="12"
+						HeightRequest="55"
+						HorizontalOptions="Fill"
+						Clicked="PastWorkout_Clicked"/>
+						
+
+					<Button
+						Text="9/06  "
+						BackgroundColor="#1C1C1C"
+                                   TextColor="White"
+                                   FontSize="15"
+                                   BorderColor="#343434"
+						BorderWidth="1"
+						CornerRadius="12"
+						HeightRequest="55"
+						HorizontalOptions="Fill"
+						Clicked="PastWorkout_Clicked"/>
+
+					<Button
+						Text="9/02  "
+						BackgroundColor="#1C1C1C"
+                                   TextColor="White"
+                                   FontSize="15"
+                                   BorderColor="#343434"
+						BorderWidth="1"
+						CornerRadius="12"
+						HeightRequest="55"
+						HorizontalOptions="Fill"
+						Clicked="PastWorkout_Clicked"/>
+
+				</VerticalStackLayout>
+
+				<Button
+					x:Name="SeeAllButton"
+					Text="See All"
+					FontSize="14"
+                                   FontAttributes="Bold"
+                                   BackgroundColor="Transparent"
+                                   TextColor="#F5C542"
+					Clicked="SeeAllButton_Clicked"/>
+
+
+			</VerticalStackLayout>
+
                      </VerticalStackLayout>
               </ScrollView>
        </Grid>
