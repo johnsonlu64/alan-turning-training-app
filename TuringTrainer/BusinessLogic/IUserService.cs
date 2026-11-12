@@ -10,4 +10,5 @@ public interface IUserService
     Task<UserAdditionError> SignUpUser(string email, string password, string username);
     Task<UserSignInError> SignInUser(string email, string password);
     Task<UserSignoutError> SignOutUser();
+    Task<UserEditError> UpdateUser(User user, string firstName, string middleInitial, string lastName, bool isCoach);
 }
