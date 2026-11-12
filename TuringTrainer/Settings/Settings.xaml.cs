@@ -12,16 +12,10 @@ namespace TuringTrainer.Settings;
 /// </summary>
 public partial class Settings : ContentPage
 {
-    /// <summary>
-    /// Themes
-    /// </summary>
     private readonly string[] themes = { "System", "Light", "Dark" };
 
     private readonly IUserService _userService;
 
-    /// <summary>
-    /// Constructor
-    /// </summary>	
     public Settings()
     {
         _userService = new UserService(new UserRepository());
@@ -46,7 +40,7 @@ public partial class Settings : ContentPage
         {
             AppTheme.Light => 1,
             AppTheme.Dark => 2,
-            _ => 0 // System
+            _ => 0 
         };
     }
 
@@ -97,7 +91,6 @@ public partial class Settings : ContentPage
 
         UserSignoutError result = await _userService.SignOutUser();
 
-        // LoginPage is registered in AppShell.
         if (result == UserSignoutError.NoError)
         {
             await Shell.Current.GoToAsync(nameof(LoginPage));
@@ -106,11 +99,6 @@ public partial class Settings : ContentPage
         {
             await DisplayAlertAsync("ErrorSigningOut", UserSignoutError.DBSignoutError.ToString(), "Ok");
         }
-    }
-
-    private async void OnBackClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("..");
     }
 
     private async void OnHomeClicked(object sender, EventArgs e)

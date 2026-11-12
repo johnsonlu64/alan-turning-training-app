@@ -15,20 +15,11 @@
                     ColumnSpacing="14"
                     Padding="0,12,0,24">
 
-                     <Button Text="‹"
-                             FontSize="32"
-                             TextColor="#F5C542"
-                             BackgroundColor="Transparent"
-                             Clicked="OnBackClicked"
-                             VerticalOptions="Center"
-                             Padding="0"
-                             WidthRequest="40"/>
-
                      <Label Grid.Column="1"
                             Text="Settings"
                             FontSize="27"
                             FontAttributes="Bold"
-                            TextColor="White"
+                            TextColor="#F5C542"
                             VerticalOptions="Center"/>
               </Grid>
 
