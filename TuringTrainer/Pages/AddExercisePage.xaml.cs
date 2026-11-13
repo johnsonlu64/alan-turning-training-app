@@ -1,35 +1,108 @@
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using TuringTrainer.BusinessLogic;
+using TuringTrainer.Models;
+using TuringTrainer.Services.Repositories;
+
 namespace TuringTrainer.Pages;
 //Name: Luke Johnson
 
-/// <summary>
-/// The exercise library. Picking an exercise hands its name back to the builder.
-/// </summary>
 public partial class AddExercisePage : ContentPage
 {
-    /// <summary>Raised with the name of the exercise the user picked.</summary>
-    public event Action<string>? Picked;
+    private readonly IExerciseService _exerciseService = new ExerciseService(new ExerciseRepository());
+    private readonly List<SelectableExercise> _allExercises = new();
+
+    public event Action<List<string>>? Picked;
 
     public AddExercisePage()
     {
         InitializeComponent();
 
-        LibraryList.ItemsSource = new List<LibraryEntry>
-        {
-            new LibraryEntry { Name = "Back Squat", Category = "Squat" },
-            new LibraryEntry { Name = "Front Squat", Category = "Squat" },
-            new LibraryEntry { Name = "Romanian Deadlift", Category = "Deadlift" },
-            new LibraryEntry { Name = "Bench Press", Category = "Bench" },
-            new LibraryEntry { Name = "Overhead Press", Category = "Bench" },
-            new LibraryEntry { Name = "Power Clean", Category = "Olympic" },
-        };
+        LibraryList.ItemsSource = FilteredExercises;
     }
 
-    private async void OnAddClicked(object? sender, EventArgs e)
+    public ObservableCollection<SelectableExercise> FilteredExercises { get; } = new();
+
+    protected override async void OnAppearing()
     {
-        if (((Button?)sender)?.CommandParameter is not LibraryEntry entry)
+        base.OnAppearing();
+
+        await _exerciseService.SelectAllExercises();
+
+        if (_allExercises.Count == 0)
+        {
+            foreach (Exercise exercise in _exerciseService.Exercises)
+            {
+                SelectableExercise selectable = new SelectableExercise(exercise);
+                selectable.PropertyChanged += OnExercisePropertyChanged;
+
+                _allExercises.Add(selectable);
+            }
+        }
+
+        ApplyFilter();
+    }
+
+    private void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        ApplyFilter();
+    }
+
+    private void ApplyFilter()
+    {
+        string search = SearchEntry.Text ?? "";
+
+        FilteredExercises.Clear();
+
+        foreach (SelectableExercise exercise in _allExercises)
+        {
+            if (exercise.Name.StartsWith(search, StringComparison.OrdinalIgnoreCase))
+            {
+                FilteredExercises.Add(exercise);
+            }
+        }
+    }
+
+    private void OnExercisePropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(SelectableExercise.IsSelected))
+        {
+            UpdateAddButton();
+        }
+    }
+
+    private void OnExerciseTapped(object? sender, TappedEventArgs e)
+    {
+        if (e.Parameter is not SelectableExercise exercise)
             return;
 
-        Picked?.Invoke(entry.Name);
+        exercise.IsSelected = !exercise.IsSelected;
+    }
+
+    private void UpdateAddButton()
+    {
+        int count = _allExercises.Count(exercise => exercise.IsSelected);
+
+        AddSelectedButton.IsEnabled = count > 0;
+        AddSelectedButton.Text = count == 1 ? "ADD EXERCISE" : "ADD EXERCISES";
+    }
+
+    private async void OnAddSelectedClicked(object? sender, EventArgs e)
+    {
+        List<string> names = new();
+
+        foreach (SelectableExercise exercise in _allExercises)
+        {
+            if (exercise.IsSelected)
+            {
+                names.Add(exercise.Name);
+            }
+        }
+
+        if (names.Count == 0)
+            return;
+
+        Picked?.Invoke(names);
 
         await Navigation.PopModalAsync();
     }
@@ -38,16 +111,4 @@ public partial class AddExercisePage : ContentPage
     {
         await Navigation.PopModalAsync();
     }
-}
-
-/// <summary>
-/// A row in the exercise library.
-/// </summary>
-public class LibraryEntry
-{
-    /// <summary>Exercise name.</summary>
-    public string Name { get; set; } = "";
-
-    /// <summary>Category the exercise belongs to.</summary>
-    public string Category { get; set; } = "";
 }
