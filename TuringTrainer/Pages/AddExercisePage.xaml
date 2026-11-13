@@ -1,35 +1,47 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:pages="clr-namespace:TuringTrainer.Pages"
+             xmlns:models="clr-namespace:TuringTrainer.Models"
              x:Class="TuringTrainer.Pages.AddExercisePage"
              Title="Add Exercise"
-             BackgroundColor="#101010"
-             Shell.NavBarIsVisible="False">
+             BackgroundColor="#101010">
 
     <ContentPage.Resources>
-        <DataTemplate x:Key="LibraryTemplate" x:DataType="pages:LibraryEntry">
+        <DataTemplate x:Key="LibraryTemplate" x:DataType="models:SelectableExercise">
             <Border BackgroundColor="#1C1C1C"
                     Stroke="#343434"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 14"
                     Padding="14">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                        <Setter Property="Stroke" Value="{StaticResource Primary}" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnExerciseTapped"
+                                          CommandParameter="{Binding .}" />
+                </Border.GestureRecognizers>
                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                    <VerticalStackLayout Spacing="4" VerticalOptions="Center">
-                        <Label Text="{Binding Name}"
-                               FontSize="15"
-                               FontAttributes="Bold"
-                               TextColor="#FFFFFF" />
-                        <Label Text="{Binding Category}"
-                               FontSize="11"
-                               CharacterSpacing="1"
-                               TextColor="#999999" />
-                    </VerticalStackLayout>
-                    <Button Grid.Column="1"
-                            Text="+"
-                            Style="{StaticResource StepButton}"
-                            Clicked="OnAddClicked"
-                            CommandParameter="{Binding .}" />
+                    <Label Text="{Binding Name}"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF"
+                           VerticalOptions="Center">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                <Setter Property="TextColor" Value="{StaticResource TextOnPrimary}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Grid.Column="1"
+                           Text="✓"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextOnPrimary}"
+                           VerticalOptions="Center"
+                           IsVisible="{Binding IsSelected}" />
                 </Grid>
             </Border>
         </DataTemplate>
@@ -37,13 +49,24 @@
 
     <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="20,12,20,20" RowSpacing="16">
 
-        <pages:PageHeader x:Name="Header"
-                          Title="Add Exercise" />
-
-        <Label Grid.Row="1"
-               Text="Pick an exercise to add to the routine."
+        <Label Grid.Row="0"
+               Text="Tap the exercises you want to add."
                FontSize="12"
                TextColor="#999999" />
+
+        <Border Grid.Row="1"
+                BackgroundColor="#1C1C1C"
+                Stroke="#343434"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 12"
+                Padding="14,0">
+            <Entry x:Name="SearchEntry"
+                   Placeholder="Search exercises"
+                   PlaceholderColor="#999999"
+                   TextColor="#FFFFFF"
+                   BackgroundColor="Transparent"
+                   TextChanged="OnSearchTextChanged" />
+        </Border>
 
         <CollectionView x:Name="LibraryList"
                         Grid.Row="2"
@@ -53,16 +76,29 @@
             </CollectionView.ItemsLayout>
         </CollectionView>
 
-        <Button Grid.Row="3"
-                Text="CANCEL"
-                Clicked="OnCancelClicked"
-                BackgroundColor="Transparent"
-                TextColor="#999999"
-                BorderColor="#343434"
-                BorderWidth="1"
-                FontAttributes="Bold"
-                FontSize="14"
-                CornerRadius="12"
-                HeightRequest="52" />
+        <Grid Grid.Row="3" ColumnDefinitions="Auto,*" ColumnSpacing="12">
+            <Button Text="CANCEL"
+                    Clicked="OnCancelClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#999999"
+                    BorderColor="#343434"
+                    BorderWidth="1"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    CornerRadius="12"
+                    HeightRequest="52"
+                    WidthRequest="120" />
+            <Button Grid.Column="1"
+                    x:Name="AddSelectedButton"
+                    Text="ADD EXERCISES"
+                    Clicked="OnAddSelectedClicked"
+                    IsEnabled="False"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="{StaticResource TextOnPrimary}"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    CornerRadius="12"
+                    HeightRequest="52" />
+        </Grid>
     </Grid>
 </ContentPage>
