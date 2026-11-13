@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
@@ -7,60 +8,62 @@ public class ExerciseService : IExerciseService
 {
   private readonly IExerciseRepository _exerciseRepository;
 
-    public ExerciseService(IExerciseRepository exerciseRepository)
+  public ExerciseService(IExerciseRepository exerciseRepository)
+  {
+    _exerciseRepository = exerciseRepository;
+  }
+
+  public ObservableCollection<Exercise> Exercises => _exerciseRepository.Exercises;
+
+  public async Task SelectAllExercises()
+  {
+    await _exerciseRepository.SelectAllExercises();
+  }
+
+  public async Task<Exercise?> SelectExercise(Guid exerciseId)
+  {
+    if (exerciseId == Guid.Empty)
     {
-        _exerciseRepository = exerciseRepository;
+      return null;
     }
 
-    public async Task SelectAllExercises()
+    return await _exerciseRepository.SelectExercise(exerciseId);
+  }
+
+  public async Task<ExerciseAdditionError> InsertExercise(Exercise exercise)
+  {
+    if (exercise.ExerciseId == Guid.Empty)
     {
-        await _exerciseRepository.SelectAllExercises();
+      return ExerciseAdditionError.InvalidId;
     }
 
-    public async Task<Exercise?> SelectExercise(Guid exerciseId)
+    if (string.IsNullOrWhiteSpace(exercise.Name))
     {
-        if (exerciseId == Guid.Empty)
-        {
-            return null;
-        }
-
-        return await _exerciseRepository.SelectExercise(exerciseId);
+      return ExerciseAdditionError.InvalidName;
     }
 
-    public async Task<ExerciseAdditionError> InsertExercise(Exercise exercise)
+    return await _exerciseRepository.InsertExercise(exercise);
+  }
+
+  public async Task<ExerciseEditError> UpdateExercise(Exercise exercise, string name)
+  {
+    if (string.IsNullOrWhiteSpace(name))
     {
-        if (exercise.ExerciseId == Guid.Empty)
-        {
-            return ExerciseAdditionError.InvalidId;
-        }
-
-        if (string.IsNullOrWhiteSpace(exercise.Name))
-        {
-            return ExerciseAdditionError.InvalidName;
-        }
-
-        return await _exerciseRepository.InsertExercise(exercise);
+      return ExerciseEditError.InvalidFieldError;
     }
 
-    public async Task<ExerciseEditError> UpdateExercise(Exercise exercise, string name)
-    {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            return ExerciseEditError.InvalidFieldError;
-        }
+    return await _exerciseRepository.UpdateExercise(exercise, name);
+  }
 
-        return await _exerciseRepository.UpdateExercise(exercise, name);
-    }
-
-    public async Task<ExerciseDeletionError> DeleteExercise(Exercise exercise)
+  public async Task<ExerciseDeletionError> DeleteExercise(Exercise exercise)
+  {
+    if (exercise != null)
     {
-        if (exercise != null)
-        {
-            return await _exerciseRepository.DeleteExercise(exercise);
-        }
-        else
-        {
-            return ExerciseDeletionError.ExerciseNotFound;
-        }
+      return await _exerciseRepository.DeleteExercise(exercise);
     }
+    else
+    {
+      return ExerciseDeletionError.ExerciseNotFound;
+    }
+  }
 }
