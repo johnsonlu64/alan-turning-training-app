@@ -35,13 +35,16 @@
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
-                    <Label Grid.Column="1"
-                           Text="✓"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="{StaticResource TextOnPrimary}"
-                           VerticalOptions="Center"
-                           IsVisible="{Binding IsSelected}" />
+                    <CheckBox Grid.Column="1"
+                              IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                              Color="#999999"
+                              VerticalOptions="Center">
+                        <CheckBox.Triggers>
+                            <DataTrigger TargetType="CheckBox" Binding="{Binding IsSelected}" Value="True">
+                                <Setter Property="Color" Value="#FFFFFF" />
+                            </DataTrigger>
+                        </CheckBox.Triggers>
+                    </CheckBox>
                 </Grid>
             </Border>
         </DataTemplate>

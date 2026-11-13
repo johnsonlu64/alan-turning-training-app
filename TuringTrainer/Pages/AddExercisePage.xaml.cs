@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
@@ -32,7 +33,10 @@ public partial class AddExercisePage : ContentPage
         {
             foreach (Exercise exercise in _exerciseService.Exercises)
             {
-                _allExercises.Add(new SelectableExercise(exercise));
+                SelectableExercise selectable = new SelectableExercise(exercise);
+                selectable.PropertyChanged += OnExercisePropertyChanged;
+
+                _allExercises.Add(selectable);
             }
         }
 
@@ -59,14 +63,20 @@ public partial class AddExercisePage : ContentPage
         }
     }
 
+    private void OnExercisePropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(SelectableExercise.IsSelected))
+        {
+            UpdateAddButton();
+        }
+    }
+
     private void OnExerciseTapped(object? sender, TappedEventArgs e)
     {
         if (e.Parameter is not SelectableExercise exercise)
             return;
 
         exercise.IsSelected = !exercise.IsSelected;
-
-        UpdateAddButton();
     }
 
     private void UpdateAddButton()
