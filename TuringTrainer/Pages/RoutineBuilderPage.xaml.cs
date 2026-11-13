@@ -146,23 +146,37 @@ public partial class RoutineBuilderPage : ContentPage, IQueryAttributable
         AddExercisePage page = new AddExercisePage();
         page.Picked += AddExercise;
 
-        await Navigation.PushModalAsync(page);
-    }
-
-    private void AddExercise(string name)
-    {
-        BuilderExercise exercise = new BuilderExercise
+        NavigationPage modal = new NavigationPage(page)
         {
-            Index = (_exercises.Count + 1).ToString("00"),
-            Name = name,
-            Focus = "NEWLY ADDED",
-            BaseLoad = 100,
+            BarBackgroundColor = Color.FromArgb("#101010"),
+            BarTextColor = Colors.White,
         };
 
-        exercise.Sets.Add(NewSet(exercise, 1));
+        await Navigation.PushModalAsync(modal);
+    }
 
-        _exercises.Add(exercise);
-        ExerciseList.SelectedItem = exercise;
+    private void AddExercise(List<string> names)
+    {
+        BuilderExercise? last = null;
+
+        foreach (string name in names)
+        {
+            BuilderExercise exercise = new BuilderExercise
+            {
+                Index = (_exercises.Count + 1).ToString("00"),
+                Name = name,
+                Focus = "NEWLY ADDED",
+                BaseLoad = 100,
+            };
+
+            exercise.Sets.Add(NewSet(exercise, 1));
+
+            _exercises.Add(exercise);
+            last = exercise;
+        }
+
+        if (last != null)
+            ExerciseList.SelectedItem = last;
     }
 
     private async void OnChangeAnchorClicked(object? sender, EventArgs e)
