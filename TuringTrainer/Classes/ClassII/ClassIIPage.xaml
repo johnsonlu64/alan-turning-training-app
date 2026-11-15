@@ -157,6 +157,9 @@
                             Padding="18"
                             Margin="0">
 
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnMemberClicked"/>
+                        </Border.GestureRecognizers>
 
                         <Grid ColumnDefinitions="*,Auto"
                               ColumnSpacing="14">
@@ -176,18 +179,6 @@
 
                             </HorizontalStackLayout>
 
-                            <Button Grid.Column="1"
-                                    Text="›"
-                                    FontSize="32"
-                                    FontAttributes="Bold"
-                                    TextColor="Black"
-                                    BackgroundColor="#F5C542"
-                                    CornerRadius="12"
-                                    WidthRequest="55"
-                                    HeightRequest="55"
-                                    Padding="0"
-                                    Clicked="OnMemberClicked"
-                                    CommandParameter="{Binding .}"/>
 
                         </Grid>
                     </Border>
