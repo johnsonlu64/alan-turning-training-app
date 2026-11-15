@@ -62,6 +62,26 @@ public partial class ClassIIPage : ContentPage
         ShowMembers();
     }
 
+    private void OnMemberSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        string search = MemberSearchBar.Text;
+
+        List<Models.User> matchingMembers = new List<Models.User>();
+
+        foreach (Models.User member in _userRepository.Users)
+        {
+            string fullName = member.FirstName + " " + member.LastName;
+
+            if (fullName.ToLower().Contains(search.ToLower()))
+            {
+                matchingMembers.Add(member);
+            }
+        }
+
+        MembersList.ItemsSource = matchingMembers;
+    }
+
+
     private void ShowSports()
     {
         SportsTab.BackgroundColor = Color.FromArgb("#332B12");
@@ -74,6 +94,7 @@ public partial class ClassIIPage : ContentPage
         SportsList.IsVisible = true;
         RoutinesList.IsVisible = false;
         MembersList.IsVisible = false;
+        MemberSearchBar.IsVisible = false;
     }
 
     private void ShowRoutines()
@@ -88,6 +109,7 @@ public partial class ClassIIPage : ContentPage
         SportsList.IsVisible = false;
         RoutinesList.IsVisible = true;
         MembersList.IsVisible = false;
+        MemberSearchBar.IsVisible = false;
     }
 
     private void ShowMembers()
@@ -103,6 +125,7 @@ public partial class ClassIIPage : ContentPage
         MembersList.IsVisible = true;
         SportsList.IsVisible = false;
         RoutinesList.IsVisible = false;
+        MemberSearchBar.IsVisible = true;
     }
 
 

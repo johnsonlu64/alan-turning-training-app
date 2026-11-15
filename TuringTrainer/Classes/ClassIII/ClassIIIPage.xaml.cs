@@ -60,6 +60,24 @@ public partial class ClassIIIPage : ContentPage
         ShowMembers();
     }
 
+    private void OnMemberSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        string search = MemberSearchBar.Text;
+        List<Models.User> matchingMembers = new List<Models.User>();
+
+        foreach (Models.User member in _userRepository.Users)
+        {
+            string fullName = member.FirstName + " " + member.LastName;
+
+            if (fullName.ToLower().Contains(search.ToLower()))
+            {
+                matchingMembers.Add(member);
+            }
+        }
+
+        MembersList.ItemsSource = matchingMembers;
+    }
+
 
     private void ShowSports()
     {
@@ -73,6 +91,7 @@ public partial class ClassIIIPage : ContentPage
         SportsList.IsVisible = true;
         RoutinesList.IsVisible = false;
         MembersList.IsVisible = false;
+        MemberSearchBar.IsVisible = false;
     }
 
     private void ShowRoutines()
@@ -87,6 +106,7 @@ public partial class ClassIIIPage : ContentPage
         SportsList.IsVisible = false;
         RoutinesList.IsVisible = true;
         MembersList.IsVisible = false;
+        MemberSearchBar.IsVisible = false;
     }
 
     private void ShowMembers()
@@ -102,6 +122,7 @@ public partial class ClassIIIPage : ContentPage
         MembersList.IsVisible = true;
         SportsList.IsVisible = false;
         RoutinesList.IsVisible = false;
+        MemberSearchBar.IsVisible = true;
     }
 
     private async void OnRoutineSelected(object? sender, SelectionChangedEventArgs e)

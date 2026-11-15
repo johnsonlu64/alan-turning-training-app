@@ -19,7 +19,8 @@
           RowSpacing="16">
 
 
-        <Grid ColumnDefinitions="Auto,*"
+        <Grid Grid.Row="0"
+                ColumnDefinitions="Auto,*"
               ColumnSpacing="12"
               Padding="0,12,0,0">
 
@@ -125,10 +126,24 @@
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-        <CollectionView Grid.Row="2"
-                        x:Name="MembersList"
-                        IsVisible="False"
-                        SelectionMode="None">
+        
+        <Grid Grid.Row="2"
+              RowDefinitions="Auto,*"
+              RowSpacing="10">
+
+            <SearchBar Grid.Row="0"
+                       x:Name="MemberSearchBar"
+                       Placeholder="Search members..."
+                       TextChanged="OnMemberSearchTextChanged"
+                       IsVisible="False"
+                       BackgroundColor="#332B12"
+                       TextColor="White"
+                       PlaceholderColor="#999999"/>
+
+            <CollectionView Grid.Row="1"
+                            x:Name="MembersList"
+                            IsVisible="False"
+                            SelectionMode="None">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"
@@ -143,6 +158,9 @@
                             Padding="18"
                             Margin="0">
 
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMemberClicked"/>
+                    </Border.GestureRecognizers>
 
                         <Grid ColumnDefinitions="*,Auto"
                               ColumnSpacing="14">
@@ -162,25 +180,12 @@
 
                             </HorizontalStackLayout>
 
-                            <Button Grid.Column="1"
-                                    Text="›"
-                                    FontSize="32"
-                                    FontAttributes="Bold"
-                                    TextColor="Black"
-                                    BackgroundColor="#F5C542"
-                                    CornerRadius="12"
-                                    WidthRequest="55"
-                                    HeightRequest="55"
-                                    Padding="0"
-                                    Clicked="OnMemberClicked"
-                                    CommandParameter="{Binding .}"/>
-
                         </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
+        </Grid>
         <CollectionView Grid.Row="2"
                         x:Name="RoutinesList"
                         IsVisible="False"
