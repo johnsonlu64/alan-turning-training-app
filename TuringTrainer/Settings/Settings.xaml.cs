@@ -44,7 +44,7 @@ public partial class Settings : ContentPage
         string? email = _userService.GetUserSession()?.User?.Email;
 
         EmailEntry.Text = email ?? "";
-        
+
     }
 
     private int GetCurrentThemeIndex()
@@ -53,7 +53,7 @@ public partial class Settings : ContentPage
         {
             AppTheme.Light => 1,
             AppTheme.Dark => 2,
-            _ => 0 
+            _ => 0
         };
     }
 
@@ -72,7 +72,41 @@ public partial class Settings : ContentPage
 
     private async void OnSaveClicked(object sender, EventArgs e)
     {
-        await DisplayAlertAsync("Saved", "Your settings have been saved.", "OK");
+        if (_currentUser == null)
+        {
+            await DisplayAlertAsync("Error", "Could not find your account information.", "OK");
+            return;
+        }
+
+        string firstName = FirstNameEntry.Text?.Trim() ?? "";
+        string middleInitial = MiddleInitialEntry.Text?.Trim() ?? "";
+        string lastName = LastNameEntry.Text?.Trim() ?? "";
+
+        if (string.IsNullOrWhiteSpace(firstName))
+        {
+            await DisplayAlertAsync("Missing Information", "Please enter your first name.", "OK");
+            return;
+        }
+
+        UserEditError result = await _userService.UpdateUser(
+            _currentUser,
+            firstName,
+            middleInitial,
+            lastName,
+            _currentUser.IsCoach);
+
+        if (result == UserEditError.NoError)
+        {
+            _currentUser.FirstName = firstName;
+            _currentUser.MiddleInitial = middleInitial;
+            _currentUser.LastName = lastName;
+
+            await DisplayAlertAsync("Success", "Your account information has been updated.", "OK");
+        }
+        else
+        {
+            await DisplayAlertAsync("Error", "Something went wrong while updating your information.", "OK");
+        }
     }
 
     private async void OnHelpTapped(object sender, TappedEventArgs e)
