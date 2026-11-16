@@ -151,32 +151,24 @@ public class UserRepository : IUserRepository
     public async Task<UserEditError> UpdateUser(User userToUpdate, String firstName, String middleInitial, String lastName, bool isCoach)
     {
         try
-        {
-            userToUpdate.FirstName = firstName;
-            userToUpdate.MiddleInitial = middleInitial;
-            userToUpdate.LastName = lastName;
-            userToUpdate.IsCoach = isCoach;
-            var response = await _client.From<User>().Update(userToUpdate);
-            if (response.Models.Any())
-            {
-                var updatedUser = response.Models.First();
-                var index = Users.IndexOf(userToUpdate);
-                if (index >= 0)
-                {
-                    Users[index] = updatedUser;
-                }
-            }
-            else
-            {
-                return UserEditError.UserNotFound;
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Update failed, {0}", ex);
-            return UserEditError.DBEditError;
-        }
+    {
+        userToUpdate.FirstName = firstName;
+        userToUpdate.MiddleInitial = middleInitial;
+        userToUpdate.LastName = lastName;
+
+        Console.WriteLine("Updating user: " + userToUpdate.UserId);
+
+        var response = await _client.From<User>().Update(userToUpdate);
+
+        Console.WriteLine("Returned records: " + response.Models.Count);
+
         return UserEditError.NoError;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Update failed: " + ex);
+        return UserEditError.DBEditError;
+    }
     }
 
     public async Task<UserDeletionError> DeleteUser(User userToDelete)

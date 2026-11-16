@@ -57,8 +57,7 @@
                                                  TextColor="#999999"/>       
 
                                           <Entry x:Name="MiddleInitialEntry"
-                                                 Placeholder="Middle Initial"
-                                                 MaxLength="1"
+                                                 Placeholder="Middle Name"
                                                  PlaceholderColor="silver"
                                                  TextColor="#FF8A8888"
                                                  BackgroundColor="#262626"/>

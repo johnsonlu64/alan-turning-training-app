@@ -105,7 +105,10 @@ public partial class Settings : ContentPage
         }
         else
         {
-            await DisplayAlertAsync("Error", "Something went wrong while updating your information.", "OK");
+            await DisplayAlertAsync(
+        "Update Failed",
+        $"Update result: {result}",
+        "OK");
         }
     }
 
