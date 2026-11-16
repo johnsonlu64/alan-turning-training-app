@@ -6,265 +6,338 @@
        BackgroundColor="#101010"
        Shell.NavBarIsVisible="False">
 
-       <Grid RowDefinitions="Auto,*,Auto"
-             Padding="20,12,20,0">
+       <Grid>
 
-              <!-- Header -->
-              <Grid Grid.Row="0"
-                    ColumnDefinitions="Auto,*"
-                    ColumnSpacing="14"
-                    Padding="0,12,0,24">
+              <Grid RowDefinitions="Auto,*,Auto"
+                    Padding="20,12,20,0">
 
-                     <Label Grid.Column="1"
-                            Text="Settings"
-                            FontSize="27"
-                            FontAttributes="Bold"
-                            TextColor="#F5C542"
-                            VerticalOptions="Center"/>
+                     <Grid Grid.Row="0"
+                           ColumnDefinitions="Auto,*"
+                           ColumnSpacing="14"
+                           Padding="0,12,0,24">
+
+                            <Label Grid.Column="1"
+                                   Text="Settings"
+                                   FontSize="27"
+                                   FontAttributes="Bold"
+                                   TextColor="#F5C542"
+                                   VerticalOptions="Center"/>
+                     </Grid>
+
+                     <ScrollView Grid.Row="1">
+                            <VerticalStackLayout Spacing="18">
+
+                                   <Border BackgroundColor="#1C1C1C"
+                                           Stroke="#343434"
+                                           StrokeThickness="1"
+                                           StrokeShape="RoundRectangle 16"
+                                           Padding="18">
+
+                                          <VerticalStackLayout Spacing="14">
+
+                                                 <Grid ColumnDefinitions="*, Auto">
+                                                        <Label Text="ACCOUNT INFORMATION"
+                                                               FontSize="13"
+                                                               CharacterSpacing="2"
+                                                               FontAttributes="Bold"
+                                                               TextColor="#A5A5A5"/>
+
+                                                        <Button Grid.Column="1"
+                                                                Text="✎"
+                                                                FontSize="22"
+                                                                WidthRequest="42"
+                                                                HeightRequest="42"
+                                                                Padding="0"
+                                                                BackgroundColor="#262626"
+                                                                TextColor="#F5C542"
+                                                                CornerRadius="10"
+                                                                Clicked="OnEditClicked"/>
+                                                 </Grid>
+
+                                                 <Label Text="First Name"
+                                                        FontSize="13"
+                                                        TextColor="#999999"/>
+
+                                                 <Border BackgroundColor="#262626"
+                                                         StrokeThickness="0"
+                                                         Padding="12,8">
+
+                                                        <Label x:Name="FirstNameLabel"
+                                                               TextColor="#FF8A8888"/>
+                                                 </Border>
+
+                                                 <Label Text="Middle Initial"
+                                                        FontSize="13"
+                                                        TextColor="#999999"/>
+
+                                                 <Border BackgroundColor="#262626"
+                                                         StrokeThickness="0"
+                                                         Padding="12,8">
+
+                                                        <Label x:Name="MiddleInitialLabel"
+                                                               TextColor="#FF8A8888"/>
+                                                 </Border>
+
+                                                 <Label Text="Last Name"
+                                                        FontSize="13"
+                                                        TextColor="#999999"/>
+
+                                                 <Border BackgroundColor="#262626"
+                                                         StrokeThickness="0"
+                                                         Padding="12,8">
+
+                                                        <Label x:Name="LastNameLabel"
+                                                               TextColor="#FF8A8888"/>
+                                                 </Border>
+
+                                                 <Label Text="Email"
+                                                        FontSize="13"
+                                                        TextColor="#999999"/>
+
+                                                 <Border BackgroundColor="#262626"
+                                                         StrokeThickness="0"
+                                                         Padding="12,8">
+
+                                                        <Label x:Name="EmailLabel"
+                                                               TextColor="#FF8A8888"/>
+                                                 </Border>
+
+                                                 <Label Text="Your email is linked to your login account"
+                                                        FontSize="13"
+                                                        TextColor="#999999"/>
+                                          </VerticalStackLayout>
+                                   </Border>
+
+                                   <Border BackgroundColor="#1C1C1C"
+                                           Stroke="#343434"
+                                           StrokeThickness="1"
+                                           StrokeShape="RoundRectangle 16"
+                                           Padding="18">
+
+                                          <Grid ColumnDefinitions="*,Auto"
+                                                ColumnSpacing="14">
+
+                                                 <VerticalStackLayout Spacing="4"
+                                                                      VerticalOptions="Center">
+                                                        <Label Text="Appearance"
+                                                               FontSize="18"
+                                                               FontAttributes="Bold"
+                                                               TextColor="White"/>
+                                                        <Label Text="Light / Dark / System"
+                                                               FontSize="12"
+                                                               TextColor="#999999"/>
+                                                 </VerticalStackLayout>
+
+                                                 <Picker Grid.Column="1"
+                                                         x:Name="ThemePicker"
+                                                         WidthRequest="130"
+                                                         TextColor="White"
+                                                         TitleColor="#999999"
+                                                         BackgroundColor="#262626"
+                                                         SelectedIndexChanged="OnThemeChanged"/>
+                                          </Grid>
+                                   </Border>
+
+                                   <Border BackgroundColor="#1C1C1C"
+                                           Stroke="#343434"
+                                           StrokeThickness="1"
+                                           StrokeShape="RoundRectangle 16"
+                                           Padding="18">
+
+                                          <Border.GestureRecognizers>
+                                                 <TapGestureRecognizer Tapped="OnHelpTapped"/>
+                                          </Border.GestureRecognizers>
+
+                                          <Grid ColumnDefinitions="*,Auto">
+                                                 <VerticalStackLayout Spacing="4"
+                                                                      VerticalOptions="Center">
+                                                        <Label Text="Help"
+                                                               FontSize="18"
+                                                               FontAttributes="Bold"
+                                                               TextColor="White"/>
+                                                        <Label Text="FAQs and support"
+                                                               FontSize="12"
+                                                               TextColor="#999999"/>
+                                                 </VerticalStackLayout>
+
+                                                 <Label Grid.Column="1"
+                                                        Text="›"
+                                                        FontSize="28"
+                                                        TextColor="#F5C542"
+                                                        VerticalOptions="Center"/>
+                                          </Grid>
+                                   </Border>
+
+                                   <Border BackgroundColor="#1C1C1C"
+                                           Stroke="#343434"
+                                           StrokeThickness="1"
+                                           StrokeShape="RoundRectangle 16"
+                                           Padding="18">
+
+                                          <Border.GestureRecognizers>
+                                                 <TapGestureRecognizer Tapped="OnFeedbackTapped"/>
+                                          </Border.GestureRecognizers>
+
+                                          <Grid ColumnDefinitions="*,Auto">
+                                                 <VerticalStackLayout Spacing="4"
+                                                                      VerticalOptions="Center">
+                                                        <Label Text="Feedback"
+                                                               FontSize="18"
+                                                               FontAttributes="Bold"
+                                                               TextColor="White"/>
+                                                        <Label Text="Share your thoughts"
+                                                               FontSize="12"
+                                                               TextColor="#999999"/>
+                                                 </VerticalStackLayout>
+
+                                                 <Label Grid.Column="1"
+                                                        Text="›"
+                                                        FontSize="28"
+                                                        TextColor="#F5C542"
+                                                        VerticalOptions="Center"/>
+                                          </Grid>
+                                   </Border>
+
+                                   <Button Text="Log Out"
+                                           Clicked="OnLogoutClicked"
+                                           BackgroundColor="Transparent"
+                                           TextColor="#E05252"
+                                           BorderColor="#E05252"
+                                           BorderWidth="1"
+                                           FontAttributes="Bold"
+                                           FontSize="14"
+                                           CornerRadius="12"
+                                           HeightRequest="52"
+                                           Margin="0,0,0,18"/>
+
+                            </VerticalStackLayout>
+                     </ScrollView>
+
+                     <Grid Grid.Row="2"
+                           ColumnDefinitions="*,*,*,*"
+                           Padding="0,12,0,16"
+                           BackgroundColor="#151515">
+
+                            <VerticalStackLayout Spacing="4">
+                                   <Button Text="🏠"
+                                           FontSize="23"
+                                           TextColor="#777777"
+                                           Clicked="OnHomeClicked"
+                                           HorizontalOptions="Center"/>
+                                   <Label Text="Home"
+                                          FontSize="10"
+                                          TextColor="#777777"
+                                          HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="4">
+                                   <Button Text="👑"
+                                           FontSize="22"
+                                           TextColor="#777777"
+                                           Clicked="OnLeaderboardClicked"
+                                           HorizontalOptions="Center"/>
+                                   <Label Text="Leaderboard"
+                                          FontSize="10"
+                                          TextColor="#777777"
+                                          HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="2"
+                                                 Spacing="4">
+                                   <Button Text="📊"
+                                           FontSize="22"
+                                           TextColor="#777777"
+                                           Clicked="OnMetricsClicked"
+                                           HorizontalOptions="Center"/>
+                                   <Label Text="Metrics"
+                                          FontSize="10"
+                                          TextColor="#777777"
+                                          HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="3"
+                                                 Spacing="4">
+                                   <Button Text="⚙️"
+                                           FontSize="22"
+                                           TextColor="#F5C542"
+                                           HorizontalOptions="Center"/>
+                                   <Label Text="Settings"
+                                          FontSize="10"
+                                          TextColor="#F5C542"
+                                          HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                     </Grid>
               </Grid>
+              <!-- Edit Account Popup -->
+              <Grid x:Name="EditAccountPopup"
+                    IsVisible="False"
+                    BackgroundColor="#CC000000">
 
-              <!-- Main content -->
-              <ScrollView Grid.Row="1">
-                     <VerticalStackLayout Spacing="18">
+                     <Border BackgroundColor="#1C1C1C"
+                             Stroke="#343434"
+                             StrokeThickness="1"
+                             StrokeShape="RoundRectangle 16"
+                             Padding="24"
+                             Margin="20"
+                             MaximumWidthRequest="450"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
 
-                            <!-- Account information -->
-                            <Border BackgroundColor="#1C1C1C"
-                                    Stroke="#343434"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="18">
+                            <ScrollView MaximumHeightRequest="600">
 
                                    <VerticalStackLayout Spacing="14">
 
-                                          <Label Text="ACCOUNT INFORMATION"
-                                                 FontSize="13"
-                                                 CharacterSpacing="2"
+                                          <Label Text="Edit Account Information"
+                                                 FontSize="22"
                                                  FontAttributes="Bold"
-                                                 TextColor="#A5A5A5"/>
+                                                 TextColor="#F5C542"/>
 
                                           <Label Text="First Name"
-                                                 FontSize="13"
                                                  TextColor="#999999"/>
 
                                           <Entry x:Name="FirstNameEntry"
                                                  Placeholder="First Name"
-                                                 PlaceholderColor="silver"
-                                                 TextColor="#FF8A8888"
+                                                 TextColor="White"
                                                  BackgroundColor="#262626"/>
 
                                           <Label Text="Middle Initial"
-                                                 FontSize="13"
-                                                 TextColor="#999999"/>       
+                                                 TextColor="#999999"/>
 
                                           <Entry x:Name="MiddleInitialEntry"
-                                                 Placeholder="Middle Name"
-                                                 PlaceholderColor="silver"
-                                                 TextColor="#FF8A8888"
+                                                 Placeholder="Middle Initial"
+                                                 MaxLength="1"
+                                                 TextColor="White"
                                                  BackgroundColor="#262626"/>
 
                                           <Label Text="Last Name"
-                                                 FontSize="13"
                                                  TextColor="#999999"/>
 
                                           <Entry x:Name="LastNameEntry"
                                                  Placeholder="Last Name"
-                                                 PlaceholderColor="silver"
-                                                 TextColor="#FF8A8888"       
-                                               BackgroundColor="#262626"/>
+                                                 TextColor="White"
+                                                 BackgroundColor="#262626"/>
 
-                                          <Label Text="Email"
-                                                 FontSize="13"
-                                                 TextColor="#999999"/>
+                                          <Grid ColumnDefinitions="*,*"
+                                                ColumnSpacing="12">
 
-                                          <Entry x:Name="EmailEntry"
-                                                 Placeholder="Email"
-                                                 IsReadOnly="True"
-                                                 PlaceholderColor="Silver"
-                                                 TextColor="#FF8A8888"
-                                                 BackgroundColor="#262626"
-                                                 Keyboard="Email"/>
+                                                 <Button Text="Cancel"
+                                                         Clicked="OnCancelClicked"
+                                                         BackgroundColor="#343434"
+                                                         TextColor="White"/>
 
-                                          <Label Text="Your email is linked to your login account"
-                                                 FontSize="13"
-                                                 TextColor="#999999"/>
+                                                 <Button Grid.Column="1"
+                                                         x:Name="SaveAccountButton"
+                                                         Text="Save Changes"
+                                                         Clicked="OnSaveClicked"
+                                                         BackgroundColor="#F5C542"
+                                                         TextColor="#151515"/>
+
+                                          </Grid>
+
                                    </VerticalStackLayout>
-                            </Border>
-
-                            <!-- Theme -->
-                            <Border BackgroundColor="#1C1C1C"
-                                    Stroke="#343434"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="18">
-
-                                   <Grid ColumnDefinitions="*,Auto"
-                                         ColumnSpacing="14">
-
-                                          <VerticalStackLayout Spacing="4"
-                                                               VerticalOptions="Center">
-                                                 <Label Text="Appearance"
-                                                        FontSize="18"
-                                                        FontAttributes="Bold"
-                                                        TextColor="White"/>
-                                                 <Label Text="Light / Dark / System"
-                                                        FontSize="12"
-                                                        TextColor="#999999"/>
-                                          </VerticalStackLayout>
-
-                                          <Picker Grid.Column="1"
-                                                  x:Name="ThemePicker"
-                                                  WidthRequest="130"
-                                                  TextColor="White"
-                                                  TitleColor="#999999"
-                                                  BackgroundColor="#262626"
-                                                  SelectedIndexChanged="OnThemeChanged"/>
-                                   </Grid>
-                            </Border>
-
-                            <!-- Help -->
-                            <Border BackgroundColor="#1C1C1C"
-                                    Stroke="#343434"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="18">
-
-                                   <Border.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="OnHelpTapped"/>
-                                   </Border.GestureRecognizers>
-
-                                   <Grid ColumnDefinitions="*,Auto">
-                                          <VerticalStackLayout Spacing="4"
-                                                               VerticalOptions="Center">
-                                                 <Label Text="Help"
-                                                        FontSize="18"
-                                                        FontAttributes="Bold"
-                                                        TextColor="White"/>
-                                                 <Label Text="FAQs and support"
-                                                        FontSize="12"
-                                                        TextColor="#999999"/>
-                                          </VerticalStackLayout>
-
-                                          <Label Grid.Column="1"
-                                                 Text="›"
-                                                 FontSize="28"
-                                                 TextColor="#F5C542"
-                                                 VerticalOptions="Center"/>
-                                   </Grid>
-                            </Border>
-
-                            <!-- Feedback -->
-                            <Border BackgroundColor="#1C1C1C"
-                                    Stroke="#343434"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="18">
-
-                                   <Border.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="OnFeedbackTapped"/>
-                                   </Border.GestureRecognizers>
-
-                                   <Grid ColumnDefinitions="*,Auto">
-                                          <VerticalStackLayout Spacing="4"
-                                                               VerticalOptions="Center">
-                                                 <Label Text="Feedback"
-                                                        FontSize="18"
-                                                        FontAttributes="Bold"
-                                                        TextColor="White"/>
-                                                 <Label Text="Share your thoughts"
-                                                        FontSize="12"
-                                                        TextColor="#999999"/>
-                                          </VerticalStackLayout>
-
-                                          <Label Grid.Column="1"
-                                                 Text="›"
-                                                 FontSize="28"
-                                                 TextColor="#F5C542"
-                                                 VerticalOptions="Center"/>
-                                   </Grid>
-                            </Border>
-
-                            <!-- Save -->
-                            <Button Text="Save Changes"
-                                    Clicked="OnSaveClicked"
-                                    BackgroundColor="#F5C542"
-                                    TextColor="#151515"
-                                    FontAttributes="Bold"
-                                    FontSize="14"
-                                    CornerRadius="12"
-                                    HeightRequest="52"/>
-
-                            <!-- Logout -->
-                            <Button Text="Log Out"
-                                    Clicked="OnLogoutClicked"
-                                    BackgroundColor="Transparent"
-                                    TextColor="#E05252"
-                                    BorderColor="#E05252"
-                                    BorderWidth="1"
-                                    FontAttributes="Bold"
-                                    FontSize="14"
-                                    CornerRadius="12"
-                                    HeightRequest="52"
-                                    Margin="0,0,0,18"/>
-
-                     </VerticalStackLayout>
-              </ScrollView>
-
-              <!-- Bottom navigation -->
-              <Grid Grid.Row="2"
-                    ColumnDefinitions="*,*,*,*"
-                    Padding="0,12,0,16"
-                    BackgroundColor="#151515">
-
-                     <VerticalStackLayout Spacing="4">
-                            <Button Text="🏠"
-                                    FontSize="23"
-                                    TextColor="#777777"
-                                    Clicked="OnHomeClicked"
-                                    HorizontalOptions="Center"/>
-                            <Label Text="Home"
-                                   FontSize="10"
-                                   TextColor="#777777"
-                                   HorizontalOptions="Center"/>
-                     </VerticalStackLayout>
-
-                     <VerticalStackLayout Grid.Column="1"
-                                          Spacing="4">
-                            <Button Text="👑"
-                                    FontSize="22"
-                                    TextColor="#777777"
-                                    Clicked="OnLeaderboardClicked"
-                                    HorizontalOptions="Center"/>
-                            <Label Text="Leaderboard"
-                                   FontSize="10"
-                                   TextColor="#777777"
-                                   HorizontalOptions="Center"/>
-                     </VerticalStackLayout>
-
-                     <VerticalStackLayout Grid.Column="2"
-                                          Spacing="4">
-                            <Button Text="📊"
-                                    FontSize="22"
-                                    TextColor="#777777"
-                                    Clicked="OnMetricsClicked"
-                                    HorizontalOptions="Center"/>
-                            <Label Text="Metrics"
-                                   FontSize="10"
-                                   TextColor="#777777"
-                                   HorizontalOptions="Center"/>
-                     </VerticalStackLayout>
-
-                     <VerticalStackLayout Grid.Column="3"
-                                          Spacing="4">
-                            <Button Text="⚙️"
-                                    FontSize="22"
-                                    TextColor="#F5C542"
-                                    HorizontalOptions="Center"/>
-                            <Label Text="Settings"
-                                   FontSize="10"
-                                   TextColor="#F5C542"
-                                   HorizontalOptions="Center"/>
-                     </VerticalStackLayout>
+                            </ScrollView>
+                     </Border>
               </Grid>
-
        </Grid>
 </ContentPage>

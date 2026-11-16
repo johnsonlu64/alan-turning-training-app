@@ -36,14 +36,12 @@ public partial class Settings : ContentPage
 
         if (_currentUser != null)
         {
-            FirstNameEntry.Text = _currentUser.FirstName;
-            MiddleInitialEntry.Text = _currentUser.MiddleInitial;
-            LastNameEntry.Text = _currentUser.LastName;
+            ShowAccountInformation();
         }
 
         string? email = _userService.GetUserSession()?.User?.Email;
 
-        EmailEntry.Text = email ?? "";
+        EmailLabel.Text = email ?? "";
 
     }
 
@@ -100,6 +98,10 @@ public partial class Settings : ContentPage
             _currentUser.FirstName = firstName;
             _currentUser.MiddleInitial = middleInitial;
             _currentUser.LastName = lastName;
+
+            ShowAccountInformation();
+
+            EditAccountPopup.IsVisible = false;
 
             await DisplayAlertAsync("Success", "Your account information has been updated.", "OK");
         }
@@ -164,5 +166,33 @@ public partial class Settings : ContentPage
     private async void OnMetricsClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("MetricsPage");
+    }
+
+    private void ShowAccountInformation()
+    {
+        if (_currentUser == null)
+            return;
+
+        FirstNameLabel.Text = _currentUser.FirstName;
+        MiddleInitialLabel.Text = _currentUser.MiddleInitial;
+        LastNameLabel.Text = _currentUser.LastName;
+    }
+
+    private void OnEditClicked(object sender, EventArgs e)
+    {
+        if (_currentUser == null)
+            return;
+
+        FirstNameEntry.Text = _currentUser.FirstName;
+        MiddleInitialEntry.Text = _currentUser.MiddleInitial;
+        LastNameEntry.Text = _currentUser.LastName;
+
+        EditAccountPopup.IsVisible = true;
+    }
+
+    private void OnCancelClicked(object sender, EventArgs e)
+    {
+        EditAccountPopup.IsVisible = false;
+
     }
 }
