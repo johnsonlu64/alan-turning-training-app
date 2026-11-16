@@ -18,14 +18,14 @@
           Padding="20,12,20,0"
           RowSpacing="20">
 
-       <Grid Grid.Row="0"
+        <Grid Grid.Row="0"
               ColumnDefinitions="Auto,*"
               ColumnSpacing="12"
               Padding="0,12,0,0">
 
 
             <VerticalStackLayout Grid.Column="1"
-                    Spacing="10">
+                                 Spacing="10">
                 <Label Text="TURINGTRAINER"
                        FontSize="12"
                        CharacterSpacing="3"
@@ -79,7 +79,7 @@
                     HeightRequest="46"
                     Padding="24,0"/>
         </HorizontalStackLayout>
-        
+
         <CollectionView Grid.Row="2"
                         x:Name="SportsList"
                         SelectionMode="None">
@@ -125,7 +125,7 @@
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-        
+
         <Grid Grid.Row="2"
               RowDefinitions="Auto,*"
               RowSpacing="10">
@@ -144,58 +144,58 @@
                             IsVisible="False"
                             SelectionMode="None">
 
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"
-                                   ItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border BackgroundColor="#1C1C1C"
-                            Stroke="#343434"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 16"
-                            Padding="18"
-                            Margin="0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="#1C1C1C"
+                                Stroke="#343434"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 16"
+                                Padding="18"
+                                Margin="0">
 
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnMemberClicked"/>
-                        </Border.GestureRecognizers>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnMemberClicked"/>
+                            </Border.GestureRecognizers>
 
-                        <Grid ColumnDefinitions="*,Auto"
-                              ColumnSpacing="14">
+                            <Grid ColumnDefinitions="*,Auto"
+                                  ColumnSpacing="14">
 
-                            <HorizontalStackLayout Spacing="5"
-                                                   VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="5"
+                                                       VerticalOptions="Center">
 
-                                <Border WidthRequest="54"
-                                                  HeightRequest="54"
-                                                  StrokeThickness="0"
-                                                  StrokeShape="RoundRectangle 27"
-                                                  VerticalOptions="Center">
+                                    <Border WidthRequest="54"
+                                            HeightRequest="54"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 27"
+                                            VerticalOptions="Center">
 
-                                                 <Image Source="{Binding AvatarImage}"
-                                                        WidthRequest="54"
-                                                        HeightRequest="54"
-                                                        Aspect="AspectFill"/>
-                                          </Border>
-                                <Label Text="{Binding FirstName}"
-                                       TextColor="White"
-                                       FontSize="18"
-                                       VerticalOptions="Center"/>
+                                        <Image Source="{Binding AvatarImage}"
+                                               WidthRequest="54"
+                                               HeightRequest="54"
+                                               Aspect="AspectFill"/>
+                                    </Border>
+                                    <Label Text="{Binding FirstName}"
+                                           TextColor="White"
+                                           FontSize="18"
+                                           VerticalOptions="Center"/>
 
-                                <Label Text="{Binding LastName}"
-                                       TextColor="White"
-                                       FontSize="18"
-                                       VerticalOptions="Center"/>
+                                    <Label Text="{Binding LastName}"
+                                           TextColor="White"
+                                           FontSize="18"
+                                           VerticalOptions="Center"/>
 
-                            </HorizontalStackLayout>
+                                </HorizontalStackLayout>
 
 
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
         <CollectionView Grid.Row="2"
                         x:Name="RoutinesList"

@@ -43,7 +43,8 @@ public class UserRepository : IUserRepository
 
     public async Task<UserAdditionError> SignUpUser(string email, string password, string username)
     {
-        try {
+        try
+        {
             var session = await _client.Auth.SignUp(email, password);
             Console.WriteLine("Failed after client");
 
@@ -72,9 +73,9 @@ public class UserRepository : IUserRepository
 
     public async Task<UserSignInError> SignInUser(string email, string password)
     {
-        
+
         var session = await _client.Auth.SignIn(email, password);
-        
+
         if (session != null)
         {
             return UserSignInError.NoError;
@@ -99,7 +100,7 @@ public class UserRepository : IUserRepository
     }
 
 
-    
+
 
     public async Task SelectAllUsersByGroup(string groupId)
     {
@@ -233,28 +234,28 @@ public class UserRepository : IUserRepository
     }
 
     public async Task<UserAvatarError> UpdateAvatar(Guid userId, string? avatarUrl)
-{
-    try
     {
-        await _client.From<User>().Where(user => user.UserId == userId).Set(user => user.AvatarUrl, avatarUrl).Update();
-
-        User? updatedUser = await SelectUser(userId);
-        if (updatedUser == null)
+        try
         {
-            return UserAvatarError.UserNotFound;
+            await _client.From<User>().Where(user => user.UserId == userId).Set(user => user.AvatarUrl, avatarUrl).Update();
+
+            User? updatedUser = await SelectUser(userId);
+            if (updatedUser == null)
+            {
+                return UserAvatarError.UserNotFound;
+            }
+
+            if (updatedUser.AvatarUrl != avatarUrl)
+            {
+                return UserAvatarError.DBEditError;
+            }
         }
-
-        if (updatedUser.AvatarUrl != avatarUrl)
+        catch (Exception ex)
         {
+            Console.WriteLine("Avatar update failed, {0}", ex);
             return UserAvatarError.DBEditError;
         }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("Avatar update failed, {0}", ex);
-        return UserAvatarError.DBEditError;
-    }
 
-    return UserAvatarError.NoError;
-}
+        return UserAvatarError.NoError;
+    }
 }

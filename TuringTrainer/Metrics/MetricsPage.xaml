@@ -215,7 +215,8 @@
 
                                    <VerticalStackLayout Spacing="13">
 
-                                          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                          <Grid ColumnDefinitions="*,Auto"
+                                                        ColumnSpacing="10">
                                                  <Label Text="Bench Press"
                                                         FontSize="16"
                                                         TextColor="White"/>
@@ -228,9 +229,12 @@
                                                         TextColor="#F5C542"/>
                                           </Grid>
 
-                                          <BoxView HeightRequest="1" Color="#343434" HorizontalOptions="Fill"/>
+                                          <BoxView HeightRequest="1"
+                                                        Color="#343434"
+                                                        HorizontalOptions="Fill"/>
 
-                                          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                          <Grid ColumnDefinitions="*,Auto"
+                                                        ColumnSpacing="10">
                                                  <Label Text="Squat"
                                                         FontSize="16"
                                                         TextColor="White"/>
@@ -243,9 +247,11 @@
                                                         TextColor="#F5C542"/>
                                           </Grid>
 
-                                          <BoxView HeightRequest="1" Color="#343434"/>
+                                          <BoxView HeightRequest="1"
+                                                        Color="#343434"/>
 
-                                          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                          <Grid ColumnDefinitions="*,Auto"
+                                                        ColumnSpacing="10">
                                                  <Label Text="Deadlift"
                                                         FontSize="16"
                                                         TextColor="White"/>
@@ -289,9 +295,9 @@
                                                          SelectedIndexChanged="ExercisePicker_SelectedIndexChanged">
                                                         <Picker.ItemsSource>
                                                                <x:Array Type="{x:Type x:String}">
-                                                               <x:String>Bench Press</x:String>
-                                                               <x:String>Squat</x:String>
-                                                               <x:String>Deadlift</x:String>
+                                                                      <x:String>Bench Press</x:String>
+                                                                      <x:String>Squat</x:String>
+                                                                      <x:String>Deadlift</x:String>
                                                                </x:Array>
                                                         </Picker.ItemsSource>
                                                  </Picker>
@@ -301,7 +307,7 @@
                                                  x:Name="StrengthChart"
                                                  HeightRequest="260"
                                                  BackgroundColor="#1C1C1C"/>
-                     
+
                                    </VerticalStackLayout>
                             </Border>
                      </VerticalStackLayout>

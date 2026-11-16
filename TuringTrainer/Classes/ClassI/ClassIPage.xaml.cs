@@ -7,7 +7,7 @@ public partial class ClassIPage : ContentPage
     private readonly IUserService _userService;
     private readonly UserRepository _userRepository;
     public ClassIPage()
-    {        
+    {
         InitializeComponent();
 
         _userRepository = new UserRepository();
@@ -107,7 +107,7 @@ public partial class ClassIPage : ContentPage
     }
 
     private void ShowMembers()
-    { 
+    {
         SportsTab.BackgroundColor = Colors.Transparent;
         SportsTab.TextColor = Color.FromArgb("#999999");
         RoutinesTab.BackgroundColor = Colors.Transparent;

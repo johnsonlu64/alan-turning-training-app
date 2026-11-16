@@ -112,7 +112,7 @@ public partial class ClassIIPage : ContentPage
     }
 
     private void ShowMembers()
-    { 
+    {
         SportsTab.BackgroundColor = Colors.Transparent;
         SportsTab.TextColor = Color.FromArgb("#999999");
         RoutinesTab.BackgroundColor = Colors.Transparent;

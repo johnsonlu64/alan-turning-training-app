@@ -23,7 +23,7 @@ public partial class MetricsPage : ContentPage
         }
     }
 
-     public string MemberName
+    public string MemberName
     {
         get { return _memberName; }
         set
@@ -49,10 +49,14 @@ public partial class MetricsPage : ContentPage
 
             MemberName = $"{member.FirstName} {member.LastName}";
 
-            AthleteAvatar.Source =
-                !string.IsNullOrWhiteSpace(member.AvatarUrl)
-                    ? ImageSource.FromUri(new Uri(member.AvatarUrl))
-                    : ImageSource.FromFile("blank_profile_picture.png");
+            if (!string.IsNullOrWhiteSpace(member.AvatarUrl))
+            {
+                AthleteAvatar.Source = ImageSource.FromUri(new Uri(member.AvatarUrl));
+            }
+            else
+            {
+                AthleteAvatar.Source = "blank_profile_picture.png";
+            }
         }
         catch (Exception ex)
         {
@@ -90,7 +94,7 @@ public partial class MetricsPage : ContentPage
         }
 
         UpdateChart(weights);
-        
+
     }
 
     // This method takes in the weight points for the chart and uses those to make a 
@@ -105,7 +109,7 @@ public partial class MetricsPage : ContentPage
                 Values = weights,
             }
         };
-        
+
         StrengthChart.XAxes = new Axis[]
         {
             new Axis
