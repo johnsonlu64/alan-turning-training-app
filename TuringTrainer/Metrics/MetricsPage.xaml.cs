@@ -36,8 +36,9 @@ public partial class MetricsPage : ContentPage
     private async Task LoadMember()
     {
         if (!Guid.TryParse(MemberId, out Guid userId))
+        {
             return;
-
+        }
         try
         {
             UserRepository repository = new UserRepository();
