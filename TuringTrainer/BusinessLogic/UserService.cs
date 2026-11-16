@@ -64,5 +64,22 @@ public class UserService : IUserService
     return await _userRepository.SignOutUser();
   }
 
+  public async Task<UserAvatarError> UploadAvatar(Guid userId, FileResult photo)
+  {
+      if (userId == Guid.Empty)
+          return UserAvatarError.UserNotFound;
 
+      if (Path.GetExtension(photo.FileName).ToLower() != ".png")
+          return UserAvatarError.InvalidFileType;
+
+      return await _userRepository.UploadAvatar(userId, photo);
+  }
+
+  public async Task<UserAvatarError> UpdateAvatar(Guid userId, string? avatarUrl)
+  {
+      if (userId == Guid.Empty)
+          return UserAvatarError.UserNotFound;
+
+      return await _userRepository.UpdateAvatar(userId, avatarUrl);
+  }
 }

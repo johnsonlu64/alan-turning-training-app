@@ -37,9 +37,7 @@ public partial class ClassIPage : ContentPage
         var member = clickedElement.BindingContext as Models.User;
         if (member == null) return;
 
-        string memberName = $"{member.FirstName} {member.LastName}";
-
-        await Shell.Current.GoToAsync($"{nameof(MetricsPage)}?name={Uri.EscapeDataString(memberName)}");
+        await Shell.Current.GoToAsync($"{nameof(MetricsPage)}?userId={member.UserId}");
     }
 
     private void OnSportsTabClicked(object? sender, EventArgs e)
@@ -55,6 +53,7 @@ public partial class ClassIPage : ContentPage
     private async void OnMembersTabClicked(object? sender, EventArgs e)
     {
         await _userRepository.SelectAllUsers();
+        MembersList.ItemsSource = _userRepository.Users.OrderBy(user => user.LastName).ToList();
         ShowMembers();
     }
 
@@ -74,7 +73,7 @@ public partial class ClassIPage : ContentPage
             }
         }
 
-        MembersList.ItemsSource = matchingMembers;
+        MembersList.ItemsSource = matchingMembers.OrderBy(user => user.LastName).ToList();
     }
 
     private void ShowSports()

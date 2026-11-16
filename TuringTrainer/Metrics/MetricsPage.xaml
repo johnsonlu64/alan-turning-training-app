@@ -51,7 +51,7 @@
                                                   StrokeShape="RoundRectangle 27"
                                                   VerticalOptions="Center">
 
-                                                 <Image Source="blank_profile_picture.png"
+                                                 <Image x:Name="AthleteAvatar"
                                                         WidthRequest="54"
                                                         HeightRequest="54"
                                                         Aspect="AspectFill"/>

@@ -2,13 +2,26 @@ using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
+using TuringTrainer.Models;
+using TuringTrainer.Services.Repositories;
 
 namespace TuringTrainer;
 // dasha
-[QueryProperty(nameof(MemberName), "name")]
+[QueryProperty(nameof(MemberId), "userId")]
 public partial class MetricsPage : ContentPage
 {
     private string _memberName = "";
+    private string _memberId = "";
+
+    public string MemberId
+    {
+        get { return _memberId; }
+        set
+        {
+            _memberId = value;
+            _ = LoadMember();
+        }
+    }
 
      public string MemberName
     {
@@ -17,6 +30,32 @@ public partial class MetricsPage : ContentPage
         {
             _memberName = value;
             OnPropertyChanged();
+        }
+    }
+
+    private async Task LoadMember()
+    {
+        if (!Guid.TryParse(MemberId, out Guid userId))
+            return;
+
+        try
+        {
+            UserRepository repository = new UserRepository();
+            User? member = await repository.SelectUser(userId);
+
+            if (member == null)
+                return;
+
+            MemberName = $"{member.FirstName} {member.LastName}";
+
+            AthleteAvatar.Source =
+                !string.IsNullOrWhiteSpace(member.AvatarUrl)
+                    ? ImageSource.FromUri(new Uri(member.AvatarUrl))
+                    : ImageSource.FromFile("blank_profile_picture.png");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Error", ex.Message, "OK");
         }
     }
     public MetricsPage()

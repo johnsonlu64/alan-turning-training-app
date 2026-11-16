@@ -202,4 +202,59 @@ public class UserRepository : IUserRepository
         }
         return UserDeletionError.NoError;
     }
+
+    public async Task<UserAvatarError> UploadAvatar(Guid userId, FileResult photo)
+    {
+        try
+        {
+            string fileName = $"{userId}/{Guid.NewGuid()}.png";
+
+            using var stream = await photo.OpenReadAsync();
+            using var memoryStream = new MemoryStream();
+
+            await stream.CopyToAsync(memoryStream);
+            await _client.Storage.From("avatars").Upload(memoryStream.ToArray(), fileName);
+
+            string avatarUrl = _client.Storage.From("avatars").GetPublicUrl(fileName);
+
+            UserAvatarError result = await UpdateAvatar(userId, avatarUrl);
+            if (result != UserAvatarError.NoError)
+            {
+                return result;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Avatar upload failed, {0}", ex);
+            return UserAvatarError.UploadFailed;
+        }
+
+        return UserAvatarError.NoError;
+    }
+
+    public async Task<UserAvatarError> UpdateAvatar(Guid userId, string? avatarUrl)
+{
+    try
+    {
+        await _client.From<User>().Where(user => user.UserId == userId).Set(user => user.AvatarUrl, avatarUrl).Update();
+
+        User? updatedUser = await SelectUser(userId);
+        if (updatedUser == null)
+        {
+            return UserAvatarError.UserNotFound;
+        }
+
+        if (updatedUser.AvatarUrl != avatarUrl)
+        {
+            return UserAvatarError.DBEditError;
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Avatar update failed, {0}", ex);
+        return UserAvatarError.DBEditError;
+    }
+
+    return UserAvatarError.NoError;
+}
 }

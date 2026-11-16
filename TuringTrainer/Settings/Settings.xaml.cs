@@ -32,12 +32,23 @@ public partial class Settings : ContentPage
         ThemePicker.SelectedIndex = GetCurrentThemeIndex();
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 
         NameEntry.Text ??= "Coach Name";
         EmailEntry.Text ??= "coach@uwosh.edu";
+
+        User? currentUser = await _userService.CurrentUser();
+
+        if (!string.IsNullOrWhiteSpace(currentUser?.AvatarUrl))
+        {
+            ProfileImage.Source = ImageSource.FromUri(new Uri(currentUser.AvatarUrl));
+        }
+        else
+        {
+            ProfileImage.Source = "blank_profile_picture.png";
+        }
     }
 
     private int GetCurrentThemeIndex()
@@ -61,6 +72,102 @@ public partial class Settings : ContentPage
             2 => AppTheme.Dark,
             _ => AppTheme.Unspecified
         };
+    }
+
+    private async void OnProfilePictureTapped(object sender, TappedEventArgs e)
+    {
+        string action = await DisplayActionSheetAsync(
+            "Change Photo",
+            "Cancel",
+            null,
+            "Upload Photo",
+            "Remove Photo");
+
+        if (action == "Upload Photo")
+        {
+            await ChangeProfilePicture();
+        }
+        else if (action == "Remove Photo")
+        {
+            await RemoveProfilePicture();
+        }
+    }
+
+    private async Task ChangeProfilePicture()
+    {
+        try
+        {
+            var photo = await MediaPicker.Default.PickPhotoAsync();
+            if (photo == null)
+            {
+                return;
+            }
+
+            string? userId = _userService.CurrentUserId();
+
+            User? currentUser = await _userService.CurrentUser();
+            if (currentUser == null)
+            {
+                await DisplayAlertAsync("Error", "User not found.", "OK");
+                return;
+            }
+
+            UserAvatarError result = await _userService.UploadAvatar(currentUser.UserId, photo);
+            if (result == UserAvatarError.NoError)
+            {
+                User? updatedUser = await _userService.CurrentUser();
+
+                if (!string.IsNullOrWhiteSpace(updatedUser?.AvatarUrl))
+                {
+                    ProfileImage.Source = ImageSource.FromUri(new Uri(updatedUser.AvatarUrl));
+                }
+            }
+            else
+            {
+                await DisplayAlertAsync("Upload Failed", result.ToString(), "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Error", ex.Message, "OK");
+        }
+    }
+
+    private async Task RemoveProfilePicture()
+    {
+        bool confirm = await DisplayAlertAsync(
+            "Remove Photo",
+            "Are you sure you want to remove your profile picture?",
+            "Remove",
+            "Cancel");
+
+        if (!confirm) { return; }
+
+        try
+        {
+            User? currentUser = await _userService.CurrentUser();
+
+            if (currentUser == null)
+            {
+                await DisplayAlertAsync("Error", "User not found.", "OK");
+                return;
+            }
+
+            UserAvatarError result = await _userService.UpdateAvatar(currentUser.UserId, null);
+
+            if (result == UserAvatarError.NoError)
+            {
+                ProfileImage.Source = "blank_profile_picture.png";
+            }
+            else
+            {
+                await DisplayAlertAsync("Remove Failed", result.ToString(), "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Error", ex.Message, "OK");
+        }
     }
 
     private async void OnSaveClicked(object sender, EventArgs e)

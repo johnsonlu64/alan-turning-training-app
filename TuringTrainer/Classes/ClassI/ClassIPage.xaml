@@ -167,6 +167,17 @@
                             <HorizontalStackLayout Spacing="5"
                                                    VerticalOptions="Center">
 
+                                 <Border WidthRequest="54"
+                                                  HeightRequest="54"
+                                                  StrokeThickness="0"
+                                                  StrokeShape="RoundRectangle 27"
+                                                  VerticalOptions="Center">
+
+                                                 <Image Source="{Binding AvatarImage}"
+                                                        WidthRequest="54"
+                                                        HeightRequest="54"
+                                                        Aspect="AspectFill"/>
+                                          </Border> 
                                 <Label Text="{Binding FirstName}"
                                        TextColor="White"
                                        FontSize="18"
