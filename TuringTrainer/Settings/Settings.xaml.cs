@@ -1,8 +1,10 @@
 using TuringTrainer.BusinessLogic;
+using TuringTrainer.Models;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
+using TuringTrainer.Services;
 using TuringTrainer.Services.Repositories;
-using TuringTrainer.Models;
+
 
 namespace TuringTrainer.Settings;
 
@@ -12,6 +14,7 @@ namespace TuringTrainer.Settings;
 /// </summary>
 public partial class Settings : ContentPage
 {
+    private User? _currentUser;
     private readonly string[] themes = { "System", "Light", "Dark" };
 
     private readonly IUserService _userService;
@@ -26,12 +29,22 @@ public partial class Settings : ContentPage
         ThemePicker.SelectedIndex = GetCurrentThemeIndex();
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
+        _currentUser = await _userService.CurrentUser();
 
-        NameEntry.Text ??= "Coach Name";
-        EmailEntry.Text ??= "coach@uwosh.edu";
+        if (_currentUser != null)
+        {
+            FirstNameEntry.Text = _currentUser.FirstName;
+            MiddleInitialEntry.Text = _currentUser.MiddleInitial;
+            LastNameEntry.Text = _currentUser.LastName;
+        }
+
+        string? email = _userService.GetUserSession()?.User?.Email;
+
+        EmailEntry.Text = email ?? "";
+        
     }
 
     private int GetCurrentThemeIndex()

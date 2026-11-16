@@ -42,18 +42,52 @@
                                                  FontAttributes="Bold"
                                                  TextColor="#A5A5A5"/>
 
-                                          <Entry x:Name="NameEntry"
-                                                 Placeholder="Name"
+                                          <Label Text="First Name"
+                                                 FontSize="13"
+                                                 TextColor="#999999"/>
+
+                                          <Entry x:Name="FirstNameEntry"
+                                                 Placeholder="First Name"
                                                  PlaceholderColor="silver"
                                                  TextColor="#FF8A8888"
                                                  BackgroundColor="#262626"/>
 
+                                          <Label Text="Middle Initial"
+                                                 FontSize="13"
+                                                 TextColor="#999999"/>       
+
+                                          <Entry x:Name="MiddleInitialEntry"
+                                                 Placeholder="Middle Initial"
+                                                 MaxLength="1"
+                                                 PlaceholderColor="silver"
+                                                 TextColor="#FF8A8888"
+                                                 BackgroundColor="#262626"/>
+
+                                          <Label Text="Last Name"
+                                                 FontSize="13"
+                                                 TextColor="#999999"/>
+
+                                          <Entry x:Name="LastNameEntry"
+                                                 Placeholder="Last Name"
+                                                 PlaceholderColor="silver"
+                                                 TextColor="#FF8A8888"       
+                                               BackgroundColor="#262626"/>
+
+                                          <Label Text="Email"
+                                                 FontSize="13"
+                                                 TextColor="#999999"/>
+
                                           <Entry x:Name="EmailEntry"
                                                  Placeholder="Email"
+                                                 IsReadOnly="True"
                                                  PlaceholderColor="Silver"
                                                  TextColor="#FF8A8888"
                                                  BackgroundColor="#262626"
                                                  Keyboard="Email"/>
+
+                                          <Label Text="Your email is linked to your login account"
+                                                 FontSize="13"
+                                                 TextColor="#999999"/>
                                    </VerticalStackLayout>
                             </Border>
 
