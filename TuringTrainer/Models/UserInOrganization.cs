@@ -10,14 +10,14 @@ public class UserInOrganization : ObservableBaseModel
     Guid _organization_id = Guid.Empty;
     readonly DateTimeOffset _created_at;
 
-    [PrimaryKey("user_id", false), Column("user_id")]
+    [Column("user_id")]
     public Guid UserId
     {
         get { return _user_id; }
         private set { _user_id = value; }
     }
 
-    [PrimaryKey("organization_id", false), Column("organization_id")]
+    [Column("organization_id")]
     public Guid OrganizationId
     {
         get { return _organization_id; }
