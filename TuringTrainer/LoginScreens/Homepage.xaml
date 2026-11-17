@@ -2,6 +2,7 @@
 <ContentPage
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:models="clr-namespace:TuringTrainer.Models"
        x:Class="TuringTrainer.Homepage"
        BackgroundColor="{DynamicResource PageBg}"
        Shell.NavBarIsVisible="False">
@@ -70,6 +71,7 @@
                                           VerticalOptions="Center"/>
 
                                    <Label Grid.Column="1"
+                                          x:Name="ClassCountLabel"
                                           Text="3 classes"
                                           FontSize="12"
                                           TextColor="{DynamicResource TextDim}"
@@ -82,10 +84,8 @@
                                     StrokeThickness="1"
                                     StrokeShape="RoundRectangle 16"
                                     Padding="18">
-
                                    <Border.GestureRecognizers>
-                                          <TapGestureRecognizer
-                                                 Tapped="OnClass1Tapped"/>
+                                          <TapGestureRecognizer Tapped="OnClass1Tapped"/>
                                    </Border.GestureRecognizers>
 
                                    <Grid ColumnDefinitions="Auto,*,Auto"
@@ -132,10 +132,8 @@
                                     StrokeThickness="1"
                                     StrokeShape="RoundRectangle 16"
                                     Padding="18">
-
                                    <Border.GestureRecognizers>
-                                          <TapGestureRecognizer
-                                                 Tapped="OnClass2Tapped"/>
+                                          <TapGestureRecognizer Tapped="OnClass2Tapped"/>
                                    </Border.GestureRecognizers>
 
                                    <Grid ColumnDefinitions="Auto,*,Auto"
@@ -182,10 +180,8 @@
                                     StrokeThickness="1"
                                     StrokeShape="RoundRectangle 16"
                                     Padding="18">
-
                                    <Border.GestureRecognizers>
-                                          <TapGestureRecognizer
-                                                 Tapped="OnClass3Tapped"/>
+                                          <TapGestureRecognizer Tapped="OnClass3Tapped"/>
                                    </Border.GestureRecognizers>
 
                                    <Grid ColumnDefinitions="Auto,*,Auto"
@@ -225,6 +221,35 @@
                                                   VerticalOptions="Center"/>
                                    </Grid>
                             </Border>
+
+                            <!-- Classes saved in Supabase are added after the existing classes. -->
+                            <VerticalStackLayout x:Name="ClassListLayout" Spacing="12">
+                                   <BindableLayout.ItemTemplate>
+                                          <DataTemplate x:DataType="models:Class">
+                                                 <Border BackgroundColor="#1C1C1C"
+                                                         Stroke="#343434"
+                                                         StrokeThickness="1"
+                                                         StrokeShape="RoundRectangle 16"
+                                                         Padding="18">
+                                                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                                                               <Border WidthRequest="48" HeightRequest="48"
+                                                                       BackgroundColor="#332B12" StrokeThickness="0"
+                                                                       StrokeShape="RoundRectangle 12" VerticalOptions="Center">
+                                                                      <Label Text="CL" FontSize="15" FontAttributes="Bold"
+                                                                             TextColor="#F5C542" HorizontalOptions="Center"
+                                                                             VerticalOptions="Center"/>
+                                                               </Border>
+                                                               <VerticalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
+                                                                      <Label Text="{Binding Name}" FontSize="18"
+                                                                             FontAttributes="Bold" TextColor="White"/>
+                                                                      <Label Text="View enrolled students" FontSize="12"
+                                                                             TextColor="#999999"/>
+                                                               </VerticalStackLayout>
+                                                        </Grid>
+                                                 </Border>
+                                          </DataTemplate>
+                                   </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
 
                             <!-- Add actions -->
                             <Grid ColumnDefinitions="*,*"
