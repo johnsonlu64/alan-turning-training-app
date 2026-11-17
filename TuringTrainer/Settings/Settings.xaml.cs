@@ -120,13 +120,16 @@ public partial class Settings : ContentPage
         if (!confirmed)
             return;
 
-        Guid? currentUserId = _userService.CurrentUserId();
+        string? currentUserId = _userService.CurrentUserId();
         UserSignoutError result = await _userService.SignOutUser();
 
         // LoginPage is registered in AppShell.
         if (result == UserSignoutError.NoError)
         {
-            await _organizationService.ClearCurrentOrganization(currentUserId);
+            if (Guid.TryParse(currentUserId, out Guid userId))
+            {
+                await _organizationService.ClearCurrentOrganization(userId);
+            }
 
             await Shell.Current.GoToAsync(nameof(LoginPage));
         }

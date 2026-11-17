@@ -102,7 +102,7 @@ public class OrganizationService : IOrganizationService
 
     public async Task<Guid?> GetCurrentOrganizationId()
     {
-        Guid? userId = _userService.CurrentUserId();
+        Guid? userId = GetCurrentUserId();
         if (userId == null)
         {
             return null;
@@ -157,7 +157,7 @@ public class OrganizationService : IOrganizationService
             return false;
         }
 
-        Guid? userId = _userService.CurrentUserId();
+        Guid? userId = GetCurrentUserId();
         if (userId == null)
         {
             return false;
@@ -175,13 +175,19 @@ public class OrganizationService : IOrganizationService
 
     public Task ClearCurrentOrganization(Guid? userId = null)
     {
-        Guid? targetUserId = userId ?? _userService.CurrentUserId();
+        Guid? targetUserId = userId ?? GetCurrentUserId();
         if (targetUserId != null)
         {
             RemoveCurrentOrganizationId(targetUserId.Value);
         }
 
         return Task.CompletedTask;
+    }
+
+    private Guid? GetCurrentUserId()
+    {
+        string? userId = _userService.CurrentUserId();
+        return Guid.TryParse(userId, out Guid parsedUserId) ? parsedUserId : null;
     }
 
     private async Task<List<Organization>> GetOrganizationsForUser(Guid userId)
