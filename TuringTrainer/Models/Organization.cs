@@ -8,7 +8,7 @@ public class Organization : ObservableBaseModel
 {
     Guid _organization_id = Guid.Empty;
     string _name = "";
-    DateTimeOffset _created_at;
+    readonly DateTimeOffset _created_at;
 
     [PrimaryKey("id"), Column("id")]
     public Guid OrganizationId
@@ -28,7 +28,6 @@ public class Organization : ObservableBaseModel
     public DateTimeOffset CreatedAt
     {
         get { return _created_at; }
-        set { SetProperty(ref _created_at, value); }
     }
 
     public Organization() { }
@@ -37,7 +36,6 @@ public class Organization : ObservableBaseModel
     {
         _organization_id = organizationId;
         _name = name;
-        _created_at = DateTimeOffset.UtcNow;
     }
 
     public override string ToString()
