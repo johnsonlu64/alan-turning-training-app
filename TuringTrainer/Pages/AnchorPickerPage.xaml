@@ -4,13 +4,13 @@
              xmlns:pages="clr-namespace:TuringTrainer.Pages"
              x:Class="TuringTrainer.Pages.AnchorPickerPage"
              Title="Choose Anchor"
-             BackgroundColor="#101010"
+             BackgroundColor="{DynamicResource PageBg}"
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
         <DataTemplate x:Key="AnchorTemplate" x:DataType="pages:AnchorOption">
-            <Border BackgroundColor="#1C1C1C"
-                    Stroke="#343434"
+            <Border BackgroundColor="{DynamicResource CardBg}"
+                    Stroke="{DynamicResource CardBorderBrush}"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 12"
                     Padding="14">
@@ -19,11 +19,11 @@
                         <Label Text="{Binding Name}"
                                FontSize="15"
                                FontAttributes="Bold"
-                               TextColor="#F5C542" />
+                               TextColor="{DynamicResource TextAccent}" />
                         <Label Text="{Binding Detail}"
                                FontSize="11"
                                CharacterSpacing="1"
-                               TextColor="#999999" />
+                               TextColor="{DynamicResource TextMuted}" />
                     </VerticalStackLayout>
                     <Button Grid.Column="1"
                             Text="+"
@@ -43,7 +43,7 @@
         <Label Grid.Row="1"
                Text="Pick the exercise this one scales from."
                FontSize="12"
-               TextColor="#999999" />
+               TextColor="{DynamicResource TextMuted}" />
 
         <CollectionView x:Name="OptionsList"
                         Grid.Row="2"
@@ -57,8 +57,8 @@
                 Text="CANCEL"
                 Clicked="OnCancelClicked"
                 BackgroundColor="Transparent"
-                TextColor="#999999"
-                BorderColor="#343434"
+                TextColor="{DynamicResource TextMuted}"
+                BorderColor="{DynamicResource CardBorder}"
                 BorderWidth="1"
                 FontAttributes="Bold"
                 FontSize="14"

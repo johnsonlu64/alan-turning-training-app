@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TuringTrainer.AddClass"
     Title="Create Class"
-    BackgroundColor="#0A0A0A">
+    BackgroundColor="{DynamicResource PageBg}">
 
     <Grid>
         <VerticalStackLayout
@@ -17,7 +17,7 @@
                 Text="Create Class"
                 FontSize="28"
                 FontAttributes="Bold"
-                TextColor="#FFD600"
+                TextColor="{DynamicResource TextAccent}"
                 HorizontalOptions="Center"
                 Margin="0,0,0,12" />
 
@@ -25,25 +25,25 @@
             <Entry
                 x:Name="ClassNameEntry"
                 Placeholder="Class Name"
-                TextColor="White"
-                PlaceholderColor="#A0A0A0"
-                BackgroundColor="#151515" />
+                TextColor="{DynamicResource TextMain}"
+                PlaceholderColor="{DynamicResource TextSub}"
+                BackgroundColor="{DynamicResource InsetBg}" />
 
             <!-- Class code -->
             <Entry
                 x:Name="ClassCodeEntry"
                 Placeholder="Class Code"
-                TextColor="White"
-                PlaceholderColor="#A0A0A0"
-                BackgroundColor="#151515" />
+                TextColor="{DynamicResource TextMain}"
+                PlaceholderColor="{DynamicResource TextSub}"
+                BackgroundColor="{DynamicResource InsetBg}" />
 
             <!-- Create class button -->
             <Button
                 Text="CREATE CLASS"
                 Clicked="OnAddClassClicked"
                 FontAttributes="Bold"
-                BackgroundColor="#FFD600"
-                TextColor="#0A0A0A"
+                BackgroundColor="{DynamicResource TextAccent}"
+                TextColor="{DynamicResource PageBg}"
                 HeightRequest="58"
                 CornerRadius="12"
                 Margin="0,10,0,0" />

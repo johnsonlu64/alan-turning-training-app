@@ -29,7 +29,7 @@ public static class ThemeService
         ["TextMuted"]  = (Color.FromArgb("#686865"), Color.FromArgb("#999999")),
         ["TextDim"]    = (Color.FromArgb("#7A7A76"), Color.FromArgb("#777777")),
 
-        ["TextAccent"] = (Color.FromArgb("#8A6A00"), Color.FromArgb("#F5C542")),
+        ["TextAccent"] = (Color.FromArgb("#F5C542"), Color.FromArgb("#F5C542")),
     };
     public static ThemeChoice Current { get; private set; } = ThemeChoice.Dark;
 

@@ -4,14 +4,14 @@
              xmlns:pages="clr-namespace:TuringTrainer.Pages"
              x:Class="TuringTrainer.Pages.RoutineBuilderPage"
              Title="Routine"
-             BackgroundColor="#101010"
+             BackgroundColor="{DynamicResource PageBg}"
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
         <DataTemplate x:Key="ExerciseTemplate"
                 x:DataType="pages:BuilderExercise">
-            <Border BackgroundColor="#1C1C1C"
-                    Stroke="#343434"
+            <Border BackgroundColor="{DynamicResource CardBg}"
+                    Stroke="{DynamicResource CardBorderBrush}"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 14"
                     Padding="14">
@@ -20,7 +20,7 @@
 
                     <Border WidthRequest="40"
                             HeightRequest="40"
-                            BackgroundColor="#332B12"
+                            BackgroundColor="{DynamicResource AccentTint}"
                             Stroke="Transparent"
                             StrokeThickness="0"
                             StrokeShape="RoundRectangle 10"
@@ -28,7 +28,7 @@
                         <Label Text="{Binding Index}"
                                FontSize="15"
                                FontAttributes="Bold"
-                               TextColor="#F5C542"
+                               TextColor="{DynamicResource TextAccent}"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"/>
                     </Border>
@@ -39,11 +39,11 @@
                         <Label Text="{Binding Name}"
                                FontSize="15"
                                FontAttributes="Bold"
-                               TextColor="#FFFFFF"/>
+                               TextColor="{DynamicResource TextMain}"/>
                         <Label Text="{Binding Focus}"
                                FontSize="11"
                                CharacterSpacing="1"
-                               TextColor="#A5A5A5"/>
+                               TextColor="{DynamicResource TextSub}"/>
                     </VerticalStackLayout>
                 </Grid>
             </Border>
@@ -51,8 +51,8 @@
 
         <DataTemplate x:Key="SetTemplate"
                 x:DataType="pages:BuilderSet">
-            <Border BackgroundColor="#1C1C1C"
-                    Stroke="#343434"
+            <Border BackgroundColor="{DynamicResource CardBg}"
+                    Stroke="{DynamicResource CardBorderBrush}"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 12"
                     Padding="12">
@@ -63,7 +63,7 @@
                            FontSize="11"
                            CharacterSpacing="1"
                            FontAttributes="Bold"
-                           TextColor="#999999"
+                           TextColor="{DynamicResource TextMuted}"
                            VerticalOptions="Center"/>
 
                     <Button Grid.Column="1"
@@ -76,7 +76,7 @@
                            Text="{Binding PercentText}"
                            FontSize="15"
                            FontAttributes="Bold"
-                           TextColor="#F5C542"
+                           TextColor="{DynamicResource TextAccent}"
                            WidthRequest="56"
                            HorizontalTextAlignment="Center"
                            VerticalOptions="Center"/>
@@ -98,7 +98,7 @@
                            Text="{Binding RepsText}"
                            FontSize="15"
                            FontAttributes="Bold"
-                           TextColor="#F5C542"
+                           TextColor="{DynamicResource TextAccent}"
                            WidthRequest="40"
                            HorizontalTextAlignment="Center"
                            VerticalOptions="Center"/>
@@ -132,7 +132,7 @@
                        FontSize="13"
                        CharacterSpacing="2"
                        FontAttributes="Bold"
-                       TextColor="#A5A5A5"/>
+                       TextColor="{DynamicResource TextSub}"/>
 
                 <CollectionView x:Name="ExerciseList"
                                 Grid.Row="1"
@@ -150,8 +150,8 @@
                         Text="+  ADD EXERCISE"
                         Clicked="OnAddExerciseClicked"
                         BackgroundColor="Transparent"
-                        TextColor="#F5C542"
-                        BorderColor="#343434"
+                        TextColor="{DynamicResource TextAccent}"
+                        BorderColor="{DynamicResource CardBorder}"
                         BorderWidth="1"
                         FontAttributes="Bold"
                         FontSize="14"
@@ -168,15 +168,15 @@
                            Text="Back Squat"
                            FontSize="18"
                            FontAttributes="Bold"
-                           TextColor="#FFFFFF"
+                           TextColor="{DynamicResource TextMain}"
                            VerticalOptions="Center"/>
 
                     <Button Grid.Column="1"
                             Text="REMOVE"
                             Clicked="OnRemoveExerciseClicked"
                             BackgroundColor="Transparent"
-                            TextColor="#999999"
-                            BorderColor="#343434"
+                            TextColor="{DynamicResource TextMuted}"
+                            BorderColor="{DynamicResource CardBorder}"
                             BorderWidth="1"
                             FontAttributes="Bold"
                             FontSize="12"
@@ -187,8 +187,8 @@
 
                 <Border Grid.Row="1"
                         Margin="0,12,0,0"
-                        BackgroundColor="#332B12"
-                        Stroke="#343434"
+                        BackgroundColor="{DynamicResource AccentTint}"
+                        Stroke="{DynamicResource CardBorderBrush}"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 14"
                         Padding="14">
@@ -199,25 +199,25 @@
                             <Label Text="ANCHOR"
                                    FontSize="11"
                                    CharacterSpacing="1"
-                                   TextColor="#A5A5A5"/>
+                                   TextColor="{DynamicResource TextSub}"/>
                             <Label x:Name="AnchorNameLabel"
                                    Text="BACK SQUAT"
                                    FontSize="15"
                                    FontAttributes="Bold"
-                                   TextColor="#F5C542"/>
+                                   TextColor="{DynamicResource TextAccent}"/>
                             <Label x:Name="AnchorDetailLabel"
                                    Text="90% OF 315 LB"
                                    FontSize="11"
                                    CharacterSpacing="1"
-                                   TextColor="#999999"/>
+                                   TextColor="{DynamicResource TextMuted}"/>
                         </VerticalStackLayout>
 
                         <Button Grid.Column="1"
                                 Text="CHANGE"
                                 Clicked="OnChangeAnchorClicked"
                                 BackgroundColor="Transparent"
-                                TextColor="#F5C542"
-                                BorderColor="#343434"
+                                TextColor="{DynamicResource TextAccent}"
+                                BorderColor="{DynamicResource CardBorder}"
                                 BorderWidth="1"
                                 FontAttributes="Bold"
                                 FontSize="12"
@@ -238,7 +238,7 @@
                            FontSize="13"
                            CharacterSpacing="2"
                            FontAttributes="Bold"
-                           TextColor="#A5A5A5"
+                           TextColor="{DynamicResource TextSub}"
                            VerticalOptions="Center"/>
 
                     <Button Grid.Column="1"
@@ -251,7 +251,7 @@
                            Text="70%"
                            FontSize="16"
                            FontAttributes="Bold"
-                           TextColor="#F5C542"
+                           TextColor="{DynamicResource TextAccent}"
                            WidthRequest="60"
                            HorizontalTextAlignment="Center"
                            VerticalOptions="Center"/>
@@ -276,8 +276,8 @@
                     <Button Text="+  ADD SET"
                             Clicked="OnAddSetClicked"
                             BackgroundColor="Transparent"
-                            TextColor="#F5C542"
-                            BorderColor="#343434"
+                            TextColor="{DynamicResource TextAccent}"
+                            BorderColor="{DynamicResource CardBorder}"
                             BorderWidth="1"
                             FontAttributes="Bold"
                             FontSize="14"
@@ -287,8 +287,8 @@
                     <Button Grid.Column="1"
                             Text="SAVE ROUTINE"
                             Clicked="OnSaveClicked"
-                            BackgroundColor="#F5C542"
-                            TextColor="#101010"
+                            BackgroundColor="{DynamicResource TextAccent}"
+                            TextColor="{DynamicResource PageBg}"
                             FontAttributes="Bold"
                             FontSize="14"
                             CornerRadius="12"

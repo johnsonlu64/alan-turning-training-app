@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TuringTrainer.LeaderBoardPage"
-             Background="#101010"
+             Background="{DynamicResource PageBgBrush}"
              Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,Auto,*,Auto"
@@ -13,7 +13,7 @@
                Text="LEADERBOARD👑"
                FontSize="28"
                FontAttributes="Bold"
-               TextColor="#FFD600"
+               TextColor="{DynamicResource TextAccent}"
                HorizontalOptions="Center"
                Margin="0,20,0,0"/>
 
@@ -21,9 +21,9 @@
         <Picker Grid.Row="1"
                 x:Name="ClassPicker"
                 Margin="20,0"
-                TextColor="White"
+                TextColor="{DynamicResource TextMain}"
                 FontSize="22"
-                BackgroundColor="#1C1C1C"
+                BackgroundColor="{DynamicResource CardBg}"
                 SelectedIndexChanged="OnClassChanged"/>
 
         <!-- Scrollable athlete list -->
@@ -35,24 +35,24 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border Stroke="#FFD600"
+                    <Border Stroke="{DynamicResource TextAccentBrush}"
                             StrokeThickness="1"
                             Padding="15"
                             Margin="0,0,0,2"
-                            BackgroundColor="#1C1C1C"
+                            BackgroundColor="{DynamicResource CardBg}"
                             StrokeShape="RoundRectangle 12">
 
                         <Grid ColumnDefinitions="*,Auto"
                               Padding="12">
 
                             <Label Text="{Binding Name}"
-                                   TextColor="White"
+                                   TextColor="{DynamicResource TextMain}"
                                    FontSize="18"
                                    VerticalOptions="Center"/>
 
                             <Label Grid.Column="1"
                                    Text="{Binding Points}"
-                                   TextColor="#FFD600"
+                                   TextColor="{DynamicResource TextAccent}"
                                    FontSize="18"
                                    FontAttributes="Bold"
                                    VerticalOptions="Center"/>
@@ -67,18 +67,18 @@
         <Grid Grid.Row="3"
               ColumnDefinitions="*,*,*,*"
               Padding="0,12,0,16"
-              BackgroundColor="#151515">
+              BackgroundColor="{DynamicResource NavBg}">
 
             <VerticalStackLayout Spacing="4">
                 <Button Text="🏠"
                         FontSize="23"
-                        TextColor="#777777"
+                        TextColor="{DynamicResource TextDim}"
                         Clicked="OnHomeClicked"
                         HorizontalOptions="Center"/>
 
                 <Label Text="Home"
                        FontSize="10"
-                       TextColor="#777777"
+                       TextColor="{DynamicResource TextDim}"
                        HorizontalOptions="Center"/>
             </VerticalStackLayout>
 
@@ -86,12 +86,12 @@
                                  Spacing="4">
                 <Button Text="👑"
                         FontSize="22"
-                        TextColor="#F5C542"
+                        TextColor="{DynamicResource TextAccent}"
                         HorizontalOptions="Center"/>
 
                 <Label Text="Leaderboard"
                        FontSize="10"
-                       TextColor="#F5C542"
+                       TextColor="{DynamicResource TextAccent}"
                        HorizontalOptions="Center"/>
             </VerticalStackLayout>
 
@@ -99,13 +99,13 @@
                                  Spacing="4">
                 <Button Text="📊"
                         FontSize="22"
-                        TextColor="#777777"
+                        TextColor="{DynamicResource TextDim}"
                         Clicked="OnMetricsClicked"
                         HorizontalOptions="Center"/>
 
                 <Label Text="Metrics"
                        FontSize="10"
-                       TextColor="#777777"
+                       TextColor="{DynamicResource TextDim}"
                        HorizontalOptions="Center"/>
             </VerticalStackLayout>
 
@@ -113,13 +113,13 @@
                                  Spacing="4">
                 <Button Text="⚙️"
                         FontSize="22"
-                        TextColor="#777777"
+                        TextColor="{DynamicResource TextDim}"
                         Clicked="OnSettingsClicked"
                         HorizontalOptions="Center"/>
 
                 <Label Text="Settings"
                        FontSize="10"
-                       TextColor="#777777"
+                       TextColor="{DynamicResource TextDim}"
                        HorizontalOptions="Center"/>
             </VerticalStackLayout>
 

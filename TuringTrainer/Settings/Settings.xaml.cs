@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 using TuringTrainer.Services;
 using TuringTrainer.Services.Repositories;
+using LiveChartsCore.Themes;
 
 
 namespace TuringTrainer.Settings;
@@ -26,7 +27,7 @@ public partial class Settings : ContentPage
         InitializeComponent();
 
         ThemePicker.ItemsSource = themes;
-        ThemePicker.SelectedIndex = GetCurrentThemeIndex();
+        ThemePicker.SelectedIndex = (int)ThemeService.Current;
     }
 
     protected override async void OnAppearing()
@@ -45,27 +46,15 @@ public partial class Settings : ContentPage
 
     }
 
-    private int GetCurrentThemeIndex()
-    {
-        return Application.Current?.UserAppTheme switch
-        {
-            AppTheme.Light => 1,
-            AppTheme.Dark => 2,
-            _ => 0
-        };
-    }
-
     private void OnThemeChanged(object sender, EventArgs e)
     {
-        if (Application.Current is null || ThemePicker.SelectedIndex < 0)
-            return;
-
-        Application.Current.UserAppTheme = ThemePicker.SelectedIndex switch
+        if(ThemePicker.SelectedIndex < 0)
         {
-            1 => AppTheme.Light,
-            2 => AppTheme.Dark,
-            _ => AppTheme.Unspecified
-        };
+            return;
+        }
+
+        ThemeChoice choice = (ThemeChoice)ThemePicker.SelectedIndex;
+        ThemeService.Apply(choice);
     }
 
     private async void OnSaveClicked(object sender, EventArgs e)

@@ -3,7 +3,7 @@
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        x:Class="TuringTrainer.Settings.Settings"
-       BackgroundColor="#101010"
+       BackgroundColor="{DynamicResource PageBg}"
        Shell.NavBarIsVisible="False">
 
        <Grid>
@@ -20,15 +20,15 @@
                                    Text="Settings"
                                    FontSize="27"
                                    FontAttributes="Bold"
-                                   TextColor="#F5C542"
+                                   TextColor="{DynamicResource TextAccent}"
                                    VerticalOptions="Center"/>
                      </Grid>
 
                      <ScrollView Grid.Row="1">
                             <VerticalStackLayout Spacing="18">
 
-                                   <Border BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
+                                   <Border BackgroundColor="{DynamicResource CardBg}"
+                                           Stroke="{DynamicResource CardBorderBrush}"
                                            StrokeThickness="1"
                                            StrokeShape="RoundRectangle 16"
                                            Padding="18">
@@ -40,7 +40,7 @@
                                                                FontSize="13"
                                                                CharacterSpacing="2"
                                                                FontAttributes="Bold"
-                                                               TextColor="#A5A5A5"/>
+                                                               TextColor="{DynamicResource TextSub}"/>
 
                                                         <Button Grid.Column="1"
                                                                 Text="✎"
@@ -48,68 +48,68 @@
                                                                 WidthRequest="42"
                                                                 HeightRequest="42"
                                                                 Padding="0"
-                                                                BackgroundColor="#262626"
-                                                                TextColor="#F5C542"
+                                                                BackgroundColor="{DynamicResource InsetBg}"
+                                                                TextColor="{DynamicResource TextAccent}"
                                                                 CornerRadius="10"
                                                                 Clicked="OnEditClicked"/>
                                                  </Grid>
 
                                                  <Label Text="First Name"
                                                         FontSize="13"
-                                                        TextColor="#999999"/>
+                                                        TextColor="{DynamicResource TextMuted}"/>
 
-                                                 <Border BackgroundColor="#262626"
+                                                 <Border BackgroundColor="{DynamicResource InsetBg}"
                                                          StrokeThickness="0"
                                                          Padding="12,8">
 
                                                         <Label x:Name="FirstNameLabel"
-                                                               TextColor="#FF8A8888"/>
+                                                               TextColor="{DynamicResource TextMain}"/>
                                                  </Border>
 
                                                  <Label Text="Middle Initial"
                                                         FontSize="13"
-                                                        TextColor="#999999"/>
+                                                        TextColor="{DynamicResource TextMuted}"/>
 
-                                                 <Border BackgroundColor="#262626"
+                                                 <Border BackgroundColor="{DynamicResource InsetBg}"
                                                          StrokeThickness="0"
                                                          Padding="12,8">
 
                                                         <Label x:Name="MiddleInitialLabel"
-                                                               TextColor="#FF8A8888"/>
+                                                               TextColor="{DynamicResource TextMain}"/>
                                                  </Border>
 
                                                  <Label Text="Last Name"
                                                         FontSize="13"
-                                                        TextColor="#999999"/>
+                                                        TextColor="{DynamicResource TextMuted}"/>
 
-                                                 <Border BackgroundColor="#262626"
+                                                 <Border BackgroundColor="{DynamicResource InsetBg}"
                                                          StrokeThickness="0"
                                                          Padding="12,8">
 
                                                         <Label x:Name="LastNameLabel"
-                                                               TextColor="#FF8A8888"/>
+                                                               TextColor="{DynamicResource TextMain}"/>
                                                  </Border>
 
                                                  <Label Text="Email"
                                                         FontSize="13"
-                                                        TextColor="#999999"/>
+                                                        TextColor="{DynamicResource TextMuted}"/>
 
-                                                 <Border BackgroundColor="#262626"
+                                                 <Border BackgroundColor="{DynamicResource InsetBg}"
                                                          StrokeThickness="0"
                                                          Padding="12,8">
 
                                                         <Label x:Name="EmailLabel"
-                                                               TextColor="#FF8A8888"/>
+                                                               TextColor="{DynamicResource TextMain}"/>
                                                  </Border>
 
                                                  <Label Text="Your email is linked to your login account"
                                                         FontSize="13"
-                                                        TextColor="#999999"/>
+                                                        TextColor="{DynamicResource TextMuted}"/>
                                           </VerticalStackLayout>
                                    </Border>
 
-                                   <Border BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
+                                   <Border BackgroundColor="{DynamicResource CardBg}"
+                                           Stroke="{DynamicResource CardBorderBrush}"
                                            StrokeThickness="1"
                                            StrokeShape="RoundRectangle 16"
                                            Padding="18">
@@ -122,24 +122,24 @@
                                                         <Label Text="Appearance"
                                                                FontSize="18"
                                                                FontAttributes="Bold"
-                                                               TextColor="White"/>
+                                                               TextColor="{DynamicResource TextMain}"/>
                                                         <Label Text="Light / Dark / System"
                                                                FontSize="12"
-                                                               TextColor="#999999"/>
+                                                               TextColor="{DynamicResource TextMuted}"/>
                                                  </VerticalStackLayout>
 
                                                  <Picker Grid.Column="1"
                                                          x:Name="ThemePicker"
                                                          WidthRequest="130"
-                                                         TextColor="White"
-                                                         TitleColor="#999999"
-                                                         BackgroundColor="#262626"
+                                                         TextColor="{DynamicResource TextMain}"
+                                                         TitleColor="{DynamicResource TextMuted}"
+                                                         BackgroundColor="{DynamicResource InsetBg}"
                                                          SelectedIndexChanged="OnThemeChanged"/>
                                           </Grid>
                                    </Border>
 
-                                   <Border BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
+                                   <Border BackgroundColor="{DynamicResource CardBg}"
+                                           Stroke="{DynamicResource CardBorderBrush}"
                                            StrokeThickness="1"
                                            StrokeShape="RoundRectangle 16"
                                            Padding="18">
@@ -154,22 +154,22 @@
                                                         <Label Text="Help"
                                                                FontSize="18"
                                                                FontAttributes="Bold"
-                                                               TextColor="White"/>
+                                                               TextColor="{DynamicResource TextMain}"/>
                                                         <Label Text="FAQs and support"
                                                                FontSize="12"
-                                                               TextColor="#999999"/>
+                                                               TextColor="{DynamicResource TextMuted}"/>
                                                  </VerticalStackLayout>
 
                                                  <Label Grid.Column="1"
                                                         Text="›"
                                                         FontSize="28"
-                                                        TextColor="#F5C542"
+                                                        TextColor="{DynamicResource TextAccent}"
                                                         VerticalOptions="Center"/>
                                           </Grid>
                                    </Border>
 
-                                   <Border BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
+                                   <Border BackgroundColor="{DynamicResource CardBg}"
+                                           Stroke="{DynamicResource CardBorderBrush}"
                                            StrokeThickness="1"
                                            StrokeShape="RoundRectangle 16"
                                            Padding="18">
@@ -184,16 +184,16 @@
                                                         <Label Text="Feedback"
                                                                FontSize="18"
                                                                FontAttributes="Bold"
-                                                               TextColor="White"/>
+                                                               TextColor="{DynamicResource TextMain}"/>
                                                         <Label Text="Share your thoughts"
                                                                FontSize="12"
-                                                               TextColor="#999999"/>
+                                                               TextColor="{DynamicResource TextMuted}"/>
                                                  </VerticalStackLayout>
 
                                                  <Label Grid.Column="1"
                                                         Text="›"
                                                         FontSize="28"
-                                                        TextColor="#F5C542"
+                                                        TextColor="{DynamicResource TextAccent}"
                                                         VerticalOptions="Center"/>
                                           </Grid>
                                    </Border>
@@ -216,17 +216,17 @@
                      <Grid Grid.Row="2"
                            ColumnDefinitions="*,*,*,*"
                            Padding="0,12,0,16"
-                           BackgroundColor="#151515">
+                           BackgroundColor="{DynamicResource NavBg}">
 
                             <VerticalStackLayout Spacing="4">
                                    <Button Text="🏠"
                                            FontSize="23"
-                                           TextColor="#777777"
+                                           TextColor="{DynamicResource TextDim}"
                                            Clicked="OnHomeClicked"
                                            HorizontalOptions="Center"/>
                                    <Label Text="Home"
                                           FontSize="10"
-                                          TextColor="#777777"
+                                          TextColor="{DynamicResource TextDim}"
                                           HorizontalOptions="Center"/>
                             </VerticalStackLayout>
 
@@ -234,12 +234,12 @@
                                                  Spacing="4">
                                    <Button Text="👑"
                                            FontSize="22"
-                                           TextColor="#777777"
+                                           TextColor="{DynamicResource TextDim}"
                                            Clicked="OnLeaderboardClicked"
                                            HorizontalOptions="Center"/>
                                    <Label Text="Leaderboard"
                                           FontSize="10"
-                                          TextColor="#777777"
+                                          TextColor="{DynamicResource TextDim}"
                                           HorizontalOptions="Center"/>
                             </VerticalStackLayout>
 
@@ -247,12 +247,12 @@
                                                  Spacing="4">
                                    <Button Text="📊"
                                            FontSize="22"
-                                           TextColor="#777777"
+                                           TextColor="{DynamicResource TextDim}"
                                            Clicked="OnMetricsClicked"
                                            HorizontalOptions="Center"/>
                                    <Label Text="Metrics"
                                           FontSize="10"
-                                          TextColor="#777777"
+                                          TextColor="{DynamicResource TextDim}"
                                           HorizontalOptions="Center"/>
                             </VerticalStackLayout>
 
@@ -260,11 +260,11 @@
                                                  Spacing="4">
                                    <Button Text="⚙️"
                                            FontSize="22"
-                                           TextColor="#F5C542"
+                                           TextColor="{DynamicResource TextAccent}"
                                            HorizontalOptions="Center"/>
                                    <Label Text="Settings"
                                           FontSize="10"
-                                          TextColor="#F5C542"
+                                          TextColor="{DynamicResource TextAccent}"
                                           HorizontalOptions="Center"/>
                             </VerticalStackLayout>
                      </Grid>
@@ -274,8 +274,8 @@
                     IsVisible="False"
                     BackgroundColor="#CC000000">
 
-                     <Border BackgroundColor="#1C1C1C"
-                             Stroke="#343434"
+                     <Border BackgroundColor="{DynamicResource CardBg}"
+                             Stroke="{DynamicResource CardBorderBrush}"
                              StrokeThickness="1"
                              StrokeShape="RoundRectangle 16"
                              Padding="24"
@@ -291,47 +291,47 @@
                                           <Label Text="Edit Account Information"
                                                  FontSize="22"
                                                  FontAttributes="Bold"
-                                                 TextColor="#F5C542"/>
+                                                 TextColor="{DynamicResource TextAccent}"/>
 
                                           <Label Text="First Name"
-                                                 TextColor="#999999"/>
+                                                 TextColor="{DynamicResource TextMuted}"/>
 
                                           <Entry x:Name="FirstNameEntry"
-                                                 Placeholder="First Name"
-                                                 TextColor="White"
-                                                 BackgroundColor="#262626"/>
+                                                 PlaceholderColor="{DynamicResource TextMuted}" Placeholder="First Name"
+                                                 TextColor="{DynamicResource TextMain}"
+                                                 BackgroundColor="{DynamicResource InsetBg}"/>
 
                                           <Label Text="Middle Initial"
-                                                 TextColor="#999999"/>
+                                                 TextColor="{DynamicResource TextMuted}"/>
 
                                           <Entry x:Name="MiddleInitialEntry"
-                                                 Placeholder="Middle Initial"
+                                                 PlaceholderColor="{DynamicResource TextMuted}" Placeholder="Middle Initial"
                                                  MaxLength="1"
-                                                 TextColor="White"
-                                                 BackgroundColor="#262626"/>
+                                                 TextColor="{DynamicResource TextMain}"
+                                                 BackgroundColor="{DynamicResource InsetBg}"/>
 
                                           <Label Text="Last Name"
-                                                 TextColor="#999999"/>
+                                                 TextColor="{DynamicResource TextMuted}"/>
 
                                           <Entry x:Name="LastNameEntry"
-                                                 Placeholder="Last Name"
-                                                 TextColor="White"
-                                                 BackgroundColor="#262626"/>
+                                                 PlaceholderColor="{DynamicResource TextMuted}" Placeholder="Last Name"
+                                                 TextColor="{DynamicResource TextMain}"
+                                                 BackgroundColor="{DynamicResource InsetBg}"/>
 
                                           <Grid ColumnDefinitions="*,*"
                                                 ColumnSpacing="12">
 
                                                  <Button Text="Cancel"
                                                          Clicked="OnCancelClicked"
-                                                         BackgroundColor="#343434"
-                                                         TextColor="White"/>
+                                                         BackgroundColor="{DynamicResource CardBorder}"
+                                                         TextColor="{DynamicResource TextMain}"/>
 
                                                  <Button Grid.Column="1"
                                                          x:Name="SaveAccountButton"
                                                          Text="Save Changes"
                                                          Clicked="OnSaveClicked"
-                                                         BackgroundColor="#F5C542"
-                                                         TextColor="#151515"/>
+                                                         BackgroundColor="{DynamicResource TextAccent}"
+                                                         TextColor="{DynamicResource NavBg}"/>
 
                                           </Grid>
 
