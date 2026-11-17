@@ -6,8 +6,8 @@
     <!-- The routine row, shared by the routines screen and the class screens. -->
     <DataTemplate x:Key="RoutineTemplate"
             x:DataType="pages:Routine">
-        <Border BackgroundColor="#1C1C1C"
-                Stroke="#343434"
+        <Border BackgroundColor="{DynamicResource CardBg}"
+                Stroke="{DynamicResource CardBorderBrush}"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 16"
                 Padding="18">
@@ -16,7 +16,7 @@
 
                 <Border WidthRequest="48"
                         HeightRequest="48"
-                        BackgroundColor="#332B12"
+                        BackgroundColor="{DynamicResource AccentTint}"
                         Stroke="Transparent"
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 12"
@@ -24,7 +24,7 @@
                     <Label Text="{Binding Index}"
                            FontSize="17"
                            FontAttributes="Bold"
-                           TextColor="#F5C542"
+                           TextColor="{DynamicResource TextAccent}"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
                 </Border>
@@ -35,22 +35,22 @@
                     <Label Text="{Binding Title}"
                            FontSize="18"
                            FontAttributes="Bold"
-                           TextColor="#FFFFFF"/>
+                           TextColor="{DynamicResource TextMain}"/>
                     <Label Text="{Binding Subtitle}"
                            FontSize="12"
-                           TextColor="#999999"/>
+                           TextColor="{DynamicResource TextMuted}"/>
 
                     <Grid ColumnDefinitions="*,Auto"
                             ColumnSpacing="12">
                         <Label Text="{Binding ExerciseCount}"
                                FontSize="11"
                                CharacterSpacing="1"
-                               TextColor="#999999"/>
+                               TextColor="{DynamicResource TextMuted}"/>
                         <Label Grid.Column="1"
                                Text="{Binding Duration}"
                                FontSize="11"
                                CharacterSpacing="1"
-                               TextColor="#999999"/>
+                               TextColor="{DynamicResource TextMuted}"/>
                     </Grid>
                 </VerticalStackLayout>
 
@@ -58,7 +58,7 @@
                        Text="›"
                        FontSize="32"
                        FontAttributes="Bold"
-                       TextColor="#F5C542"
+                       TextColor="{DynamicResource TextAccent}"
                        WidthRequest="48"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"

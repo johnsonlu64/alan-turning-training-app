@@ -4,7 +4,7 @@
              xmlns:pages="clr-namespace:TuringTrainer.Pages"
              x:Class="TuringTrainer.Pages.RoutinesPage"
              Title="My Routines"
-             BackgroundColor="#101010"
+             BackgroundColor="{DynamicResource PageBg}"
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
@@ -37,8 +37,8 @@
                 Text="Join Group"
                 Clicked="OnJoinGroupClicked"
                 BackgroundColor="Transparent"
-                TextColor="#F5C542"
-                BorderColor="#343434"
+                TextColor="{DynamicResource TextAccent}"
+                BorderColor="{DynamicResource CardBorder}"
                 BorderWidth="1"
                 FontAttributes="Bold"
                 FontSize="14"

@@ -13,7 +13,7 @@
                 HeightRequest="44"
                 Padding="0"
                 BackgroundColor="Transparent"
-                TextColor="#F5C542"
+                TextColor="{DynamicResource TextAccent}"
                 Clicked="OnBackClicked"
                 VerticalOptions="Center"
                 AutomationId="backButton"
@@ -24,19 +24,19 @@
             <Label Text="TURINGTRAINER"
                    FontSize="12"
                    CharacterSpacing="3"
-                   TextColor="#F5C542"
+                   TextColor="{DynamicResource TextAccent}"
                    FontAttributes="Bold" />
 
             <Label x:Name="TitleLabel"
                    FontSize="27"
                    FontAttributes="Bold"
-                   TextColor="White" />
+                   TextColor="{DynamicResource TextMain}" />
 
             <Label x:Name="RightLabelText"
                    FontSize="13"
                    CharacterSpacing="2"
                    FontAttributes="Bold"
-                   TextColor="#A5A5A5"
+                   TextColor="{DynamicResource TextSub}"
                    IsVisible="False" />
 
         </VerticalStackLayout>
