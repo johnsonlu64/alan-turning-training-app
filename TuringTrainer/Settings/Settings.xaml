@@ -291,29 +291,29 @@
                                           <Label Text="Edit Account Information"
                                                  FontSize="22"
                                                  FontAttributes="Bold"
-                                                 TextColor="#A5A5A5"/>
+                                                 TextColor="{DynamicResource TextSub}"/>
 
                                           <VerticalStackLayout Spacing="4">
                                                  <Label x:Name="OrganizationNameLabel"
                                                         FontSize="16"
                                                         FontAttributes="Bold"
-                                                        TextColor="White"/>
+                                                        TextColor="{DynamicResource TextMain}"/>
                                                  <Label x:Name="OrganizationIdLabel"
                                                         FontSize="11"
-                                                        TextColor="#999999"/>
+                                                        TextColor="{DynamicResource TextMuted}"/>
                                           </VerticalStackLayout>
 
                                           <Entry x:Name="NameEntry"
                                                  Placeholder="Name"
-                                                 PlaceholderColor="silver"
-                                                 TextColor="#FF8A8888"
-                                                 BackgroundColor="#262626"/>
+                                                 PlaceholderColor="{DynamicResource TextMuted}"
+                                                 TextColor="{DynamicResource TextMain}"
+                                                 BackgroundColor="{DynamicResource InsetBg}"/>
 
                                           <Entry x:Name="EmailEntry"
                                                  Placeholder="Email"
-                                                 PlaceholderColor="Silver"
-                                                 TextColor="#FF8A8888"
-                                                 BackgroundColor="#262626"
+                                                 PlaceholderColor="{DynamicResource TextMuted}"
+                                                 TextColor="{DynamicResource TextMain}"
+                                                 BackgroundColor="{DynamicResource InsetBg}"
                                                  Keyboard="Email"/>
 
                                           <Label Text="First Name"

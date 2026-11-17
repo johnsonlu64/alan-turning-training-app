@@ -49,15 +49,15 @@
                TextColor="{DynamicResource TextMuted}" />
 
         <Border Grid.Row="1"
-                BackgroundColor="#1C1C1C"
-                Stroke="#343434"
+                BackgroundColor="{DynamicResource CardBg}"
+                Stroke="{DynamicResource CardBorderBrush}"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 12"
                 Padding="14,0">
             <Entry x:Name="SearchEntry"
                    Placeholder="Search exercises"
-                   PlaceholderColor="#999999"
-                   TextColor="#FFFFFF"
+                   PlaceholderColor="{DynamicResource TextMuted}"
+                   TextColor="{DynamicResource TextMain}"
                    BackgroundColor="Transparent"
                    TextChanged="OnSearchTextChanged" />
         </Border>
@@ -74,8 +74,8 @@
             <Button Text="CANCEL"
                     Clicked="OnCancelClicked"
                     BackgroundColor="Transparent"
-                    TextColor="#999999"
-                    BorderColor="#343434"
+                    TextColor="{DynamicResource TextMuted}"
+                    BorderColor="{DynamicResource CardBorder}"
                     BorderWidth="1"
                     FontAttributes="Bold"
                     FontSize="14"

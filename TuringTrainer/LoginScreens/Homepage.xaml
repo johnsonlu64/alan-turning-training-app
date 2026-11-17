@@ -226,24 +226,24 @@
                             <VerticalStackLayout x:Name="ClassListLayout" Spacing="12">
                                    <BindableLayout.ItemTemplate>
                                           <DataTemplate x:DataType="models:Class">
-                                                 <Border BackgroundColor="#1C1C1C"
-                                                         Stroke="#343434"
+                                                 <Border BackgroundColor="{DynamicResource CardBg}"
+                                                         Stroke="{DynamicResource CardBorderBrush}"
                                                          StrokeThickness="1"
                                                          StrokeShape="RoundRectangle 16"
                                                          Padding="18">
                                                         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
                                                                <Border WidthRequest="48" HeightRequest="48"
-                                                                       BackgroundColor="#332B12" StrokeThickness="0"
+                                                                       BackgroundColor="{DynamicResource AccentTint}" StrokeThickness="0"
                                                                        StrokeShape="RoundRectangle 12" VerticalOptions="Center">
                                                                       <Label Text="CL" FontSize="15" FontAttributes="Bold"
-                                                                             TextColor="#F5C542" HorizontalOptions="Center"
+                                                                             TextColor="{DynamicResource TextAccent}" HorizontalOptions="Center"
                                                                              VerticalOptions="Center"/>
                                                                </Border>
                                                                <VerticalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
                                                                       <Label Text="{Binding Name}" FontSize="18"
-                                                                             FontAttributes="Bold" TextColor="White"/>
+                                                                             FontAttributes="Bold" TextColor="{DynamicResource TextMain}"/>
                                                                       <Label Text="View enrolled students" FontSize="12"
-                                                                             TextColor="#999999"/>
+                                                                             TextColor="{DynamicResource TextMuted}"/>
                                                                </VerticalStackLayout>
                                                         </Grid>
                                                  </Border>
