@@ -10,4 +10,8 @@ public interface IOrganizationService
     Task SelectMembersByOrganization(Guid organizationId);
     Task<OrganizationAdditionError> InsertOrganization(string organizationName);
     Task<OrganizationAdditionError> InsertUsersIntoOrganization(Guid organizationId, IList<Guid> userIds);
+    Task<Guid?> GetCurrentOrganizationId();
+    Task<Organization?> GetCurrentOrganization();
+    Task<bool> SetCurrentOrganizationId(Guid organizationId);
+    Task ClearCurrentOrganization(Guid? userId = null);
 }

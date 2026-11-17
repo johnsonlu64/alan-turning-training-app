@@ -1,6 +1,5 @@
 using TuringTrainer.BusinessLogic;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Storage;
 using TuringTrainer.Services.Repositories;
 using TuringTrainer.Models;
 
@@ -18,7 +17,7 @@ public partial class Settings : ContentPage
     private readonly string[] themes = { "System", "Light", "Dark" };
 
     private readonly IUserService _userService;
-    private readonly ICurrentOrganizationService _currentOrganizationService = new CurrentOrganizationService();
+    private readonly IOrganizationService _organizationService = new OrganizationService();
 
     /// <summary>
     /// Constructor
@@ -47,7 +46,7 @@ public partial class Settings : ContentPage
     {
         try
         {
-            Organization? organization = await _currentOrganizationService.GetCurrentOrganization();
+            Organization? organization = await _organizationService.GetCurrentOrganization();
             if (organization != null)
             {
                 OrganizationNameLabel.Text = organization.Name;
@@ -121,16 +120,13 @@ public partial class Settings : ContentPage
         if (!confirmed)
             return;
 
-        string? currentUserId = _userService.CurrentUserId();
+        Guid? currentUserId = _userService.CurrentUserId();
         UserSignoutError result = await _userService.SignOutUser();
 
         // LoginPage is registered in AppShell.
         if (result == UserSignoutError.NoError)
         {
-            if (Guid.TryParse(currentUserId, out Guid userId))
-            {
-                Preferences.Remove("current_organization_id:" + userId.ToString("N"));
-            }
+            await _organizationService.ClearCurrentOrganization(currentUserId);
 
             await Shell.Current.GoToAsync(nameof(LoginPage));
         }
