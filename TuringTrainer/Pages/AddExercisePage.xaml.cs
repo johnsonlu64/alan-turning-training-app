@@ -79,6 +79,14 @@ public partial class AddExercisePage : ContentPage
         exercise.IsSelected = !exercise.IsSelected;
     }
 
+    private void OnAddClicked(object? sender, EventArgs e)
+    {
+        if (sender is Button { CommandParameter: SelectableExercise exercise })
+        {
+            exercise.IsSelected = !exercise.IsSelected;
+        }
+    }
+
     private void UpdateAddButton()
     {
         int count = _allExercises.Count(exercise => exercise.IsSelected);

@@ -1,3 +1,4 @@
+using TuringTrainer.Services;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using Microsoft.Maui.Controls;
@@ -34,8 +35,10 @@ public partial class Settings : ContentPage
         base.OnAppearing();
         _currentUser = await _userService.CurrentUser();
 
-        NameEntry.Text ??= "Coach Name";
-        EmailEntry.Text ??= "coach@uwosh.edu";
+        ShowAccountInformation();
+
+        string? email = _userService.GetUserSession()?.User?.Email;
+        EmailLabel.Text = email ?? "";
 
         await LoadOrganizationName();
     }
@@ -61,19 +64,6 @@ public partial class Settings : ContentPage
             OrganizationNameLabel.Text = "No organization";
             OrganizationIdLabel.Text = string.Empty;
         }
-    }
-
-    private int GetCurrentThemeIndex()
-    {
-        return Application.Current?.UserAppTheme switch
-        {
-            ShowAccountInformation();
-        }
-
-        string? email = _userService.GetUserSession()?.User?.Email;
-
-        EmailLabel.Text = email ?? "";
-
     }
 
     private void OnThemeChanged(object sender, EventArgs e)
