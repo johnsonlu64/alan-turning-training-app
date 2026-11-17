@@ -291,7 +291,53 @@
                                           <Label Text="Edit Account Information"
                                                  FontSize="22"
                                                  FontAttributes="Bold"
-                                                 TextColor="{DynamicResource TextAccent}"/>
+                                                 TextColor="#A5A5A5"/>
+
+                                          <VerticalStackLayout Spacing="4">
+                                                 <Label x:Name="OrganizationNameLabel"
+                                                        FontSize="16"
+                                                        FontAttributes="Bold"
+                                                        TextColor="White"/>
+                                                 <Label x:Name="OrganizationIdLabel"
+                                                        FontSize="11"
+                                                        TextColor="#999999"/>
+                                          </VerticalStackLayout>
+
+                                          <Entry x:Name="NameEntry"
+                                                 Placeholder="Name"
+                                                 PlaceholderColor="silver"
+                                                 TextColor="#FF8A8888"
+                                                 BackgroundColor="#262626"/>
+
+                                          <Entry x:Name="EmailEntry"
+                                                 Placeholder="Email"
+                                                 PlaceholderColor="Silver"
+                                                 TextColor="#FF8A8888"
+                                                 BackgroundColor="#262626"
+                                                 Keyboard="Email"/>
+                                   </VerticalStackLayout>
+                            </Border>
+
+                            <!-- Theme -->
+                            <Border BackgroundColor="#1C1C1C"
+                                    Stroke="#343434"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 16"
+                                    Padding="18">
+
+                                   <Grid ColumnDefinitions="*,Auto"
+                                         ColumnSpacing="14">
+
+                                          <VerticalStackLayout Spacing="4"
+                                                               VerticalOptions="Center">
+                                                 <Label Text="Appearance"
+                                                        FontSize="18"
+                                                        FontAttributes="Bold"
+                                                        TextColor="White"/>
+                                                 <Label Text="Light / Dark / System"
+                                                        FontSize="12"
+                                                        TextColor="#999999"/>
+                                          </VerticalStackLayout>
 
                                           <Label Text="First Name"
                                                  TextColor="{DynamicResource TextMuted}"/>

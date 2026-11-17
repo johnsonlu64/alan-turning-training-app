@@ -55,7 +55,15 @@ public class UserService : IUserService
       return UserSignInError.InvalidEmailOrPassword;
     }
 
-    return await _userRepository.SignInUser(email, password);
+    UserSignInError result = await _userRepository.SignInUser(email, password);
+    if (result == UserSignInError.NoError)
+    {
+      IOrganizationService organizationService = new OrganizationService(this, new OrganizationRepository());
+      await organizationService.ClearCurrentOrganization();
+      await organizationService.GetCurrentOrganizationId();
+    }
+
+    return result;
   }
 
   public async Task<UserSignoutError> SignOutUser()

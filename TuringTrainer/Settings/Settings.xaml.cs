@@ -1,8 +1,6 @@
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Storage;
-using TuringTrainer.Services;
 using TuringTrainer.Services.Repositories;
 using LiveChartsCore.Themes;
 
@@ -19,6 +17,7 @@ public partial class Settings : ContentPage
     private readonly string[] themes = { "System", "Light", "Dark" };
 
     private readonly IUserService _userService;
+    private readonly IOrganizationService _organizationService = new OrganizationService();
 
     public Settings()
     {
@@ -35,7 +34,38 @@ public partial class Settings : ContentPage
         base.OnAppearing();
         _currentUser = await _userService.CurrentUser();
 
-        if (_currentUser != null)
+        NameEntry.Text ??= "Coach Name";
+        EmailEntry.Text ??= "coach@uwosh.edu";
+
+        await LoadOrganizationName();
+    }
+
+    private async Task LoadOrganizationName()
+    {
+        try
+        {
+            Organization? organization = await _organizationService.GetCurrentOrganization();
+            if (organization != null)
+            {
+                OrganizationNameLabel.Text = organization.Name;
+                OrganizationIdLabel.Text = organization.OrganizationId.ToString();
+            }
+            else
+            {
+                OrganizationNameLabel.Text = "No organization";
+                OrganizationIdLabel.Text = string.Empty;
+            }
+        }
+        catch
+        {
+            OrganizationNameLabel.Text = "No organization";
+            OrganizationIdLabel.Text = string.Empty;
+        }
+    }
+
+    private int GetCurrentThemeIndex()
+    {
+        return Application.Current?.UserAppTheme switch
         {
             ShowAccountInformation();
         }
@@ -130,10 +160,16 @@ public partial class Settings : ContentPage
         if (!confirmed)
             return;
 
+        string? currentUserId = _userService.CurrentUserId();
         UserSignoutError result = await _userService.SignOutUser();
 
         if (result == UserSignoutError.NoError)
         {
+            if (Guid.TryParse(currentUserId, out Guid userId))
+            {
+                await _organizationService.ClearCurrentOrganization(userId);
+            }
+
             await Shell.Current.GoToAsync(nameof(LoginPage));
         }
         else
