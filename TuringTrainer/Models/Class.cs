@@ -6,11 +6,15 @@ using Supabase.Postgrest.Attributes;
 public class Class : ObservableBaseModel
 {
     private readonly Guid _classId = Guid.Empty;
+    private readonly Guid _organizationId = Guid.Empty;
     private readonly Guid _coachId = Guid.Empty;
     private string _name = string.Empty;
 
     [PrimaryKey("class_id"), Column("class_id")]
     public Guid ClassId => _classId;
+
+    [Column("organization_id")]
+    public Guid OrganizationId => _organizationId;
 
     [Column("coach_id")]
     public Guid CoachId => _coachId;
