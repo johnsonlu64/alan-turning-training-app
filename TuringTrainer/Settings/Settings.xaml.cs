@@ -18,6 +18,7 @@ public partial class Settings : ContentPage
     private readonly string[] themes = { "System", "Light", "Dark" };
 
     private readonly IUserService _userService;
+    private readonly ICurrentOrganizationService _currentOrganizationService = new CurrentOrganizationService();
 
     /// <summary>
     /// Constructor
@@ -32,12 +33,37 @@ public partial class Settings : ContentPage
         ThemePicker.SelectedIndex = GetCurrentThemeIndex();
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 
         NameEntry.Text ??= "Coach Name";
         EmailEntry.Text ??= "coach@uwosh.edu";
+
+        await LoadOrganizationName();
+    }
+
+    private async Task LoadOrganizationName()
+    {
+        try
+        {
+            Organization? organization = await _currentOrganizationService.GetCurrentOrganization();
+            if (organization != null)
+            {
+                OrganizationNameLabel.Text = organization.Name;
+                OrganizationIdLabel.Text = organization.OrganizationId.ToString();
+            }
+            else
+            {
+                OrganizationNameLabel.Text = "No organization";
+                OrganizationIdLabel.Text = string.Empty;
+            }
+        }
+        catch
+        {
+            OrganizationNameLabel.Text = "No organization";
+            OrganizationIdLabel.Text = string.Empty;
+        }
     }
 
     private int GetCurrentThemeIndex()
@@ -95,11 +121,17 @@ public partial class Settings : ContentPage
         if (!confirmed)
             return;
 
+        string? currentUserId = _userService.CurrentUserId();
         UserSignoutError result = await _userService.SignOutUser();
 
         // LoginPage is registered in AppShell.
         if (result == UserSignoutError.NoError)
         {
+            if (Guid.TryParse(currentUserId, out Guid userId))
+            {
+                Preferences.Remove("current_organization_id:" + userId.ToString("N"));
+            }
+
             await Shell.Current.GoToAsync(nameof(LoginPage));
         }
         else

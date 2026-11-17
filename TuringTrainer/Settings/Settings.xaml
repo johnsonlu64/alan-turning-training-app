@@ -51,6 +51,16 @@
                                                  FontAttributes="Bold"
                                                  TextColor="#A5A5A5"/>
 
+                                          <VerticalStackLayout Spacing="4">
+                                                 <Label x:Name="OrganizationNameLabel"
+                                                        FontSize="16"
+                                                        FontAttributes="Bold"
+                                                        TextColor="White"/>
+                                                 <Label x:Name="OrganizationIdLabel"
+                                                        FontSize="11"
+                                                        TextColor="#999999"/>
+                                          </VerticalStackLayout>
+
                                           <Entry x:Name="NameEntry"
                                                  Placeholder="Name"
                                                  PlaceholderColor="silver"
