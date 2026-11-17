@@ -8,13 +8,13 @@ public class Organization : ObservableBaseModel
 {
     Guid _organization_id = Guid.Empty;
     string _name = "";
-    readonly DateTimeOffset _created_at;
+    DateTimeOffset _created_at;
 
     [PrimaryKey("organization_id"), Column("organization_id")]
     public Guid OrganizationId
     {
         get { return _organization_id; }
-        private set { _organization_id = value; }
+        set { _organization_id = value; }
     }
 
     [Column("name")]
@@ -28,6 +28,7 @@ public class Organization : ObservableBaseModel
     public DateTimeOffset CreatedAt
     {
         get { return _created_at; }
+        set { _created_at = value; }
     }
 
     public Organization() { }

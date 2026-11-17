@@ -8,26 +8,27 @@ public class UserInOrganization : ObservableBaseModel
 {
     Guid _user_id = Guid.Empty;
     Guid _organization_id = Guid.Empty;
-    readonly DateTimeOffset _created_at;
+    DateTimeOffset _created_at;
 
     [Column("user_id")]
     public Guid UserId
     {
         get { return _user_id; }
-        private set { _user_id = value; }
+        set { _user_id = value; }
     }
 
     [Column("organization_id")]
     public Guid OrganizationId
     {
         get { return _organization_id; }
-        private set { _organization_id = value; }
+        set { _organization_id = value; }
     }
 
     [Column("created_at")]
     public DateTimeOffset CreatedAt
     {
         get { return _created_at; }
+        set { _created_at = value; }
     }
 
     public UserInOrganization() { }
