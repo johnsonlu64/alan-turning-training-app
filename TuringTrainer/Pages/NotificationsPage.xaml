@@ -4,13 +4,13 @@
              xmlns:pages="clr-namespace:TuringTrainer.Pages"
              x:Class="TuringTrainer.Pages.NotificationsPage"
              Title="Notifications"
-             BackgroundColor="#101010"
+             BackgroundColor="{DynamicResource PageBg}"
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
         <DataTemplate x:Key="NotificationTemplate" x:DataType="pages:NotificationItem">
-            <Border BackgroundColor="#1C1C1C"
-                    Stroke="#343434"
+            <Border BackgroundColor="{DynamicResource CardBg}"
+                    Stroke="{DynamicResource CardBorderBrush}"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 16"
                     Padding="18">
@@ -39,12 +39,12 @@
                         <Label Text="{Binding Headline}"
                                FontSize="16"
                                FontAttributes="Bold"
-                               TextColor="#FFFFFF"
+                               TextColor="{DynamicResource TextMain}"
                                LineBreakMode="TailTruncation"
                                MaxLines="2" />
                         <Label Text="{Binding Detail}"
                                FontSize="12"
-                               TextColor="#999999"
+                               TextColor="{DynamicResource TextMuted}"
                                LineBreakMode="TailTruncation"
                                MaxLines="2" />
 
@@ -52,13 +52,13 @@
                             <Label Text="{Binding Time}"
                                    FontSize="11"
                                    CharacterSpacing="1"
-                                   TextColor="#999999"
+                                   TextColor="{DynamicResource TextMuted}"
                                    VerticalOptions="Center" />
                             <Label Text="{Binding TypeWord}"
                                    FontSize="11"
                                    CharacterSpacing="1"
                                    FontAttributes="Bold"
-                                   TextColor="#999999"
+                                   TextColor="{DynamicResource TextMuted}"
                                    VerticalOptions="Center" />
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
@@ -67,7 +67,7 @@
                            Text="›"
                            FontSize="26"
                            FontAttributes="Bold"
-                           TextColor="#F5C542"
+                           TextColor="{DynamicResource TextAccent}"
                            WidthRequest="48"
                            VerticalOptions="Center"
                            HorizontalOptions="Center"
@@ -88,7 +88,7 @@
                    FontSize="13"
                    CharacterSpacing="2"
                    FontAttributes="Bold"
-                   TextColor="#A5A5A5" />
+                   TextColor="{DynamicResource TextSub}" />
 
             <Label x:Name="UnreadCountLabel"
                    Grid.Column="1"
@@ -96,7 +96,7 @@
                    FontSize="12"
                    CharacterSpacing="2"
                    FontAttributes="Bold"
-                   TextColor="#F5C542"
+                   TextColor="{DynamicResource TextAccent}"
                    VerticalOptions="Center" />
         </Grid>
 
@@ -112,8 +112,8 @@
                 Text="Mark all read"
                 Clicked="OnMarkAllReadClicked"
                 BackgroundColor="Transparent"
-                TextColor="#F5C542"
-                BorderColor="#343434"
+                TextColor="{DynamicResource TextAccent}"
+                BorderColor="{DynamicResource CardBorder}"
                 BorderWidth="1"
                 FontAttributes="Bold"
                 FontSize="14"

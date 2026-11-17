@@ -6,7 +6,7 @@ public class UserService : IUserService
 
   private readonly IUserRepository _userRepository;
 
-  public UserService (IUserRepository userRepository)
+  public UserService(IUserRepository userRepository)
   {
     _userRepository = userRepository;
   }
@@ -40,12 +40,12 @@ public class UserService : IUserService
     {
       return UserAdditionError.InvalidId;
     }
-    
+
     if (password.Length < 6)
     {
       return UserAdditionError.PasswordTooShort;
     }
-    
+
     return await _userRepository.SignUpUser(email, password, username);
   }
   public async Task<UserSignInError> SignInUser(string email, string password)
@@ -66,11 +66,14 @@ public class UserService : IUserService
     return result;
   }
 
-
   public async Task<UserSignoutError> SignOutUser()
   {
     return await _userRepository.SignOutUser();
   }
 
+  public async Task<UserEditError> UpdateUser(User user, string firstName, string middleInitial, string lastName, bool isCoach)
+  {
+    return await _userRepository.UpdateUser(user, firstName, middleInitial, lastName, isCoach);
+  }
 
 }

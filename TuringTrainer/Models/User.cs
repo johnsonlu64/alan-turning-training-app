@@ -6,7 +6,7 @@ using Supabase.Postgrest.Attributes;
 [Table("user")]
 public class User : ObservableBaseModel
 {
-    readonly Guid _user_id = Guid.Empty;
+    Guid _user_id = Guid.Empty;
     string _first_name = "";
     string _middle_initial = "";
     string _last_name = "";
@@ -17,6 +17,7 @@ public class User : ObservableBaseModel
     public Guid UserId
     {
         get { return _user_id; }
+        set { SetProperty(ref _user_id, value); }
     }
 
     [Column("first_name")]

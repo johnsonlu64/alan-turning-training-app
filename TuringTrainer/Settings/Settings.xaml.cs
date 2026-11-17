@@ -1,7 +1,9 @@
 using TuringTrainer.BusinessLogic;
+using TuringTrainer.Models;
 using Microsoft.Maui.Controls;
 using TuringTrainer.Services.Repositories;
-using TuringTrainer.Models;
+using LiveChartsCore.Themes;
+
 
 namespace TuringTrainer.Settings;
 
@@ -11,17 +13,12 @@ namespace TuringTrainer.Settings;
 /// </summary>
 public partial class Settings : ContentPage
 {
-    /// <summary>
-    /// Themes
-    /// </summary>
+    private User? _currentUser;
     private readonly string[] themes = { "System", "Light", "Dark" };
 
     private readonly IUserService _userService;
     private readonly IOrganizationService _organizationService = new OrganizationService();
 
-    /// <summary>
-    /// Constructor
-    /// </summary>	
     public Settings()
     {
         _userService = new UserService(new UserRepository());
@@ -29,12 +26,13 @@ public partial class Settings : ContentPage
         InitializeComponent();
 
         ThemePicker.ItemsSource = themes;
-        ThemePicker.SelectedIndex = GetCurrentThemeIndex();
+        ThemePicker.SelectedIndex = (int)ThemeService.Current;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        _currentUser = await _userService.CurrentUser();
 
         NameEntry.Text ??= "Coach Name";
         EmailEntry.Text ??= "coach@uwosh.edu";
@@ -69,28 +67,70 @@ public partial class Settings : ContentPage
     {
         return Application.Current?.UserAppTheme switch
         {
-            AppTheme.Light => 1,
-            AppTheme.Dark => 2,
-            _ => 0 // System
-        };
+            ShowAccountInformation();
+        }
+
+        string? email = _userService.GetUserSession()?.User?.Email;
+
+        EmailLabel.Text = email ?? "";
+
     }
 
     private void OnThemeChanged(object sender, EventArgs e)
     {
-        if (Application.Current is null || ThemePicker.SelectedIndex < 0)
-            return;
-
-        Application.Current.UserAppTheme = ThemePicker.SelectedIndex switch
+        if(ThemePicker.SelectedIndex < 0)
         {
-            1 => AppTheme.Light,
-            2 => AppTheme.Dark,
-            _ => AppTheme.Unspecified
-        };
+            return;
+        }
+
+        ThemeChoice choice = (ThemeChoice)ThemePicker.SelectedIndex;
+        ThemeService.Apply(choice);
     }
 
     private async void OnSaveClicked(object sender, EventArgs e)
     {
-        await DisplayAlertAsync("Saved", "Your settings have been saved.", "OK");
+        if (_currentUser == null)
+        {
+            await DisplayAlertAsync("Error", "Could not find your account information.", "OK");
+            return;
+        }
+
+        string firstName = FirstNameEntry.Text?.Trim() ?? "";
+        string middleInitial = MiddleInitialEntry.Text?.Trim() ?? "";
+        string lastName = LastNameEntry.Text?.Trim() ?? "";
+
+        if (string.IsNullOrWhiteSpace(firstName))
+        {
+            await DisplayAlertAsync("Missing Information", "Please enter your first name.", "OK");
+            return;
+        }
+
+        UserEditError result = await _userService.UpdateUser(
+            _currentUser,
+            firstName,
+            middleInitial,
+            lastName,
+            _currentUser.IsCoach);
+
+        if (result == UserEditError.NoError)
+        {
+            _currentUser.FirstName = firstName;
+            _currentUser.MiddleInitial = middleInitial;
+            _currentUser.LastName = lastName;
+
+            ShowAccountInformation();
+
+            EditAccountPopup.IsVisible = false;
+
+            await DisplayAlertAsync("Success", "Your account information has been updated.", "OK");
+        }
+        else
+        {
+            await DisplayAlertAsync(
+        "Update Failed",
+        $"Update result: {result}",
+        "OK");
+        }
     }
 
     private async void OnHelpTapped(object sender, TappedEventArgs e)
@@ -123,7 +163,6 @@ public partial class Settings : ContentPage
         string? currentUserId = _userService.CurrentUserId();
         UserSignoutError result = await _userService.SignOutUser();
 
-        // LoginPage is registered in AppShell.
         if (result == UserSignoutError.NoError)
         {
             if (Guid.TryParse(currentUserId, out Guid userId))
@@ -139,11 +178,6 @@ public partial class Settings : ContentPage
         }
     }
 
-    private async void OnBackClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("..");
-    }
-
     private async void OnHomeClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(Homepage));
@@ -157,5 +191,33 @@ public partial class Settings : ContentPage
     private async void OnMetricsClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("MetricsPage");
+    }
+
+    private void ShowAccountInformation()
+    {
+        if (_currentUser == null)
+            return;
+
+        FirstNameLabel.Text = _currentUser.FirstName;
+        MiddleInitialLabel.Text = _currentUser.MiddleInitial;
+        LastNameLabel.Text = _currentUser.LastName;
+    }
+
+    private void OnEditClicked(object sender, EventArgs e)
+    {
+        if (_currentUser == null)
+            return;
+
+        FirstNameEntry.Text = _currentUser.FirstName;
+        MiddleInitialEntry.Text = _currentUser.MiddleInitial;
+        LastNameEntry.Text = _currentUser.LastName;
+
+        EditAccountPopup.IsVisible = true;
+    }
+
+    private void OnCancelClicked(object sender, EventArgs e)
+    {
+        EditAccountPopup.IsVisible = false;
+
     }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using TuringTrainer.Services;
 
 namespace TuringTrainer;
 
@@ -8,8 +8,7 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		// The app is designed dark, so the Shell navigation bar follows the dark palette.
-		UserAppTheme = AppTheme.Dark;
+		ThemeService.Initialize(this);
 	}
 
 	protected override Window CreateWindow(IActivationState? activationState)

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              x:Class="TuringTrainer.MetricsPage"
-             BackgroundColor="#101010"
+             BackgroundColor="{DynamicResource PageBg}"
              Title="Metrics Page"
              Shell.NavBarIsVisible="False">
 
@@ -22,13 +22,13 @@
                             <Label Text="TURINGTRAINER"
                                    FontSize="12"
                                    CharacterSpacing="3"
-                                   TextColor="#F5C542"
+                                   TextColor="{DynamicResource TextAccent}"
                                    FontAttributes="Bold"/>
 
                             <Label Text="Athlete Metrics"
                                    FontSize="27"
                                    FontAttributes="Bold"
-                                   TextColor="White"/>
+                                   TextColor="{DynamicResource TextMain}"/>
                      </VerticalStackLayout>
               </Grid>
 
@@ -36,8 +36,8 @@
                      <VerticalStackLayout Spacing="18"
                                           Padding="0,0,0,24">
 
-                            <Border BackgroundColor="#1C1C1C"
-                                    Stroke="#343434"
+                            <Border BackgroundColor="{DynamicResource CardBg}"
+                                    Stroke="{DynamicResource CardBorderBrush}"
                                     StrokeThickness="1"
                                     StrokeShape="RoundRectangle 16"
                                     Padding="18">
@@ -65,12 +65,12 @@
                                                         Text="{Binding MemberName}"
                                                         FontSize="20"
                                                         FontAttributes="Bold"
-                                                        TextColor="White"/>
+                                                        TextColor="{DynamicResource TextMain}"/>
 
                                                  <Label x:Name="AthleteClassLabel"
                                                         Text="Class 1 • Varsity Football"
                                                         FontSize="12"
-                                                        TextColor="#A5A5A5"/>
+                                                        TextColor="{DynamicResource TextSub}"/>
                                           </VerticalStackLayout>
                                    </Grid>
                             </Border>
@@ -79,7 +79,7 @@
                                    FontSize="13"
                                    CharacterSpacing="2"
                                    FontAttributes="Bold"
-                                   TextColor="#A5A5A5"/>
+                                   TextColor="{DynamicResource TextSub}"/>
 
                             <Grid ColumnDefinitions="*,*"
                                   RowDefinitions="Auto,Auto"
@@ -88,8 +88,8 @@
 
                                    <Border Grid.Row="0"
                                            Grid.Column="0"
-                                           BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
+                                           BackgroundColor="{DynamicResource CardBg}"
+                                           Stroke="{DynamicResource CardBorderBrush}"
                                            StrokeThickness="1"
                                            StrokeShape="RoundRectangle 16"
                                            Padding="15">
@@ -99,25 +99,25 @@
                                                  <Label Text="TOTAL PRs"
                                                         FontSize="11"
                                                         CharacterSpacing="1"
-                                                        TextColor="#A5A5A5"
+                                                        TextColor="{DynamicResource TextSub}"
                                                         FontAttributes="Bold"/>
 
                                                  <Label x:Name="TotalPRsLabel"
                                                         Text="8"
                                                         FontSize="27"
-                                                        TextColor="#F5C542"
+                                                        TextColor="{DynamicResource TextAccent}"
                                                         FontAttributes="Bold"/>
 
                                                  <Label Text="Personal records"
                                                         FontSize="11"
-                                                        TextColor="#999999"/>
+                                                        TextColor="{DynamicResource TextMuted}"/>
                                           </VerticalStackLayout>
                                    </Border>
 
                                    <Border Grid.Row="0"
                                            Grid.Column="1"
-                                           BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
+                                           BackgroundColor="{DynamicResource CardBg}"
+                                           Stroke="{DynamicResource CardBorderBrush}"
                                            StrokeThickness="1"
                                            StrokeShape="RoundRectangle 16"
                                            Padding="15">
@@ -127,25 +127,25 @@
                                                  <Label Text="WORKOUTS"
                                                         FontSize="11"
                                                         CharacterSpacing="1"
-                                                        TextColor="#A5A5A5"
+                                                        TextColor="{DynamicResource TextSub}"
                                                         FontAttributes="Bold"/>
 
                                                  <Label x:Name="WorkoutsLabel"
                                                         Text="24"
                                                         FontSize="27"
-                                                        TextColor="#F5C542"
+                                                        TextColor="{DynamicResource TextAccent}"
                                                         FontAttributes="Bold"/>
 
                                                  <Label Text="Completed"
                                                         FontSize="11"
-                                                        TextColor="#999999"/>
+                                                        TextColor="{DynamicResource TextMuted}"/>
                                           </VerticalStackLayout>
                                    </Border>
 
                                    <Border Grid.Row="1"
                                            Grid.Column="0"
-                                           BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
+                                           BackgroundColor="{DynamicResource CardBg}"
+                                           Stroke="{DynamicResource CardBorderBrush}"
                                            StrokeThickness="1"
                                            StrokeShape="RoundRectangle 16"
                                            Padding="15">
@@ -155,26 +155,26 @@
                                                  <Label Text="LATEST PR"
                                                         FontSize="11"
                                                         CharacterSpacing="1"
-                                                        TextColor="#A5A5A5"
+                                                        TextColor="{DynamicResource TextSub}"
                                                         FontAttributes="Bold"/>
 
                                                  <Label x:Name="LatestPRLabel"
                                                         Text="315 lbs"
                                                         FontSize="25"
-                                                        TextColor="#F5C542"
+                                                        TextColor="{DynamicResource TextAccent}"
                                                         FontAttributes="Bold"/>
 
                                                  <Label x:Name="LatestPRExerciseLabel"
                                                         Text="Deadlift"
                                                         FontSize="11"
-                                                        TextColor="#999999"/>
+                                                        TextColor="{DynamicResource TextMuted}"/>
                                           </VerticalStackLayout>
                                    </Border>
 
                                    <Border Grid.Row="1"
                                            Grid.Column="1"
-                                           BackgroundColor="#1C1C1C"
-                                           Stroke="#343434"
+                                           BackgroundColor="{DynamicResource CardBg}"
+                                           Stroke="{DynamicResource CardBorderBrush}"
                                            StrokeThickness="1"
                                            StrokeShape="RoundRectangle 16"
                                            Padding="15">
@@ -184,19 +184,19 @@
                                                  <Label Text="IMPROVEMENT"
                                                         FontSize="11"
                                                         CharacterSpacing="1"
-                                                        TextColor="#A5A5A5"
+                                                        TextColor="{DynamicResource TextSub}"
                                                         FontAttributes="Bold"/>
 
                                                  <Label x:Name="ImprovementLabel"
                                                         Text="+12%"
                                                         FontSize="27"
-                                                        TextColor="#F5C542"
+                                                        TextColor="{DynamicResource TextAccent}"
                                                         FontAttributes="Bold"/>
 
                                                  <Label x:Name="ImprovementExerciseLabel"
                                                         Text="Bench Press"
                                                         FontSize="11"
-                                                        TextColor="#999999"/>
+                                                        TextColor="{DynamicResource TextMuted}"/>
                                           </VerticalStackLayout>
                                    </Border>
                             </Grid>
@@ -205,10 +205,10 @@
                                    FontSize="13"
                                    CharacterSpacing="2"
                                    FontAttributes="Bold"
-                                   TextColor="#A5A5A5"/>
+                                   TextColor="{DynamicResource TextSub}"/>
 
-                            <Border BackgroundColor="#1C1C1C"
-                                    Stroke="#343434"
+                            <Border BackgroundColor="{DynamicResource CardBg}"
+                                    Stroke="{DynamicResource CardBorderBrush}"
                                     StrokeThickness="1"
                                     StrokeShape="RoundRectangle 16"
                                     Padding="18">
@@ -218,44 +218,44 @@
                                           <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                                  <Label Text="Bench Press"
                                                         FontSize="16"
-                                                        TextColor="White"/>
+                                                        TextColor="{DynamicResource TextMain}"/>
 
                                                  <Label x:Name="BenchPressLabel"
                                                         Grid.Column="1"
                                                         Text="185 lbs"
                                                         FontSize="17"
                                                         FontAttributes="Bold"
-                                                        TextColor="#F5C542"/>
+                                                        TextColor="{DynamicResource TextAccent}"/>
                                           </Grid>
 
-                                          <BoxView HeightRequest="1" Color="#343434" HorizontalOptions="Fill"/>
+                                          <BoxView HeightRequest="1" Color="{DynamicResource CardBorder}" HorizontalOptions="Fill"/>
 
                                           <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                                  <Label Text="Squat"
                                                         FontSize="16"
-                                                        TextColor="White"/>
+                                                        TextColor="{DynamicResource TextMain}"/>
 
                                                  <Label x:Name="SquatLabel"
                                                         Grid.Column="1"
                                                         Text="275 lbs"
                                                         FontSize="17"
                                                         FontAttributes="Bold"
-                                                        TextColor="#F5C542"/>
+                                                        TextColor="{DynamicResource TextAccent}"/>
                                           </Grid>
 
-                                          <BoxView HeightRequest="1" Color="#343434"/>
+                                          <BoxView HeightRequest="1" Color="{DynamicResource CardBorder}"/>
 
                                           <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                                  <Label Text="Deadlift"
                                                         FontSize="16"
-                                                        TextColor="White"/>
+                                                        TextColor="{DynamicResource TextMain}"/>
 
                                                  <Label x:Name="DeadliftLabel"
                                                         Grid.Column="1"
                                                         Text="315 lbs"
                                                         FontSize="17"
                                                         FontAttributes="Bold"
-                                                        TextColor="#F5C542"/>
+                                                        TextColor="{DynamicResource TextAccent}"/>
                                           </Grid>
                                    </VerticalStackLayout>
                             </Border>
@@ -264,10 +264,10 @@
                                    FontSize="13"
                                    CharacterSpacing="2"
                                    FontAttributes="Bold"
-                                   TextColor="#A5A5A5"/>
+                                   TextColor="{DynamicResource TextSub}"/>
 
-                            <Border BackgroundColor="#1C1C1C"
-                                    Stroke="#343434"
+                            <Border BackgroundColor="{DynamicResource CardBg}"
+                                    Stroke="{DynamicResource CardBorderBrush}"
                                     StrokeThickness="1"
                                     StrokeShape="RoundRectangle 16"
                                     Padding="18">
@@ -278,14 +278,14 @@
                                                  <Label Text="1-Rep Max Progress"
                                                         FontSize="16"
                                                         FontAttributes="Bold"
-                                                        TextColor="White"
+                                                        TextColor="{DynamicResource TextMain}"
                                                         VerticalOptions="Center"/>
 
                                                  <Picker x:Name="ExercisePicker"
                                                          Grid.Column="1"
                                                          Title="Exercise"
-                                                         TextColor="#F5C542"
-                                                         TitleColor="#A5A5A5"
+                                                         TextColor="{DynamicResource TextAccent}"
+                                                         TitleColor="{DynamicResource TextSub}"
                                                          SelectedIndexChanged="ExercisePicker_SelectedIndexChanged">
                                                         <Picker.ItemsSource>
                                                                <x:Array Type="{x:Type x:String}">
@@ -300,7 +300,7 @@
                                           <lvc:CartesianChart
                                                  x:Name="StrengthChart"
                                                  HeightRequest="260"
-                                                 BackgroundColor="#1C1C1C"/>
+                                                 BackgroundColor="{DynamicResource CardBg}"/>
                      
                                    </VerticalStackLayout>
                             </Border>

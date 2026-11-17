@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TuringTrainer.ClassesPage"
-             Background="#101010"
+             Background="{DynamicResource PageBgBrush}"
              Title="Classes"
              Shell.NavBarIsVisible="False">
 
@@ -18,13 +18,13 @@
                 <Label Text="TURINGTRAINER"
                        FontSize="12"
                        CharacterSpacing="3"
-                       TextColor="#F5C542"
+                       TextColor="{DynamicResource TextAccent}"
                        FontAttributes="Bold"/>
 
                 <Label Text="Classes"
                        FontSize="27"
                        FontAttributes="Bold"
-                       TextColor="White"/>
+                       TextColor="{DynamicResource TextMain}"/>
             </VerticalStackLayout>
 
         </Grid>
@@ -39,19 +39,19 @@
                            FontSize="13"
                            CharacterSpacing="2"
                            FontAttributes="Bold"
-                           TextColor="#A5A5A5"
+                           TextColor="{DynamicResource TextSub}"
                            VerticalOptions="Center"/>
 
                     <Label Grid.Column="1"
                            Text="3 classes"
                            FontSize="12"
-                           TextColor="#777777"
+                           TextColor="{DynamicResource TextDim}"
                            VerticalOptions="Center"/>
                 </Grid>
 
                 <!-- Class 1 -->
-                <Border BackgroundColor="#1C1C1C"
-                        Stroke="#343434"
+                <Border BackgroundColor="{DynamicResource CardBg}"
+                        Stroke="{DynamicResource CardBorderBrush}"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 16"
                         Padding="18">
@@ -66,14 +66,14 @@
 
                         <Border WidthRequest="48"
                                 HeightRequest="48"
-                                BackgroundColor="#332B12"
+                                BackgroundColor="{DynamicResource AccentTint}"
                                 StrokeThickness="0"
                                 StrokeShape="RoundRectangle 12"
                                 VerticalOptions="Center">
                             <Label Text="01"
                                    FontSize="17"
                                    FontAttributes="Bold"
-                                   TextColor="#F5C542"
+                                   TextColor="{DynamicResource TextAccent}"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
@@ -84,24 +84,24 @@
                             <Label Text="Class 1"
                                    FontSize="18"
                                    FontAttributes="Bold"
-                                   TextColor="White"/>
+                                   TextColor="{DynamicResource TextMain}"/>
                             <Label Text="View enrolled students"
                                    FontSize="12"
-                                   TextColor="#999999"/>
+                                   TextColor="{DynamicResource TextMuted}"/>
                         </VerticalStackLayout>
 
                         <Button Grid.Column="2"
                                 Text="›"
                                 FontSize="32"
-                                BackgroundColor="#F5C542"
-                                TextColor="Black"
+                                BackgroundColor="{DynamicResource TextAccent}"
+                                TextColor="{DynamicResource PageBg}"
                                 VerticalOptions="Center"/>
                     </Grid>
                 </Border>
 
                 <!-- Class 2 -->
-                <Border BackgroundColor="#1C1C1C"
-                        Stroke="#343434"
+                <Border BackgroundColor="{DynamicResource CardBg}"
+                        Stroke="{DynamicResource CardBorderBrush}"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 16"
                         Padding="18">
@@ -116,14 +116,14 @@
 
                         <Border WidthRequest="48"
                                 HeightRequest="48"
-                                BackgroundColor="#332B12"
+                                BackgroundColor="{DynamicResource AccentTint}"
                                 StrokeThickness="0"
                                 StrokeShape="RoundRectangle 12"
                                 VerticalOptions="Center">
                             <Label Text="02"
                                    FontSize="17"
                                    FontAttributes="Bold"
-                                   TextColor="#F5C542"
+                                   TextColor="{DynamicResource TextAccent}"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
@@ -134,24 +134,24 @@
                             <Label Text="Class 2"
                                    FontSize="18"
                                    FontAttributes="Bold"
-                                   TextColor="White"/>
+                                   TextColor="{DynamicResource TextMain}"/>
                             <Label Text="View enrolled students"
                                    FontSize="12"
-                                   TextColor="#999999"/>
+                                   TextColor="{DynamicResource TextMuted}"/>
                         </VerticalStackLayout>
 
                         <Button Grid.Column="2"
                                 Text="›"
                                 FontSize="32"
-                                BackgroundColor="#F5C542"
-                                TextColor="Black"
+                                BackgroundColor="{DynamicResource TextAccent}"
+                                TextColor="{DynamicResource PageBg}"
                                 VerticalOptions="Center"/>
                     </Grid>
                 </Border>
 
                 <!-- Class 3 -->
-                <Border BackgroundColor="#1C1C1C"
-                        Stroke="#343434"
+                <Border BackgroundColor="{DynamicResource CardBg}"
+                        Stroke="{DynamicResource CardBorderBrush}"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 16"
                         Padding="18">
@@ -166,14 +166,14 @@
 
                         <Border WidthRequest="48"
                                 HeightRequest="48"
-                                BackgroundColor="#332B12"
+                                BackgroundColor="{DynamicResource AccentTint}"
                                 StrokeThickness="0"
                                 StrokeShape="RoundRectangle 12"
                                 VerticalOptions="Center">
                             <Label Text="03"
                                    FontSize="17"
                                    FontAttributes="Bold"
-                                   TextColor="#F5C542"
+                                   TextColor="{DynamicResource TextAccent}"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
@@ -184,17 +184,17 @@
                             <Label Text="Class 3"
                                    FontSize="18"
                                    FontAttributes="Bold"
-                                   TextColor="White"/>
+                                   TextColor="{DynamicResource TextMain}"/>
                             <Label Text="View enrolled students"
                                    FontSize="12"
-                                   TextColor="#999999"/>
+                                   TextColor="{DynamicResource TextMuted}"/>
                         </VerticalStackLayout>
 
                         <Button Grid.Column="2"
                                 Text="›"
                                 FontSize="32"
-                                BackgroundColor="#F5C542"
-                                TextColor="Black"
+                                BackgroundColor="{DynamicResource TextAccent}"
+                                TextColor="{DynamicResource PageBg}"
                                 VerticalOptions="Center"/>
                     </Grid>
                 </Border>
@@ -206,17 +206,17 @@
               <Grid Grid.Row="2"
                     ColumnDefinitions="*,*,*,*"
                     Padding="0,12,0,16"
-                    BackgroundColor="#151515">
+                    BackgroundColor="{DynamicResource NavBg}">
 
                      <VerticalStackLayout Spacing="4">
                             <Button Text="🏠"
                                     FontSize="23"
-                                    TextColor="Black"
+                                    TextColor="{DynamicResource PageBg}"
                                     Clicked="OnHomeClicked"
                                     HorizontalOptions="Center"/>
                             <Label Text="Home"
                                    FontSize="10"
-                                   TextColor="#F5C542"
+                                   TextColor="{DynamicResource TextAccent}"
                                    HorizontalOptions="Center"/>
                      </VerticalStackLayout>
 
@@ -224,12 +224,12 @@
                                           Spacing="4">
                             <Button Text="👑"
                                     FontSize="22"
-                                    TextColor="Black"
+                                    TextColor="{DynamicResource PageBg}"
                                     Clicked="OnLeaderboardClicked"
                                     HorizontalOptions="Center"/>
                             <Label Text="Leaderboard"
                                    FontSize="10"
-                                   TextColor="#777777"
+                                   TextColor="{DynamicResource TextDim}"
                                    HorizontalOptions="Center"/>
                      </VerticalStackLayout>
 
@@ -237,12 +237,12 @@
                                           Spacing="4">
                             <Button Text="📊"
                                     FontSize="22"
-                                    TextColor="Black"
+                                    TextColor="{DynamicResource PageBg}"
                                     Clicked="OnMetricsClicked"
                                     HorizontalOptions="Center"/>
                             <Label Text="Metrics"
                                    FontSize="10"
-                                   TextColor="#777777"
+                                   TextColor="{DynamicResource TextDim}"
                                    HorizontalOptions="Center"/>
                      </VerticalStackLayout>
 
@@ -250,12 +250,12 @@
                                           Spacing="4">
                             <Button Text="⚙️"
                                     FontSize="22"
-                                    TextColor="Black"
+                                    TextColor="{DynamicResource PageBg}"
                                     Clicked="OnSettingsClicked"
                                     HorizontalOptions="Center"/>
                             <Label Text="Settings"
                                    FontSize="10"
-                                   TextColor="#777777"
+                                   TextColor="{DynamicResource TextDim}"
                                    HorizontalOptions="Center"/>
                      </VerticalStackLayout>
               </Grid>

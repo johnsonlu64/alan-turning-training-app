@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TuringTrainer.WelcomePage"
-    BackgroundColor="#0A0A0A">
+    BackgroundColor="{DynamicResource PageBg}">
 
     <Grid RowDefinitions="*,Auto">
 
@@ -16,7 +16,7 @@
 
             
             <BoxView
-                Color="#FFD600"
+                Color="{DynamicResource TextAccent}"
                 HeightRequest="5"
                 WidthRequest="55"
                 HorizontalOptions="Center"
@@ -28,7 +28,7 @@
                 Text="TURING"
                 FontSize="42"
                 FontAttributes="Bold"
-                TextColor="White"
+                TextColor="{DynamicResource TextMain}"
                 HorizontalOptions="Center"
                 CharacterSpacing="3" />
 
@@ -36,7 +36,7 @@
                 Text="TRAINER"
                 FontSize="42"
                 FontAttributes="Bold"
-                TextColor="#FFD600"
+                TextColor="{DynamicResource TextAccent}"
                 HorizontalOptions="Center"
                 CharacterSpacing="3" />
 
@@ -45,15 +45,15 @@
                 Text="TRAIN HARD. TRACK EVERYTHING."
                 FontSize="12"
                 FontAttributes="Bold"
-                TextColor="#A0A0A0"
+                TextColor="{DynamicResource TextSub}"
                 HorizontalOptions="Center"
                 CharacterSpacing="2"
                 Margin="0,12,0,35" />
 
             
             <Border
-                BackgroundColor="#151515"
-                Stroke="#292929"
+                BackgroundColor="{DynamicResource NavBg}"
+                Stroke="{DynamicResource CardBorderBrush}"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 25"
                 Padding="20"
@@ -72,8 +72,8 @@
                 Text="LOG IN"
                 FontSize="16"
                 FontAttributes="Bold"
-                BackgroundColor="#FFD600"
-                TextColor="#0A0A0A"
+                BackgroundColor="{DynamicResource TextAccent}"
+                TextColor="{DynamicResource PageBg}"
                 CornerRadius="14"
                 HeightRequest="58"
                 Clicked="LoginButton_Clicked"
@@ -87,8 +87,8 @@
                 FontSize="16"
                 FontAttributes="Bold"
                 BackgroundColor="Transparent"
-                TextColor="#FFD600"
-                BorderColor="#FFD600"
+                TextColor="{DynamicResource TextAccent}"
+                BorderColor="{DynamicResource TextAccent}"
                 BorderWidth="2"
                 CornerRadius="14"
                 HeightRequest="58"
@@ -105,7 +105,7 @@
             Text="Number one app in the world"
             FontSize="10"
             FontAttributes="Bold"
-            TextColor="#555555"
+            TextColor="{DynamicResource TextDim}"
             HorizontalOptions="Center"
             Margin="0,0,0,20"
             CharacterSpacing="2" />
