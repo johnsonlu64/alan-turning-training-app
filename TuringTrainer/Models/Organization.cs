@@ -10,7 +10,7 @@ public class Organization : ObservableBaseModel
     string _name = "";
     readonly DateTimeOffset _created_at;
 
-    [PrimaryKey("id"), Column("id")]
+    [PrimaryKey("organization_id"), Column("organization_id")]
     public Guid OrganizationId
     {
         get { return _organization_id; }
