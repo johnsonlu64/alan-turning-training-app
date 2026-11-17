@@ -13,11 +13,9 @@ public partial class LoginPage : ContentPage
 {
 	//int count = 0;
 	private readonly IUserService _userService;
-	private readonly IOrganizationService _organizationService;
 	public LoginPage()
 	{
 		_userService = new UserService(new UserRepository());
-		_organizationService = new OrganizationService();
 
 		InitializeComponent();
 
@@ -34,7 +32,6 @@ public partial class LoginPage : ContentPage
 
 			if (result == UserSignInError.NoError)
 			{
-				await _organizationService.ClearCurrentOrganization();
 				EmailEntry.Text = "";
 				PasswordEntry.Text = "";
 				await Shell.Current.GoToAsync(nameof(Homepage));
