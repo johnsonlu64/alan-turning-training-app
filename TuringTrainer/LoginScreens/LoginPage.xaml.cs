@@ -11,18 +11,20 @@ namespace TuringTrainer;
 
 public partial class LoginPage : ContentPage
 {
-    //int count = 0;
+	//int count = 0;
 	private readonly IUserService _userService;
-    public LoginPage()
-    {
+	private readonly IOrganizationService _organizationService;
+	public LoginPage()
+	{
 		_userService = new UserService(new UserRepository());
+		_organizationService = new OrganizationService();
 
-        InitializeComponent();
-        
-    }
+		InitializeComponent();
 
-    private async void LoginButton_Clicked(object? sender, EventArgs e)
-    {
+	}
+
+	private async void LoginButton_Clicked(object? sender, EventArgs e)
+	{
 		try
 		{
 			string email = EmailEntry.Text?.Trim() ?? "";
@@ -32,6 +34,7 @@ public partial class LoginPage : ContentPage
 
 			if (result == UserSignInError.NoError)
 			{
+				await _organizationService.ClearCurrentOrganization();
 				EmailEntry.Text = "";
 				PasswordEntry.Text = "";
 				await Shell.Current.GoToAsync(nameof(Homepage));
@@ -49,4 +52,4 @@ public partial class LoginPage : ContentPage
 
 }
 
- 
+
