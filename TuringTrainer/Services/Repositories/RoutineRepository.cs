@@ -20,7 +20,7 @@ public class RoutineRepository : IRoutineRepository
                 return;
             }
 
-            var response = await _client.From<Routine>().Where(routine => routine.ClassId == classId).Get();
+            var response = await _client.From<Routine>().Where(routine => routine.ClassId.Equals(classId)).Get();
 
             foreach (var routine in response.Models)
             {
