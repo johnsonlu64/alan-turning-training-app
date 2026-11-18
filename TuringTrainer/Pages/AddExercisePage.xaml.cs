@@ -85,6 +85,10 @@ public partial class AddExercisePage : ContentPage
             return;
 
         exercise.IsSelected = true;
+        if (sender is Button button && button.CommandParameter is SelectableExercise exercise)
+        {
+            exercise.IsSelected = !exercise.IsSelected;
+        }
     }
 
     private void UpdateAddButton()

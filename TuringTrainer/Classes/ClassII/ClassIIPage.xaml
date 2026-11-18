@@ -17,13 +17,15 @@
     <Grid RowDefinitions="Auto,Auto,*"
           Padding="20,12,20,0"
           RowSpacing="20">
-        <Grid ColumnDefinitions="Auto,*"
+
+        <Grid Grid.Row="0"
+              ColumnDefinitions="Auto,*"
               ColumnSpacing="12"
               Padding="0,12,0,0">
 
 
             <VerticalStackLayout Grid.Column="1"
-                    Spacing="10">
+                                 Spacing="10">
                 <Label Text="TURINGTRAINER"
                        FontSize="12"
                        CharacterSpacing="3"
@@ -77,7 +79,7 @@
                     HeightRequest="46"
                     Padding="24,0"/>
         </HorizontalStackLayout>
-        
+
         <CollectionView Grid.Row="2"
                         x:Name="SportsList"
                         SelectionMode="None">
@@ -123,62 +125,78 @@
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-        <CollectionView Grid.Row="2"
-                x:Name="MembersList"
-                IsVisible="False"
-                SelectionMode="None">
 
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"
-                                   ItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border BackgroundColor="{DynamicResource CardBg}"
-                            Stroke="{DynamicResource CardBorderBrush}"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 16"
-                            Padding="18"
-                            Margin="0">
+        <Grid Grid.Row="2"
+              RowDefinitions="Auto,*"
+              RowSpacing="10">
+
+            <SearchBar Grid.Row="0"
+                       x:Name="MemberSearchBar"
+                       Placeholder="Search members..."
+                       TextChanged="OnMemberSearchTextChanged"
+                       IsVisible="False"
+                       BackgroundColor="#332B12"
+                       TextColor="White"
+                       PlaceholderColor="#999999"/>
+
+            <CollectionView Grid.Row="1"
+                            x:Name="MembersList"
+                            IsVisible="False"
+                            SelectionMode="None">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="#1C1C1C"
+                                Stroke="#343434"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 16"
+                                Padding="18"
+                                Margin="0">
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnMemberClicked"/>
+                            </Border.GestureRecognizers>
+
+                            <Grid ColumnDefinitions="*,Auto"
+                                  ColumnSpacing="14">
+
+                                <HorizontalStackLayout Spacing="5"
+                                                       VerticalOptions="Center">
+
+                                    <Border WidthRequest="54"
+                                            HeightRequest="54"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 27"
+                                            VerticalOptions="Center">
+
+                                        <Image Source="{Binding AvatarImage}"
+                                               WidthRequest="54"
+                                               HeightRequest="54"
+                                               Aspect="AspectFill"/>
+                                    </Border>
+                                    <Label Text="{Binding FirstName}"
+                                           TextColor="White"
+                                           FontSize="18"
+                                           VerticalOptions="Center"/>
+
+                                    <Label Text="{Binding LastName}"
+                                           TextColor="White"
+                                           FontSize="18"
+                                           VerticalOptions="Center"/>
+
+                                </HorizontalStackLayout>
 
 
-                        <Grid ColumnDefinitions="*,Auto"
-                              ColumnSpacing="14">
-
-                            <HorizontalStackLayout Spacing="5"
-                                                   VerticalOptions="Center">
-
-                                <Label Text="{Binding FirstName}"
-                                       TextColor="{DynamicResource TextMain}"
-                                       FontSize="18"
-                                       VerticalOptions="Center"/>
-
-                                <Label Text="{Binding LastName}"
-                                       TextColor="{DynamicResource TextMain}"
-                                       FontSize="18"
-                                       VerticalOptions="Center"/>
-
-                            </HorizontalStackLayout>
-
-                            <Button Grid.Column="1"
-                                    Text="›"
-                                    FontSize="32"
-                                    FontAttributes="Bold"
-                                    TextColor="{DynamicResource PageBg}"
-                                    BackgroundColor="{DynamicResource TextAccent}"
-                                    CornerRadius="12"
-                                    WidthRequest="55"
-                                    HeightRequest="55"
-                                    Padding="0"
-                                    Clicked="OnMemberClicked"
-                                    CommandParameter="{Binding .}"/>
-
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
         <CollectionView Grid.Row="2"
                         x:Name="RoutinesList"
                         IsVisible="False"
