@@ -136,7 +136,7 @@
                        TextChanged="OnMemberSearchTextChanged"
                        IsVisible="False"
                        BackgroundColor="#332B12"
-                       TextColor="White"
+                       TextColor="{DynamicResource TextMain}"
                        PlaceholderColor="#999999"/>
 
             <CollectionView Grid.Row="1"
@@ -150,8 +150,8 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border BackgroundColor="#1C1C1C"
-                                Stroke="#343434"
+                        <Border BackgroundColor="{DynamicResource CardBg}"
+                                Stroke="{DynamicResource CardBorderBrush}"
                                 StrokeThickness="1"
                                 StrokeShape="RoundRectangle 16"
                                 Padding="18"
@@ -179,12 +179,12 @@
                                                Aspect="AspectFill"/>
                                     </Border>
                                     <Label Text="{Binding FirstName}"
-                                           TextColor="White"
+                                           TextColor="{DynamicResource TextMain}"
                                            FontSize="18"
                                            VerticalOptions="Center"/>
 
                                     <Label Text="{Binding LastName}"
-                                           TextColor="White"
+                                           TextColor="{DynamicResource TextMain}"
                                            FontSize="18"
                                            VerticalOptions="Center"/>
 
