@@ -146,11 +146,9 @@ public partial class RoutineBuilderPage : ContentPage, IQueryAttributable
         AddExercisePage page = new AddExercisePage();
         page.Picked += AddExercise;
 
-        NavigationPage modal = new NavigationPage(page)
-        {
-            BarBackgroundColor = Color.FromArgb("#101010"),
-            BarTextColor = Colors.White,
-        };
+        NavigationPage modal = new NavigationPage(page);
+        modal.SetDynamicResource(NavigationPage.BarBackgroundColorProperty, "PageBg");
+        modal.SetDynamicResource(NavigationPage.BarTextColorProperty, "TextMain");
 
         await Navigation.PushModalAsync(modal);
     }

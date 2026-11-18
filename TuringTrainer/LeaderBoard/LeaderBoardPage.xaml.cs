@@ -82,7 +82,7 @@ public partial class LeaderBoardPage : ContentPage
 
     private async void OnMetricsClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("MetricsPage");
+        await Shell.Current.GoToAsync(nameof(ClassesPage));
     }
  
 }

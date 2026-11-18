@@ -53,6 +53,7 @@ public partial class Homepage : ContentPage
             }
         }
     };
+    private readonly TuringTrainer.Services.StudentImportService _studentImport = new();
     private readonly IUserService _userService;
 
     public Homepage()
@@ -137,50 +138,137 @@ public partial class Homepage : ContentPage
     /// <param name="e"></param>
     private void OnAddStudentClicked(object sender, EventArgs e)
     {
-        ClassPicker.SelectedIndex = 0;
-        StudentIdEntry.Text = string.Empty;
+        ClassPicker.SelectedIndex = -1;
+        StudentEmailEntry.Text = "";
+        PreviewLabel.Text = "";
+
+        ImportFileLabel.Text ="Use the first worksheet with an email column header.";
         AddStudentPopup.IsVisible = true;
     }
 
-    private async void OnStudentIdEntryCompleted(object sender, EventArgs e)
+    private void OnPreviewClicked(object? sender, EventArgs e)
     {
-        if(ClassPicker.SelectedIndex == -1)
+        string emailText = StudentEmailEntry.Text ?? "";
+
+        string[] emails = emailText.Split(
+            new[] { '\r', '\n' },
+            StringSplitOptions.RemoveEmptyEntries);
+
+        ShowPreview(emails);
+    }
+
+    private void ShowPreview(IEnumerable<string> emails)
+    {
+        if (ClassPicker.SelectedIndex == -1)
         {
-            await DisplayAlertAsync("Error", "Please select a class.", "OK");
+            PreviewLabel.Text = "Please select a class.";
             return;
         }
 
-        string studentIdsText = StudentIdEntry.Text;
-        if (string.IsNullOrWhiteSpace(studentIdsText))
-        {
-            await DisplayAlertAsync("Error", "Please enter at least one student ID.", "OK");
-            return;
-        }
+        string selectedClassName =
+            ClassPicker.Items[ClassPicker.SelectedIndex];
 
-        string[] studentIds = studentIdsText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-        CLasses selectedClass = classes[ClassPicker.SelectedIndex];
+        List<string> results = _studentImport.Validate(emails);
 
-        int numberOfStudentsAdded = 0;
-        foreach (string studentId in studentIds)
+        int validCount = 0;
+
+        foreach (string result in results)
         {
-            string cleanedStudentId = studentId.Trim();
-            if(cleanedStudentId != "")
+            if (result.StartsWith("Valid: "))
             {
-                Athlete newStudent = new Athlete();
-
-                newStudent.Name = cleanedStudentId;
-                newStudent.Points = 0;
-
-                selectedClass.Athletes.Add(newStudent);
-
-                numberOfStudentsAdded++;
+                validCount++;
             }
         }
 
-        StudentIdEntry.Text = "";
-        AddStudentPopup.IsVisible = false;
+        string details;
 
-        await DisplayAlertAsync("Success", $"{numberOfStudentsAdded} student(s) added to {selectedClass.Name}.", "OK");
+        if (results.Count == 0)
+        {
+            details = "Enter at least one email.";
+        }
+        else
+        {
+            details = string.Join("\n", results);
+        }
+
+        PreviewLabel.Text =
+            selectedClassName + ": " + validCount + " valid email(s).\n" +
+            "Preview only. No students were enrolled.\n" +
+            details;
+    }
+
+    private async void OnUploadExcelClicked(object? sender, EventArgs e)
+    {
+        if (ClassPicker.SelectedIndex == -1)
+        {
+            PreviewLabel.Text = "Please select a class.";
+            return;
+        }
+
+        try
+        {
+            var file = await FilePicker.Default.PickAsync(new PickOptions
+            {
+                PickerTitle = "Choose an Excel workbook (.xlsx)"
+            });
+
+            if (file == null)
+            {
+                return;
+            }
+
+            string extension = Path.GetExtension(file.FileName);
+
+            if (!extension.Equals(
+                ".xlsx",
+                StringComparison.OrdinalIgnoreCase))
+            {
+                PreviewLabel.Text = "Please select an .xlsx workbook.";
+                return;
+            }
+
+            using var stream = await file.OpenReadAsync();
+            using var buffer = new MemoryStream();
+
+            byte[] chunk = new byte[81920];
+            int count;
+
+            while ((count = await stream.ReadAsync(chunk)) > 0)
+            {
+                if (buffer.Length + count > 10 * 1024 * 1024)
+                {
+                    PreviewLabel.Text =
+                        "Please choose a workbook smaller than 10 MB.";
+
+                    return;
+                }
+
+                await buffer.WriteAsync(chunk.AsMemory(0, count));
+            }
+
+            buffer.Position = 0;
+
+            List<string> emails = _studentImport.ReadExcel(buffer);
+
+            StudentEmailEntry.Text = string.Join("\n", emails);
+            ImportFileLabel.Text = file.FileName;
+
+            ShowPreview(emails);
+        }
+        catch (Exception)
+        {
+            PreviewLabel.Text =
+                "Could not read the workbook. Use an .xlsx file under " +
+                "10 MB, with an email header and at most 5,000 rows.";
+        }
+    }
+
+    private void OnPreviewInputChanged(object? sender, EventArgs e)
+    {
+        if (PreviewLabel != null)
+        {
+            PreviewLabel.Text = "";
+        }
     }
 
     private void CloseAddStudentPopup(object sender, EventArgs e)

@@ -5,19 +5,27 @@ using Supabase.Postgrest.Attributes;
 [Table("classes")]
 public class Class : ObservableBaseModel
 {
-    private readonly Guid _classId = Guid.Empty;
+    private  Guid _classId = Guid.Empty;
     private readonly Guid _organizationId = Guid.Empty;
-    private readonly Guid _coachId = Guid.Empty;
+    private  Guid _coachId = Guid.Empty;
     private string _name = string.Empty;
 
-    [PrimaryKey("class_id"), Column("class_id")]
-    public Guid ClassId => _classId;
+    [PrimaryKey("class_id",false), Column("class_id")]
+    public Guid ClassId
+    {
+        get => _classId;
+        set => SetProperty(ref _classId, value);
+    }
 
     [Column("organization_id")]
     public Guid OrganizationId => _organizationId;
 
     [Column("coach_id")]
-    public Guid CoachId => _coachId;
+    public Guid CoachId
+    {
+        get => _coachId;
+        set => SetProperty(ref _coachId, value);
+    }
 
     [Column("name")]
     public string Name

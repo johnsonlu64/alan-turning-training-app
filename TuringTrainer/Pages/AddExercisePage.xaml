@@ -2,13 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:TuringTrainer.Models"
-             x:Class="TuringTrainer.Pages.AddExercisePage"
+            xmlns:pages="clr-namespace:TuringTrainer.Pages"
+            x:Class="TuringTrainer.Pages.AddExercisePage"
              Title="Add Exercise"
              BackgroundColor="{DynamicResource PageBg}"
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
-        <DataTemplate x:Key="LibraryTemplate" x:DataType="pages:LibraryEntry">
+        <DataTemplate x:Key="LibraryTemplate" x:DataType="models:SelectableExercise">
             <Border BackgroundColor="{DynamicResource CardBg}"
                     Stroke="{DynamicResource CardBorderBrush}"
                     StrokeThickness="1"
@@ -30,10 +31,6 @@
                                FontSize="15"
                                FontAttributes="Bold"
                                TextColor="{DynamicResource TextMain}" />
-                        <Label Text="{Binding Category}"
-                               FontSize="11"
-                               CharacterSpacing="1"
-                               TextColor="{DynamicResource TextMuted}" />
                     </VerticalStackLayout>
                     <Button Grid.Column="1"
                             Text="+"
@@ -53,15 +50,15 @@
                TextColor="{DynamicResource TextMuted}" />
 
         <Border Grid.Row="1"
-                BackgroundColor="#1C1C1C"
-                Stroke="#343434"
+                BackgroundColor="{DynamicResource CardBg}"
+                Stroke="{DynamicResource CardBorderBrush}"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 12"
                 Padding="14,0">
             <Entry x:Name="SearchEntry"
                    Placeholder="Search exercises"
-                   PlaceholderColor="#999999"
-                   TextColor="#FFFFFF"
+                   PlaceholderColor="{DynamicResource TextMuted}"
+                   TextColor="{DynamicResource TextMain}"
                    BackgroundColor="Transparent"
                    TextChanged="OnSearchTextChanged" />
         </Border>
@@ -78,8 +75,8 @@
             <Button Text="CANCEL"
                     Clicked="OnCancelClicked"
                     BackgroundColor="Transparent"
-                    TextColor="#999999"
-                    BorderColor="#343434"
+                    TextColor="{DynamicResource TextMuted}"
+                    BorderColor="{DynamicResource CardBorder}"
                     BorderWidth="1"
                     FontAttributes="Bold"
                     FontSize="14"
