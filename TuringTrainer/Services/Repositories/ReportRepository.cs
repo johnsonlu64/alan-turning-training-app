@@ -3,7 +3,7 @@ using TuringTrainer.Models;
 
 namespace TuringTrainer.Services.Repositories;
 
-/// <summary>Loads report data by calling the athlete_report and report_partials functions in Supabase.</summary>
+/// Loads report data by calling the athlete_report and report_partials functions in Supabase
 public class ReportRepository
 {
     private readonly Supabase.Client _client = Database.getClient();

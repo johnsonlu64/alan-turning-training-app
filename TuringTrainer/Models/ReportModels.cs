@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace TuringTrainer.Models;
 
-/// <summary>One athlete's line in a report (a row returned by athlete_report).</summary>
+/// One athlete's line in a report. (a row returned by athlete_report)
 public class AthleteReportRow
 {
     [JsonPropertyName("user_id")] public Guid UserId { get; set; }
@@ -16,7 +16,7 @@ public class AthleteReportRow
     [JsonIgnore]
     public string FullName => $"{FirstName} {LastName}".Trim();
 
-    /// <summary>Completed workouts divided by assigned workouts, 0 to 1.</summary>
+    /// <Completed workouts divided by assigned workouts, 0 to 1.
     [JsonIgnore]
     public double Progress => Assigned == 0 ? 0 : (double)Completed / Assigned;
 
@@ -29,7 +29,7 @@ public class AthleteReportRow
         : $"{Completed} completed  •  {Partial} partial  •  {Missed} missed  (of {Assigned})";
 }
 
-/// <summary>A student's reason for a partial workout (a row returned by report_partials).</summary>
+///A student's reason for a partial workout (a row returned by report_partials
 public class PartialReasonRow
 {
     [JsonPropertyName("first_name")] public string? FirstName { get; set; }
@@ -48,7 +48,7 @@ public class PartialReasonRow
     public string ReasonText => string.IsNullOrWhiteSpace(Reason) ? "(no reason given)" : Reason!;
 }
 
-/// <summary>Everything the results page needs to show and export a report.</summary>
+/// Everything the results page needs to show and export a report
 public class ReportResult
 {
     public string Title { get; set; } = "";
