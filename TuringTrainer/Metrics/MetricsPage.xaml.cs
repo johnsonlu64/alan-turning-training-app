@@ -4,6 +4,7 @@ using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
+using TuringTrainer.BusinessLogic;
 
 namespace TuringTrainer;
 // dasha
@@ -12,6 +13,7 @@ public partial class MetricsPage : ContentPage
 {
     private string _memberName = "";
     private string _memberId = "";
+    private readonly IPersonalRecordService _personalRecordService;
 
     public string MemberId
     {
@@ -49,6 +51,9 @@ public partial class MetricsPage : ContentPage
 
             MemberName = $"{member.FirstName} {member.LastName}";
 
+            await _personalRecordService.SelectPersonalRecords(userId);
+            DisplayPersonalRecords();
+
             if (!string.IsNullOrWhiteSpace(member.AvatarUrl))
             {
                 AthleteAvatar.Source = ImageSource.FromUri(new Uri(member.AvatarUrl));
@@ -63,9 +68,66 @@ public partial class MetricsPage : ContentPage
             await DisplayAlertAsync("Error", ex.Message, "OK");
         }
     }
+
+    private void DisplayPersonalRecords()
+    {
+        Guid cleanId = Guid.Parse("576d09f7-9686-45a2-b3ba-e8753219e0b3");
+        Guid backSquatId = Guid.Parse("45db5851-46a2-4711-a0c0-5d307cd9967d");
+        Guid benchPressId = Guid.Parse("d9036c3b-b69d-4945-b6d9-13f2b0e97edc");
+
+        var records = _personalRecordService.PersonalRecords;
+
+        PersonalRecord? clean = null;
+        PersonalRecord? backSquat = null;
+        PersonalRecord? benchPress = null;
+
+        foreach (PersonalRecord record in records)
+        {
+            if (record.ExerciseId == cleanId)
+            {
+                clean = record;
+            }
+            else if (record.ExerciseId == backSquatId)
+            {
+                backSquat = record;
+            }
+            else if (record.ExerciseId == benchPressId)
+            {
+                benchPress = record;
+            }
+        }
+
+        if (clean != null && clean.Weight != null)
+        {
+            CleanLabel.Text = $"{clean.Weight} lbs";
+        }
+        else
+        {
+            CleanLabel.Text = "N/A";
+        }
+
+        if (backSquat != null && backSquat.Weight != null)
+        {
+            BackSquatLabel.Text = $"{backSquat.Weight} lbs";
+        }
+        else
+        {
+            BackSquatLabel.Text = "N/A";
+        }
+
+        if (benchPress != null && benchPress.Weight != null)
+        {
+            BenchPressLabel.Text = $"{benchPress.Weight} lbs";
+        }
+        else
+        {
+            BenchPressLabel.Text = "N/A";
+        }
+    }
     public MetricsPage()
     {
         InitializeComponent();
+        _personalRecordService = new PersonalRecordService(new PersonalRecordRepository());
         BindingContext = this;
     }
 

@@ -194,7 +194,7 @@
                                                         FontAttributes="Bold"/>
 
                                                  <Label x:Name="ImprovementExerciseLabel"
-                                                        Text="Bench Press"
+                                                        Text="Overall"
                                                         FontSize="11"
                                                         TextColor="#999999"/>
                                           </VerticalStackLayout>
@@ -235,11 +235,11 @@
 
                                           <Grid ColumnDefinitions="*,Auto"
                                                         ColumnSpacing="10">
-                                                 <Label Text="Squat"
+                                                 <Label Text="Back Squat"
                                                         FontSize="16"
                                                         TextColor="White"/>
 
-                                                 <Label x:Name="SquatLabel"
+                                                 <Label x:Name="BackSquatLabel"
                                                         Grid.Column="1"
                                                         Text="275 lbs"
                                                         FontSize="17"
@@ -252,11 +252,11 @@
 
                                           <Grid ColumnDefinitions="*,Auto"
                                                         ColumnSpacing="10">
-                                                 <Label Text="Deadlift"
+                                                 <Label Text="Clean"
                                                         FontSize="16"
                                                         TextColor="White"/>
 
-                                                 <Label x:Name="DeadliftLabel"
+                                                 <Label x:Name="CleanLabel"
                                                         Grid.Column="1"
                                                         Text="315 lbs"
                                                         FontSize="17"
@@ -296,8 +296,8 @@
                                                         <Picker.ItemsSource>
                                                                <x:Array Type="{x:Type x:String}">
                                                                       <x:String>Bench Press</x:String>
-                                                                      <x:String>Squat</x:String>
-                                                                      <x:String>Deadlift</x:String>
+                                                                      <x:String>Back Squat</x:String>
+                                                                      <x:String>Clean</x:String>
                                                                </x:Array>
                                                         </Picker.ItemsSource>
                                                  </Picker>
