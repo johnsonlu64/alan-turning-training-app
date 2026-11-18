@@ -1,4 +1,3 @@
-
 using TuringTrainer.Services;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
@@ -40,6 +39,7 @@ public partial class Settings : ContentPage
         EmailEntry.Text ??= "coach@uwosh.edu";
 
         ShowAccountInformation();
+        await LoadOrganizationName();
 
         string? email = _userService.GetUserSession()?.User?.Email;
         EmailLabel.Text = email ?? "";
@@ -51,6 +51,32 @@ public partial class Settings : ContentPage
         else
         {
             ProfileImage.Source = "blank_profile_picture.png";
+        }
+    }
+
+    private async Task LoadOrganizationName()
+    {
+        try
+        {
+            Organization? organization = await _organizationService.GetCurrentOrganization();
+            if (organization != null)
+            {
+                OrganizationNameLabel.Text = organization.Name;
+                AccountOrganizationLabel.Text = organization.Name;
+                OrganizationIdLabel.Text = organization.OrganizationId.ToString();
+            }
+            else
+            {
+                OrganizationNameLabel.Text = "No organization";
+                AccountOrganizationLabel.Text = "No organization";
+                OrganizationIdLabel.Text = string.Empty;
+            }
+        }
+        catch
+        {
+            OrganizationNameLabel.Text = "No organization";
+            AccountOrganizationLabel.Text = "No organization";
+            OrganizationIdLabel.Text = string.Empty;
         }
     }
 
@@ -264,7 +290,7 @@ public partial class Settings : ContentPage
 
     private async void OnMetricsClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("MetricsPage");
+        await Shell.Current.GoToAsync(nameof(ClassesPage));
     }
 
     private void ShowAccountInformation()

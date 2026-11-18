@@ -50,11 +50,18 @@
                                                  </Border>
 
                                                  <Grid ColumnDefinitions="*, Auto">
-                                                        <Label Text="ACCOUNT INFORMATION"
-                                                               FontSize="13"
-                                                               CharacterSpacing="2"
-                                                               FontAttributes="Bold"
-                                                               TextColor="{DynamicResource TextSub}"/>
+                                                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                                               <Label Text="ACCOUNT INFORMATION"
+                                                                      FontSize="13"
+                                                                      CharacterSpacing="2"
+                                                                      FontAttributes="Bold"
+                                                                      TextColor="{DynamicResource TextSub}"/>
+
+                                                               <Label x:Name="AccountOrganizationLabel"
+                                                                      FontSize="14"
+                                                                      FontAttributes="Bold"
+                                                                      TextColor="{DynamicResource TextMain}"/>
+                                                        </VerticalStackLayout>
 
                                                         <Button Grid.Column="1"
                                                                 Text="✎"
