@@ -20,21 +20,31 @@ public partial class AddClass : ContentPage
         string className = ClassNameEntry.Text?.Trim() ?? string.Empty;
         if (string.IsNullOrWhiteSpace(className))
         {
-            await DisplayAlert("Error", "Class name cannot be empty.", "OK");
+            await DisplayAlertAsync("Error", "Class name cannot be empty.", "OK");
             return;
         }
 
         try
         {
+            var userService = new UserService(new Services.Repositories.UserRepository());
+            if (!Guid.TryParse(userService.CurrentUserId(), out Guid coachId))
+            {
+                await DisplayAlertAsync(
+                    "Sign in required",
+                    "Please sign in before creating a class.",
+                    "OK");
+                return;
+            }
+
             var newClass = new Models.Class(Guid.NewGuid(), CoachId, className);
             await _classRepository.AddClassAsync(newClass);
-            await DisplayAlert("Success", "Class added successfully.", "OK");
+            await DisplayAlertAsync("Success", "Class added successfully.", "OK");
             ClassNameEntry.Text = "";
             await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", $"Could not add class: {ex.Message}", "OK");
+            await DisplayAlertAsync("Error", $"Could not add class: {ex.Message}", "OK");
         }
     }
 }

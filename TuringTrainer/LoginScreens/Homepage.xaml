@@ -223,27 +223,40 @@
                             </Border>
 
                             <!-- Classes saved in Supabase are added after the existing classes. -->
-                            <VerticalStackLayout x:Name="ClassListLayout" Spacing="12">
+                            <VerticalStackLayout x:Name="ClassListLayout"
+                                          Spacing="12">
                                    <BindableLayout.ItemTemplate>
                                           <DataTemplate x:DataType="models:Class">
-                                                 <Border BackgroundColor="#1C1C1C"
-                                                         Stroke="#343434"
+                                                 <Border BackgroundColor="{DynamicResource CardBg}"
+                                                         Stroke="{DynamicResource CardBorderBrush}"
                                                          StrokeThickness="1"
                                                          StrokeShape="RoundRectangle 16"
                                                          Padding="18">
-                                                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
-                                                               <Border WidthRequest="48" HeightRequest="48"
-                                                                       BackgroundColor="#332B12" StrokeThickness="0"
-                                                                       StrokeShape="RoundRectangle 12" VerticalOptions="Center">
-                                                                      <Label Text="CL" FontSize="15" FontAttributes="Bold"
-                                                                             TextColor="#F5C542" HorizontalOptions="Center"
+                                                        <Grid ColumnDefinitions="Auto,*"
+                                                                      ColumnSpacing="14">
+                                                               <Border WidthRequest="48"
+                                                                             HeightRequest="48"
+                                                                       BackgroundColor="{DynamicResource AccentTint}"
+                                                                             StrokeThickness="0"
+                                                                       StrokeShape="RoundRectangle 12"
+                                                                             VerticalOptions="Center">
+                                                                      <Label Text="CL"
+                                                                                    FontSize="15"
+                                                                                    FontAttributes="Bold"
+                                                                             TextColor="{DynamicResource TextAccent}"
+                                                                                    HorizontalOptions="Center"
                                                                              VerticalOptions="Center"/>
                                                                </Border>
-                                                               <VerticalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
-                                                                      <Label Text="{Binding Name}" FontSize="18"
-                                                                             FontAttributes="Bold" TextColor="White"/>
-                                                                      <Label Text="View enrolled students" FontSize="12"
-                                                                             TextColor="#999999"/>
+                                                               <VerticalStackLayout Grid.Column="1"
+                                                                             Spacing="5"
+                                                                             VerticalOptions="Center">
+                                                                      <Label Text="{Binding Name}"
+                                                                                    FontSize="18"
+                                                                             FontAttributes="Bold"
+                                                                                    TextColor="{DynamicResource TextMain}"/>
+                                                                      <Label Text="View enrolled students"
+                                                                                    FontSize="12"
+                                                                             TextColor="{DynamicResource TextMuted}"/>
                                                                </VerticalStackLayout>
                                                         </Grid>
                                                  </Border>
@@ -373,50 +386,66 @@
                              HorizontalOptions="Center"
                              VerticalOptions="Center">
 
-                            <VerticalStackLayout Spacing="16">
+                            <ScrollView MaximumHeightRequest="650">
+                                   <VerticalStackLayout Spacing="16">
 
-                                   <Label Text="ADD STUDENT"
-                                          FontSize="20"
-                                          FontAttributes="Bold"
-                                          TextColor="{DynamicResource TextAccent}"
-                                          HorizontalOptions="Center"/>
+                                          <Label Text="PREVIEW STUDENTS"
+                                                 FontSize="20"
+                                                 FontAttributes="Bold"
+                                                 TextColor="{DynamicResource TextAccent}"
+                                                 HorizontalOptions="Center"/>
 
-                                   <Picker x:Name="ClassPicker"
-                                           Title="Select Class"
-                                           TextColor="{DynamicResource TextMain}"
-                                           TitleColor="{DynamicResource TextMuted}"
-                                           BackgroundColor="{DynamicResource InsetBg}"/>
+                                          <Picker x:Name="ClassPicker"
+                                                  Title="Select saved class"
+                                                  SelectedIndexChanged="OnPreviewInputChanged"
+                                                  TextColor="{DynamicResource TextMain}"
+                                                  TitleColor="{DynamicResource TextMuted}"
+                                                  BackgroundColor="{DynamicResource InsetBg}"/>
 
-                                   <Editor x:Name="StudentIdEntry"
-                                          Placeholder="Enter student IDs (one per line)"
-                                          PlaceholderColor="{DynamicResource TextDim}"
-                                          TextColor="{DynamicResource TextMain}"
-                                          BackgroundColor="{DynamicResource InsetBg}"
-                                          HeightRequest="120"
-                                          AutoSize="TextChanges"/>
+                                          <Editor x:Name="StudentEmailEntry"
+                                                  TextChanged="OnPreviewInputChanged"
+                                                  Placeholder="Enter student emails (one per line)"
+                                                  PlaceholderColor="{DynamicResource TextDim}"
+                                                  TextColor="{DynamicResource TextMain}"
+                                                  BackgroundColor="{DynamicResource InsetBg}"
+                                                  HeightRequest="120"
+                                                  AutoSize="TextChanges"/>
 
-                                   <Button Text="Add Student"
-                                           Clicked="OnStudentIdEntryCompleted"
-                                           BackgroundColor="{DynamicResource TextAccent}"
-                                           TextColor="{DynamicResource PageBg}"
-                                           FontAttributes="Bold"
-                                           FontSize="14"
-                                           CornerRadius="12"
-                                           HeightRequest="50"
-                                           HorizontalOptions="Center"
-                                           WidthRequest="180"/>
+                                          <Button Text="Upload Excel (.xlsx)"
+                                                 Clicked="OnUploadExcelClicked"
+                                                 BackgroundColor="{DynamicResource TextAccent}"
+                                                 TextColor="{DynamicResource PageBg}"
+                                                 CornerRadius="12"/>
+                                          <Label x:Name="ImportFileLabel"
+                                                 TextColor="{DynamicResource TextMuted}"
+                                                 FontSize="12"/>
+                                          <ScrollView HeightRequest="120">
+                                                 <Label x:Name="PreviewLabel"
+                                                        TextColor="{DynamicResource TextMain}"
+                                                        FontSize="12"/>
+                                          </ScrollView>
+                                          <Button Text="Preview Emails"
+                                                  Clicked="OnPreviewClicked"
+                                                  BackgroundColor="{DynamicResource TextAccent}"
+                                                  TextColor="{DynamicResource PageBg}"
+                                                  FontAttributes="Bold"
+                                                  FontSize="14"
+                                                  CornerRadius="12"
+                                                  HeightRequest="50"
+                                                  HorizontalOptions="Center"
+                                                  WidthRequest="180"/>
 
-                                   <Button Text="Cancel"
-                                           Clicked="CloseAddStudentPopup"
-                                           BackgroundColor="{DynamicResource DividerLine}"
-                                           TextColor="{DynamicResource TextMuted}"
-                                           FontSize="13"
-                                           CornerRadius="12"
-                                           HeightRequest="42"/>
-                            </VerticalStackLayout>
+                                          <Button Text="Cancel"
+                                                  Clicked="CloseAddStudentPopup"
+                                                  BackgroundColor="{DynamicResource DividerLine}"
+                                                  TextColor="{DynamicResource TextMuted}"
+                                                  FontSize="13"
+                                                  CornerRadius="12"
+                                                  HeightRequest="42"/>
+                                   </VerticalStackLayout>
+                            </ScrollView>
                      </Border>
               </Grid>
-
 
        </Grid>
 </ContentPage>

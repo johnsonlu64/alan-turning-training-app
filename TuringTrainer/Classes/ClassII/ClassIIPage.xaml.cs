@@ -83,12 +83,12 @@ public partial class ClassIIPage : ContentPage
 
     private void ShowSports()
     {
-        SportsTab.BackgroundColor = Color.FromArgb("#332B12");
-        SportsTab.TextColor = Color.FromArgb("#F5C542");
+        SportsTab.SetDynamicResource(VisualElement.BackgroundColorProperty, "AccentTint");
+        SportsTab.SetDynamicResource(Button.TextColorProperty, "TextAccent");
         RoutinesTab.BackgroundColor = Colors.Transparent;
-        RoutinesTab.TextColor = Color.FromArgb("#999999");
+        RoutinesTab.SetDynamicResource(Button.TextColorProperty, "TextMuted");
         MembersTab.BackgroundColor = Colors.Transparent;
-        MembersTab.TextColor = Color.FromArgb("#999999");
+        MembersTab.SetDynamicResource(Button.TextColorProperty, "TextMuted");
 
         SportsList.IsVisible = true;
         RoutinesList.IsVisible = false;
@@ -99,11 +99,11 @@ public partial class ClassIIPage : ContentPage
     private void ShowRoutines()
     {
         SportsTab.BackgroundColor = Colors.Transparent;
-        SportsTab.TextColor = Color.FromArgb("#999999");
-        RoutinesTab.BackgroundColor = Color.FromArgb("#332B12");
-        RoutinesTab.TextColor = Color.FromArgb("#F5C542");
+        SportsTab.SetDynamicResource(Button.TextColorProperty, "TextMuted");
+        RoutinesTab.SetDynamicResource(VisualElement.BackgroundColorProperty, "AccentTint");
+        RoutinesTab.SetDynamicResource(Button.TextColorProperty, "TextAccent");
         MembersTab.BackgroundColor = Colors.Transparent;
-        MembersTab.TextColor = Color.FromArgb("#999999");
+        MembersTab.SetDynamicResource(Button.TextColorProperty, "TextMuted");
 
         SportsList.IsVisible = false;
         RoutinesList.IsVisible = true;
@@ -114,12 +114,12 @@ public partial class ClassIIPage : ContentPage
     private void ShowMembers()
     {
         SportsTab.BackgroundColor = Colors.Transparent;
-        SportsTab.TextColor = Color.FromArgb("#999999");
+        SportsTab.SetDynamicResource(Button.TextColorProperty, "TextMuted");
         RoutinesTab.BackgroundColor = Colors.Transparent;
-        RoutinesTab.TextColor = Color.FromArgb("#999999");
+        RoutinesTab.SetDynamicResource(Button.TextColorProperty, "TextMuted");
 
-        MembersTab.BackgroundColor = Color.FromArgb("#332B12");
-        MembersTab.TextColor = Color.FromArgb("#F5C542");
+        MembersTab.SetDynamicResource(VisualElement.BackgroundColorProperty, "AccentTint");
+        MembersTab.SetDynamicResource(Button.TextColorProperty, "TextAccent");
 
         MembersList.IsVisible = true;
         SportsList.IsVisible = false;

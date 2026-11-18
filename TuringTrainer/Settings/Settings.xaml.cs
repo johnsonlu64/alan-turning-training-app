@@ -36,8 +36,10 @@ public partial class Settings : ContentPage
         base.OnAppearing();
         _currentUser = await _userService.CurrentUser();
 
-        NameEntry.Text ??= "Coach Name";
-        EmailEntry.Text ??= "coach@uwosh.edu";
+        ShowAccountInformation();
+
+        string? email = _userService.GetUserSession()?.User?.Email;
+        EmailLabel.Text = email ?? "";
 
         ShowAccountInformation();
 
