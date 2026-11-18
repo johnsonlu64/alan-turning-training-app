@@ -44,19 +44,9 @@ public class SportRepository : ISportRepository
 
             var sports = await _client.From<Sport>().Where(g => g.ClassId == classGuid).Get();
 
-            var sportIds = new HashSet<Guid>();
             foreach (var sport in sports.Models)
             {
-                sportIds.Add(sport.SportId);
-            }
-
-            var sportResponse = await _client.From<Sport>().Get();
-            foreach (var sport in sports.Models)
-            {
-                if (sportIds.Contains(sport.SportId))
-                {
-                    Sports.Add(sport);
-                }
+                Sports.Add(sport);
             }
         }
         catch (Exception ex)
