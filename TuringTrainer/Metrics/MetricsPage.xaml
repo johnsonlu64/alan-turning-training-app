@@ -68,7 +68,7 @@
                                                         TextColor="White"/>
 
                                                  <Label x:Name="AthleteClassLabel"
-                                                        Text="Class 1 • Varsity Football"
+                                                        Text=""
                                                         FontSize="12"
                                                         TextColor="#A5A5A5"/>
                                           </VerticalStackLayout>
@@ -181,20 +181,20 @@
 
                                           <VerticalStackLayout Spacing="7">
 
-                                                 <Label Text="IMPROVEMENT"
+                                                 <Label Text="LAST WORKOUT"
                                                         FontSize="11"
                                                         CharacterSpacing="1"
                                                         TextColor="#A5A5A5"
                                                         FontAttributes="Bold"/>
 
                                                  <Label x:Name="ImprovementLabel"
-                                                        Text="+12%"
+                                                        Text="N/A"
                                                         FontSize="27"
                                                         TextColor="#F5C542"
                                                         FontAttributes="Bold"/>
 
                                                  <Label x:Name="ImprovementExerciseLabel"
-                                                        Text="Overall"
+                                                        Text="Completed"
                                                         FontSize="11"
                                                         TextColor="#999999"/>
                                           </VerticalStackLayout>

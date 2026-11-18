@@ -14,6 +14,7 @@ public partial class MetricsPage : ContentPage
     private string _memberName = "";
     private string _memberId = "";
     private readonly IPersonalRecordService _personalRecordService;
+    private readonly IRoutineEntryService _routineEntryService;
 
     public string MemberId
     {
@@ -53,7 +54,22 @@ public partial class MetricsPage : ContentPage
 
             await _personalRecordService.SelectPersonalRecords(userId);
             DisplayPersonalRecords();
+            DisplayLatestPR();
+
             TotalPRsLabel.Text = _personalRecordService.PersonalRecords.Count.ToString();
+            int workouts = await _routineEntryService.SelectCompletedWorkouts(userId);
+            WorkoutsLabel.Text = workouts.ToString();
+
+            DateTime? lastWorkout = await _routineEntryService.SelectLastWorkoutDate(userId);
+
+            if (lastWorkout != null)
+            {
+                ImprovementLabel.Text = lastWorkout.Value.ToShortDateString();
+            }
+            else
+            {
+                ImprovementLabel.Text = "N/A";
+            }
 
             if (!string.IsNullOrWhiteSpace(member.AvatarUrl))
             {
@@ -124,10 +140,55 @@ public partial class MetricsPage : ContentPage
             BenchPressLabel.Text = "N/A";
         }
     }
+
+    private void DisplayLatestPR()
+    {
+        var records = _personalRecordService.PersonalRecords;
+
+        PersonalRecord? latestPR = null;
+
+        foreach (PersonalRecord record in records)
+        {
+            if (record.UpdatedAt != null && record.Weight != null)
+            {
+                if (latestPR == null || record.UpdatedAt > latestPR.UpdatedAt)
+                {
+                    latestPR = record;
+                }
+            }
+        }
+
+        if (latestPR == null)
+        {
+            LatestPRLabel.Text = "N/A";
+            LatestPRExerciseLabel.Text = "No records";
+            return;
+        }
+
+        LatestPRLabel.Text = $"{latestPR.Weight} lbs";
+
+        if (latestPR.ExerciseId == Guid.Parse("576d09f7-9686-45a2-b3ba-e8753219e0b3"))
+        {
+            LatestPRExerciseLabel.Text = "Clean";
+        }
+        else if (latestPR.ExerciseId == Guid.Parse("45db5851-46a2-4711-a0c0-5d307cd9967d"))
+        {
+            LatestPRExerciseLabel.Text = "Back Squat";
+        }
+        else if (latestPR.ExerciseId == Guid.Parse("d9036c3b-b69d-4945-b6d9-13f2b0e97edc"))
+        {
+            LatestPRExerciseLabel.Text = "Bench Press";
+        }
+        else
+        {
+            LatestPRExerciseLabel.Text = "Other exercise";
+        }
+    }
     public MetricsPage()
     {
         InitializeComponent();
         _personalRecordService = new PersonalRecordService(new PersonalRecordRepository());
+        _routineEntryService = new RoutineEntryService(new RoutineEntryRepository());
         BindingContext = this;
     }
 
