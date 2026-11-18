@@ -315,35 +315,13 @@
                                                  TextColor="#FF8A8888"
                                                  BackgroundColor="#262626"
                                                  Keyboard="Email"/>
-                                   </VerticalStackLayout>
-                            </Border>
-
-                            <!-- Theme -->
-                            <Border BackgroundColor="#1C1C1C"
-                                    Stroke="#343434"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="18">
-
-                                   <Grid ColumnDefinitions="*,Auto"
-                                         ColumnSpacing="14">
-
-                                          <VerticalStackLayout Spacing="4"
-                                                               VerticalOptions="Center">
-                                                 <Label Text="Appearance"
-                                                        FontSize="18"
-                                                        FontAttributes="Bold"
-                                                        TextColor="White"/>
-                                                 <Label Text="Light / Dark / System"
-                                                        FontSize="12"
-                                                        TextColor="#999999"/>
-                                          </VerticalStackLayout>
 
                                           <Label Text="First Name"
                                                  TextColor="{DynamicResource TextMuted}"/>
 
                                           <Entry x:Name="FirstNameEntry"
-                                                 PlaceholderColor="{DynamicResource TextMuted}" Placeholder="First Name"
+                                                 Placeholder="First Name"
+                                                 PlaceholderColor="{DynamicResource TextMuted}"
                                                  TextColor="{DynamicResource TextMain}"
                                                  BackgroundColor="{DynamicResource InsetBg}"/>
 
@@ -351,7 +329,8 @@
                                                  TextColor="{DynamicResource TextMuted}"/>
 
                                           <Entry x:Name="MiddleInitialEntry"
-                                                 PlaceholderColor="{DynamicResource TextMuted}" Placeholder="Middle Initial"
+                                                 Placeholder="Middle Initial"
+                                                 PlaceholderColor="{DynamicResource TextMuted}"
                                                  MaxLength="1"
                                                  TextColor="{DynamicResource TextMain}"
                                                  BackgroundColor="{DynamicResource InsetBg}"/>
@@ -360,7 +339,8 @@
                                                  TextColor="{DynamicResource TextMuted}"/>
 
                                           <Entry x:Name="LastNameEntry"
-                                                 PlaceholderColor="{DynamicResource TextMuted}" Placeholder="Last Name"
+                                                 Placeholder="Last Name"
+                                                 PlaceholderColor="{DynamicResource TextMuted}"
                                                  TextColor="{DynamicResource TextMain}"
                                                  BackgroundColor="{DynamicResource InsetBg}"/>
 
@@ -380,7 +360,6 @@
                                                          TextColor="{DynamicResource NavBg}"/>
 
                                           </Grid>
-
                                    </VerticalStackLayout>
                             </ScrollView>
                      </Border>

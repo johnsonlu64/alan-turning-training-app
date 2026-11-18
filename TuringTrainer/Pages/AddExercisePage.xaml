@@ -8,7 +8,7 @@
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
-        <DataTemplate x:Key="LibraryTemplate" x:DataType="pages:LibraryEntry">
+        <DataTemplate x:Key="LibraryTemplate" x:DataType="models:SelectableExercise">
             <Border BackgroundColor="{DynamicResource CardBg}"
                     Stroke="{DynamicResource CardBorderBrush}"
                     StrokeThickness="1"
@@ -30,10 +30,6 @@
                                FontSize="15"
                                FontAttributes="Bold"
                                TextColor="{DynamicResource TextMain}" />
-                        <Label Text="{Binding Category}"
-                               FontSize="11"
-                               CharacterSpacing="1"
-                               TextColor="{DynamicResource TextMuted}" />
                     </VerticalStackLayout>
                     <Button Grid.Column="1"
                             Text="+"

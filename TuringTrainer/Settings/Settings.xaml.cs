@@ -1,8 +1,8 @@
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using Microsoft.Maui.Controls;
+using TuringTrainer.Services;
 using TuringTrainer.Services.Repositories;
-using LiveChartsCore.Themes;
 
 
 namespace TuringTrainer.Settings;
@@ -34,8 +34,16 @@ public partial class Settings : ContentPage
         base.OnAppearing();
         _currentUser = await _userService.CurrentUser();
 
+        if (_currentUser != null)
+        {
+            ShowAccountInformation();
+        }
+
         NameEntry.Text ??= "Coach Name";
         EmailEntry.Text ??= "coach@uwosh.edu";
+
+        string? email = _userService.GetUserSession()?.User?.Email;
+        EmailLabel.Text = email ?? "";
 
         await LoadOrganizationName();
     }
@@ -67,13 +75,10 @@ public partial class Settings : ContentPage
     {
         return Application.Current?.UserAppTheme switch
         {
-            ShowAccountInformation();
-        }
-
-        string? email = _userService.GetUserSession()?.User?.Email;
-
-        EmailLabel.Text = email ?? "";
-
+            AppTheme.Light => (int)ThemeChoice.Light,
+            AppTheme.Dark => (int)ThemeChoice.Dark,
+            _ => (int)ThemeChoice.System
+        };
     }
 
     private void OnThemeChanged(object sender, EventArgs e)
