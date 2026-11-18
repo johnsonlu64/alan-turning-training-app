@@ -3,7 +3,7 @@ namespace TuringTrainer.Models;
 using System;
 using Supabase.Postgrest.Attributes;
 
-[Table("sport")]
+[Table("sports")]
 public class Sport : ObservableBaseModel
 {
     readonly Guid _sport_id = Guid.Empty;
