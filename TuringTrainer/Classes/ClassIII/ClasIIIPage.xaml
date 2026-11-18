@@ -151,8 +151,8 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border BackgroundColor="#1C1C1C"
-                            Stroke="#343434"
+                    <Border BackgroundColor="{DynamicResource CardBg}"
+                            Stroke="{DynamicResource CardBorderBrush}"
                             StrokeThickness="1"
                             StrokeShape="RoundRectangle 16"
                             Padding="18"
@@ -169,30 +169,16 @@
                                                        VerticalOptions="Center">
 
                                 <Label Text="{Binding FirstName}"
-                                       TextColor="White"
+                                       TextColor="{DynamicResource TextMain}"
                                        FontSize="18"
                                        VerticalOptions="Center"/>
 
                                 <Label Text="{Binding LastName}"
-                                       TextColor="White"
+                                       TextColor="{DynamicResource TextMain}"
                                        FontSize="18"
                                        VerticalOptions="Center"/>
 
                                 </HorizontalStackLayout>
-
-                            <Button Grid.Column="1"
-                                    Text="›"
-                                    FontSize="32"
-                                    FontAttributes="Bold"
-                                    TextColor="Black"
-                                    BackgroundColor="#F5C542"
-                                    CornerRadius="12"
-                                    WidthRequest="55"
-                                    HeightRequest="55"
-                                    Padding="0"
-                                    Clicked="OnMemberClicked"
-                                    CommandParameter="{Binding .}"/>
-
                         </Grid>
                     </Border>
                 </DataTemplate>
