@@ -46,3 +46,12 @@ public enum UserEditError
     DBEditError,
     NoError
 }
+
+public enum UserAvatarError
+{
+    InvalidFileType,
+    UploadFailed,
+    DBEditError,
+    UserNotFound,
+    NoError
+}

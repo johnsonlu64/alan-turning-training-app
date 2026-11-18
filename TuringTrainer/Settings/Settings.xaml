@@ -24,8 +24,9 @@
                                    VerticalOptions="Center"/>
                      </Grid>
 
-                     <ScrollView Grid.Row="1">
-                            <VerticalStackLayout Spacing="18">
+              <!-- Main content -->
+              <ScrollView Grid.Row="1">
+                     <VerticalStackLayout Spacing="18">
 
                                    <Border BackgroundColor="{DynamicResource CardBg}"
                                            Stroke="{DynamicResource CardBorderBrush}"
@@ -34,6 +35,19 @@
                                            Padding="18">
 
                                           <VerticalStackLayout Spacing="14">
+
+                                                 <Border WidthRequest="100"
+                                                        HeightRequest="100"
+                                                        StrokeThickness="0"
+                                                        StrokeShape="RoundRectangle 50"
+                                                        HorizontalOptions="Center">
+                                                 <Border.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnProfilePictureTapped"/>
+                                                 </Border.GestureRecognizers>
+                                                 <Image x:Name="ProfileImage"
+                                                        Source="blank_profile_picture.png"
+                                                        Aspect="AspectFill"/>
+                                                 </Border>
 
                                                  <Grid ColumnDefinitions="*, Auto">
                                                         <Label Text="ACCOUNT INFORMATION"
@@ -315,29 +329,6 @@
                                                  TextColor="#FF8A8888"
                                                  BackgroundColor="#262626"
                                                  Keyboard="Email"/>
-                                   </VerticalStackLayout>
-                            </Border>
-
-                            <!-- Theme -->
-                            <Border BackgroundColor="#1C1C1C"
-                                    Stroke="#343434"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="18">
-
-                                   <Grid ColumnDefinitions="*,Auto"
-                                         ColumnSpacing="14">
-
-                                          <VerticalStackLayout Spacing="4"
-                                                               VerticalOptions="Center">
-                                                 <Label Text="Appearance"
-                                                        FontSize="18"
-                                                        FontAttributes="Bold"
-                                                        TextColor="White"/>
-                                                 <Label Text="Light / Dark / System"
-                                                        FontSize="12"
-                                                        TextColor="#999999"/>
-                                          </VerticalStackLayout>
 
                                           <Label Text="First Name"
                                                  TextColor="{DynamicResource TextMuted}"/>
