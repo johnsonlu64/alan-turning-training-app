@@ -1,3 +1,4 @@
+
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
@@ -75,15 +76,16 @@ public class UserService : IUserService
   {
       if (userId == Guid.Empty)
           return UserAvatarError.UserNotFound;
-  public async Task<UserEditError> UpdateUser(User user, string firstName, string middleInitial, string lastName, bool isCoach)
-  {
-    return await _userRepository.UpdateUser(user, firstName, middleInitial, lastName, isCoach);
-  }
 
       if (Path.GetExtension(photo.FileName).ToLower() != ".png")
           return UserAvatarError.InvalidFileType;
 
       return await _userRepository.UploadAvatar(userId, photo);
+  }
+
+  public async Task<UserEditError> UpdateUser(User user, string firstName, string middleInitial, string lastName, bool isCoach)
+  {
+    return await _userRepository.UpdateUser(user, firstName, middleInitial, lastName, isCoach);
   }
 
   public async Task<UserAvatarError> UpdateAvatar(Guid userId, string? avatarUrl)

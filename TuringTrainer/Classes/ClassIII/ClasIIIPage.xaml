@@ -198,7 +198,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
+        </Grid>
         <CollectionView Grid.Row="2"
                         x:Name="RoutinesList"
                         IsVisible="False"

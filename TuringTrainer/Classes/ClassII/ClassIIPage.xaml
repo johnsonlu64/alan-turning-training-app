@@ -197,57 +197,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"
-                                   ItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border BackgroundColor="{DynamicResource CardBg}"
-                            Stroke="{DynamicResource CardBorderBrush}"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 16"
-                            Padding="18"
-                            Margin="0">
-
-
-                        <Grid ColumnDefinitions="*,Auto"
-                              ColumnSpacing="14">
-
-                            <HorizontalStackLayout Spacing="5"
-                                                   VerticalOptions="Center">
-
-                                <Label Text="{Binding FirstName}"
-                                       TextColor="{DynamicResource TextMain}"
-                                       FontSize="18"
-                                       VerticalOptions="Center"/>
-
-                                <Label Text="{Binding LastName}"
-                                       TextColor="{DynamicResource TextMain}"
-                                       FontSize="18"
-                                       VerticalOptions="Center"/>
-
-                            </HorizontalStackLayout>
-
-                            <Button Grid.Column="1"
-                                    Text="›"
-                                    FontSize="32"
-                                    FontAttributes="Bold"
-                                    TextColor="{DynamicResource PageBg}"
-                                    BackgroundColor="{DynamicResource TextAccent}"
-                                    CornerRadius="12"
-                                    WidthRequest="55"
-                                    HeightRequest="55"
-                                    Padding="0"
-                                    Clicked="OnMemberClicked"
-                                    CommandParameter="{Binding .}"/>
-
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
         <CollectionView Grid.Row="2"
                         x:Name="RoutinesList"
                         IsVisible="False"

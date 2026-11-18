@@ -1,3 +1,5 @@
+
+using TuringTrainer.Services;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using Microsoft.Maui.Controls;
@@ -36,19 +38,20 @@ public partial class Settings : ContentPage
 
         NameEntry.Text ??= "Coach Name";
         EmailEntry.Text ??= "coach@uwosh.edu";
-    }
 
-    private int GetCurrentThemeIndex()
-    {
-        return Application.Current?.UserAppTheme switch
-        {
-            ShowAccountInformation();
-        }
+        ShowAccountInformation();
 
         string? email = _userService.GetUserSession()?.User?.Email;
-
         EmailLabel.Text = email ?? "";
 
+        if (!string.IsNullOrWhiteSpace(_currentUser?.AvatarUrl))
+        {
+            ProfileImage.Source = ImageSource.FromUri(new Uri(_currentUser.AvatarUrl));
+        }
+        else
+        {
+            ProfileImage.Source = "blank_profile_picture.png";
+        }
     }
 
     private void OnThemeChanged(object sender, EventArgs e)
