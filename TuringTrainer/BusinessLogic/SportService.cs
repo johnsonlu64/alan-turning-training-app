@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
@@ -11,6 +12,8 @@ public class SportService : ISportService
     {
         _sportRepository = sportRepository;
     }
+
+    public ObservableCollection<Sport> Sports => _sportRepository.Sports;
 
     public async Task SelectAllSports()
     {
