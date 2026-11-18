@@ -31,11 +31,6 @@ public class SportRepository : ISportRepository
         }
     }
 
-    public async Task SelectAllSportsByGroup(string groupId)
-    {
-        return;
-    }
-
     public async Task SelectAllSportsByClass(string classId)
     {
         try

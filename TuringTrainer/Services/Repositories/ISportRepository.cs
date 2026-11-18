@@ -9,8 +9,7 @@ public interface ISportRepository
     public ObservableCollection<Sport> Sports { get; }
     public Task SelectAllSports();
 
-    public Task SelectAllSportsByGroup(String groupId);
-    public Task SelectAllSportsByClass(String classId);
+    public Task SelectAllSportsByClass(string classId);
 
     public Task<Sport?> SelectSport(Guid sportId);
     public Task<SportAdditionError> InsertSport(Sport sport);

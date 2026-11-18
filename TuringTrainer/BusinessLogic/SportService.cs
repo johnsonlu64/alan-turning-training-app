@@ -20,6 +20,11 @@ public class SportService : ISportService
         await _sportRepository.SelectAllSports();
     }
 
+    public async Task SelectAllSportsByClass(string classId)
+    {
+        await _sportRepository.SelectAllSportsByClass(classId);
+    }
+
     public async Task<Sport?> SelectSport(Guid sportId)
     {
         if (sportId == Guid.Empty)
@@ -29,6 +34,7 @@ public class SportService : ISportService
 
         return await _sportRepository.SelectSport(sportId);
     }
+
 
     public async Task<SportAdditionError> InsertSport(Sport sport)
     {
