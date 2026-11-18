@@ -53,6 +53,7 @@ public partial class MetricsPage : ContentPage
 
             await _personalRecordService.SelectPersonalRecords(userId);
             DisplayPersonalRecords();
+            TotalPRsLabel.Text = _personalRecordService.PersonalRecords.Count.ToString();
 
             if (!string.IsNullOrWhiteSpace(member.AvatarUrl))
             {
@@ -80,7 +81,6 @@ public partial class MetricsPage : ContentPage
         PersonalRecord? clean = null;
         PersonalRecord? backSquat = null;
         PersonalRecord? benchPress = null;
-
         foreach (PersonalRecord record in records)
         {
             if (record.ExerciseId == cleanId)
