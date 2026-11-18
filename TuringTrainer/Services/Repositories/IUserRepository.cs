@@ -7,6 +7,7 @@ public interface IUserRepository
 {
 
     public ObservableCollection<User> Users { get; }
+    public ObservableCollection<User> ClassMembers { get; }
     public Task SelectAllUsers();
 
     public Task SelectAllUsersByGroup(String groupId);
