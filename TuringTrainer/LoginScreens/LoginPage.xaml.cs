@@ -11,18 +11,18 @@ namespace TuringTrainer;
 
 public partial class LoginPage : ContentPage
 {
-    //int count = 0;
+	//int count = 0;
 	private readonly IUserService _userService;
-    public LoginPage()
-    {
+	public LoginPage()
+	{
 		_userService = new UserService(new UserRepository());
 
-        InitializeComponent();
-        
-    }
+		InitializeComponent();
 
-    private async void LoginButton_Clicked(object? sender, EventArgs e)
-    {
+	}
+
+	private async void LoginButton_Clicked(object? sender, EventArgs e)
+	{
 		try
 		{
 			string email = EmailEntry.Text?.Trim() ?? "";
@@ -49,4 +49,4 @@ public partial class LoginPage : ContentPage
 
 }
 
- 
+

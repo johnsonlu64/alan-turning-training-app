@@ -4,7 +4,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="TuringTrainer.SignupPage"
 	Title="Create Account"
-	Background="#0A0A0A">
+	Background="{DynamicResource PageBgBrush}">
 
 	<Grid>
 		<VerticalStackLayout
@@ -16,38 +16,38 @@
 				Text="CREATE ACCOUNT"
 				FontSize="28"
 				FontAttributes="Bold"
-				TextColor="#FFD600"
+				TextColor="{DynamicResource TextAccent}"
 				HorizontalOptions="Center"
 				Margin="0,0,0,12" />
 
 			<Entry
 				x:Name="UsernameEntry"
 				Placeholder="Username"
-				TextColor="White"
-				PlaceholderColor="#A0A0A0"
-				Background="#151515" />
+				TextColor="{DynamicResource TextMain}"
+				PlaceholderColor="{DynamicResource TextSub}"
+				Background="{DynamicResource InsetBgBrush}" />
 
 			<Entry
 				x:Name="EmailEntry"
 				Placeholder="Email"
 				Keyboard="Email"
-				TextColor="White"
-				PlaceholderColor="#A0A0A0"
-				Background="#151515" />
+				TextColor="{DynamicResource TextMain}"
+				PlaceholderColor="{DynamicResource TextSub}"
+				Background="{DynamicResource InsetBgBrush}" />
 
 			<Entry
 				x:Name="PasswordEntry"
 				Placeholder="Password"
 				IsPassword="True"
-				TextColor="White"
-				PlaceholderColor="#A0A0A0"
-				Background="#151515" />
+				TextColor="{DynamicResource TextMain}"
+				PlaceholderColor="{DynamicResource TextSub}"
+				Background="{DynamicResource InsetBgBrush}" />
 
 			<Button
 				Text="SIGN UP"
 				FontAttributes="Bold"
-				Background="#FFD600"
-				TextColor="#0A0A0A"
+				Background="{DynamicResource TextAccentBrush}"
+				TextColor="{DynamicResource PageBg}"
 				HeightRequest="58"
 				Margin="0,10,0,0" 
 				Clicked="SignupButton_Clicked"/>

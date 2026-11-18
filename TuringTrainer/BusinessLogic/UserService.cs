@@ -6,7 +6,7 @@ public class UserService : IUserService
 
   private readonly IUserRepository _userRepository;
 
-  public UserService (IUserRepository userRepository)
+  public UserService(IUserRepository userRepository)
   {
     _userRepository = userRepository;
   }
@@ -40,12 +40,12 @@ public class UserService : IUserService
     {
       return UserAdditionError.InvalidId;
     }
-    
+
     if (password.Length < 6)
     {
       return UserAdditionError.PasswordTooShort;
     }
-    
+
     return await _userRepository.SignUpUser(email, password, username);
   }
   public async Task<UserSignInError> SignInUser(string email, string password)
@@ -54,10 +54,17 @@ public class UserService : IUserService
     {
       return UserSignInError.InvalidEmailOrPassword;
     }
-    
-    return await _userRepository.SignInUser(email, password);
-  }
 
+    UserSignInError result = await _userRepository.SignInUser(email, password);
+    if (result == UserSignInError.NoError)
+    {
+      IOrganizationService organizationService = new OrganizationService(this, new OrganizationRepository());
+      await organizationService.ClearCurrentOrganization();
+      await organizationService.GetCurrentOrganizationId();
+    }
+
+    return result;
+  }
 
   public async Task<UserSignoutError> SignOutUser()
   {
@@ -68,6 +75,10 @@ public class UserService : IUserService
   {
       if (userId == Guid.Empty)
           return UserAvatarError.UserNotFound;
+  public async Task<UserEditError> UpdateUser(User user, string firstName, string middleInitial, string lastName, bool isCoach)
+  {
+    return await _userRepository.UpdateUser(user, firstName, middleInitial, lastName, isCoach);
+  }
 
       if (Path.GetExtension(photo.FileName).ToLower() != ".png")
           return UserAvatarError.InvalidFileType;

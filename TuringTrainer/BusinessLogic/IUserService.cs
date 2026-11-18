@@ -12,4 +12,5 @@ public interface IUserService
     Task<UserSignoutError> SignOutUser();
     Task<UserAvatarError> UploadAvatar(Guid userId, FileResult photo);
     Task<UserAvatarError> UpdateAvatar(Guid userId, string? avatarUrl);
+    Task<UserEditError> UpdateUser(User user, string firstName, string middleInitial, string lastName, bool isCoach);
 }

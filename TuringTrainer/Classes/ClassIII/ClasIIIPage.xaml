@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TuringTrainer.ClassIIIPage"
-             Background="#101010"
+             Background="{DynamicResource PageBgBrush}"
              Title="Class 3"
              Shell.NavBarIsVisible="False">
 
@@ -30,16 +30,16 @@
                 <Label Text="TURINGTRAINER"
                        FontSize="12"
                        CharacterSpacing="3"
-                       TextColor="#F5C542"
+                       TextColor="{DynamicResource TextAccent}"
                        FontAttributes="Bold"/>
 
                 <Label Text="Class 3"
-                       TextColor="White"
+                       TextColor="{DynamicResource TextMain}"
                        FontSize="27"
                        FontAttributes="Bold"/>
 
                 <Label Text="COLLEGE SPORTS"
-                       TextColor="#A5A5A5"
+                       TextColor="{DynamicResource TextSub}"
                        CharacterSpacing="2"
                        FontAttributes="Bold"
                        FontSize="13"/>
@@ -52,8 +52,8 @@
             <Button x:Name="SportsTab"
                     Text="Sports"
                     Clicked="OnSportsTabClicked"
-                    BackgroundColor="#332B12"
-                    TextColor="#F5C542"
+                    BackgroundColor="{DynamicResource AccentTint}"
+                    TextColor="{DynamicResource TextAccent}"
                     FontAttributes="Bold"
                     FontSize="13"
                     CornerRadius="12"
@@ -63,7 +63,7 @@
                     Text="Routines"
                     Clicked="OnRoutinesTabClicked"
                     BackgroundColor="Transparent"
-                    TextColor="#999999"
+                    TextColor="{DynamicResource TextMuted}"
                     FontAttributes="Bold"
                     FontSize="13"
                     CornerRadius="12"
@@ -73,7 +73,7 @@
                     Text="Members"
                     Clicked="OnMembersTabClicked"
                     BackgroundColor="Transparent"
-                    TextColor="#999999"
+                    TextColor="{DynamicResource TextMuted}"
                     FontAttributes="Bold"
                     FontSize="13"
                     CornerRadius="12"
@@ -91,8 +91,8 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border BackgroundColor="#1C1C1C"
-                            Stroke="#343434"
+                    <Border BackgroundColor="{DynamicResource CardBg}"
+                            Stroke="{DynamicResource CardBorderBrush}"
                             StrokeThickness="1"
                             StrokeShape="RoundRectangle 16"
                             Padding="18"
@@ -103,7 +103,7 @@
                               ColumnSpacing="14">
 
                             <Label Text="{Binding .}"
-                                   TextColor="White"
+                                   TextColor="{DynamicResource TextMain}"
                                    FontSize="18"
                                    VerticalOptions="Center"/>
 
@@ -111,8 +111,8 @@
                                     Text="›"
                                     FontSize="32"
                                     FontAttributes="Bold"
-                                    TextColor="Black"
-                                    BackgroundColor="#F5C542"
+                                    TextColor="{DynamicResource PageBg}"
+                                    BackgroundColor="{DynamicResource TextAccent}"
                                     CornerRadius="12"
                                     WidthRequest="55"
                                     HeightRequest="55"
@@ -145,18 +145,18 @@
                             IsVisible="False"
                             SelectionMode="None">
 
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical"
-                                       ItemSpacing="10"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BackgroundColor="#1C1C1C"
-                                Stroke="#343434"
-                                StrokeThickness="1"
-                                StrokeShape="RoundRectangle 16"
-                                Padding="18"
-                                Margin="0">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="#1C1C1C"
+                            Stroke="#343434"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 16"
+                            Padding="18"
+                            Margin="0">
 
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnMemberClicked"/>
@@ -168,35 +168,37 @@
                                 <HorizontalStackLayout Spacing="5"
                                                        VerticalOptions="Center">
 
-                                    <Border WidthRequest="54"
-                                            HeightRequest="54"
-                                            StrokeThickness="0"
-                                            StrokeShape="RoundRectangle 27"
-                                            VerticalOptions="Center">
+                                <Label Text="{Binding FirstName}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       VerticalOptions="Center"/>
 
-                                        <Image Source="{Binding AvatarImage}"
-                                               WidthRequest="54"
-                                               HeightRequest="54"
-                                               Aspect="AspectFill"/>
-                                    </Border>
-                                    <Label Text="{Binding FirstName}"
-                                           TextColor="White"
-                                           FontSize="18"
-                                           VerticalOptions="Center"/>
-
-                                    <Label Text="{Binding LastName}"
-                                           TextColor="White"
-                                           FontSize="18"
-                                           VerticalOptions="Center"/>
+                                <Label Text="{Binding LastName}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       VerticalOptions="Center"/>
 
                                 </HorizontalStackLayout>
 
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Grid>
+                            <Button Grid.Column="1"
+                                    Text="›"
+                                    FontSize="32"
+                                    FontAttributes="Bold"
+                                    TextColor="Black"
+                                    BackgroundColor="#F5C542"
+                                    CornerRadius="12"
+                                    WidthRequest="55"
+                                    HeightRequest="55"
+                                    Padding="0"
+                                    Clicked="OnMemberClicked"
+                                    CommandParameter="{Binding .}"/>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
         <CollectionView Grid.Row="2"
                         x:Name="RoutinesList"
                         IsVisible="False"
