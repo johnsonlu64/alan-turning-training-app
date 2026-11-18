@@ -19,7 +19,8 @@
           RowSpacing="16">
 
 
-        <Grid ColumnDefinitions="Auto,*"
+        <Grid Grid.Row="0"
+              ColumnDefinitions="Auto,*"
               ColumnSpacing="12"
               Padding="0,12,0,0">
 
@@ -125,10 +126,24 @@
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-        <CollectionView Grid.Row="2"
-                        x:Name="MembersList"
-                        IsVisible="False"
-                        SelectionMode="None">
+
+        <Grid Grid.Row="2"
+              RowDefinitions="Auto,*"
+              RowSpacing="10">
+
+            <SearchBar Grid.Row="0"
+                       x:Name="MemberSearchBar"
+                       Placeholder="Search members..."
+                       TextChanged="OnMemberSearchTextChanged"
+                       IsVisible="False"
+                       BackgroundColor="#332B12"
+                       TextColor="White"
+                       PlaceholderColor="#999999"/>
+
+            <CollectionView Grid.Row="1"
+                            x:Name="MembersList"
+                            IsVisible="False"
+                            SelectionMode="None">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"
@@ -136,38 +151,41 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border BackgroundColor="{DynamicResource CardBg}"
-                            Stroke="{DynamicResource CardBorderBrush}"
+                    <Border BackgroundColor="#1C1C1C"
+                            Stroke="#343434"
                             StrokeThickness="1"
                             StrokeShape="RoundRectangle 16"
                             Padding="18"
                             Margin="0">
 
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnMemberClicked"/>
+                            </Border.GestureRecognizers>
 
-                        <Grid ColumnDefinitions="*,Auto"
-                              ColumnSpacing="14">
+                            <Grid ColumnDefinitions="*,Auto"
+                                  ColumnSpacing="14">
 
-                            <HorizontalStackLayout Spacing="5"
-                                                   VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="5"
+                                                       VerticalOptions="Center">
 
                                 <Label Text="{Binding FirstName}"
-                                       TextColor="{DynamicResource TextMain}"
+                                       TextColor="White"
                                        FontSize="18"
                                        VerticalOptions="Center"/>
 
                                 <Label Text="{Binding LastName}"
-                                       TextColor="{DynamicResource TextMain}"
+                                       TextColor="White"
                                        FontSize="18"
                                        VerticalOptions="Center"/>
 
-                            </HorizontalStackLayout>
+                                </HorizontalStackLayout>
 
                             <Button Grid.Column="1"
                                     Text="›"
                                     FontSize="32"
                                     FontAttributes="Bold"
-                                    TextColor="{DynamicResource PageBg}"
-                                    BackgroundColor="{DynamicResource TextAccent}"
+                                    TextColor="Black"
+                                    BackgroundColor="#F5C542"
                                     CornerRadius="12"
                                     WidthRequest="55"
                                     HeightRequest="55"
@@ -180,7 +198,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
+        </Grid>
         <CollectionView Grid.Row="2"
                         x:Name="RoutinesList"
                         IsVisible="False"

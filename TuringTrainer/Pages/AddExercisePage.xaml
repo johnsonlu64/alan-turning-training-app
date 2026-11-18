@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:TuringTrainer.Models"
-             x:Class="TuringTrainer.Pages.AddExercisePage"
+            xmlns:pages="clr-namespace:TuringTrainer.Pages"
+            x:Class="TuringTrainer.Pages.AddExercisePage"
              Title="Add Exercise"
              BackgroundColor="{DynamicResource PageBg}"
              Shell.NavBarIsVisible="False">

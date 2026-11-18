@@ -41,9 +41,7 @@ public partial class ClassIIPage : ContentPage
         var member = clickedElement.BindingContext as Models.User;
         if (member == null) return;
 
-        string memberName = $"{member.FirstName} {member.LastName}";
-
-        await Shell.Current.GoToAsync($"{nameof(MetricsPage)}?name={Uri.EscapeDataString(memberName)}");
+        await Shell.Current.GoToAsync($"{nameof(MetricsPage)}?userId={member.UserId}");
     }
 
     private void OnSportsTabClicked(object? sender, EventArgs e)
@@ -59,8 +57,29 @@ public partial class ClassIIPage : ContentPage
     private async void OnMembersTabClicked(object? sender, EventArgs e)
     {
         await _userRepository.SelectAllUsers();
+        MembersList.ItemsSource = _userRepository.Users.OrderBy(user => user.LastName).ToList();
         ShowMembers();
     }
+
+    private void OnMemberSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        string search = MemberSearchBar.Text;
+
+        List<Models.User> matchingMembers = new List<Models.User>();
+
+        foreach (Models.User member in _userRepository.Users)
+        {
+            string fullName = member.FirstName + " " + member.LastName;
+
+            if (fullName.ToLower().Contains(search.ToLower()))
+            {
+                matchingMembers.Add(member);
+            }
+        }
+
+        MembersList.ItemsSource = matchingMembers.OrderBy(user => user.LastName).ToList();
+    }
+
 
     private void ShowSports()
     {
@@ -74,6 +93,7 @@ public partial class ClassIIPage : ContentPage
         SportsList.IsVisible = true;
         RoutinesList.IsVisible = false;
         MembersList.IsVisible = false;
+        MemberSearchBar.IsVisible = false;
     }
 
     private void ShowRoutines()
@@ -88,10 +108,11 @@ public partial class ClassIIPage : ContentPage
         SportsList.IsVisible = false;
         RoutinesList.IsVisible = true;
         MembersList.IsVisible = false;
+        MemberSearchBar.IsVisible = false;
     }
 
     private void ShowMembers()
-    { 
+    {
         SportsTab.BackgroundColor = Colors.Transparent;
         SportsTab.SetDynamicResource(Button.TextColorProperty, "TextMuted");
         RoutinesTab.BackgroundColor = Colors.Transparent;
@@ -103,6 +124,7 @@ public partial class ClassIIPage : ContentPage
         MembersList.IsVisible = true;
         SportsList.IsVisible = false;
         RoutinesList.IsVisible = false;
+        MemberSearchBar.IsVisible = true;
     }
 
 

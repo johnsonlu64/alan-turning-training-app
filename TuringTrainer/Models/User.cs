@@ -6,11 +6,12 @@ using Supabase.Postgrest.Attributes;
 [Table("user")]
 public class User : ObservableBaseModel
 {
-    Guid _user_id = Guid.Empty;
+    private Guid _user_id = Guid.Empty;
     string _first_name = "";
     string _middle_initial = "";
     string _last_name = "";
     bool _is_coach;
+    private string? _avatar_url;
     DateTimeOffset _created_at;
 
     [PrimaryKey("user_id"), Column("user_id")]
@@ -53,6 +54,32 @@ public class User : ObservableBaseModel
     {
         get { return _created_at; }
         set { SetProperty(ref _created_at, value); }
+    }
+
+    [Column("avatar_url")]
+    public string? AvatarUrl
+    {
+        get { return _avatar_url; }
+        set
+        {
+            if (SetProperty(ref _avatar_url, value))
+            {
+                OnPropertyChanged(nameof(AvatarImage));
+            }
+        }
+    }
+
+    public string AvatarImage
+    {
+        get
+        {
+            if (!string.IsNullOrWhiteSpace(AvatarUrl))
+            {
+                return AvatarUrl;
+            }
+
+            return "blank_profile_picture.png";
+        }
     }
 
     public User() { }
