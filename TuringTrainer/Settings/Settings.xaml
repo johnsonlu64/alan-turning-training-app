@@ -50,11 +50,18 @@
                                                  </Border>
 
                                                  <Grid ColumnDefinitions="*, Auto">
-                                                        <Label Text="ACCOUNT INFORMATION"
-                                                               FontSize="13"
-                                                               CharacterSpacing="2"
-                                                               FontAttributes="Bold"
-                                                               TextColor="{DynamicResource TextSub}"/>
+                                                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                                               <Label Text="ACCOUNT INFORMATION"
+                                                                      FontSize="13"
+                                                                      CharacterSpacing="2"
+                                                                      FontAttributes="Bold"
+                                                                      TextColor="{DynamicResource TextSub}"/>
+
+                                                               <Label x:Name="AccountOrganizationLabel"
+                                                                      FontSize="14"
+                                                                      FontAttributes="Bold"
+                                                                      TextColor="{DynamicResource TextMain}"/>
+                                                        </VerticalStackLayout>
 
                                                         <Button Grid.Column="1"
                                                                 Text="✎"
@@ -305,29 +312,29 @@
                                           <Label Text="Edit Account Information"
                                                  FontSize="22"
                                                  FontAttributes="Bold"
-                                                 TextColor="#A5A5A5"/>
+                                                 TextColor="{DynamicResource TextSub}"/>
 
                                           <VerticalStackLayout Spacing="4">
                                                  <Label x:Name="OrganizationNameLabel"
                                                         FontSize="16"
                                                         FontAttributes="Bold"
-                                                        TextColor="White"/>
+                                                        TextColor="{DynamicResource TextMain}"/>
                                                  <Label x:Name="OrganizationIdLabel"
                                                         FontSize="11"
-                                                        TextColor="#999999"/>
+                                                        TextColor="{DynamicResource TextMuted}"/>
                                           </VerticalStackLayout>
 
                                           <Entry x:Name="NameEntry"
                                                  Placeholder="Name"
-                                                 PlaceholderColor="silver"
-                                                 TextColor="#FF8A8888"
-                                                 BackgroundColor="#262626"/>
+                                                 PlaceholderColor="{DynamicResource TextMuted}"
+                                                 TextColor="{DynamicResource TextMain}"
+                                                 BackgroundColor="{DynamicResource InsetBg}"/>
 
                                           <Entry x:Name="EmailEntry"
                                                  Placeholder="Email"
-                                                 PlaceholderColor="Silver"
-                                                 TextColor="#FF8A8888"
-                                                 BackgroundColor="#262626"
+                                                 PlaceholderColor="{DynamicResource TextMuted}"
+                                                 TextColor="{DynamicResource TextMain}"
+                                                 BackgroundColor="{DynamicResource InsetBg}"
                                                  Keyboard="Email"/>
 
                                           <Label Text="First Name"
@@ -336,6 +343,8 @@
                                           <Entry x:Name="FirstNameEntry"
                                                  Placeholder="First Name"
                                                  PlaceholderColor="{DynamicResource TextMuted}"
+                                                 PlaceholderColor="{DynamicResource TextMuted}"
+                                                 Placeholder="First Name"
                                                  TextColor="{DynamicResource TextMain}"
                                                  BackgroundColor="{DynamicResource InsetBg}"/>
 
@@ -345,6 +354,8 @@
                                           <Entry x:Name="MiddleInitialEntry"
                                                  Placeholder="Middle Initial"
                                                  PlaceholderColor="{DynamicResource TextMuted}"
+                                                 PlaceholderColor="{DynamicResource TextMuted}"
+                                                 Placeholder="Middle Initial"
                                                  MaxLength="1"
                                                  TextColor="{DynamicResource TextMain}"
                                                  BackgroundColor="{DynamicResource InsetBg}"/>
@@ -355,6 +366,8 @@
                                           <Entry x:Name="LastNameEntry"
                                                  Placeholder="Last Name"
                                                  PlaceholderColor="{DynamicResource TextMuted}"
+                                                 PlaceholderColor="{DynamicResource TextMuted}"
+                                                 Placeholder="Last Name"
                                                  TextColor="{DynamicResource TextMain}"
                                                  BackgroundColor="{DynamicResource InsetBg}"/>
 

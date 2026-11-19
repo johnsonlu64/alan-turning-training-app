@@ -31,14 +31,29 @@ public class SportRepository : ISportRepository
         }
     }
 
-    public async Task SelectAllSportsByGroup(string groupId)
-    {
-        return;
-    }
-
     public async Task SelectAllSportsByClass(string classId)
     {
-        return;
+        try
+        {
+            Sports.Clear();
+
+            if (!Guid.TryParse(classId, out Guid classGuid))
+            {
+                return;
+            }
+
+            var sports = await _client.From<Sport>().Where(g => g.ClassId == classGuid).Get();
+
+            foreach (var sport in sports.Models)
+            {
+                Sports.Add(sport);
+            }
+        }
+        catch (Exception ex)
+        {
+            Sports.Clear();
+            Console.WriteLine("Error fetching users by class: " + ex.Message);
+        }
     }
 
     public async Task<Sport?> SelectSport(Guid sportId)

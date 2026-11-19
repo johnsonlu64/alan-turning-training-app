@@ -2,14 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:TuringTrainer.Models"
-            xmlns:pages="clr-namespace:TuringTrainer.Pages"
-            x:Class="TuringTrainer.Pages.AddExercisePage"
+             x:Class="TuringTrainer.Pages.AddExercisePage"
              Title="Add Exercise"
              BackgroundColor="{DynamicResource PageBg}"
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
-        <DataTemplate x:Key="LibraryTemplate" x:DataType="models:SelectableExercise">
+        <DataTemplate x:Key="ExerciseListTemplate" x:DataType="models:SelectableExercise">
             <Border BackgroundColor="{DynamicResource CardBg}"
                     Stroke="{DynamicResource CardBorderBrush}"
                     StrokeThickness="1"
@@ -50,22 +49,22 @@
                TextColor="{DynamicResource TextMuted}" />
 
         <Border Grid.Row="1"
-                BackgroundColor="#1C1C1C"
-                Stroke="#343434"
+                BackgroundColor="{DynamicResource CardBg}"
+                Stroke="{DynamicResource CardBorderBrush}"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 12"
                 Padding="14,0">
             <Entry x:Name="SearchEntry"
                    Placeholder="Search exercises"
-                   PlaceholderColor="#999999"
-                   TextColor="#FFFFFF"
+                   PlaceholderColor="{DynamicResource TextMuted}"
+                   TextColor="{DynamicResource TextMain}"
                    BackgroundColor="Transparent"
                    TextChanged="OnSearchTextChanged" />
         </Border>
 
-        <CollectionView x:Name="LibraryList"
+        <CollectionView x:Name="ExerciseList"
                         Grid.Row="2"
-                        ItemTemplate="{StaticResource LibraryTemplate}">
+                        ItemTemplate="{StaticResource ExerciseListTemplate}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
             </CollectionView.ItemsLayout>
@@ -75,8 +74,8 @@
             <Button Text="CANCEL"
                     Clicked="OnCancelClicked"
                     BackgroundColor="Transparent"
-                    TextColor="#999999"
-                    BorderColor="#343434"
+                    TextColor="{DynamicResource TextMuted}"
+                    BorderColor="{DynamicResource CardBorder}"
                     BorderWidth="1"
                     FontAttributes="Bold"
                     FontSize="14"

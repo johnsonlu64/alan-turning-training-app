@@ -18,7 +18,7 @@ public partial class AddExercisePage : ContentPage
     {
         InitializeComponent();
 
-        LibraryList.ItemsSource = FilteredExercises;
+        ExerciseList.ItemsSource = FilteredExercises;
     }
 
     public ObservableCollection<SelectableExercise> FilteredExercises { get; } = new();

@@ -13,6 +13,8 @@ public class UserRepository : IUserRepository
 
     public ObservableCollection<User> Users { get; private set; } = new();
 
+    public ObservableCollection<User> ClassMembers { get; private set; } = new();
+
     public async Task SelectAllUsers()
     {
         try
@@ -109,7 +111,48 @@ public class UserRepository : IUserRepository
 
     public async Task SelectAllUsersByClass(string classId)
     {
-        return;
+        try
+        {
+            ClassMembers.Clear();
+
+            if (!Guid.TryParse(classId, out Guid classGuid))
+            {
+                return;
+            }
+
+            var groups = await _client.From<TuringTrainer.Models.Group>().Where(g => g.ClassId == classGuid).Get();
+
+            var groupIds = new HashSet<Guid>();
+            foreach (var group in groups.Models)
+            {
+                groupIds.Add(group.GroupId);
+            }
+
+            var memberships = await _client.From<UserInGroup>().Get();
+
+            var userIds = new HashSet<Guid>();
+            foreach (var membership in memberships.Models)
+            {
+                if (groupIds.Contains(membership.GroupId))
+                {
+                    userIds.Add(membership.UserId);
+                }
+            }
+
+            var userResponse = await _client.From<User>().Get();
+            foreach (var user in userResponse.Models)
+            {
+                if (userIds.Contains(user.UserId))
+                {
+                    ClassMembers.Add(user);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ClassMembers.Clear();
+            Console.WriteLine("Error fetching users by class: " + ex.Message);
+        }
     }
 
     public async Task SelectAllUsersBySport(string sportId)
