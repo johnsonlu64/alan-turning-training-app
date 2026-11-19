@@ -8,7 +8,7 @@
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
-        <DataTemplate x:Key="LibraryTemplate" x:DataType="models:SelectableExercise">
+        <DataTemplate x:Key="ExerciseListTemplate" x:DataType="models:SelectableExercise">
             <Border BackgroundColor="{DynamicResource CardBg}"
                     Stroke="{DynamicResource CardBorderBrush}"
                     StrokeThickness="1"
@@ -62,9 +62,9 @@
                    TextChanged="OnSearchTextChanged" />
         </Border>
 
-        <CollectionView x:Name="LibraryList"
+        <CollectionView x:Name="ExerciseList"
                         Grid.Row="2"
-                        ItemTemplate="{StaticResource LibraryTemplate}">
+                        ItemTemplate="{StaticResource ExerciseListTemplate}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
             </CollectionView.ItemsLayout>

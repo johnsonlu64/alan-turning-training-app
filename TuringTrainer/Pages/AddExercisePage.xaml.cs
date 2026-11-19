@@ -18,7 +18,7 @@ public partial class AddExercisePage : ContentPage
     {
         InitializeComponent();
 
-        LibraryList.ItemsSource = FilteredExercises;
+        ExerciseList.ItemsSource = FilteredExercises;
     }
 
     public ObservableCollection<SelectableExercise> FilteredExercises { get; } = new();
@@ -81,7 +81,7 @@ public partial class AddExercisePage : ContentPage
 
     private void OnAddClicked(object? sender, EventArgs e)
     {
-        if (sender is Button { CommandParameter: SelectableExercise exercise })
+        if (sender is Button button && button.CommandParameter is SelectableExercise exercise)
         {
             exercise.IsSelected = !exercise.IsSelected;
         }

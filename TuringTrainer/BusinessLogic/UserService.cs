@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
@@ -9,6 +10,25 @@ public class UserService : IUserService
   public UserService(IUserRepository userRepository)
   {
     _userRepository = userRepository;
+  }
+
+  public ObservableCollection<User> Users => _userRepository.Users;
+
+  public ObservableCollection<User> ClassMembers => _userRepository.ClassMembers;
+
+  public async Task SelectAllUsers()
+  {
+    await _userRepository.SelectAllUsers();
+  }
+
+  public async Task GetUsersInClass(string classId)
+  {
+    if (string.IsNullOrWhiteSpace(classId))
+    {
+      return;
+    }
+
+    await _userRepository.SelectAllUsersByClass(classId);
   }
 
   public Supabase.Gotrue.Session? GetUserSession()
@@ -71,9 +91,27 @@ public class UserService : IUserService
     return await _userRepository.SignOutUser();
   }
 
+  public async Task<UserAvatarError> UploadAvatar(Guid userId, FileResult photo)
+  {
+      if (userId == Guid.Empty)
+          return UserAvatarError.UserNotFound;
+
+      if (Path.GetExtension(photo.FileName).ToLower() != ".png")
+          return UserAvatarError.InvalidFileType;
+
+      return await _userRepository.UploadAvatar(userId, photo);
+  }
+
   public async Task<UserEditError> UpdateUser(User user, string firstName, string middleInitial, string lastName, bool isCoach)
   {
     return await _userRepository.UpdateUser(user, firstName, middleInitial, lastName, isCoach);
   }
 
+  public async Task<UserAvatarError> UpdateAvatar(Guid userId, string? avatarUrl)
+  {
+      if (userId == Guid.Empty)
+          return UserAvatarError.UserNotFound;
+
+      return await _userRepository.UpdateAvatar(userId, avatarUrl);
+  }
 }

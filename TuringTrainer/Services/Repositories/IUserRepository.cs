@@ -7,6 +7,7 @@ public interface IUserRepository
 {
 
     public ObservableCollection<User> Users { get; }
+    public ObservableCollection<User> ClassMembers { get; }
     public Task SelectAllUsers();
 
     public Task SelectAllUsersByGroup(String groupId);
@@ -24,4 +25,6 @@ public interface IUserRepository
     public Task<UserAdditionError> InsertUser(User user);
     public Task<UserEditError> UpdateUser(User currentUser, String firstName, String middleInitial, String lastName, bool isCoach);
     public Task<UserDeletionError> DeleteUser(User user);
+    public Task<UserAvatarError> UploadAvatar(Guid userId, FileResult photo);
+    public Task<UserAvatarError> UpdateAvatar(Guid userId, string? avatarUrl);
 }

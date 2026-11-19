@@ -13,6 +13,8 @@ public class UserRepository : IUserRepository
 
     public ObservableCollection<User> Users { get; private set; } = new();
 
+    public ObservableCollection<User> ClassMembers { get; private set; } = new();
+
     public async Task SelectAllUsers()
     {
         try
@@ -43,7 +45,8 @@ public class UserRepository : IUserRepository
 
     public async Task<UserAdditionError> SignUpUser(string email, string password, string username)
     {
-        try {
+        try
+        {
             var session = await _client.Auth.SignUp(email, password);
             Console.WriteLine("Failed after client");
 
@@ -72,9 +75,9 @@ public class UserRepository : IUserRepository
 
     public async Task<UserSignInError> SignInUser(string email, string password)
     {
-        
+
         var session = await _client.Auth.SignIn(email, password);
-        
+
         if (session != null)
         {
             return UserSignInError.NoError;
@@ -99,7 +102,7 @@ public class UserRepository : IUserRepository
     }
 
 
-    
+
 
     public async Task SelectAllUsersByGroup(string groupId)
     {
@@ -108,7 +111,48 @@ public class UserRepository : IUserRepository
 
     public async Task SelectAllUsersByClass(string classId)
     {
-        return;
+        try
+        {
+            ClassMembers.Clear();
+
+            if (!Guid.TryParse(classId, out Guid classGuid))
+            {
+                return;
+            }
+
+            var groups = await _client.From<TuringTrainer.Models.Group>().Where(g => g.ClassId == classGuid).Get();
+
+            var groupIds = new HashSet<Guid>();
+            foreach (var group in groups.Models)
+            {
+                groupIds.Add(group.GroupId);
+            }
+
+            var memberships = await _client.From<UserInGroup>().Get();
+
+            var userIds = new HashSet<Guid>();
+            foreach (var membership in memberships.Models)
+            {
+                if (groupIds.Contains(membership.GroupId))
+                {
+                    userIds.Add(membership.UserId);
+                }
+            }
+
+            var userResponse = await _client.From<User>().Get();
+            foreach (var user in userResponse.Models)
+            {
+                if (userIds.Contains(user.UserId))
+                {
+                    ClassMembers.Add(user);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ClassMembers.Clear();
+            Console.WriteLine("Error fetching users by class: " + ex.Message);
+        }
     }
 
     public async Task SelectAllUsersBySport(string sportId)
@@ -193,5 +237,60 @@ public class UserRepository : IUserRepository
             return UserDeletionError.DBDeletionError;
         }
         return UserDeletionError.NoError;
+    }
+
+    public async Task<UserAvatarError> UploadAvatar(Guid userId, FileResult photo)
+    {
+        try
+        {
+            string fileName = $"{userId}/{Guid.NewGuid()}.png";
+
+            using var stream = await photo.OpenReadAsync();
+            using var memoryStream = new MemoryStream();
+
+            await stream.CopyToAsync(memoryStream);
+            await _client.Storage.From("avatars").Upload(memoryStream.ToArray(), fileName);
+
+            string avatarUrl = _client.Storage.From("avatars").GetPublicUrl(fileName);
+
+            UserAvatarError result = await UpdateAvatar(userId, avatarUrl);
+            if (result != UserAvatarError.NoError)
+            {
+                return result;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Avatar upload failed, {0}", ex);
+            return UserAvatarError.UploadFailed;
+        }
+
+        return UserAvatarError.NoError;
+    }
+
+    public async Task<UserAvatarError> UpdateAvatar(Guid userId, string? avatarUrl)
+    {
+        try
+        {
+            await _client.From<User>().Where(user => user.UserId == userId).Set(user => user.AvatarUrl, avatarUrl).Update();
+
+            User? updatedUser = await SelectUser(userId);
+            if (updatedUser == null)
+            {
+                return UserAvatarError.UserNotFound;
+            }
+
+            if (updatedUser.AvatarUrl != avatarUrl)
+            {
+                return UserAvatarError.DBEditError;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Avatar update failed, {0}", ex);
+            return UserAvatarError.DBEditError;
+        }
+
+        return UserAvatarError.NoError;
     }
 }

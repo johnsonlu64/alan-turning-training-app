@@ -24,8 +24,9 @@
                                    VerticalOptions="Center"/>
                      </Grid>
 
-                     <ScrollView Grid.Row="1">
-                            <VerticalStackLayout Spacing="18">
+              <!-- Main content -->
+              <ScrollView Grid.Row="1">
+                     <VerticalStackLayout Spacing="18">
 
                                    <Border BackgroundColor="{DynamicResource CardBg}"
                                            Stroke="{DynamicResource CardBorderBrush}"
@@ -35,12 +36,32 @@
 
                                           <VerticalStackLayout Spacing="14">
 
+                                                 <Border WidthRequest="100"
+                                                        HeightRequest="100"
+                                                        StrokeThickness="0"
+                                                        StrokeShape="RoundRectangle 50"
+                                                        HorizontalOptions="Center">
+                                                 <Border.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnProfilePictureTapped"/>
+                                                 </Border.GestureRecognizers>
+                                                 <Image x:Name="ProfileImage"
+                                                        Source="blank_profile_picture.png"
+                                                        Aspect="AspectFill"/>
+                                                 </Border>
+
                                                  <Grid ColumnDefinitions="*, Auto">
-                                                        <Label Text="ACCOUNT INFORMATION"
-                                                               FontSize="13"
-                                                               CharacterSpacing="2"
-                                                               FontAttributes="Bold"
-                                                               TextColor="{DynamicResource TextSub}"/>
+                                                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                                               <Label Text="ACCOUNT INFORMATION"
+                                                                      FontSize="13"
+                                                                      CharacterSpacing="2"
+                                                                      FontAttributes="Bold"
+                                                                      TextColor="{DynamicResource TextSub}"/>
+
+                                                               <Label x:Name="AccountOrganizationLabel"
+                                                                      FontSize="14"
+                                                                      FontAttributes="Bold"
+                                                                      TextColor="{DynamicResource TextMain}"/>
+                                                        </VerticalStackLayout>
 
                                                         <Button Grid.Column="1"
                                                                 Text="✎"

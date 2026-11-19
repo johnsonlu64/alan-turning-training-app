@@ -12,6 +12,8 @@ public class Group : ObservableBaseModel
 
 	readonly Guid _sport_id = Guid.Empty;
 
+	readonly Guid _class_id = Guid.Empty;
+
 	[PrimaryKey("group_id"), Column("group_id")]
 	public Guid GroupId
 	{
@@ -28,6 +30,12 @@ public class Group : ObservableBaseModel
 	public Guid SportId
 	{
 		get { return _sport_id; }
+	}
+
+	[Column("class_id")]
+	public Guid ClassId
+	{
+		get { return _class_id; }
 	}
 	public Group() { }
 
