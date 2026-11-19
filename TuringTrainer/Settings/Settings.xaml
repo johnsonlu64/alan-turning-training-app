@@ -7,7 +7,6 @@
        Shell.NavBarIsVisible="False">
 
        <Grid>
-
               <Grid RowDefinitions="Auto,*,Auto"
                     Padding="20,12,20,0">
 
@@ -24,9 +23,8 @@
                                    VerticalOptions="Center"/>
                      </Grid>
 
-              <!-- Main content -->
-              <ScrollView Grid.Row="1">
-                     <VerticalStackLayout Spacing="18">
+                     <ScrollView Grid.Row="1">
+                            <VerticalStackLayout Spacing="18">
 
                                    <Border BackgroundColor="{DynamicResource CardBg}"
                                            Stroke="{DynamicResource CardBorderBrush}"
@@ -37,20 +35,23 @@
                                           <VerticalStackLayout Spacing="14">
 
                                                  <Border WidthRequest="100"
-                                                        HeightRequest="100"
-                                                        StrokeThickness="0"
-                                                        StrokeShape="RoundRectangle 50"
-                                                        HorizontalOptions="Center">
-                                                 <Border.GestureRecognizers>
-                                                        <TapGestureRecognizer Tapped="OnProfilePictureTapped"/>
-                                                 </Border.GestureRecognizers>
-                                                 <Image x:Name="ProfileImage"
-                                                        Source="blank_profile_picture.png"
-                                                        Aspect="AspectFill"/>
+                                                         HeightRequest="100"
+                                                         StrokeThickness="0"
+                                                         StrokeShape="RoundRectangle 50"
+                                                         HorizontalOptions="Center">
+
+                                                        <Border.GestureRecognizers>
+                                                               <TapGestureRecognizer
+                                                                      Tapped="OnProfilePictureTapped"/>
+                                                        </Border.GestureRecognizers>
+
+                                                        <Image x:Name="ProfileImage"
+                                                               Source="blank_profile_picture.png"
+                                                               Aspect="AspectFill"/>
                                                  </Border>
 
-                                                 <Grid ColumnDefinitions="*, Auto">
-                                                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                                 <Grid ColumnDefinitions="*,Auto">
+                                                        <VerticalStackLayout Spacing="5">
                                                                <Label Text="ACCOUNT INFORMATION"
                                                                       FontSize="13"
                                                                       CharacterSpacing="2"
@@ -82,7 +83,6 @@
                                                  <Border BackgroundColor="{DynamicResource InsetBg}"
                                                          StrokeThickness="0"
                                                          Padding="12,8">
-
                                                         <Label x:Name="FirstNameLabel"
                                                                TextColor="{DynamicResource TextMain}"/>
                                                  </Border>
@@ -94,7 +94,6 @@
                                                  <Border BackgroundColor="{DynamicResource InsetBg}"
                                                          StrokeThickness="0"
                                                          Padding="12,8">
-
                                                         <Label x:Name="MiddleInitialLabel"
                                                                TextColor="{DynamicResource TextMain}"/>
                                                  </Border>
@@ -106,7 +105,6 @@
                                                  <Border BackgroundColor="{DynamicResource InsetBg}"
                                                          StrokeThickness="0"
                                                          Padding="12,8">
-
                                                         <Label x:Name="LastNameLabel"
                                                                TextColor="{DynamicResource TextMain}"/>
                                                  </Border>
@@ -118,7 +116,6 @@
                                                  <Border BackgroundColor="{DynamicResource InsetBg}"
                                                          StrokeThickness="0"
                                                          Padding="12,8">
-
                                                         <Label x:Name="EmailLabel"
                                                                TextColor="{DynamicResource TextMain}"/>
                                                  </Border>
@@ -144,6 +141,7 @@
                                                                FontSize="18"
                                                                FontAttributes="Bold"
                                                                TextColor="{DynamicResource TextMain}"/>
+
                                                         <Label Text="Light / Dark / System"
                                                                FontSize="12"
                                                                TextColor="{DynamicResource TextMuted}"/>
@@ -176,6 +174,7 @@
                                                                FontSize="18"
                                                                FontAttributes="Bold"
                                                                TextColor="{DynamicResource TextMain}"/>
+
                                                         <Label Text="FAQs and support"
                                                                FontSize="12"
                                                                TextColor="{DynamicResource TextMuted}"/>
@@ -184,8 +183,8 @@
                                                  <Label Grid.Column="1"
                                                         Text="›"
                                                         FontSize="28"
-                                                        TextColor="{DynamicResource TextAccent}"
-                                                        VerticalOptions="Center"/>
+                                                        VerticalOptions="Center"
+                                                        TextColor="{DynamicResource TextAccent}"/>
                                           </Grid>
                                    </Border>
 
@@ -206,6 +205,7 @@
                                                                FontSize="18"
                                                                FontAttributes="Bold"
                                                                TextColor="{DynamicResource TextMain}"/>
+
                                                         <Label Text="Share your thoughts"
                                                                FontSize="12"
                                                                TextColor="{DynamicResource TextMuted}"/>
@@ -214,8 +214,8 @@
                                                  <Label Grid.Column="1"
                                                         Text="›"
                                                         FontSize="28"
-                                                        TextColor="{DynamicResource TextAccent}"
-                                                        VerticalOptions="Center"/>
+                                                        VerticalOptions="Center"
+                                                        TextColor="{DynamicResource TextAccent}"/>
                                           </Grid>
                                    </Border>
 
@@ -230,7 +230,6 @@
                                            CornerRadius="12"
                                            HeightRequest="52"
                                            Margin="0,0,0,18"/>
-
                             </VerticalStackLayout>
                      </ScrollView>
 
@@ -245,6 +244,7 @@
                                            TextColor="{DynamicResource TextDim}"
                                            Clicked="OnHomeClicked"
                                            HorizontalOptions="Center"/>
+
                                    <Label Text="Home"
                                           FontSize="10"
                                           TextColor="{DynamicResource TextDim}"
@@ -252,12 +252,13 @@
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Grid.Column="1"
-                                                 Spacing="4">
+                                          Spacing="4">
                                    <Button Text="👑"
                                            FontSize="22"
                                            TextColor="{DynamicResource TextDim}"
                                            Clicked="OnLeaderboardClicked"
                                            HorizontalOptions="Center"/>
+
                                    <Label Text="Leaderboard"
                                           FontSize="10"
                                           TextColor="{DynamicResource TextDim}"
@@ -265,12 +266,13 @@
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Grid.Column="2"
-                                                 Spacing="4">
+                                          Spacing="4">
                                    <Button Text="📊"
                                            FontSize="22"
                                            TextColor="{DynamicResource TextDim}"
                                            Clicked="OnMetricsClicked"
                                            HorizontalOptions="Center"/>
+
                                    <Label Text="Metrics"
                                           FontSize="10"
                                           TextColor="{DynamicResource TextDim}"
@@ -278,11 +280,12 @@
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Grid.Column="3"
-                                                 Spacing="4">
+                                          Spacing="4">
                                    <Button Text="⚙️"
                                            FontSize="22"
                                            TextColor="{DynamicResource TextAccent}"
                                            HorizontalOptions="Center"/>
+
                                    <Label Text="Settings"
                                           FontSize="10"
                                           TextColor="{DynamicResource TextAccent}"
@@ -290,7 +293,7 @@
                             </VerticalStackLayout>
                      </Grid>
               </Grid>
-              <!-- Edit Account Popup -->
+
               <Grid x:Name="EditAccountPopup"
                     IsVisible="False"
                     BackgroundColor="#CC000000">
@@ -306,7 +309,6 @@
                              VerticalOptions="Center">
 
                             <ScrollView MaximumHeightRequest="600">
-
                                    <VerticalStackLayout Spacing="14">
 
                                           <Label Text="Edit Account Information"
@@ -319,6 +321,7 @@
                                                         FontSize="16"
                                                         FontAttributes="Bold"
                                                         TextColor="{DynamicResource TextMain}"/>
+
                                                  <Label x:Name="OrganizationIdLabel"
                                                         FontSize="11"
                                                         TextColor="{DynamicResource TextMuted}"/>
@@ -343,8 +346,6 @@
                                           <Entry x:Name="FirstNameEntry"
                                                  Placeholder="First Name"
                                                  PlaceholderColor="{DynamicResource TextMuted}"
-                                                 PlaceholderColor="{DynamicResource TextMuted}"
-                                                 Placeholder="First Name"
                                                  TextColor="{DynamicResource TextMain}"
                                                  BackgroundColor="{DynamicResource InsetBg}"/>
 
@@ -354,8 +355,6 @@
                                           <Entry x:Name="MiddleInitialEntry"
                                                  Placeholder="Middle Initial"
                                                  PlaceholderColor="{DynamicResource TextMuted}"
-                                                 PlaceholderColor="{DynamicResource TextMuted}"
-                                                 Placeholder="Middle Initial"
                                                  MaxLength="1"
                                                  TextColor="{DynamicResource TextMain}"
                                                  BackgroundColor="{DynamicResource InsetBg}"/>
@@ -366,8 +365,6 @@
                                           <Entry x:Name="LastNameEntry"
                                                  Placeholder="Last Name"
                                                  PlaceholderColor="{DynamicResource TextMuted}"
-                                                 PlaceholderColor="{DynamicResource TextMuted}"
-                                                 Placeholder="Last Name"
                                                  TextColor="{DynamicResource TextMain}"
                                                  BackgroundColor="{DynamicResource InsetBg}"/>
 
@@ -385,7 +382,6 @@
                                                          Clicked="OnSaveClicked"
                                                          BackgroundColor="{DynamicResource TextAccent}"
                                                          TextColor="{DynamicResource NavBg}"/>
-
                                           </Grid>
                                    </VerticalStackLayout>
                             </ScrollView>
