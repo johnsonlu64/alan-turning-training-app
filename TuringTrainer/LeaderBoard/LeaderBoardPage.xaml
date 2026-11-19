@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lb="clr-namespace:TuringTrainer.LeaderBoard"
              x:Class="TuringTrainer.LeaderBoardPage"
              Background="{DynamicResource PageBgBrush}"
              Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,*,Auto"
-        Padding="20,16,20,0" 
-        RowSpacing="15">
+          Padding="20,16,20,0"
+          RowSpacing="15">
 
         <VerticalStackLayout Spacing="10">
 
             <Label Text="Leaderboard"
                    FontSize="28"
                    FontAttributes="Bold"
-                   TextColor="{DynamicResource TextAccent}" />
+                   TextColor="{DynamicResource TextAccent}"/>
 
             <Label Text="Ranked by PR ÷ body weight at the PR."
                    FontSize="13"
-                   TextColor="{DynamicResource TextMuted}" />
+                   TextColor="{DynamicResource TextMuted}"/>
 
             <Grid ColumnDefinitions="*,*"
                   ColumnSpacing="12">
 
                 <VerticalStackLayout Spacing="4">
                     <Label Text="Class"
-                           TextColor="{DynamicResource TextMuted}" />
+                           TextColor="{DynamicResource TextMuted}"/>
 
                     <Picker x:Name="ClassPicker"
                             Title="Select a class"
@@ -33,12 +35,13 @@
                             SelectedIndexChanged="OnClassChanged"
                             TextColor="{DynamicResource TextMain}"
                             TitleColor="{DynamicResource TextMuted}"
-                            BackgroundColor="{DynamicResource InsetBg}" />
+                            BackgroundColor="{DynamicResource InsetBg}"/>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout Grid.Column="1" Spacing="4">
+                <VerticalStackLayout Grid.Column="1"
+                        Spacing="4">
                     <Label Text="Group"
-                           TextColor="{DynamicResource TextMuted}" />
+                           TextColor="{DynamicResource TextMuted}"/>
 
                     <Picker x:Name="GroupPicker"
                             Title="Select a group"
@@ -47,13 +50,13 @@
                             SelectedIndexChanged="OnGroupChanged"
                             TextColor="{DynamicResource TextMain}"
                             TitleColor="{DynamicResource TextMuted}"
-                            BackgroundColor="{DynamicResource InsetBg}" />
+                            BackgroundColor="{DynamicResource InsetBg}"/>
                 </VerticalStackLayout>
             </Grid>
 
             <VerticalStackLayout Spacing="4">
                 <Label Text="Exercise"
-                       TextColor="{DynamicResource TextMuted}" />
+                       TextColor="{DynamicResource TextMuted}"/>
 
                 <Picker x:Name="ExercisePicker"
                         Title="Select an exercise"
@@ -62,7 +65,7 @@
                         SelectedIndexChanged="OnExerciseChanged"
                         TextColor="{DynamicResource TextMain}"
                         TitleColor="{DynamicResource TextMuted}"
-                        BackgroundColor="{DynamicResource InsetBg}" />
+                        BackgroundColor="{DynamicResource InsetBg}"/>
             </VerticalStackLayout>
 
             <Grid ColumnDefinitions="*,Auto"
@@ -72,19 +75,19 @@
                        Text="Loading classes…"
                        FontSize="12"
                        VerticalOptions="Center"
-                       TextColor="{DynamicResource TextMuted}" />
+                       TextColor="{DynamicResource TextMuted}"/>
 
                 <Button x:Name="RefreshButton"
                         Grid.Column="1"
                         Text="Refresh"
                         Clicked="OnRefreshClicked"
                         BackgroundColor="{DynamicResource InsetBg}"
-                        TextColor="{DynamicResource TextAccent}" />
+                        TextColor="{DynamicResource TextAccent}"/>
             </Grid>
 
             <ActivityIndicator x:Name="LoadingIndicator"
                                IsVisible="False"
-                               Color="{DynamicResource TextAccent}" />
+                               Color="{DynamicResource TextAccent}"/>
         </VerticalStackLayout>
 
         <!-- Ranked athletes -->
@@ -108,37 +111,37 @@
 
                                 <Label Text="{Binding RankText}"
                                        VerticalOptions="Center"
-                                       TextColor="{DynamicResource TextAccent}" />
+                                       TextColor="{DynamicResource TextAccent}"/>
 
                                 <Label Grid.Column="1"
                                        Text="{Binding Name}"
                                        FontSize="17"
                                        FontAttributes="Bold"
                                        VerticalOptions="Center"
-                                       TextColor="{DynamicResource TextMain}" />
+                                       TextColor="{DynamicResource TextMain}"/>
 
                                 <Label Grid.Column="2"
                                        Text="{Binding RatioText}"
                                        FontSize="21"
                                        FontAttributes="Bold"
                                        HorizontalTextAlignment="End"
-                                       TextColor="{DynamicResource TextAccent}" />
+                                       TextColor="{DynamicResource TextAccent}"/>
                             </Grid>
 
                             <Label Text="{Binding PrText}"
-                                   TextColor="{DynamicResource TextMain}" />
+                                   TextColor="{DynamicResource TextMain}"/>
 
                             <Label Text="{Binding PrBodyWeightText}"
                                    FontSize="12"
-                                   TextColor="{DynamicResource TextMuted}" />
+                                   TextColor="{DynamicResource TextMuted}"/>
 
                             <Label Text="{Binding CurrentWeightText}"
                                    FontSize="12"
-                                   TextColor="{DynamicResource TextMuted}" />
+                                   TextColor="{DynamicResource TextMuted}"/>
 
                             <Label Text="{Binding RecordedText}"
                                    FontSize="12"
-                                   TextColor="{DynamicResource TextMuted}" />
+                                   TextColor="{DynamicResource TextMuted}"/>
 
                             <Grid ColumnDefinitions="*,*"
                                   ColumnSpacing="10">
@@ -147,14 +150,14 @@
                                         FontSize="12"
                                         Clicked="OnUpdateWeightClicked"
                                         BackgroundColor="{DynamicResource TextAccent}"
-                                        TextColor="{DynamicResource NavBg}" />
+                                        TextColor="{DynamicResource NavBg}"/>
 
                                 <Button Grid.Column="1"
                                         Text="PR options"
                                         FontSize="12"
                                         Clicked="OnPrOptionsClicked"
                                         BackgroundColor="{DynamicResource InsetBg}"
-                                        TextColor="{DynamicResource TextAccent}" />
+                                        TextColor="{DynamicResource TextAccent}"/>
                             </Grid>
                         </VerticalStackLayout>
                     </Border>
@@ -162,7 +165,8 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Grid Grid.Row="3"
+        <Grid x:Name="BottomNavigation"
+              Grid.Row="2"
               ColumnDefinitions="*,*,*,*"
               Padding="0,12,0,16"
               BackgroundColor="{DynamicResource NavBg}">
