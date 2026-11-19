@@ -80,7 +80,7 @@ public partial class LeaderBoardPage : ContentPage
 
             if (IsCurrentRequest(version))
             {
-                StatusLabel.Text ="Could not load classes. Sign in and tap Refresh.";
+                StatusLabel.Text = "Could not load classes. Sign in and tap Refresh.";
             }
         }
         finally
@@ -226,8 +226,7 @@ public partial class LeaderBoardPage : ContentPage
 
             if (IsCurrentRequest(version))
             {
-                StatusLabel.Text =
-                    "Could not load rankings. Tap Refresh to retry.";
+                StatusLabel.Text ="Could not load rankings. Tap Refresh to retry.";
             }
         }
         finally
@@ -295,12 +294,7 @@ public partial class LeaderBoardPage : ContentPage
 
         try
         {
-            string action = await DisplayActionSheetAsync(
-                row.Name,
-                "Cancel",
-                null,
-                "Record new PR",
-                "Set body weight at existing PR");
+            string action = await DisplayActionSheetAsync(row.Name, "Cancel", null, "Record new PR", "Set body weight at existing PR");
 
             if (!pageVisible)
                 return;
@@ -319,19 +313,12 @@ public partial class LeaderBoardPage : ContentPage
                 if (row.PrWeightLb.HasValue &&
                     (double)prWeight.Value <= row.PrWeightLb.Value)
                 {
-                    await DisplayAlert(
-                        "Higher PR needed",
-                        "The new PR must exceed the existing PR.",
-                        "OK");
+                    await DisplayAlertAsync("Higher PR needed", "The new PR must exceed the existing PR.", "OK");
 
                     return;
                 }
 
-                decimal? bodyWeight = await AskWeightAsync(
-                    "Body weight at PR",
-                    "Enter the athlete's body weight when this PR was achieved.",
-                    null,
-                    1500);
+                decimal? bodyWeight = await AskWeightAsync("Body weight at PR", "Enter the athlete's body weight when this PR was achieved. ",null, 1500);
 
                 if (!bodyWeight.HasValue || !pageVisible)
                     return;
@@ -349,11 +336,7 @@ public partial class LeaderBoardPage : ContentPage
             {
                 if (row.PrWeightLb is null || row.PrWeightLb <= 0)
                 {
-                    await DisplayAlert(
-                        "No PR",
-                        "Record a PR for this exercise first.",
-                        "OK");
-
+                    await DisplayAlertAsync("No PR", "Record a PR for this exercise first.", "OK");
                     return;
                 }
 
@@ -453,11 +436,7 @@ public partial class LeaderBoardPage : ContentPage
 
             if (pageVisible)
             {
-                await DisplayAlertAsync(
-                    "Could not save",
-                    "Check your connection and coach permissions. "
-                    + "A new PR must exceed the existing PR.",
-                    "OK");
+                await DisplayAlertAsync("Could not save", "Check your connection and coach permissions. " + "A new PR must exceed the existing PR.", "OK");
             }
 
             return;
@@ -468,7 +447,9 @@ public partial class LeaderBoardPage : ContentPage
         }
 
         if (pageVisible)
+        {
             await LoadRowsAsync();
+        }
     }
 
     private bool TryGetSelection(
@@ -522,12 +503,10 @@ public partial class LeaderBoardPage : ContentPage
         ClassPicker.IsEnabled = enabled;
 
         GroupPicker.IsEnabled = enabled && GroupPicker.ItemsSource?.Count > 0;
-
         ExercisePicker.IsEnabled = enabled && ExercisePicker.ItemsSource?.Count > 0;
 
         Board.IsEnabled = enabled;
         RefreshButton.IsEnabled = enabled;
-        BottomNavigation.IsEnabled = enabled;
     }
 
     private async void OnRefreshClicked(object sender, EventArgs e)
