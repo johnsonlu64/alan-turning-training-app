@@ -81,6 +81,10 @@ public partial class AddExercisePage : ContentPage
 
     private void OnAddClicked(object? sender, EventArgs e)
     {
+        if (sender is not Button { CommandParameter: SelectableExercise exercise })
+            return;
+
+        exercise.IsSelected = true;
         if (sender is Button button && button.CommandParameter is SelectableExercise exercise)
         {
             exercise.IsSelected = !exercise.IsSelected;
