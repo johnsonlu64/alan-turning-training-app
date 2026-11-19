@@ -9,8 +9,6 @@ public partial class RoutinesPage : ContentPage
     public RoutinesPage()
     {
         InitializeComponent();
-
-        RoutinesList.ItemsSource = Routine.All;
     }
 
     private async void OnRoutineSelected(object? sender, SelectionChangedEventArgs e)
