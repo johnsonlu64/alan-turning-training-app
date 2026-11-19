@@ -40,7 +40,6 @@ public partial class RoutineBuilderPage : ContentPage, IQueryAttributable
 
         Routine? routine = Routine.All.FirstOrDefault(r => r.Id == routineId);
         Header.Title = routine?.Title ?? "Routine";
-        Header.RightLabel = routine?.ExerciseCount ?? "";
 
         ExerciseList.ItemsSource = _exercises;
         ExerciseList.SelectedItem = _exercises[0];

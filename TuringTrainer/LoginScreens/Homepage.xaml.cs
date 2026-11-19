@@ -109,19 +109,12 @@ public partial class Homepage : ContentPage
         }
     }
 
-    private async void OnClass1Tapped(object sender, TappedEventArgs e)
+    private async void OnClassTapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(ClassIPage));
-    }
+        var selected = (sender as Element)?.BindingContext as Models.Class;
+        if (selected == null) return;
 
-    private async void OnClass2Tapped(object sender, TappedEventArgs e)
-    {
-        await Shell.Current.GoToAsync(nameof(ClassIIPage));
-    }
-
-    private async void OnClass3Tapped(object sender, TappedEventArgs e)
-    {
-        await Shell.Current.GoToAsync(nameof(ClassIIIPage));
+        await Shell.Current.GoToAsync($"{nameof(ClassPage)}?classId={selected.ClassId}&className={Uri.EscapeDataString(selected.Name ?? string.Empty)}");
     }
 
     private async void OnAddClassClicked(object sender, EventArgs e)
