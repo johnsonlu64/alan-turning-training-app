@@ -5,63 +5,161 @@
              Background="{DynamicResource PageBgBrush}"
              Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto"
-          RowSpacing="15">
+    <Grid RowDefinitions="Auto,*,Auto"
+        Padding="20,16,20,0" 
+        RowSpacing="15">
 
-        <!-- Leaderboard title -->
-        <Label Grid.Row="0"
-               Text="LEADERBOARD👑"
-               FontSize="28"
-               FontAttributes="Bold"
-               TextColor="{DynamicResource TextAccent}"
-               HorizontalOptions="Center"
-               Margin="0,20,0,0"/>
+        <VerticalStackLayout Spacing="10">
 
-        <!-- Class selector -->
-        <Picker Grid.Row="1"
-                x:Name="ClassPicker"
-                Margin="20,0"
-                TextColor="{DynamicResource TextMain}"
-                FontSize="22"
-                BackgroundColor="{DynamicResource CardBg}"
-                SelectedIndexChanged="OnClassChanged"/>
+            <Label Text="Leaderboard"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource TextAccent}" />
 
-        <!-- Scrollable athlete list -->
-        <CollectionView Grid.Row="2"
-                        x:Name="Board"
-                        Margin="20,0"
-                        VerticalOptions="Fill"
-                        ItemsLayout="VerticalList">
+            <Label Text="Ranked by PR ÷ body weight at the PR."
+                   FontSize="13"
+                   TextColor="{DynamicResource TextMuted}" />
+
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="12">
+
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Class"
+                           TextColor="{DynamicResource TextMuted}" />
+
+                    <Picker x:Name="ClassPicker"
+                            Title="Select a class"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedIndexChanged="OnClassChanged"
+                            TextColor="{DynamicResource TextMain}"
+                            TitleColor="{DynamicResource TextMuted}"
+                            BackgroundColor="{DynamicResource InsetBg}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="4">
+                    <Label Text="Group"
+                           TextColor="{DynamicResource TextMuted}" />
+
+                    <Picker x:Name="GroupPicker"
+                            Title="Select a group"
+                            IsEnabled="False"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedIndexChanged="OnGroupChanged"
+                            TextColor="{DynamicResource TextMain}"
+                            TitleColor="{DynamicResource TextMuted}"
+                            BackgroundColor="{DynamicResource InsetBg}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Exercise"
+                       TextColor="{DynamicResource TextMuted}" />
+
+                <Picker x:Name="ExercisePicker"
+                        Title="Select an exercise"
+                        IsEnabled="False"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedIndexChanged="OnExerciseChanged"
+                        TextColor="{DynamicResource TextMain}"
+                        TitleColor="{DynamicResource TextMuted}"
+                        BackgroundColor="{DynamicResource InsetBg}" />
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*,Auto"
+                  ColumnSpacing="8">
+
+                <Label x:Name="StatusLabel"
+                       Text="Loading classes…"
+                       FontSize="12"
+                       VerticalOptions="Center"
+                       TextColor="{DynamicResource TextMuted}" />
+
+                <Button x:Name="RefreshButton"
+                        Grid.Column="1"
+                        Text="Refresh"
+                        Clicked="OnRefreshClicked"
+                        BackgroundColor="{DynamicResource InsetBg}"
+                        TextColor="{DynamicResource TextAccent}" />
+            </Grid>
+
+            <ActivityIndicator x:Name="LoadingIndicator"
+                               IsVisible="False"
+                               Color="{DynamicResource TextAccent}" />
+        </VerticalStackLayout>
+
+        <!-- Ranked athletes -->
+        <CollectionView x:Name="Board"
+                        Grid.Row="1"
+                        SelectionMode="None">
 
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border Stroke="{DynamicResource TextAccentBrush}"
-                            StrokeThickness="1"
-                            Padding="15"
-                            Margin="0,0,0,2"
+                <DataTemplate x:DataType="lb:LeaderboardRow">
+
+                    <Border Padding="14"
+                            Margin="0,0,0,10"
+                            Stroke="{DynamicResource CardBorderBrush}"
                             BackgroundColor="{DynamicResource CardBg}"
-                            StrokeShape="RoundRectangle 12">
+                            StrokeShape="RoundRectangle 14">
 
-                        <Grid ColumnDefinitions="*,Auto"
-                              Padding="12">
+                        <VerticalStackLayout Spacing="8">
 
-                            <Label Text="{Binding Name}"
-                                   TextColor="{DynamicResource TextMain}"
-                                   FontSize="18"
-                                   VerticalOptions="Center"/>
+                            <Grid ColumnDefinitions="28,*,72"
+                                  ColumnSpacing="6">
 
-                            <Label Grid.Column="1"
-                                   Text="{Binding Points}"
-                                   TextColor="{DynamicResource TextAccent}"
-                                   FontSize="18"
-                                   FontAttributes="Bold"
-                                   VerticalOptions="Center"/>
+                                <Label Text="{Binding RankText}"
+                                       VerticalOptions="Center"
+                                       TextColor="{DynamicResource TextAccent}" />
 
-                        </Grid>
+                                <Label Grid.Column="1"
+                                       Text="{Binding Name}"
+                                       FontSize="17"
+                                       FontAttributes="Bold"
+                                       VerticalOptions="Center"
+                                       TextColor="{DynamicResource TextMain}" />
+
+                                <Label Grid.Column="2"
+                                       Text="{Binding RatioText}"
+                                       FontSize="21"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="End"
+                                       TextColor="{DynamicResource TextAccent}" />
+                            </Grid>
+
+                            <Label Text="{Binding PrText}"
+                                   TextColor="{DynamicResource TextMain}" />
+
+                            <Label Text="{Binding PrBodyWeightText}"
+                                   FontSize="12"
+                                   TextColor="{DynamicResource TextMuted}" />
+
+                            <Label Text="{Binding CurrentWeightText}"
+                                   FontSize="12"
+                                   TextColor="{DynamicResource TextMuted}" />
+
+                            <Label Text="{Binding RecordedText}"
+                                   FontSize="12"
+                                   TextColor="{DynamicResource TextMuted}" />
+
+                            <Grid ColumnDefinitions="*,*"
+                                  ColumnSpacing="10">
+
+                                <Button Text="Update weight"
+                                        FontSize="12"
+                                        Clicked="OnUpdateWeightClicked"
+                                        BackgroundColor="{DynamicResource TextAccent}"
+                                        TextColor="{DynamicResource NavBg}" />
+
+                                <Button Grid.Column="1"
+                                        Text="PR options"
+                                        FontSize="12"
+                                        Clicked="OnPrOptionsClicked"
+                                        BackgroundColor="{DynamicResource InsetBg}"
+                                        TextColor="{DynamicResource TextAccent}" />
+                            </Grid>
+                        </VerticalStackLayout>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
         </CollectionView>
 
         <Grid Grid.Row="3"
