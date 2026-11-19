@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Services.Repositories;
 
@@ -11,6 +12,9 @@ public partial class ClassPage : ContentPage, IQueryAttributable
     private readonly IClassStudentService _classStudentService;
     private readonly IRoutineService _routineService;
     private bool _loaded;
+
+    private readonly ObservableCollection<Models.User> _allMembers = new();
+    public ObservableCollection<Models.User> FilteredMembers { get; } = new();
 
     private string _selectedClassId = string.Empty;
     public string SelectedClassId
@@ -90,7 +94,13 @@ public partial class ClassPage : ContentPage, IQueryAttributable
 
         // Members are students enrolled directly in this class via class_students, resolved as User objects.
         SportsList.ItemsSource = _sportService.Sports;
-        MembersList.ItemsSource = _classStudentService.ClassMembers;
+
+        _allMembers.Clear();
+        foreach (Models.User member in _classStudentService.ClassMembers.OrderBy(m => m.LastName))
+            _allMembers.Add(member);
+
+        MembersList.ItemsSource = FilteredMembers;
+        ApplyFilter();
 
         var displayRoutines = new List<Pages.Routine>();
         int position = 1;
@@ -109,11 +119,6 @@ public partial class ClassPage : ContentPage, IQueryAttributable
         ShowSports();
     }
 
-    private void OnSportClicked(object? sender, EventArgs e)
-    {
-        // TODO: open sport detail
-    }
-
     private async void OnMemberClicked(object sender, EventArgs e)
     {
         var clickedElement = sender as VisualElement;
@@ -122,8 +127,21 @@ public partial class ClassPage : ContentPage, IQueryAttributable
         var member = clickedElement.BindingContext as Models.User;
         if (member == null) return;
 
-        string memberName = $"{member.FirstName} {member.LastName}";
-        await Shell.Current.GoToAsync($"{nameof(MetricsPage)}?name={Uri.EscapeDataString(memberName)}");
+        await Shell.Current.GoToAsync($"{nameof(MetricsPage)}?userId={member.UserId}");
+    }
+
+    private void OnMemberSearchTextChanged(object? sender, TextChangedEventArgs e) => ApplyFilter();
+
+    private void ApplyFilter()
+    {
+        string search = MemberSearchBar.Text ?? "";
+        FilteredMembers.Clear();
+        foreach (Models.User member in _allMembers)
+        {
+            string fullName = member.FirstName + " " + member.LastName;
+            if (fullName.Contains(search, StringComparison.OrdinalIgnoreCase))
+                FilteredMembers.Add(member);
+        }
     }
 
     private void OnSportsTabClicked(object? sender, EventArgs e)
@@ -153,6 +171,7 @@ public partial class ClassPage : ContentPage, IQueryAttributable
         SportsList.IsVisible = true;
         RoutinesList.IsVisible = false;
         MembersList.IsVisible = false;
+        MemberSearchContainer.IsVisible = false;
     }
 
     private void ShowRoutines()
@@ -167,6 +186,7 @@ public partial class ClassPage : ContentPage, IQueryAttributable
         SportsList.IsVisible = false;
         RoutinesList.IsVisible = true;
         MembersList.IsVisible = false;
+        MemberSearchContainer.IsVisible = false;
     }
 
     private void ShowMembers()
@@ -182,6 +202,7 @@ public partial class ClassPage : ContentPage, IQueryAttributable
         SportsList.IsVisible = false;
         RoutinesList.IsVisible = false;
         MembersList.IsVisible = true;
+        MemberSearchContainer.IsVisible = true;
     }
 
     private static Color ResourceColor(string key, Color fallback)

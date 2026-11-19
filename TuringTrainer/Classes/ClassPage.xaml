@@ -96,7 +96,7 @@
                             Padding="18"
                             Margin="0">
 
-                        <Grid ColumnDefinitions="*,Auto"
+                        <Grid ColumnDefinitions="*"
                               ColumnSpacing="14">
 
                             <Label Text="{Binding Name}"
@@ -104,79 +104,84 @@
                                    FontSize="18"
                                    VerticalOptions="Center"/>
 
-                            <Button Grid.Column="1"
-                                    Text="›"
-                                    FontSize="32"
-                                    FontAttributes="Bold"
-                                    TextColor="{DynamicResource PageBg}"
-                                    BackgroundColor="{DynamicResource TextAccent}"
-                                    CornerRadius="12"
-                                    WidthRequest="55"
-                                    HeightRequest="55"
-                                    Padding="0"
-                                    Clicked="OnSportClicked"
-                                    CommandParameter="{Binding .}"/>
-
                         </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-        <CollectionView Grid.Row="2"
-                        x:Name="MembersList"
-                        IsVisible="False"
-                        SelectionMode="None">
+        <Grid Grid.Row="2" RowDefinitions="Auto,*" RowSpacing="10">
+            <Border x:Name="MemberSearchContainer"
+                    BackgroundColor="{DynamicResource CardBg}"
+                    Stroke="{DynamicResource CardBorderBrush}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="14,0"
+                    IsVisible="False">
+                <Entry x:Name="MemberSearchBar"
+                       Placeholder="Search members..."
+                       PlaceholderColor="{DynamicResource TextMuted}"
+                       TextColor="{DynamicResource TextMain}"
+                       BackgroundColor="Transparent"
+                       TextChanged="OnMemberSearchTextChanged" />
+            </Border>
 
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"
-                                   ItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border BackgroundColor="{DynamicResource CardBg}"
-                            Stroke="{DynamicResource CardBorderBrush}"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 16"
-                            Padding="18"
-                            Margin="0">
+            <CollectionView Grid.Row="1"
+                            x:Name="MembersList"
+                            IsVisible="False"
+                            SelectionMode="None">
 
-                        <Grid ColumnDefinitions="*,Auto"
-                              ColumnSpacing="14">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{DynamicResource CardBg}"
+                                Stroke="{DynamicResource CardBorderBrush}"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 16"
+                                Padding="18"
+                                Margin="0">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnMemberClicked"/>
+                            </Border.GestureRecognizers>
 
-                            <HorizontalStackLayout Spacing="5"
-                                                   VerticalOptions="Center">
+                            <Grid ColumnDefinitions="*"
+                                  ColumnSpacing="14">
 
-                                <Label Text="{Binding FirstName}"
-                                       TextColor="{DynamicResource TextMain}"
-                                       FontSize="18"
-                                       VerticalOptions="Center"/>
+                                <HorizontalStackLayout Spacing="5"
+                                                       VerticalOptions="Center">
 
-                                <Label Text="{Binding LastName}"
-                                       TextColor="{DynamicResource TextMain}"
-                                       FontSize="18"
-                                       VerticalOptions="Center"/>
+                                    <Border WidthRequest="54"
+                                            HeightRequest="54"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 27"
+                                            VerticalOptions="Center">
+                                        <Image Source="{Binding AvatarImage}"
+                                               WidthRequest="54"
+                                               HeightRequest="54"
+                                               Aspect="AspectFill"/>
+                                    </Border>
 
-                            </HorizontalStackLayout>
+                                    <Label Text="{Binding FirstName}"
+                                           TextColor="{DynamicResource TextMain}"
+                                           FontSize="18"
+                                           VerticalOptions="Center"/>
 
-                            <Button Grid.Column="1"
-                                    Text="›"
-                                    FontSize="32"
-                                    FontAttributes="Bold"
-                                    TextColor="{DynamicResource PageBg}"
-                                    BackgroundColor="{DynamicResource TextAccent}"
-                                    CornerRadius="12"
-                                    WidthRequest="55"
-                                    HeightRequest="55"
-                                    Padding="0"
-                                    Clicked="OnMemberClicked"
-                                    CommandParameter="{Binding .}"/>
+                                    <Label Text="{Binding LastName}"
+                                           TextColor="{DynamicResource TextMain}"
+                                           FontSize="18"
+                                           VerticalOptions="Center"/>
 
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                </HorizontalStackLayout>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
 
         <CollectionView Grid.Row="2"
                         x:Name="RoutinesList"

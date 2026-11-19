@@ -38,15 +38,6 @@
                            TextColor="{DynamicResource TextMain}"/>
                 </VerticalStackLayout>
 
-                <Label Grid.Column="2"
-                       Text="›"
-                       FontSize="32"
-                       FontAttributes="Bold"
-                       TextColor="{DynamicResource TextAccent}"
-                       WidthRequest="48"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center"
-                       HorizontalTextAlignment="Center"/>
             </Grid>
         </Border>
     </DataTemplate>
