@@ -110,7 +110,6 @@ public partial class AddExercisePage : ContentPage
             return;
         }
 
-        // Select once; do not immediately toggle it off.
         exercise.IsSelected = true;
     }
 
