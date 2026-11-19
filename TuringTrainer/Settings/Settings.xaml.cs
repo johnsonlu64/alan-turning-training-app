@@ -40,9 +40,7 @@ public partial class Settings : ContentPage
         string? email = _userService.GetUserSession()?.User?.Email;
         EmailLabel.Text = email ?? "";
 
-        ShowAccountInformation();
         await LoadOrganizationName();
-
 
         if (!string.IsNullOrWhiteSpace(_currentUser?.AvatarUrl))
         {

@@ -78,189 +78,38 @@
                                           VerticalOptions="Center"/>
                             </Grid>
 
-                            <!-- Class 1 -->
-                            <Border BackgroundColor="{DynamicResource CardBg}"
-                                    Stroke="{DynamicResource CardBorderBrush}"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="18">
-                                   <Border.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="OnClass1Tapped"/>
-                                   </Border.GestureRecognizers>
-
-                                   <Grid ColumnDefinitions="Auto,*,Auto"
-                                         ColumnSpacing="14">
-
-                                          <Border WidthRequest="48"
-                                                  HeightRequest="48"
-                                                  BackgroundColor="{DynamicResource AccentTint}"
-                                                  StrokeThickness="0"
-                                                  StrokeShape="RoundRectangle 12"
-                                                  VerticalOptions="Center">
-                                                 <Label Text="01"
-                                                        FontSize="17"
-                                                        FontAttributes="Bold"
-                                                        TextColor="{DynamicResource TextAccent}"
-                                                        HorizontalOptions="Center"
-                                                        VerticalOptions="Center"/>
-                                          </Border>
-
-                                          <VerticalStackLayout Grid.Column="1"
-                                                               Spacing="5"
-                                                               VerticalOptions="Center">
-                                                 <Label Text="Class 1"
-                                                        FontSize="18"
-                                                        FontAttributes="Bold"
-                                                        TextColor="{DynamicResource TextMain}"/>
-                                                 <Label Text="View enrolled students"
-                                                        FontSize="12"
-                                                        TextColor="{DynamicResource TextMuted}"/>
-                                          </VerticalStackLayout>
-
-                                          <Button Grid.Column="2"
-                                                  Text="›"
-                                                  FontSize="32"
-                                                  BackgroundColor="{DynamicResource TextAccent}"
-                                                  TextColor="{DynamicResource PageBg}"
-                                                  VerticalOptions="Center"/>
-                                   </Grid>
-                            </Border>
-
-                            <!-- Class 2 -->
-                            <Border BackgroundColor="{DynamicResource CardBg}"
-                                    Stroke="{DynamicResource CardBorderBrush}"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="18">
-                                   <Border.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="OnClass2Tapped"/>
-                                   </Border.GestureRecognizers>
-
-                                   <Grid ColumnDefinitions="Auto,*,Auto"
-                                         ColumnSpacing="14">
-
-                                          <Border WidthRequest="48"
-                                                  HeightRequest="48"
-                                                  BackgroundColor="{DynamicResource AccentTint}"
-                                                  StrokeThickness="0"
-                                                  StrokeShape="RoundRectangle 12"
-                                                  VerticalOptions="Center">
-                                                 <Label Text="02"
-                                                        FontSize="17"
-                                                        FontAttributes="Bold"
-                                                        TextColor="{DynamicResource TextAccent}"
-                                                        HorizontalOptions="Center"
-                                                        VerticalOptions="Center"/>
-                                          </Border>
-
-                                          <VerticalStackLayout Grid.Column="1"
-                                                               Spacing="5"
-                                                               VerticalOptions="Center">
-                                                 <Label Text="Class 2"
-                                                        FontSize="18"
-                                                        FontAttributes="Bold"
-                                                        TextColor="{DynamicResource TextMain}"/>
-                                                 <Label Text="View enrolled students"
-                                                        FontSize="12"
-                                                        TextColor="{DynamicResource TextMuted}"/>
-                                          </VerticalStackLayout>
-
-                                          <Button Grid.Column="2"
-                                                  Text="›"
-                                                  FontSize="32"
-                                                  BackgroundColor="{DynamicResource TextAccent}"
-                                                  TextColor="{DynamicResource PageBg}"
-                                                  VerticalOptions="Center"/>
-                                   </Grid>
-                            </Border>
-
-                            <!-- Class 3 -->
-                            <Border BackgroundColor="{DynamicResource CardBg}"
-                                    Stroke="{DynamicResource CardBorderBrush}"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 16"
-                                    Padding="18">
-                                   <Border.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="OnClass3Tapped"/>
-                                   </Border.GestureRecognizers>
-
-                                   <Grid ColumnDefinitions="Auto,*,Auto"
-                                         ColumnSpacing="14">
-
-                                          <Border WidthRequest="48"
-                                                  HeightRequest="48"
-                                                  BackgroundColor="{DynamicResource AccentTint}"
-                                                  StrokeThickness="0"
-                                                  StrokeShape="RoundRectangle 12"
-                                                  VerticalOptions="Center">
-                                                 <Label Text="03"
-                                                        FontSize="17"
-                                                        FontAttributes="Bold"
-                                                        TextColor="{DynamicResource TextAccent}"
-                                                        HorizontalOptions="Center"
-                                                        VerticalOptions="Center"/>
-                                          </Border>
-
-                                          <VerticalStackLayout Grid.Column="1"
-                                                               Spacing="5"
-                                                               VerticalOptions="Center">
-                                                 <Label Text="Class 3"
-                                                        FontSize="18"
-                                                        FontAttributes="Bold"
-                                                        TextColor="{DynamicResource TextMain}"/>
-                                                 <Label Text="View enrolled students"
-                                                        FontSize="12"
-                                                        TextColor="{DynamicResource TextMuted}"/>
-                                          </VerticalStackLayout>
-
-                                          <Button Grid.Column="2"
-                                                  Text="›"
-                                                  FontSize="32"
-                                                  BackgroundColor="{DynamicResource TextAccent}"
-                                                  TextColor="{DynamicResource PageBg}"
-                                                  VerticalOptions="Center"/>
-                                   </Grid>
-                            </Border>
+                            
 
                             <!-- Classes saved in Supabase are added after the existing classes. -->
                             <VerticalStackLayout x:Name="ClassListLayout"
                                           Spacing="12">
                                    <BindableLayout.ItemTemplate>
-                                          <DataTemplate x:DataType="models:Class">
-                                                 <Border BackgroundColor="{DynamicResource CardBg}"
-                                                         Stroke="{DynamicResource CardBorderBrush}"
-                                                         StrokeThickness="1"
-                                                         StrokeShape="RoundRectangle 16"
-                                                         Padding="18">
-                                                        <Grid ColumnDefinitions="Auto,*"
-                                                                      ColumnSpacing="14">
-                                                               <Border WidthRequest="48"
-                                                                             HeightRequest="48"
-                                                                       BackgroundColor="{DynamicResource AccentTint}"
-                                                                             StrokeThickness="0"
-                                                                       StrokeShape="RoundRectangle 12"
-                                                                             VerticalOptions="Center">
-                                                                      <Label Text="CL"
-                                                                                    FontSize="15"
-                                                                                    FontAttributes="Bold"
-                                                                             TextColor="{DynamicResource TextAccent}"
-                                                                                    HorizontalOptions="Center"
-                                                                             VerticalOptions="Center"/>
-                                                               </Border>
-                                                               <VerticalStackLayout Grid.Column="1"
-                                                                             Spacing="5"
-                                                                             VerticalOptions="Center">
-                                                                      <Label Text="{Binding Name}"
-                                                                                    FontSize="18"
-                                                                             FontAttributes="Bold"
-                                                                                    TextColor="{DynamicResource TextMain}"/>
-                                                                      <Label Text="View enrolled students"
-                                                                                    FontSize="12"
-                                                                             TextColor="{DynamicResource TextMuted}"/>
-                                                               </VerticalStackLayout>
-                                                        </Grid>
-                                                 </Border>
-                                          </DataTemplate>
+                                           <DataTemplate x:DataType="models:Class">
+                                                  <Border BackgroundColor="{DynamicResource CardBg}"
+                                                          Stroke="{DynamicResource CardBorderBrush}"
+                                                          StrokeThickness="1"
+                                                          StrokeShape="RoundRectangle 16"
+                                                          Padding="18">
+                                                         <Border.GestureRecognizers>
+                                                                  <TapGestureRecognizer Tapped="OnClassTapped"/>
+                                                         </Border.GestureRecognizers>
+                                                         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                                                                <Border WidthRequest="48" HeightRequest="48"
+                                                                        BackgroundColor="{DynamicResource AccentTint}" StrokeThickness="0"
+                                                                        StrokeShape="RoundRectangle 12" VerticalOptions="Center">
+                                                                       <Label Text="CL" FontSize="15" FontAttributes="Bold"
+                                                                              TextColor="{DynamicResource TextAccent}" HorizontalOptions="Center"
+                                                                              VerticalOptions="Center"/>
+                                                                </Border>
+                                                                <VerticalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
+                                                                       <Label Text="{Binding Name}" FontSize="18"
+                                                                              FontAttributes="Bold" TextColor="{DynamicResource TextMain}"/>
+                                                                       <Label Text="View enrolled students" FontSize="12"
+                                                                              TextColor="{DynamicResource TextMuted}"/>
+                                                                </VerticalStackLayout>
+                                                         </Grid>
+                                                  </Border>
+                                           </DataTemplate>
                                    </BindableLayout.ItemTemplate>
                             </VerticalStackLayout>
 

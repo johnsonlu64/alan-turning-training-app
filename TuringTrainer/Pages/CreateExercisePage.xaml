@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TuringTrainer.Pages.CreateExercisePage"
+             Title="Create Exercise"
+             BackgroundColor="#101010">
+
+    <Grid RowDefinitions="*,Auto"
+          Padding="20,12,20,20"
+          RowSpacing="16">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="16">
+
+                <Label Text="Give the exercise a name. You can add it to a routine from the routine builder afterwards."
+                       FontSize="12"
+                       TextColor="#999999"/>
+
+                <Border BackgroundColor="#1C1C1C"
+                        Stroke="#343434"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="18">
+
+                    <VerticalStackLayout Spacing="14">
+                        <Label Text="EXERCISE NAME"
+                               FontSize="13"
+                               CharacterSpacing="2"
+                               FontAttributes="Bold"
+                               TextColor="#A5A5A5"/>
+
+                        <Entry x:Name="NameEntry"
+                               Placeholder="For example, Bench Press"
+                               PlaceholderColor="#999999"
+                               TextColor="#FFFFFF"
+                               BackgroundColor="#262626"
+                               ReturnType="Done"
+                               Completed="OnNameCompleted"/>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Row="1"
+              ColumnDefinitions="Auto,*"
+              ColumnSpacing="12">
+
+            <Button Text="CANCEL"
+                    Clicked="OnCancelClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#999999"
+                    BorderColor="#343434"
+                    BorderWidth="1"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    CornerRadius="12"
+                    HeightRequest="52"
+                    WidthRequest="120"/>
+
+            <Button Grid.Column="1"
+                    Text="CREATE EXERCISE"
+                    Clicked="OnCreateClicked"
+                    BackgroundColor="#F5C542"
+                    TextColor="#101010"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    CornerRadius="12"
+                    HeightRequest="52"/>
+        </Grid>
+    </Grid>
+</ContentPage>

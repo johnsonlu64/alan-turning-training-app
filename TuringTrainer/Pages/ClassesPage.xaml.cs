@@ -8,24 +8,6 @@ public partial class ClassesPage : ContentPage
 
     }
 
-    private async void OnClass1Tapped(object sender, TappedEventArgs e)
-    {
-        // Open Class 1
-        await Shell.Current.GoToAsync(nameof(ClassIPage));
-    }
-
-    private async void OnClass2Tapped(object sender, TappedEventArgs e)
-    {
-        // Open Class 2
-        await Shell.Current.GoToAsync(nameof(ClassIIPage));
-    }
-
-    private async void OnClass3Tapped(object sender, TappedEventArgs e)
-    {
-        // Open Class 3
-        await Shell.Current.GoToAsync(nameof(ClassIIIPage));
-    }
-
     private async void OnHomeClicked(object sender, EventArgs e)
     {
         // Navigate to Home page

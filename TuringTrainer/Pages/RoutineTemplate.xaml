@@ -36,33 +36,8 @@
                            FontSize="18"
                            FontAttributes="Bold"
                            TextColor="{DynamicResource TextMain}"/>
-                    <Label Text="{Binding Subtitle}"
-                           FontSize="12"
-                           TextColor="{DynamicResource TextMuted}"/>
-
-                    <Grid ColumnDefinitions="*,Auto"
-                            ColumnSpacing="12">
-                        <Label Text="{Binding ExerciseCount}"
-                               FontSize="11"
-                               CharacterSpacing="1"
-                               TextColor="{DynamicResource TextMuted}"/>
-                        <Label Grid.Column="1"
-                               Text="{Binding Duration}"
-                               FontSize="11"
-                               CharacterSpacing="1"
-                               TextColor="{DynamicResource TextMuted}"/>
-                    </Grid>
                 </VerticalStackLayout>
 
-                <Label Grid.Column="2"
-                       Text="›"
-                       FontSize="32"
-                       FontAttributes="Bold"
-                       TextColor="{DynamicResource TextAccent}"
-                       WidthRequest="48"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center"
-                       HorizontalTextAlignment="Center"/>
             </Grid>
         </Border>
     </DataTemplate>

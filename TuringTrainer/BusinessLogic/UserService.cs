@@ -1,4 +1,4 @@
-
+using System.Collections.ObjectModel;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
 using TuringTrainer.Services.Repositories;
@@ -10,6 +10,25 @@ public class UserService : IUserService
   public UserService(IUserRepository userRepository)
   {
     _userRepository = userRepository;
+  }
+
+  public ObservableCollection<User> Users => _userRepository.Users;
+
+  public ObservableCollection<User> ClassMembers => _userRepository.ClassMembers;
+
+  public async Task SelectAllUsers()
+  {
+    await _userRepository.SelectAllUsers();
+  }
+
+  public async Task GetUsersInClass(string classId)
+  {
+    if (string.IsNullOrWhiteSpace(classId))
+    {
+      return;
+    }
+
+    await _userRepository.SelectAllUsersByClass(classId);
   }
 
   public Supabase.Gotrue.Session? GetUserSession()
