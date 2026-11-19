@@ -242,4 +242,27 @@ public partial class MetricsPage : ContentPage
         };
     }
 
+    private async void OnHomeClicked(object sender, EventArgs e)
+    {
+        // Navigate to Home page
+        await Shell.Current.GoToAsync(nameof(Homepage));
+    }
+
+    private async void OnLeaderboardClicked(object sender, EventArgs e)
+    {
+        // Navigate to Leaderboard page
+        await Shell.Current.GoToAsync(nameof(LeaderBoardPage));
+    }
+
+    private async void OnMetricsClicked(object sender, EventArgs e)
+    {
+        // Navigate to Metrics page
+        await Shell.Current.GoToAsync(nameof(ClassesPage));
+    }
+
+    private async void OnSettingsClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("SettingsPage");
+    }
+
 }
