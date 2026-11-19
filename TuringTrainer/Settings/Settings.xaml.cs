@@ -75,17 +75,20 @@ public partial class Settings : ContentPage
             if (organization != null)
             {
                 OrganizationNameLabel.Text = organization.Name;
+                AccountOrganizationLabel.Text = organization.Name;
                 OrganizationIdLabel.Text = organization.OrganizationId.ToString();
             }
             else
             {
                 OrganizationNameLabel.Text = "No organization";
+                AccountOrganizationLabel.Text = "No organization";
                 OrganizationIdLabel.Text = string.Empty;
             }
         }
         catch
         {
             OrganizationNameLabel.Text = "No organization";
+            AccountOrganizationLabel.Text = "No organization";
             OrganizationIdLabel.Text = string.Empty;
         }
     }
