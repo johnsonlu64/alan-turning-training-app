@@ -16,6 +16,17 @@ public partial class Settings : ContentPage
     private User? _currentUser;
     private readonly string[] themes = { "System", "Light", "Dark" };
 
+    private Image? ProfileImage
+    {
+        get
+        {
+            return this.FindByName("ProfileImage") as Image
+                ?? this.FindByName("ProfilePictureImage") as Image
+                ?? this.FindByName("ProfilePicture") as Image
+                ?? this.FindByName("AvatarImage") as Image;
+        }
+    }
+
     private readonly IUserService _userService;
     private readonly IOrganizationService _organizationService = new OrganizationService();
 
@@ -30,38 +41,31 @@ public partial class Settings : ContentPage
     }
 
     protected override async void OnAppearing()
+{
+    base.OnAppearing();
+
+    _currentUser = await _userService.CurrentUser();
+
+    if (_currentUser != null)
     {
-        base.OnAppearing();
-        _currentUser = await _userService.CurrentUser();
-
-        if (_currentUser != null)
-        {
-            ShowAccountInformation();
-        }
-
-        NameEntry.Text ??= "Coach Name";
-        EmailEntry.Text ??= "coach@uwosh.edu";
-
-        string? email = _userService.GetUserSession()?.User?.Email;
-        EmailLabel.Text = email ?? "";
-
-        await LoadOrganizationName();
         ShowAccountInformation();
-
-        string? email = _userService.GetUserSession()?.User?.Email;
-        EmailLabel.Text = email ?? "";
-
-        await LoadOrganizationName();
-
-        if (!string.IsNullOrWhiteSpace(_currentUser?.AvatarUrl))
-        {
-            ProfileImage.Source = ImageSource.FromUri(new Uri(_currentUser.AvatarUrl));
-        }
-        else
-        {
-            ProfileImage.Source = "blank_profile_picture.png";
-        }
     }
+
+    string? email = _userService.GetUserSession()?.User?.Email;
+    EmailLabel.Text = email ?? "";
+
+    await LoadOrganizationName();
+
+    if (!string.IsNullOrWhiteSpace(_currentUser?.AvatarUrl))
+    {
+        ProfileImage.Source = ImageSource.FromUri(
+            new Uri(_currentUser.AvatarUrl));
+    }
+    else
+    {
+        ProfileImage.Source = "blank_profile_picture.png";
+    }
+}
 
     private async Task LoadOrganizationName()
     {
@@ -71,20 +75,17 @@ public partial class Settings : ContentPage
             if (organization != null)
             {
                 OrganizationNameLabel.Text = organization.Name;
-                AccountOrganizationLabel.Text = organization.Name;
                 OrganizationIdLabel.Text = organization.OrganizationId.ToString();
             }
             else
             {
                 OrganizationNameLabel.Text = "No organization";
-                AccountOrganizationLabel.Text = "No organization";
                 OrganizationIdLabel.Text = string.Empty;
             }
         }
         catch
         {
             OrganizationNameLabel.Text = "No organization";
-            AccountOrganizationLabel.Text = "No organization";
             OrganizationIdLabel.Text = string.Empty;
         }
     }
@@ -160,48 +161,55 @@ public partial class Settings : ContentPage
     }
 
     private async Task RemoveProfilePicture()
+{
+    bool confirm = await DisplayAlertAsync(
+        "Remove Photo",
+        "Are you sure you want to remove your profile picture?",
+        "Remove",
+        "Cancel");
+
+    if (!confirm)
+        return;
+
+    try
     {
-        return Application.Current?.UserAppTheme switch
+        User? currentUser = await _userService.CurrentUser();
+
+        if (currentUser == null)
         {
-            AppTheme.Light => (int)ThemeChoice.Light,
-            AppTheme.Dark => (int)ThemeChoice.Dark,
-            _ => (int)ThemeChoice.System
-        };
-    }
-        bool confirm = await DisplayAlertAsync(
-            "Remove Photo",
-            "Are you sure you want to remove your profile picture?",
-            "Remove",
-            "Cancel");
+            await DisplayAlertAsync(
+                "Error",
+                "User not found.",
+                "OK");
 
-        if (!confirm) { return; }
-
-        try
-        {
-            User? currentUser = await _userService.CurrentUser();
-
-            if (currentUser == null)
-            {
-                await DisplayAlertAsync("Error", "User not found.", "OK");
-                return;
-            }
-
-            UserAvatarError result = await _userService.UpdateAvatar(currentUser.UserId, null);
-
-            if (result == UserAvatarError.NoError)
-            {
-                ProfileImage.Source = "blank_profile_picture.png";
-            }
-            else
-            {
-                await DisplayAlertAsync("Remove Failed", result.ToString(), "OK");
-            }
+            return;
         }
-        catch (Exception ex)
+
+        UserAvatarError result = await _userService.UpdateAvatar(
+            currentUser.UserId,
+            null);
+
+        if (result == UserAvatarError.NoError)
         {
-            await DisplayAlertAsync("Error", ex.Message, "OK");
+            currentUser.AvatarUrl = null;
+            ProfileImage.Source = "blank_profile_picture.png";
+        }
+        else
+        {
+            await DisplayAlertAsync(
+                "Remove Failed",
+                result.ToString(),
+                "OK");
         }
     }
+    catch (Exception ex)
+    {
+        await DisplayAlertAsync(
+            "Error",
+            ex.Message,
+            "OK");
+    }
+}
 
     private async void OnSaveClicked(object sender, EventArgs e)
     {
