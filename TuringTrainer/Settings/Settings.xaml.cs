@@ -1,34 +1,28 @@
+using System;
+using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
 using TuringTrainer.BusinessLogic;
 using TuringTrainer.Models;
-using Microsoft.Maui.Controls;
 using TuringTrainer.Services;
 using TuringTrainer.Services.Repositories;
 
-
 namespace TuringTrainer.Settings;
 
-/// <summary>
-/// Settings
-/// Author: Aaditya Bhanadari
-/// </summary>
 public partial class Settings : ContentPage
 {
     private User? _currentUser;
-    private readonly string[] themes = { "System", "Light", "Dark" };
 
-    private Image? ProfileImage
+    private readonly string[] themes =
     {
-        get
-        {
-            return this.FindByName("ProfileImage") as Image
-                ?? this.FindByName("ProfilePictureImage") as Image
-                ?? this.FindByName("ProfilePicture") as Image
-                ?? this.FindByName("AvatarImage") as Image;
-        }
-    }
+        "System",
+        "Light",
+        "Dark"
+    };
 
     private readonly IUserService _userService;
-    private readonly IOrganizationService _organizationService = new OrganizationService();
+
+    private readonly IOrganizationService _organizationService =
+        new OrganizationService();
 
     public Settings()
     {
@@ -41,42 +35,45 @@ public partial class Settings : ContentPage
     }
 
     protected override async void OnAppearing()
-{
-    base.OnAppearing();
-
-    _currentUser = await _userService.CurrentUser();
-
-    if (_currentUser != null)
     {
-        ShowAccountInformation();
-    }
+        base.OnAppearing();
 
-    string? email = _userService.GetUserSession()?.User?.Email;
-    EmailLabel.Text = email ?? "";
+        _currentUser = await _userService.CurrentUser();
 
-    await LoadOrganizationName();
+        if (_currentUser != null)
+        {
+            ShowAccountInformation();
+        }
 
-    if (!string.IsNullOrWhiteSpace(_currentUser?.AvatarUrl))
-    {
-        ProfileImage.Source = ImageSource.FromUri(
-            new Uri(_currentUser.AvatarUrl));
+        string? email = _userService.GetUserSession()?.User?.Email;
+        EmailLabel.Text = email ?? "";
+
+        await LoadOrganizationName();
+
+        if (!string.IsNullOrWhiteSpace(_currentUser?.AvatarUrl))
+        {
+            ProfileImage.Source = ImageSource.FromUri(
+                new Uri(_currentUser.AvatarUrl));
+        }
+        else
+        {
+            ProfileImage.Source = "blank_profile_picture.png";
+        }
     }
-    else
-    {
-        ProfileImage.Source = "blank_profile_picture.png";
-    }
-}
 
     private async Task LoadOrganizationName()
     {
         try
         {
-            Organization? organization = await _organizationService.GetCurrentOrganization();
+            Organization? organization =
+                await _organizationService.GetCurrentOrganization();
+
             if (organization != null)
             {
                 OrganizationNameLabel.Text = organization.Name;
                 AccountOrganizationLabel.Text = organization.Name;
-                OrganizationIdLabel.Text = organization.OrganizationId.ToString();
+                OrganizationIdLabel.Text =
+                    organization.OrganizationId.ToString();
             }
             else
             {
@@ -95,16 +92,18 @@ public partial class Settings : ContentPage
 
     private void OnThemeChanged(object sender, EventArgs e)
     {
-        if(ThemePicker.SelectedIndex < 0)
-        {
+        if (ThemePicker.SelectedIndex < 0)
             return;
-        }
 
-        ThemeChoice choice = (ThemeChoice)ThemePicker.SelectedIndex;
+        ThemeChoice choice =
+            (ThemeChoice)ThemePicker.SelectedIndex;
+
         ThemeService.Apply(choice);
     }
 
-    private async void OnProfilePictureTapped(object sender, TappedEventArgs e)
+    private async void OnProfilePictureTapped(
+        object sender,
+        TappedEventArgs e)
     {
         string action = await DisplayActionSheetAsync(
             "Change Photo",
@@ -128,107 +127,144 @@ public partial class Settings : ContentPage
         try
         {
             var photo = await MediaPicker.Default.PickPhotoAsync();
+
             if (photo == null)
-            {
                 return;
-            }
 
-            string? userId = _userService.CurrentUserId();
+            User? currentUser =
+                await _userService.CurrentUser();
 
-            User? currentUser = await _userService.CurrentUser();
             if (currentUser == null)
             {
-                await DisplayAlertAsync("Error", "User not found.", "OK");
+                await DisplayAlertAsync(
+                    "Error",
+                    "User not found.",
+                    "OK");
+
                 return;
             }
 
-            UserAvatarError result = await _userService.UploadAvatar(currentUser.UserId, photo);
+            UserAvatarError result =
+                await _userService.UploadAvatar(
+                    currentUser.UserId,
+                    photo);
+
             if (result == UserAvatarError.NoError)
             {
-                User? updatedUser = await _userService.CurrentUser();
+                User? updatedUser =
+                    await _userService.CurrentUser();
 
                 if (!string.IsNullOrWhiteSpace(updatedUser?.AvatarUrl))
                 {
-                    ProfileImage.Source = ImageSource.FromUri(new Uri(updatedUser.AvatarUrl));
+                    _currentUser = updatedUser;
+
+                    ProfileImage.Source = ImageSource.FromUri(
+                        new Uri(updatedUser.AvatarUrl));
                 }
             }
             else
             {
-                await DisplayAlertAsync("Upload Failed", result.ToString(), "OK");
+                await DisplayAlertAsync(
+                    "Upload Failed",
+                    result.ToString(),
+                    "OK");
             }
         }
         catch (Exception ex)
         {
-            await DisplayAlertAsync("Error", ex.Message, "OK");
+            await DisplayAlertAsync(
+                "Error",
+                ex.Message,
+                "OK");
         }
     }
 
     private async Task RemoveProfilePicture()
-{
-    bool confirm = await DisplayAlertAsync(
-        "Remove Photo",
-        "Are you sure you want to remove your profile picture?",
-        "Remove",
-        "Cancel");
-
-    if (!confirm)
-        return;
-
-    try
     {
-        User? currentUser = await _userService.CurrentUser();
+        bool confirm = await DisplayAlertAsync(
+            "Remove Photo",
+            "Are you sure you want to remove your profile picture?",
+            "Remove",
+            "Cancel");
 
-        if (currentUser == null)
+        if (!confirm)
+            return;
+
+        try
+        {
+            User? currentUser =
+                await _userService.CurrentUser();
+
+            if (currentUser == null)
+            {
+                await DisplayAlertAsync(
+                    "Error",
+                    "User not found.",
+                    "OK");
+
+                return;
+            }
+
+            UserAvatarError result =
+                await _userService.UpdateAvatar(
+                    currentUser.UserId,
+                    null);
+
+            if (result == UserAvatarError.NoError)
+            {
+                currentUser.AvatarUrl = null;
+                _currentUser = currentUser;
+
+                ProfileImage.Source =
+                    "blank_profile_picture.png";
+            }
+            else
+            {
+                await DisplayAlertAsync(
+                    "Remove Failed",
+                    result.ToString(),
+                    "OK");
+            }
+        }
+        catch (Exception ex)
         {
             await DisplayAlertAsync(
                 "Error",
-                "User not found.",
-                "OK");
-
-            return;
-        }
-
-        UserAvatarError result = await _userService.UpdateAvatar(
-            currentUser.UserId,
-            null);
-
-        if (result == UserAvatarError.NoError)
-        {
-            currentUser.AvatarUrl = null;
-            ProfileImage.Source = "blank_profile_picture.png";
-        }
-        else
-        {
-            await DisplayAlertAsync(
-                "Remove Failed",
-                result.ToString(),
+                ex.Message,
                 "OK");
         }
     }
-    catch (Exception ex)
-    {
-        await DisplayAlertAsync(
-            "Error",
-            ex.Message,
-            "OK");
-    }
-}
 
-    private async void OnSaveClicked(object sender, EventArgs e)
+    private async void OnSaveClicked(
+        object sender,
+        EventArgs e)
     {
         if (_currentUser == null)
         {
-            await DisplayAlertAsync("Error", "Could not find your account information.", "OK");
+            await DisplayAlertAsync(
+                "Error",
+                "Could not find your account information.",
+                "OK");
+
             return;
         }
 
-        string firstName = FirstNameEntry.Text?.Trim() ?? "";
-        string middleInitial = MiddleInitialEntry.Text?.Trim() ?? "";
-        string lastName = LastNameEntry.Text?.Trim() ?? "";
+        string firstName =
+            FirstNameEntry.Text?.Trim() ?? "";
+
+        string middleInitial =
+            MiddleInitialEntry.Text?.Trim() ?? "";
+
+        string lastName =
+            LastNameEntry.Text?.Trim() ?? "";
 
         if (string.IsNullOrWhiteSpace(firstName))
         {
-            await DisplayAlertAsync("Missing Information", "Please enter your first name.", "OK");
+            await DisplayAlertAsync(
+                "Missing Information",
+                "Please enter your first name.",
+                "OK");
+
             return;
         }
 
@@ -249,34 +285,43 @@ public partial class Settings : ContentPage
 
             EditAccountPopup.IsVisible = false;
 
-            await DisplayAlertAsync("Success", "Your account information has been updated.", "OK");
+            await DisplayAlertAsync(
+                "Success",
+                "Your account information has been updated.",
+                "OK");
         }
         else
         {
             await DisplayAlertAsync(
-        "Update Failed",
-        $"Update result: {result}",
-        "OK");
+                "Update Failed",
+                $"Update result: {result}",
+                "OK");
         }
     }
 
-    private async void OnHelpTapped(object sender, TappedEventArgs e)
+    private async void OnHelpTapped(
+        object sender,
+        TappedEventArgs e)
     {
         await DisplayAlertAsync(
-        "Coming Soon!",
-        "The Help feature will be available soon.",
-        "OK");
+            "Coming Soon!",
+            "The Help feature will be available soon.",
+            "OK");
     }
 
-    private async void OnFeedbackTapped(object sender, TappedEventArgs e)
+    private async void OnFeedbackTapped(
+        object sender,
+        TappedEventArgs e)
     {
         await DisplayAlertAsync(
-        "Coming Soon!",
-        "The Feedback feature will be available soon.",
-        "OK");
+            "Coming Soon!",
+            "The Feedback feature will be available soon.",
+            "OK");
     }
 
-    private async void OnLogoutClicked(object sender, EventArgs e)
+    private async void OnLogoutClicked(
+        object sender,
+        EventArgs e)
     {
         bool confirmed = await DisplayAlertAsync(
             "Log Out",
@@ -287,35 +332,48 @@ public partial class Settings : ContentPage
         if (!confirmed)
             return;
 
-        string? currentUserId = _userService.CurrentUserId();
-        UserSignoutError result = await _userService.SignOutUser();
+        string? currentUserId =
+            _userService.CurrentUserId();
+
+        UserSignoutError result =
+            await _userService.SignOutUser();
 
         if (result == UserSignoutError.NoError)
         {
             if (Guid.TryParse(currentUserId, out Guid userId))
             {
-                await _organizationService.ClearCurrentOrganization(userId);
+                await _organizationService.ClearCurrentOrganization(
+                    userId);
             }
 
             await Shell.Current.GoToAsync(nameof(LoginPage));
         }
         else
         {
-            await DisplayAlertAsync("ErrorSigningOut", UserSignoutError.DBSignoutError.ToString(), "Ok");
+            await DisplayAlertAsync(
+                "ErrorSigningOut",
+                UserSignoutError.DBSignoutError.ToString(),
+                "OK");
         }
     }
 
-    private async void OnHomeClicked(object sender, EventArgs e)
+    private async void OnHomeClicked(
+        object sender,
+        EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(Homepage));
     }
 
-    private async void OnLeaderboardClicked(object sender, EventArgs e)
+    private async void OnLeaderboardClicked(
+        object sender,
+        EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(LeaderBoardPage));
     }
 
-    private async void OnMetricsClicked(object sender, EventArgs e)
+    private async void OnMetricsClicked(
+        object sender,
+        EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(ClassesPage));
     }
@@ -330,7 +388,9 @@ public partial class Settings : ContentPage
         LastNameLabel.Text = _currentUser.LastName;
     }
 
-    private void OnEditClicked(object sender, EventArgs e)
+    private void OnEditClicked(
+        object sender,
+        EventArgs e)
     {
         if (_currentUser == null)
             return;
@@ -342,9 +402,10 @@ public partial class Settings : ContentPage
         EditAccountPopup.IsVisible = true;
     }
 
-    private void OnCancelClicked(object sender, EventArgs e)
+    private void OnCancelClicked(
+        object sender,
+        EventArgs e)
     {
         EditAccountPopup.IsVisible = false;
-
     }
 }
