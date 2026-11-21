@@ -529,7 +529,7 @@ public partial class LeaderBoardPage : ContentPage
     private async void OnMetricsClicked(object sender, EventArgs e)
     {
         if (!busy && !editing)
-            await Shell.Current.GoToAsync(nameof(MetricsPage));
+            await Shell.Current.GoToAsync(nameof(ClassesPage));
     }
 
     private async void OnSettingsClicked(object sender, EventArgs e)
