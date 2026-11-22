@@ -18,10 +18,6 @@
                    FontAttributes="Bold"
                    TextColor="{DynamicResource TextAccent}"/>
 
-            <Label Text="Ranked by PR ÷ body weight at the PR."
-                   FontSize="13"
-                   TextColor="{DynamicResource TextMuted}"/>
-
             <Grid ColumnDefinitions="*,*"
                   ColumnSpacing="12">
 
