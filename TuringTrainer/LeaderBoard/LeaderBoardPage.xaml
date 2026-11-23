@@ -120,13 +120,44 @@
 
                                           <VerticalStackLayout Spacing="9">
 
-                                                 <Grid ColumnDefinitions="32,*,90"
+                                                 <Grid ColumnDefinitions="48,*,90"
                                                        ColumnSpacing="8">
 
                                                         <Label Text="{Binding RankText}"
-                                                               FontSize="18"
+                                                               FontSize="24"
+                                                               HorizontalTextAlignment="Center"
                                                                VerticalOptions="Center"
-                                                               TextColor="{DynamicResource TextMain}"/>
+                                                               TextColor="{DynamicResource TextMain}">
+
+                                                               <Label.Triggers>
+                                                                      <DataTrigger TargetType="Label"
+                                                                                   Binding="{Binding Rank}"
+                                                                                   Value="1">
+                                                                             <Setter Property="Text"
+                                                                                           Value="🥇"/>
+                                                                             <Setter Property="FontSize"
+                                                                                           Value="30"/>
+                                                                      </DataTrigger>
+
+                                                                      <DataTrigger TargetType="Label"
+                                                                                   Binding="{Binding Rank}"
+                                                                                   Value="2">
+                                                                             <Setter Property="Text"
+                                                                                           Value="🥈"/>
+                                                                             <Setter Property="FontSize"
+                                                                                           Value="30"/>
+                                                                      </DataTrigger>
+
+                                                                      <DataTrigger TargetType="Label"
+                                                                                   Binding="{Binding Rank}"
+                                                                                   Value="3">
+                                                                             <Setter Property="Text"
+                                                                                           Value="🥉"/>
+                                                                             <Setter Property="FontSize"
+                                                                                           Value="30"/>
+                                                                      </DataTrigger>
+                                                               </Label.Triggers>
+                                                        </Label>
 
                                                         <Label Grid.Column="1"
                                                                Text="{Binding Name}"
