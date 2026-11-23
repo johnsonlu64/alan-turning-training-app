@@ -1,246 +1,290 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:lb="clr-namespace:TuringTrainer.LeaderBoard"
-    x:Class="TuringTrainer.LeaderBoardPage"
-    Background="{DynamicResource PageBgBrush}"
-    Shell.NavBarIsVisible="False">
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:lb="clr-namespace:TuringTrainer.LeaderBoard"
+       x:Class="TuringTrainer.LeaderBoardPage"
+       Background="{DynamicResource PageBgBrush}"
+       Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto,*,Auto"
-          Padding="20,14,20,8"
-          RowSpacing="12">
+       <Grid RowDefinitions="Auto,*,Auto"
+             Padding="20,14,20,8"
+             RowSpacing="12">
 
-        <VerticalStackLayout Spacing="10">
+              <VerticalStackLayout Spacing="10">
 
-            <Label Text="Leaderboard"
-                   FontSize="30"
-                   FontAttributes="Bold"
-                   TextColor="{DynamicResource TextAccent}" />
+                     <Label Text="Leaderboard"
+                            FontSize="30"
+                            FontAttributes="Bold"
+                            TextColor="{DynamicResource TextAccent}"/>
 
-            <Grid ColumnDefinitions="*,*,*"
-                  RowDefinitions="Auto,Auto,Auto"
-                  ColumnSpacing="14"
-                  RowSpacing="8">
+                     <Grid ColumnDefinitions="*,*,*"
+                           RowDefinitions="Auto,Auto,Auto"
+                           ColumnSpacing="14"
+                           RowSpacing="8">
 
-                <VerticalStackLayout
-                    Grid.ColumnSpan="{OnIdiom Phone=3, Default=1}"
-                    Spacing="3">
+                            <VerticalStackLayout
+                                   Grid.ColumnSpan="{OnIdiom Phone=3, Default=1}"
+                                   Spacing="3">
 
-                    <Label Text="Class"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextMain}" />
+                                   <Label Text="Class"
+                                          FontSize="16"
+                                          TextColor="{DynamicResource TextMain}"/>
 
-                    <Picker x:Name="ClassPicker"
-                            Title="Choose class"
-                            FontSize="18"
-                            HeightRequest="48"
-                            ItemDisplayBinding="{Binding Name}"
-                            SelectedIndexChanged="OnClassChanged"
-                            TextColor="{DynamicResource TextMain}"
-                            TitleColor="{DynamicResource TextMuted}"
-                            BackgroundColor="{DynamicResource InsetBg}" />
-                </VerticalStackLayout>
+                                   <Picker x:Name="ClassPicker"
+                                           Title="Choose class"
+                                           FontSize="18"
+                                           HeightRequest="48"
+                                           ItemDisplayBinding="{Binding Name}"
+                                           SelectedIndexChanged="OnClassChanged"
+                                           TextColor="{DynamicResource TextMain}"
+                                           TitleColor="{DynamicResource TextMuted}"
+                                           BackgroundColor="{DynamicResource InsetBg}"/>
+                            </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Grid.Column="{OnIdiom Phone=0, Default=1}"
-                    Grid.Row="{OnIdiom Phone=1, Default=0}"
-                    Grid.ColumnSpan="{OnIdiom Phone=3, Default=1}"
-                    Spacing="3">
+                            <VerticalStackLayout
+                                   Grid.Column="{OnIdiom Phone=0, Default=1}"
+                                   Grid.Row="{OnIdiom Phone=1, Default=0}"
+                                   Grid.ColumnSpan="{OnIdiom Phone=3, Default=1}"
+                                   Spacing="3">
 
-                    <Label Text="Sport"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextMain}" />
+                                   <Label Text="Sport"
+                                          FontSize="16"
+                                          TextColor="{DynamicResource TextMain}"/>
 
-                    <Picker x:Name="GroupPicker"
-                            Title="Choose sport"
-                            FontSize="18"
-                            HeightRequest="48"
-                            IsEnabled="False"
-                            ItemDisplayBinding="{Binding Name}"
-                            SelectedIndexChanged="OnGroupChanged"
-                            TextColor="{DynamicResource TextMain}"
-                            TitleColor="{DynamicResource TextMuted}"
-                            BackgroundColor="{DynamicResource InsetBg}" />
-                </VerticalStackLayout>
+                                   <Picker x:Name="GroupPicker"
+                                           Title="Choose sport"
+                                           FontSize="18"
+                                           HeightRequest="48"
+                                           IsEnabled="False"
+                                           ItemDisplayBinding="{Binding Name}"
+                                           SelectedIndexChanged="OnGroupChanged"
+                                           TextColor="{DynamicResource TextMain}"
+                                           TitleColor="{DynamicResource TextMuted}"
+                                           BackgroundColor="{DynamicResource InsetBg}"/>
+                            </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Grid.Column="{OnIdiom Phone=0, Default=2}"
-                    Grid.Row="{OnIdiom Phone=2, Default=0}"
-                    Grid.ColumnSpan="{OnIdiom Phone=3, Default=1}"
-                    Spacing="3">
+                            <VerticalStackLayout
+                                   Grid.Column="{OnIdiom Phone=0, Default=2}"
+                                   Grid.Row="{OnIdiom Phone=2, Default=0}"
+                                   Grid.ColumnSpan="{OnIdiom Phone=3, Default=1}"
+                                   Spacing="3">
 
-                    <Label Text="Exercise"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextMain}" />
+                                   <Label Text="Exercise"
+                                          FontSize="16"
+                                          TextColor="{DynamicResource TextMain}"/>
 
-                    <Picker x:Name="ExercisePicker"
-                            Title="Choose exercise"
-                            FontSize="18"
-                            HeightRequest="48"
-                            IsEnabled="False"
-                            ItemDisplayBinding="{Binding Name}"
-                            SelectedIndexChanged="OnExerciseChanged"
-                            TextColor="{DynamicResource TextMain}"
-                            TitleColor="{DynamicResource TextMuted}"
-                            BackgroundColor="{DynamicResource InsetBg}" />
-                </VerticalStackLayout>
-            </Grid>
+                                   <Picker x:Name="ExercisePicker"
+                                           Title="Choose exercise"
+                                           FontSize="18"
+                                           HeightRequest="48"
+                                           IsEnabled="False"
+                                           ItemDisplayBinding="{Binding Name}"
+                                           SelectedIndexChanged="OnExerciseChanged"
+                                           TextColor="{DynamicResource TextMain}"
+                                           TitleColor="{DynamicResource TextMuted}"
+                                           BackgroundColor="{DynamicResource InsetBg}"/>
+                            </VerticalStackLayout>
+                     </Grid>
 
-            <Grid ColumnDefinitions="*,Auto"
-                  ColumnSpacing="12">
+                     <Grid ColumnDefinitions="*,Auto"
+                           ColumnSpacing="12">
 
-                <Label x:Name="StatusLabel"
-                       Text="Loading classes…"
-                       FontSize="15"
-                       VerticalOptions="Center"
-                       TextColor="{DynamicResource TextMain}" />
+                            <Label x:Name="StatusLabel"
+                                   Text="Loading classes…"
+                                   FontSize="15"
+                                   VerticalOptions="Center"
+                                   TextColor="{DynamicResource TextMain}"/>
 
-                <Button x:Name="RefreshButton"
-                        Grid.Column="1"
-                        Text="Refresh"
-                        FontSize="16"
-                        HeightRequest="44"
-                        Clicked="OnRefreshClicked"
-                        TextColor="{DynamicResource TextMain}"
-                        BackgroundColor="{DynamicResource InsetBg}" />
-            </Grid>
+                            <Button x:Name="RefreshButton"
+                                    Grid.Column="1"
+                                    Text="Refresh"
+                                    FontSize="16"
+                                    HeightRequest="44"
+                                    Clicked="OnRefreshClicked"
+                                    TextColor="{DynamicResource TextMain}"
+                                    BackgroundColor="{DynamicResource InsetBg}"/>
+                     </Grid>
 
-            <ActivityIndicator x:Name="LoadingIndicator"
-                               IsVisible="False"
-                               Color="{DynamicResource TextAccent}" />
-        </VerticalStackLayout>
+                     <ActivityIndicator x:Name="LoadingIndicator"
+                                        IsVisible="False"
+                                        Color="{DynamicResource TextAccent}"/>
+              </VerticalStackLayout>
 
-        <CollectionView x:Name="Board"
-                        Grid.Row="1"
-                        SelectionMode="None">
+              <CollectionView x:Name="Board"
+                              Grid.Row="1"
+                              SelectionMode="None">
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="lb:LeaderboardRow">
+                     <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="lb:LeaderboardRow">
 
-                    <Border Padding="14"
-                            Margin="0,0,0,10"
-                            StrokeShape="RoundRectangle 12"
-                            BackgroundColor="{DynamicResource CardBg}"
-                            Stroke="{DynamicResource CardBorderBrush}">
+                                   <Border Padding="14"
+                                           Margin="0,0,0,10"
+                                           StrokeShape="RoundRectangle 12"
+                                           BackgroundColor="{DynamicResource CardBg}"
+                                           Stroke="{DynamicResource CardBorderBrush}">
 
-                        <VerticalStackLayout Spacing="9">
+                                          <VerticalStackLayout Spacing="9">
 
-                            <Grid ColumnDefinitions="32,*,90"
-                                  ColumnSpacing="8">
+                                                 <Grid ColumnDefinitions="32,*,90"
+                                                       ColumnSpacing="8">
 
-                                <Label Text="{Binding RankText}"
-                                       FontSize="18"
-                                       VerticalOptions="Center"
-                                       TextColor="{DynamicResource TextMain}" />
+                                                        <Label Text="{Binding RankText}"
+                                                               FontSize="18"
+                                                               VerticalOptions="Center"
+                                                               TextColor="{DynamicResource TextMain}"/>
 
-                                <Label Grid.Column="1"
-                                       Text="{Binding Name}"
-                                       FontSize="20"
-                                       FontAttributes="Bold"
-                                       VerticalOptions="Center"
-                                       TextColor="{DynamicResource TextMain}" />
+                                                        <Label Grid.Column="1"
+                                                               Text="{Binding Name}"
+                                                               FontSize="20"
+                                                               FontAttributes="Bold"
+                                                               VerticalOptions="Center"
+                                                               TextColor="{DynamicResource TextMain}"/>
 
-                                <Label Grid.Column="2"
-                                       Text="{Binding RatioText}"
-                                       FontSize="24"
-                                       FontAttributes="Bold"
-                                       HorizontalTextAlignment="End"
-                                       TextColor="{DynamicResource TextMain}" />
-                            </Grid>
+                                                        <Label Grid.Column="2"
+                                                               Text="{Binding RatioText}"
+                                                               FontSize="24"
+                                                               FontAttributes="Bold"
+                                                               HorizontalTextAlignment="End"
+                                                               TextColor="{DynamicResource TextMain}"/>
+                                                 </Grid>
 
-                            <FlexLayout Wrap="Wrap"
-                                        AlignItems="Center"
-                                        JustifyContent="Start">
+                                                 <FlexLayout Wrap="Wrap"
+                                                             AlignItems="Center"
+                                                             JustifyContent="Start">
 
-                                <Label Text="{Binding PrText}"
-                                       Margin="0,0,24,5"
-                                       FontSize="17"
-                                       TextColor="{DynamicResource TextMain}" />
+                                                        <Label Text="{Binding PrText}"
+                                                               Margin="0,0,24,5"
+                                                               FontSize="17"
+                                                               TextColor="{DynamicResource TextMain}"/>
 
-                                <Label Text="{Binding PrBodyWeightText}"
-                                       Margin="0,0,24,5"
-                                       FontSize="16"
-                                       TextColor="{DynamicResource TextMain}" />
+                                                        <Label Text="{Binding PrBodyWeightText}"
+                                                               Margin="0,0,24,5"
+                                                               FontSize="16"
+                                                               TextColor="{DynamicResource TextMain}"/>
 
-                                <Label Text="{Binding CurrentWeightText}"
-                                       Margin="0,0,0,5"
-                                       FontSize="16"
-                                       TextColor="{DynamicResource TextMain}" />
-                            </FlexLayout>
+                                                        <Label Text="{Binding CurrentWeightText}"
+                                                               Margin="0,0,0,5"
+                                                               FontSize="16"
+                                                               TextColor="{DynamicResource TextMain}"/>
+                                                 </FlexLayout>
 
-                            <FlexLayout Wrap="Wrap"
-                                        AlignItems="Center"
-                                        JustifyContent="Start">
+                                                 <FlexLayout Wrap="Wrap"
+                                                             AlignItems="Center"
+                                                             JustifyContent="Start">
 
-                                <Button Text="Update weight"
-                                        FontSize="15"
-                                        HeightRequest="44"
-                                        Margin="0,0,10,4"
-                                        Clicked="OnUpdateWeightClicked"
-                                        BackgroundColor="{DynamicResource InsetBg}"
-                                        TextColor="{DynamicResource TextMain}" />
+                                                        <Button Text="Update weight"
+                                                                FontSize="15"
+                                                                HeightRequest="44"
+                                                                Margin="0,0,10,4"
+                                                                Clicked="OnUpdateWeightClicked"
+                                                                BackgroundColor="{DynamicResource InsetBg}"
+                                                                TextColor="{DynamicResource TextMain}"/>
 
-                                <Button Text="PR options"
-                                        FontSize="15"
-                                        HeightRequest="44"
-                                        Margin="0,0,16,4"
-                                        Clicked="OnPrOptionsClicked"
-                                        BackgroundColor="{DynamicResource InsetBg}"
-                                        TextColor="{DynamicResource TextMain}" />
+                                                        <Button Text="PR options"
+                                                                FontSize="15"
+                                                                HeightRequest="44"
+                                                                Margin="0,0,16,4"
+                                                                Clicked="OnPrOptionsClicked"
+                                                                BackgroundColor="{DynamicResource InsetBg}"
+                                                                TextColor="{DynamicResource TextMain}"/>
 
-                                <Label Text="{Binding RecordedText}"
-                                       FontSize="14"
-                                       Margin="0,0,0,4"
-                                       TextColor="{DynamicResource TextMuted}" />
-                            </FlexLayout>
-                        </VerticalStackLayout>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                                        <Label Text="{Binding RecordedText}"
+                                                               FontSize="14"
+                                                               Margin="0,0,0,4"
+                                                               TextColor="{DynamicResource TextMuted}"/>
+                                                 </FlexLayout>
+                                          </VerticalStackLayout>
+                                   </Border>
+                            </DataTemplate>
+                     </CollectionView.ItemTemplate>
+              </CollectionView>
 
-        <Grid x:Name="BottomNavigation"
-              Grid.Row="2"
-              ColumnDefinitions="*,*,*,*"
-              ColumnSpacing="6"
-              Padding="0,6"
-              BackgroundColor="{DynamicResource NavBg}">
+              <Grid x:Name="BottomNavigation"
+                    Grid.Row="2"
+                    ColumnDefinitions="*,*,*,*"
+                    Padding="0,10,0,12"
+                    BackgroundColor="{DynamicResource NavBg}">
 
-            <Button Text="Home"
-                    FontSize="15"
-                    HeightRequest="44"
-                    Padding="2"
-                    Clicked="OnHomeClicked"
-                    BackgroundColor="Transparent"
-                    TextColor="{DynamicResource TextMain}" />
+                     <VerticalStackLayout Grid.Column="0"
+                                          Spacing="4"
+                                          HorizontalOptions="Center">
 
-            <Button Grid.Column="1"
-                    Text="Leaderboard"
-                    FontSize="14"
-                    HeightRequest="44"
-                    Padding="2"
-                    FontAttributes="Bold"
-                    BackgroundColor="{DynamicResource AccentTint}"
-                    TextColor="{DynamicResource TextMain}" />
+                            <Button Text="🏠"
+                                    FontSize="23"
+                                    WidthRequest="60"
+                                    HeightRequest="46"
+                                    Padding="0"
+                                    CornerRadius="12"
+                                    Clicked="OnHomeClicked"
+                                    BackgroundColor="{DynamicResource TextAccent}"
+                                    TextColor="{DynamicResource NavBg}"/>
 
-            <Button Grid.Column="2"
-                    Text="Metrics"
-                    FontSize="15"
-                    HeightRequest="44"
-                    Padding="2"
-                    Clicked="OnMetricsClicked"
-                    BackgroundColor="Transparent"
-                    TextColor="{DynamicResource TextMain}" />
+                            <Label Text="Home"
+                                   FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{DynamicResource TextMuted}"/>
+                     </VerticalStackLayout>
 
-            <Button Grid.Column="3"
-                    Text="Settings"
-                    FontSize="15"
-                    HeightRequest="44"
-                    Padding="2"
-                    Clicked="OnSettingsClicked"
-                    BackgroundColor="Transparent"
-                    TextColor="{DynamicResource TextMain}" />
-        </Grid>
-    </Grid>
+                     <VerticalStackLayout Grid.Column="1"
+                                          Spacing="4"
+                                          HorizontalOptions="Center">
+
+                            <Button Text="👑"
+                                    FontSize="23"
+                                    WidthRequest="60"
+                                    HeightRequest="46"
+                                    Padding="0"
+                                    CornerRadius="12"
+                                    BackgroundColor="{DynamicResource TextAccent}"
+                                    TextColor="{DynamicResource NavBg}"/>
+
+                            <Label Text="Leaderboard"
+                                   FontSize="12"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{DynamicResource TextAccent}"/>
+                     </VerticalStackLayout>
+
+                     <VerticalStackLayout Grid.Column="2"
+                                          Spacing="4"
+                                          HorizontalOptions="Center">
+
+                            <Button Text="📊"
+                                    FontSize="23"
+                                    WidthRequest="60"
+                                    HeightRequest="46"
+                                    Padding="0"
+                                    CornerRadius="12"
+                                    Clicked="OnMetricsClicked"
+                                    BackgroundColor="{DynamicResource TextAccent}"
+                                    TextColor="{DynamicResource NavBg}"/>
+
+                            <Label Text="Metrics"
+                                   FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{DynamicResource TextMuted}"/>
+                     </VerticalStackLayout>
+
+                     <VerticalStackLayout Grid.Column="3"
+                                          Spacing="4"
+                                          HorizontalOptions="Center">
+
+                            <Button Text="⚙️"
+                                    FontSize="23"
+                                    WidthRequest="60"
+                                    HeightRequest="46"
+                                    Padding="0"
+                                    CornerRadius="12"
+                                    Clicked="OnSettingsClicked"
+                                    BackgroundColor="{DynamicResource TextAccent}"
+                                    TextColor="{DynamicResource NavBg}"/>
+
+                            <Label Text="Settings"
+                                   FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{DynamicResource TextMuted}"/>
+                     </VerticalStackLayout>
+              </Grid>
+       </Grid>
 </ContentPage>
