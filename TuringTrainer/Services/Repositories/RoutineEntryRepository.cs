@@ -27,4 +27,11 @@ public class RoutineEntryRepository : IRoutineEntryRepository
 
         return lastWorkout;
     }
+
+    public async Task<List<RoutineEntry>> SelectRoutineEntries(Guid userId)
+    {
+        var response = await _client.From<RoutineEntry>().Where(entry => entry.UserId == userId).Where(entry => entry.Status == "completed").Get();
+
+        return response.Models;
+    }
 }
