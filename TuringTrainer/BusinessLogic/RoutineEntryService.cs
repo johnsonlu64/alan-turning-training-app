@@ -1,4 +1,5 @@
 using TuringTrainer.Services.Repositories;
+using TuringTrainer.Models;
 
 namespace TuringTrainer.BusinessLogic;
 
@@ -29,5 +30,15 @@ public class RoutineEntryService : IRoutineEntryService
         }
 
         return await _routineEntryRepository.SelectLastWorkoutDate(userId);
+    }
+
+    public async Task<List<RoutineEntry>> SelectRoutineEntries(Guid userId)
+    {
+        if (userId == Guid.Empty)
+        {
+            return new List<RoutineEntry>();
+        }
+
+        return await _routineEntryRepository.SelectRoutineEntries(userId);
     }
 }
