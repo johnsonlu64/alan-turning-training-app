@@ -55,6 +55,8 @@ public partial class MetricsPage : ContentPage
             await _personalRecordService.SelectPersonalRecords(userId);
             DisplayPersonalRecords();
             DisplayLatestPR();
+            ExercisePicker.SelectedIndex = 0;
+            ExercisePicker_SelectedIndexChanged(null, EventArgs.Empty);
 
             TotalPRsLabel.Text = _personalRecordService.PersonalRecords.Count.ToString();
             int workouts = await _routineEntryService.SelectCompletedWorkouts(userId);
@@ -197,39 +199,64 @@ public partial class MetricsPage : ContentPage
     // update chart method
     private void ExercisePicker_SelectedIndexChanged(object? sender, EventArgs e)
     {
-        double[] weights;
+        if (_personalRecordService == null)
+        {
+            return;
+        }
+
+        Guid exerciseId;
 
         if (ExercisePicker.SelectedIndex == 0)
         {
-            weights = new double[] { 145, 155, 160, 175, 185 };
+            exerciseId = Guid.Parse("d9036c3b-b69d-4945-b6d9-13f2b0e97edc");
         }
         else if (ExercisePicker.SelectedIndex == 1)
         {
-            weights = new double[] { 225, 235, 245, 260, 275 };
+            exerciseId = Guid.Parse("45db5851-46a2-4711-a0c0-5d307cd9967d");
         }
         else if (ExercisePicker.SelectedIndex == 2)
         {
-            weights = new double[] { 265, 275, 290, 300, 315 };
+            exerciseId = Guid.Parse("576d09f7-9686-45a2-b3ba-e8753219e0b3");
         }
         else
         {
-            return;  // if nothing is selected yet don't display anything currently
+            return;
         }
 
-        UpdateChart(weights);
+        var records = _personalRecordService.PersonalRecords
+            .Where(pr => pr.ExerciseId == exerciseId
+                && pr.Weight.HasValue
+                && pr.UpdatedAt.HasValue)
+            .OrderBy(pr => pr.UpdatedAt)
+            .ToList();
 
+        double[] weights = records
+            .Select(pr => pr.Weight.Value)
+            .ToArray();
+
+        string[] dates = records
+            .Select(pr => pr.UpdatedAt.Value.ToString("MM/dd"))
+            .ToArray();
+
+        UpdateChart(weights, dates);
     }
 
     // This method takes in the weight points for the chart and uses those to make a 
     // line then sets the xasis as custom month names. The y axis is automatically 
     // made based off the values in the LineSeries
-    private void UpdateChart(double[] weights)
+    private void UpdateChart(double[] weights, string[] dates)
     {
+        var accentColor = (Color)Application.Current.Resources["TextAccent"];
+        var chartColor = SKColor.Parse(accentColor.ToHex());
         StrengthChart.Series = new ISeries[]
         {
             new LineSeries<double>
             {
                 Values = weights,
+                Stroke = new SolidColorPaint(chartColor, 3),
+                GeometryFill = new SolidColorPaint(chartColor),
+                GeometryStroke = new SolidColorPaint(chartColor),
+                Fill = null,
             }
         };
 
@@ -237,7 +264,16 @@ public partial class MetricsPage : ContentPage
         {
             new Axis
             {
-                Labels = new string[] {"Sept", "Oct", "Nov", "Dec", "Jan" }
+                Name = "Date",
+                Labels = dates
+            }
+        };
+
+        StrengthChart.YAxes = new Axis[]
+        {
+            new Axis
+            {
+                Name = "Weight (lbs)"
             }
         };
     }
