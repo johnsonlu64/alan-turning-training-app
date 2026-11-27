@@ -6,7 +6,7 @@ using Supabase.Postgrest.Attributes;
 [Table("sports")]
 public class Sport : ObservableBaseModel
 {
-    readonly Guid _sport_id = Guid.Empty;
+    Guid _sport_id = Guid.Empty;
     Guid _classId = Guid.Empty;
     string _name = "";
 
@@ -14,6 +14,7 @@ public class Sport : ObservableBaseModel
     public Guid SportId
     {
         get { return _sport_id; }
+        set { SetProperty(ref _sport_id, value); }
     }
 
     [Column("class_id")]
@@ -31,8 +32,6 @@ public class Sport : ObservableBaseModel
     }
 
     
-
-
     public Sport() { }
 
     public Sport(Guid sportId,

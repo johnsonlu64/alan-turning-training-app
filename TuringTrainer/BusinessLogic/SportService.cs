@@ -35,7 +35,16 @@ public class SportService : ISportService
         return await _sportRepository.SelectSport(sportId);
     }
 
+    public async Task<List<Sport>> SelectSportsByUser(Guid userId)
+    {
+        if (userId == Guid.Empty)
+        {
+            return new List<Sport>();
+        }
 
+        return await _sportRepository.SelectSportsByUser(userId);
+    }
+    
     public async Task<SportAdditionError> InsertSport(Sport sport)
     {
         if (sport.SportId == Guid.Empty)

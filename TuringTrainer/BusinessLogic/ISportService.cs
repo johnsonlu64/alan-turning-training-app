@@ -9,6 +9,7 @@ public interface ISportService
     Task SelectAllSports();
     Task SelectAllSportsByClass(string classId);
     Task<Sport?> SelectSport(Guid sportId);
+    Task<List<Sport>> SelectSportsByUser(Guid userId);
     Task<SportAdditionError> InsertSport(Sport sport);
     Task<SportEditError> UpdateSport(Sport sport, string name);
     Task<SportDeletionError> DeleteSport(Sport sport);

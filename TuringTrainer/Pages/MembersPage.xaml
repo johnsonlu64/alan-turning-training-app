@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:TuringTrainer.Models"
+             x:Class="TuringTrainer.ClassesPage"
+             Background="{DynamicResource PageBgBrush}"
+             Title="Members"
+             Shell.NavBarIsVisible="False">
+
+       <Grid RowDefinitions="Auto,*, Auto"
+             Padding="20,12,20,0"
+             RowSpacing="16">
+              <!-- Header -->
+              <Grid Grid.Row="0"
+                    ColumnDefinitions="*,Auto"
+                    Padding="0,12,0,24">
+
+                     <VerticalStackLayout Spacing="4">
+                            <Label Text="TURINGTRAINER"
+                                   FontSize="12"
+                                   CharacterSpacing="3"
+                                   TextColor="{DynamicResource TextAccent}"
+                                   FontAttributes="Bold"/>
+
+                            <Label Text="Members"
+                                   FontSize="27"
+                                   FontAttributes="Bold"
+                                   TextColor="{DynamicResource TextMain}"/>
+                     </VerticalStackLayout>
+
+              </Grid>
+
+
+              <!-- Main content -->
+              <Grid Grid.Row="1"
+              RowDefinitions="Auto,*"
+              RowSpacing="10">
+
+                     <Border x:Name="MemberSearchContainer"
+                            BackgroundColor="{DynamicResource CardBg}"
+                            Stroke="{DynamicResource CardBorderBrush}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="14,0">
+
+                            <Entry x:Name="MemberSearchBar"
+                                   Placeholder="Search members..."
+                                   PlaceholderColor="{DynamicResource TextMuted}"
+                                   TextColor="{DynamicResource TextMain}"
+                                   BackgroundColor="Transparent"
+                                   TextChanged="OnMemberSearchTextChanged"/>
+                     </Border>
+
+                     <CollectionView Grid.Row="1"
+                                   x:Name="MembersList"
+                                   SelectionMode="None">
+
+                            <CollectionView.ItemsLayout>
+                                   <LinearItemsLayout Orientation="Vertical"
+                                                 ItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                   <DataTemplate>
+                                          <Border BackgroundColor="{DynamicResource CardBg}"
+                                                 Stroke="{DynamicResource CardBorderBrush}"
+                                                 StrokeThickness="1"
+                                                 StrokeShape="RoundRectangle 16"
+                                                 Padding="18"
+                                                 Margin="0">
+
+                                                 <Border.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnMemberClicked"/>
+                                                 </Border.GestureRecognizers>
+
+                                                 <Grid ColumnDefinitions="*"
+                                                 ColumnSpacing="14">
+
+                                                        <HorizontalStackLayout Spacing="5"
+                                                                             VerticalOptions="Center">
+
+                                                               <Border WidthRequest="54"
+                                                                      HeightRequest="54"
+                                                                      StrokeThickness="0"
+                                                                      StrokeShape="RoundRectangle 27"
+                                                                      VerticalOptions="Center">
+
+                                                                      <Image Source="{Binding AvatarImage}"
+                                                                             WidthRequest="54"
+                                                                             HeightRequest="54"
+                                                                             Aspect="AspectFill"/>
+                                                               </Border>
+
+                                                               <Label Text="{Binding FirstName}"
+                                                                      TextColor="{DynamicResource TextMain}"
+                                                                      FontSize="18"
+                                                                      VerticalOptions="Center"/>
+
+                                                               <Label Text="{Binding LastName}"
+                                                                      TextColor="{DynamicResource TextMain}"
+                                                                      FontSize="18"
+                                                                      VerticalOptions="Center"/>
+
+                                                        </HorizontalStackLayout>
+
+                                                 </Grid>
+                                          </Border>
+                                   </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                     </CollectionView>
+              </Grid>
+              <!-- Bottom navigation -->
+              <Grid Grid.Row="2"
+                    ColumnDefinitions="*,*,*,*"
+                    Padding="0,12,0,16"
+                    BackgroundColor="{DynamicResource NavBg}">
+
+                     <VerticalStackLayout Spacing="4">
+                            <Button Text="🏠"
+                                    FontSize="23"
+                                    TextColor="{DynamicResource PageBg}"
+                                    Clicked="OnHomeClicked"
+                                    HorizontalOptions="Center"/>
+                            <Label Text="Home"
+                                   FontSize="10"
+                                   TextColor="{DynamicResource TextDim}"
+                                   HorizontalOptions="Center"/>
+                     </VerticalStackLayout>
+
+                     <VerticalStackLayout Grid.Column="1"
+                                          Spacing="4">
+                            <Button Text="👑"
+                                    FontSize="22"
+                                    TextColor="{DynamicResource PageBg}"
+                                    Clicked="OnLeaderboardClicked"
+                                    HorizontalOptions="Center"/>
+                            <Label Text="Leaderboard"
+                                   FontSize="10"
+                                   TextColor="{DynamicResource TextDim}"
+                                   HorizontalOptions="Center"/>
+                     </VerticalStackLayout>
+
+                     <VerticalStackLayout Grid.Column="2"
+                                          Spacing="4">
+                            <Button Text="📊"
+                                    FontSize="22"
+                                    TextColor="{DynamicResource PageBg}"
+                                    Clicked="OnMetricsClicked"
+                                    HorizontalOptions="Center"/>
+                            <Label Text="Metrics"
+                                   FontSize="10"
+                                   TextColor="{DynamicResource TextAccent}"
+                                   HorizontalOptions="Center"/>
+                     </VerticalStackLayout>
+
+                     <VerticalStackLayout Grid.Column="3"
+                                          Spacing="4">
+                            <Button Text="⚙️"
+                                    FontSize="22"
+                                    TextColor="{DynamicResource PageBg}"
+                                    Clicked="OnSettingsClicked"
+                                    HorizontalOptions="Center"/>
+                            <Label Text="Settings"
+                                   FontSize="10"
+                                   TextColor="{DynamicResource TextDim}"
+                                   HorizontalOptions="Center"/>
+                     </VerticalStackLayout>
+              </Grid>
+
+       </Grid>
+</ContentPage>
