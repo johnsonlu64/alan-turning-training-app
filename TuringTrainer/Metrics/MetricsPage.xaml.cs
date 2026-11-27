@@ -15,6 +15,8 @@ public partial class MetricsPage : ContentPage
     private string _memberId = "";
     private readonly IPersonalRecordService _personalRecordService;
     private readonly IRoutineEntryService _routineEntryService;
+    private readonly IExerciseEntryService _exerciseEntryService;
+    private readonly IExerciseEntrySetService _exerciseEntrySetService;
 
     public string MemberId
     {
@@ -55,8 +57,14 @@ public partial class MetricsPage : ContentPage
             await _personalRecordService.SelectPersonalRecords(userId);
             DisplayPersonalRecords();
             DisplayLatestPR();
-            ExercisePicker.SelectedIndex = 0;
-            ExercisePicker_SelectedIndexChanged(null, EventArgs.Empty);
+            if (ExercisePicker.SelectedIndex == 0)
+            {
+                await DisplayExerciseHistory();
+            }
+            else
+            {
+                ExercisePicker.SelectedIndex = 0;
+            }
 
             TotalPRsLabel.Text = _personalRecordService.PersonalRecords.Count.ToString();
             int workouts = await _routineEntryService.SelectCompletedWorkouts(userId);
@@ -191,19 +199,27 @@ public partial class MetricsPage : ContentPage
         InitializeComponent();
         _personalRecordService = new PersonalRecordService(new PersonalRecordRepository());
         _routineEntryService = new RoutineEntryService(new RoutineEntryRepository());
+        _exerciseEntryService = new ExerciseEntryService(new ExerciseEntryRepository());
+        _exerciseEntrySetService = new ExerciseEntrySetService(new ExerciseEntrySetRepository());
         BindingContext = this;
     }
 
     // When a item from the drop down is selected this method is triggered and
     // fills in the weights depending on which exercise was selected calls 
     // update chart method
-    private void ExercisePicker_SelectedIndexChanged(object? sender, EventArgs e)
+    private async void ExercisePicker_SelectedIndexChanged(object? sender, EventArgs e)
     {
-        if (_personalRecordService == null)
+        await DisplayExerciseHistory();
+    }
+
+    private async Task DisplayExerciseHistory()
+    {
+        if (!Guid.TryParse(MemberId, out Guid userId))
         {
             return;
         }
 
+        int selectedIndex = ExercisePicker.SelectedIndex;
         Guid exerciseId;
 
         if (ExercisePicker.SelectedIndex == 0)
@@ -223,22 +239,48 @@ public partial class MetricsPage : ContentPage
             return;
         }
 
-        var records = _personalRecordService.PersonalRecords
-            .Where(pr => pr.ExerciseId == exerciseId
-                && pr.Weight.HasValue
-                && pr.UpdatedAt.HasValue)
-            .OrderBy(pr => pr.UpdatedAt)
-            .ToList();
+        try
+        {
+            List<ExerciseEntrySet> history = new List<ExerciseEntrySet>();
 
-        double[] weights = records
-            .Select(pr => pr.Weight.Value)
-            .ToArray();
+            var routineEntries = await _routineEntryService.SelectRoutineEntries(userId);
 
-        string[] dates = records
-            .Select(pr => pr.UpdatedAt.Value.ToString("MM/dd"))
-            .ToArray();
+            foreach (RoutineEntry routineEntry in routineEntries)
+            {
+                var exerciseEntries = await _exerciseEntryService.SelectExerciseEntries(routineEntry.RoutineEntryId, exerciseId);
 
-        UpdateChart(weights, dates);
+                foreach (ExerciseEntry exerciseEntry in exerciseEntries)
+                {
+                    var sets = await _exerciseEntrySetService.SelectExerciseEntrySets(exerciseEntry.ExerciseEntryId);
+
+                    history.AddRange(sets);
+                }
+            }
+
+            var records = history.Where(entry => entry.Weight.HasValue).Select(entry => (Weight: entry.Weight.Value, Date: entry.EndTime)).ToList();
+
+            foreach (PersonalRecord record in _personalRecordService.PersonalRecords)
+            {
+                if (record.ExerciseId == exerciseId && record.Weight.HasValue && record.UpdatedAt.HasValue)
+                {
+                    records.Add((record.Weight.Value, record.UpdatedAt.Value));
+                }
+            }
+
+            records = records.Distinct().OrderBy(record => record.Date).ToList();
+
+            double[] weights = records.Select(record => record.Weight).ToArray();
+            string[] dates = records.Select(record => record.Date.ToString("MM/dd")).ToArray();
+
+            if (MemberId == userId.ToString() && ExercisePicker.SelectedIndex == selectedIndex)
+            {
+                UpdateChart(weights, dates);
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Error", ex.Message, "OK");
+        }
     }
 
     // This method takes in the weight points for the chart and uses those to make a 
@@ -257,6 +299,8 @@ public partial class MetricsPage : ContentPage
                 GeometryFill = new SolidColorPaint(chartColor),
                 GeometryStroke = new SolidColorPaint(chartColor),
                 Fill = null,
+                DataLabelsPaint = new SolidColorPaint(chartColor),
+                DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
             }
         };
 
@@ -273,7 +317,8 @@ public partial class MetricsPage : ContentPage
         {
             new Axis
             {
-                Name = "Weight (lbs)"
+                Name = "Weight (lbs)",
+                MaxLimit = weights.DefaultIfEmpty().Max() + 20
             }
         };
     }
