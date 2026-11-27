@@ -6,36 +6,40 @@ using Supabase.Postgrest.Attributes;
 [Table("groups")]
 public class Group : ObservableBaseModel
 {
-	readonly Guid _group_id = Guid.Empty;
+	Guid _group_id = Guid.Empty;
 
-	readonly Guid _coach_id = Guid.Empty;
+	Guid _coach_id = Guid.Empty;
 
-	readonly Guid _sport_id = Guid.Empty;
+	Guid? _sport_id;
 
-	readonly Guid _class_id = Guid.Empty;
+	Guid? _class_id;
 
 	[PrimaryKey("group_id"), Column("group_id")]
 	public Guid GroupId
 	{
 		get { return _group_id; }
+		set { SetProperty(ref _group_id, value); }
 	}
 
 	[Column("coach_id")]
 	public Guid CoachId
 	{
 		get { return _coach_id; }
+		set { SetProperty(ref _coach_id, value); }
 	}
 
 	[Column("sport_id")]
-	public Guid SportId
+	public Guid? SportId
 	{
 		get { return _sport_id; }
+		set { SetProperty(ref _sport_id, value); }
 	}
 
 	[Column("class_id")]
-	public Guid ClassId
+	public Guid? ClassId
 	{
 		get { return _class_id; }
+		set { SetProperty(ref _class_id, value); }
 	}
 	public Group() { }
 

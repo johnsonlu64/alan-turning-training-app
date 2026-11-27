@@ -66,6 +66,33 @@ public class SportRepository : ISportRepository
         return null;
     }
 
+    public async Task<List<Sport>> SelectSportsByUser(Guid userId)
+    {
+        var memberships = await _client.From<UserInGroup>().Where(member => member.UserId == userId).Get();
+
+        List<Sport> sports = new List<Sport>();
+
+        foreach (var membership in memberships.Models)
+        {
+            var groups = await _client.From<TuringTrainer.Models.Group>().Where(group => group.GroupId == membership.GroupId).Get();
+
+            foreach (var group in groups.Models)
+            {
+                if (group.SportId != null)
+                {
+                    Sport? sport = await SelectSport(group.SportId.Value);
+
+                    if (sport != null && !sports.Contains(sport))
+                    {
+                        sports.Add(sport);
+                    }
+                }
+            }
+        }
+
+        return sports;
+    }
+
     public async Task<SportAdditionError> InsertSport(Sport sport)
     {
         try

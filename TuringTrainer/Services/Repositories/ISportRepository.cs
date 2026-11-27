@@ -12,6 +12,7 @@ public interface ISportRepository
     public Task SelectAllSportsByClass(string classId);
 
     public Task<Sport?> SelectSport(Guid sportId);
+    public Task<List<Sport>> SelectSportsByUser(Guid userId);
     public Task<SportAdditionError> InsertSport(Sport sport);
     public Task<SportEditError> UpdateSport(Sport sportToUpdate, String name);
     public Task<SportDeletionError> DeleteSport(Sport sportToDelete);

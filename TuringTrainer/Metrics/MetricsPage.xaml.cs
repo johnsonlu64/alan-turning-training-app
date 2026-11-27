@@ -17,6 +17,7 @@ public partial class MetricsPage : ContentPage
     private readonly IRoutineEntryService _routineEntryService;
     private readonly IExerciseEntryService _exerciseEntryService;
     private readonly IExerciseEntrySetService _exerciseEntrySetService;
+    private readonly ISportService _sportService;
 
     public string MemberId
     {
@@ -53,6 +54,9 @@ public partial class MetricsPage : ContentPage
                 return;
 
             MemberName = $"{member.FirstName} {member.LastName}";
+
+            var sports = await _sportService.SelectSportsByUser(userId);
+            AthleteClassLabel.Text = string.Join(", ", sports.Select(sport => sport.Name));
 
             await _personalRecordService.SelectPersonalRecords(userId);
             DisplayPersonalRecords();
@@ -201,6 +205,7 @@ public partial class MetricsPage : ContentPage
         _routineEntryService = new RoutineEntryService(new RoutineEntryRepository());
         _exerciseEntryService = new ExerciseEntryService(new ExerciseEntryRepository());
         _exerciseEntrySetService = new ExerciseEntrySetService(new ExerciseEntrySetRepository());
+        _sportService = new SportService(new SportRepository());
         BindingContext = this;
     }
 
